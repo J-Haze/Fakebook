@@ -1,0 +1,119 @@
+.login-cont {
+  display: block;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+}
+
+.login-content {
+  display: flex;
+  flex-direction: column;
+  background-color: #fefefe;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 1vh;
+  padding: 30px;
+  padding-top: 0px;
+  border: 1px solid #888;
+  border: 1px solid #00b0f0;
+  border-radius: 15px;
+  width: 400px;
+  justify-content: center;
+  align-items: center;
+  color: black;
+  margin-top: 40px;
+}
+
+#title-login {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin-left: 97px;
+  margin-right: auto;
+  margin-top: 30px;
+  font-size: 1.6em;
+}
+
+.input {
+  font-size: 1em;
+  --text-opacity: 1;
+  box-sizing: border-box;
+  border-style: solid;
+  border-color: #e2e8f0;
+  font-family: inherit;
+  margin: 0;
+  margin-top: 20px;
+  overflow: visible;
+  line-height: inherit;
+  color: inherit;
+  --bg-opacity: 1;
+  background-color: rgba(255, 255, 255, var(--bg-opacity));
+  border-radius: 0.25rem;
+  border-width: 1px;
+  font-size: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.error-message-login {
+  color: red;
+  margin-top: 5px;
+  margin-bottom: -10px;
+}
+
+#submit-login {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 208px;
+  border-style: solid;
+  border-color: #e2e8f0;
+  font-family: inherit;
+  margin: 0;
+  margin-top: 20px;
+  overflow: visible;
+  text-transform: none;
+  background-image: none;
+  cursor: pointer;
+  line-height: inherit;
+  --bg-opacity: 1;
+  background-color: #00b0f0;
+  border-radius: 0.25rem;
+  border-width: 0;
+  font-size: 1.125rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  --text-opacity: 1;
+  color: rgba(255, 255, 255, var(--text-opacity));
+}
+
+#submit-login:hover {
+  box-sizing: border-box;
+  border-style: solid;
+  border-color: #e2e8f0;
+  font-family: inherit;
+  margin: 0;
+  margin-top: 20px;
+  overflow: visible;
+  text-transform: none;
+  background-image: none;
+  cursor: pointer;
+  line-height: inherit;
+  border-radius: 0.25rem;
+  border-width: 0;
+  font-size: 1.125rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  --text-opacity: 1;
+  color: rgba(255, 255, 255, var(--text-opacity));
+  --bg-opacity: 1;
+  background-color: #00b0f0bb;
+}

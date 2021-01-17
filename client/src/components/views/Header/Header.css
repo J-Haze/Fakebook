@@ -1,0 +1,45 @@
+#header {
+  height: 100px;
+  color: whitesmoke;
+  background-color: #00b0f0;
+  min-width: 800px;
+}
+
+#header-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+  height: 100%;
+  width: 800px;
+}
+
+#title {
+  font-size: 3em;
+  margin-left: 10px;
+}
+
+.header-btn-cont {
+  margin-left: auto;
+}
+
+#btn-cont-auth {
+  display: flex;
+}
+
+#btn-cont-unauth {
+  display: flex;
+}
+
+.header-btn {
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-top: 10px;
+  font-weight: 500;
+}
+
+.header-btn:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
