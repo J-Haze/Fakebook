@@ -3,6 +3,7 @@ const { body, validationResult, check } = require("express-validator");
 const bcrypt = require("bcryptjs");
 const async = require("async");
 const jwt = require("jsonwebtoken");
+const keys = require("../config/keys");
 require("dotenv").config();
 
 var User = require("../models/User");
@@ -33,12 +34,6 @@ exports.get_users = (req, res, next) => {
       return res.json(err);
     }
     res.json(users);
-  });
-};
-
-exports.get_create_user = function (req, res, next) {
-  res.json({
-    message: "Get Sign Up Form",
   });
 };
 
@@ -97,7 +92,7 @@ exports.post_create_user = [
             firstname: req.body.firstname,
             lastname: req.body.lastname,
             email: req.body.email,
-            password: req.body.password,
+            password: hashed,
             birthDate: req.body.birthDate,
             gender: req.body.gender,
             friendList: [],
@@ -121,13 +116,6 @@ exports.post_create_user = [
   },
 ];
 
-//login
-exports.get_user_login = function (req, res) {
-  res.json({
-    message: "Get Log-in Form",
-  });
-};
-
 exports.post_user_login = function (req, res, next) {
   passport.authenticate("local", { session: false }, function (
     err,
@@ -137,14 +125,20 @@ exports.post_user_login = function (req, res, next) {
     console.log(err);
     if (err || !user) {
       console.log("error or no user");
+      console.log("err", err)
+      console.log("user", user)
+      console.log("info", info)
       return res.json({
-        message: "Incorrect Username or Password.",
+        message: "Incorrect Email or Password.",
       });
     }
     if (err) res.send(err);
     jwt.sign(
-      { _id: user._id, username: user.username },
-      process.env.JWT_SECRET,
+      { _id: user._id, email: user.email },
+      //Production:
+      // process.env.JWT_SECRET,
+      //Local
+      keys.secretOrKey,
       { expiresIn: 3600 },
       (err, token) => {
         if (err) {
@@ -152,16 +146,16 @@ exports.post_user_login = function (req, res, next) {
         }
         res.json({
           token: token,
-          user: { _id: user._id, username: user.username },
+          user: { _id: user._id, email: user.email },
         });
       }
     );
   })(req, res);
 };
 
-exports.user_logout_get = function (req, res) {
-  req.logOut();
-};
+// exports.user_logout_get = function (req, res) {
+//   req.logOut();
+// };
 
 exports.get_currentUser_posts = (req, res, next) => {
   const { body, validationResult, check } = require("express-validator");

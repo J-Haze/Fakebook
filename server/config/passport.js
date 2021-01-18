@@ -20,22 +20,28 @@ const User = require("../models/User");
 passport.use(
   new LocalStrategy(
     {
-      usernameField: "username",
+      usernameField: "email",
       passwordField: "password",
     },
-    function (username, password, cb) {
-      User.findOne({ username }, (err, user) => {
+    function (email, password, cb) {
+      console.log("email", email);
+      console.log("email", password);
+      User.findOne({ email }, (err, user) => {
         if (err) return cb(err);
-        if (!user) return cb(null, false, { message: "Incorrect username" });
+        if (!user)
+          return cb(null, false, {
+            message: "No account associated with this email",
+          });
 
         bcrypt.compare(password, user.password, (err, match) => {
+          console.log("got to here");
           if (err) return cb(err);
           if (!match) return cb(null, false, { message: "Incorrect Password" });
           return cb(null, user, { message: "Logged In successfully" });
         });
       });
     }
-  ) 
+  )
 );
 
 // console.log("secretTunnel:", process.env.JWT_SECRET)
