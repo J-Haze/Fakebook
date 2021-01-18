@@ -36,25 +36,20 @@ exports.get_users = (req, res, next) => {
   });
 };
 
+exports.get_create_user = function (req, res, next) {
+  res.json({
+    message: "Get Sign Up Form",
+  });
+};
+
 exports.post_create_user = [
   //Validate and sanitize fields.
-  body("username", "Please enter a Username between 2 and 15 characters.")
-    .trim()
-    .isLength({ min: 2, max: 15 }),
-  body("password", "Please enter a Password between 2 and 15 characters.")
-    .trim()
-    .isLength({ min: 2, max: 15 }),
-  body(
-    "confirmPassword",
-    "Confirm password must be between 2 and 15 characters."
-  )
-    .trim()
-    .isLength({ min: 2, max: 15 }),
-
-  check("password").exists(),
-  check("confirmPassword", "Confirm Password and Password fields must match")
-    .exists()
-    .custom((value, { req }) => value === req.body.password),
+  body("firstname", "Please enter a first name").not().isEmpty().trim(),
+  body("lastname", "Please enter a last name").not().isEmpty().trim(),
+  body("email", "Please enter an email").isEmail().not().isEmpty().trim(),
+  body("password", "Please enter a password").not().isEmpty().trim(),
+  body("birthDate", "Please enter a birth date").not().isEmpty().trim(),
+  body("gender", "Please enter a gender").not().isEmpty().trim(),
 
   // Process request after validation and sanitization.
   async (req, res, next) => {
@@ -63,23 +58,32 @@ exports.post_create_user = [
 
     // Create a User object with escaped and trimmed data.
     var user = new User({
-      username: req.body.username,
+      firstname: req.body.firstname,
+      lastname: req.body.lastname,
+      email: req.body.email,
       password: req.body.password,
-      isAdmin: false,
+      birthDate: req.body.birthDate,
+      gender: req.body.gender,
+      friendList: [],
+      photo: "",
+      realFacebookID: "",
+      isPublished: true,
     });
 
     const checkUser = await User.findOne({
-      username: user.username,
+      email: user.email,
     });
 
     if (!errors.isEmpty()) {
       console.log(errors);
       return;
     } else {
-      // Check if email and username are available
+      // Check if email is available
       if (checkUser) {
-        console.log("User already taken");
-        return res.json({ message: "User with this username already exists" });
+        console.log("There is already an account associated with this email.");
+        return res.json({
+          message: "There is already an account associated with this email.",
+        });
       } else {
         //Username not taken
         //Hash Password
@@ -90,9 +94,16 @@ exports.post_create_user = [
           }
           //Create new user with hashed password
           var user = new User({
-            username: req.body.username,
-            password: hashed,
-            isAdmin: false,
+            firstname: req.body.firstname,
+            lastname: req.body.lastname,
+            email: req.body.email,
+            password: req.body.password,
+            birthDate: req.body.birthDate,
+            gender: req.body.gender,
+            friendList: [],
+            photo: "",
+            realFacebookID: "",
+            isPublished: true,
           });
 
           user.save(function (err) {
@@ -109,6 +120,13 @@ exports.post_create_user = [
     }
   },
 ];
+
+//login
+exports.get_user_login = function (req, res) {
+  res.json({
+    message: "Get Log-in Form",
+  });
+};
 
 exports.post_user_login = function (req, res, next) {
   passport.authenticate("local", { session: false }, function (
@@ -139,6 +157,10 @@ exports.post_user_login = function (req, res, next) {
       }
     );
   })(req, res);
+};
+
+exports.user_logout_get = function (req, res) {
+  req.logOut();
 };
 
 exports.get_currentUser_posts = (req, res, next) => {

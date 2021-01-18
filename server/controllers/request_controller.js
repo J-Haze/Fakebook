@@ -7,19 +7,11 @@ require("dotenv").config();
 
 var User = require("../models/User");
 var Post = require("../models/Post");
-var Comment = require("../models/Comment");
 
 exports.get_posts = (req, res, next) => {
   Post.find((err, posts) => {
     if (err) return res.json(err);
     res.json(posts);
-  });
-};
-
-exports.get_create_post = function (req, res, next) {
-  //Render Sign-Up page
-  res.json({
-    message: "Get New Post Form",
   });
 };
 

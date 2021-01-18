@@ -78,11 +78,13 @@ app.use(bodyParser.json());
 var indexRouter = require("./routes/index");
 var userRouter = require("./routes/user");
 var postRouter = require("./routes/post");
+var requestRouter = require("./routes/request");
 
 //Routes Middleware
 app.use("/", indexRouter);
 app.use("/user", userRouter);
 app.use("/post", postRouter);
+app.use("/request", postRouter);
 
 // // Serve static assets if in production
 // if (process.env.NODE_ENV === "production") {

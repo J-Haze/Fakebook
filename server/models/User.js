@@ -5,11 +5,20 @@ const moment = require("moment");
 
 const userSchema = mongoose.Schema(
   {
-    username: { type: String, required: true, minlength: 3, maxlength: 15 },
-    password: { type: String, required: true, minlength: 6 },
-    isAdmin: { type: Boolean, default: false },
+    firstname: { type: String, required: true },
+    lastname: { type: String, required: true },
+    email: { type: String, required: true },
+    password: { type: String, required: true },
+    birthDate: { type: Date, required: true },
+    gender: { type: String, required: true },
+    // friendList: { type: Array, required: true },
+    friendList: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
+    photo: { type: String, default: "" },
+    realFacebookID: { type: String },
+    isPublished: { type: Boolean, default: true },
+    // isGuest: { type: Boolean },
   },
   { timestamps: true }
 );
 
-module.exports = mongoose.model("User", userSchema); 
+module.exports = mongoose.model("User", userSchema);

@@ -12,9 +12,9 @@ dev.js
 
 .history
 
-# .env
+.env
 
-# keys.js
+keys.js
 
 
 .DS_Store
@@ -31,4 +31,5 @@ yarn-error.log*
 .env.production.local
 
 .vscode
+
  

@@ -16,6 +16,7 @@ const User = require("../models/User");
 //Update passport part
 // JWTStrategy vs LocalStrategy ?
 
+//I think that JWT is being used and that this is being over written. Which is fine, but looks sloppy
 passport.use(
   new LocalStrategy(
     {
@@ -34,14 +35,18 @@ passport.use(
         });
       });
     }
-  )
+  ) 
 );
+
+// console.log("secretTunnel:", process.env.JWT_SECRET)
 
 passport.use(
   new JWTStrategy(
     {
       jwtFromRequest: extractJWT.fromAuthHeaderAsBearerToken(),
-      secretOrKey: process.env.JWT_SECRET,
+      secretOrKey: keys.secretOrKey,
+      // //Production:
+      // secretOrKey: process.env.JWT_SECRET,
     },
     (jwtPayload, cb) => {
       return cb(null, jwtPayload);
