@@ -28,22 +28,35 @@ function LoginPage(props) {
       >
         <input
           id="username"
-          className="input"
-          placeholder="Username"
+          className="input-login"
+          placeholder="Email"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
         <input
           id="password"
-          className="input"
+          className="input-login"
           placeholder="Password"
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
         <div className="error-message-login">{errorMessage}</div>
-        <div id="submit-login" onClick={() => {}}>
+        <div id="submit-login" className="login-btn" onClick={() => {}}>
           Log In
+        </div>
+        <div id="submit-fb-login" className="login-btn" onClick={() => {}}>
+          Log In with Facebook
+        </div>
+        <div id="submit-guest-login" className="login-btn" onClick={() => {}}>
+          Test Drive a Guest Account
+        </div>
+        <div
+          id="submit-new-account-login"
+          className="login-btn"
+          onClick={() => {}}
+        >
+          Create New Account
         </div>
       </div>
     </div>
