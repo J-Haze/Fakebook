@@ -1,189 +1,76 @@
-
-
-/* @media only screen and (max-width: 900px) */
-
-/* #cont-1{
-  min-width: 440px;
-  border: 1px solid green;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-}
-
-#cont-2{
-min-width: 440px;
-border: 1px solid green;
-display: flex;
-  justify-content: center;
-  align-items: center;
-} */
-
 .login-cont {
-  /* display: flex;
-  flex-wrap: wrap;
-  width: 100%;
-  height: 100vh;
-  justify-content: space-around; */
-
-    display: flex;
+  display: flex;
   justify-content: space-around;
   align-items: center;
-  padding-top: 120px;
-  width: min(980, 100%);
-}
-
-.login-text-cont{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  /* align-items: center; */
-  text-align: center;
-  width: 400px;
-  margin-left: auto;
-  margin-right: auto;
-  /* border: 1px solid red; */
-}
-
-/* .login-text-cont @media only screen and (max-width: 900px) {
-  border: 1px solid pink;
-} */
-
-#fb-signin-logo{
-  color: var(--blue);
-  font-size: 56px;
-  font-weight: bold;
-  border: 1px solid black;
-  height: 106px;
-  width: 301px;
-  margin-top: -28px;
-  font-family: var(--fb-font);
-}
-
-#fb-signin-text{
-  font-size: 24px;
-    line-height: 28px;
-    /* width: auto; */
-    width: 400px;
-    height: 56px;
-    font-weight: normal;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-}
-
-.login-content {
-  display: flex;
-  flex-direction: column;
-  background-color: #ffffff;
-  /* margin-left: auto;
-  margin-right: auto;
-  margin-top: 1vh;
-  padding: 30px;
-  padding-top: 0px; */
-
-  margin: 40px 0 0;
-  margin: 40px auto 0 auto;
-  padding: 10px 0px 24px;
-
-
-  box-shadow: 0 2px 4px rgba(0, 0, 0, .1), 0 8px 16px rgba(0, 0, 0, .1);
-  border-radius: 15px;
-  justify-content: center;
-  align-items: center;
-  color: black;
-  margin-top: 40px;
-      /* height: 456px; */
-    height: 345px;
-      width: 396px;
-      border: 1px solid red;
-}
-
-@media only screen and (max-width: 980px) {
-.login-cont {
-  display: flex;
-  /* flex-direction: row; */
-  flex-wrap: wrap;
-  /* left: 0;
-  top: 0; */
-  width: 100%;
+  width: min(900, 100%);
   height: 100vh;
-    /* flex-direction: column; */
-  justify-content: center;
 }
 
-.login-text-cont{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  /* align-items: center; */
-  text-align: center;
+.login-text-cont {
   width: 400px;
+  padding-right: 2rem;
+  margin-top: -200px;
+  /* margin-left: 40px; */
   margin-left: auto;
-  margin-right: auto;
-  /* border: 1px solid red; */
+  margin-right: 40px;
+  /* border: 1px solid black; */
 }
 
-/* .login-text-cont @media only screen and (max-width: 900px) {
-  border: 1px solid pink;
-} */
-
-#fb-signin-logo{
+#fb-signin-logo {
   color: var(--blue);
   font-size: 56px;
   font-weight: bold;
-  border: 1px solid black;
-  height: 106px;
   width: 301px;
-  margin-top: -28px;
   font-family: var(--fb-font);
 }
 
-#fb-signin-text{
-  font-size: 24px;
-    line-height: 28px;
-    /* width: auto; */
-    width: 400px;
-    height: 56px;
-    font-weight: normal;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
+#fb-signin-text {
+  font-size: 26px;
+  line-height: 1.2;
 }
 
 .login-content {
-  display: flex;
-  flex-direction: column;
-  background-color: #ffffff;
-  /* margin-left: auto;
+  margin-top: -100px;
+  /* margin-right: 40px; */
   margin-right: auto;
-  margin-top: 1vh;
-  padding: 30px;
-  padding-top: 0px; */
-
-  margin: 40px 0 0;
-  margin: 40px auto 0 auto;
-  padding: 10px 0px 24px;
-
-
-  box-shadow: 0 2px 4px rgba(0, 0, 0, .1), 0 8px 16px rgba(0, 0, 0, .1);
-  border-radius: 15px;
-  justify-content: center;
-  align-items: center;
-  color: black;
-  margin-top: 40px;
-      /* height: 456px; */
-    height: 345px;
-      width: 396px;
-      border: 1px solid red;
+  height: 315px;
+  width: 380px;
+  padding: 1rem;
+  border-radius: 6px;
+  background: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.1);
 }
 
+@media only screen and (max-width: 900px) {
+  .login-cont {
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  .login-text-cont {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* margin-top: 20px; */
+    margin-top: auto;
+    margin-left: 0px;
+    padding-right: 0px;
+  }
+
+  #fb-signin-text {
+    text-align: center;
+    font-size: 24px;
+    line-height: 1.2;
+    color: black;
+  }
+
+  .login-content {
+    margin-top: 40px;
+    margin-right: 0px;
+    /* margin-bottom: auto; */
+    margin-bottom: 300px;
+  }
 }
-
-
-
 
 #title-login {
   display: flex;
