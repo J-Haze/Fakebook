@@ -1,7 +1,7 @@
 #header {
   height: 100px;
   color: whitesmoke;
-  background-color: #00b0f0;
+  background-color: var(--blue);
   min-width: 800px;
 }
 

@@ -16,7 +16,7 @@
   padding: 30px;
   padding-top: 0px;
   border: 1px solid #888;
-  border: 1px solid #00b0f0;
+  border: 1px solid var(--blue);
   border-radius: 15px;
   width: 400px;
   justify-content: center;
@@ -36,7 +36,7 @@
 }
 
 .error-message-signup {
-  color: red;
+  color: var(--red);
   width: 208px;
   margin-top: 5px;
   margin-bottom: -15px;
@@ -59,7 +59,7 @@
   cursor: pointer;
   line-height: inherit;
   --bg-opacity: 1;
-  background-color: #00b0f0;
+  background-color: var(--blue);
   border-radius: 0.25rem;
   border-width: 0;
   font-size: 1.125rem;
@@ -93,7 +93,7 @@
   --text-opacity: 1;
   color: rgba(255, 255, 255, var(--text-opacity));
   --bg-opacity: 1;
-  background-color: #00b0f0bb;
+  background-color: var(--blue);
 }
 
 #bottom {

@@ -6,7 +6,7 @@ function HomePage(props) {
   return (
     <>
       <div id="home">
-        
+        Home Page
       </div>
     </>
   );

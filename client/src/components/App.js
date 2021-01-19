@@ -20,19 +20,19 @@ function App() {
   const history = useHistory();
 
   return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <Header />
+    <Switch>
+      <Route
+        exact
+        path="/"
+        render={() => (isLoggedIn ? <HomePage /> : <LoginPage />)}
+      ></Route>
 
-      <Switch>
-        <Route exact path="/" render={() => <HomePage />}></Route>
+      <Route exact path="/log-in" render={() => <LoginPage />}></Route>
 
-        <Route exact path="/log-in" render={() => <LoginPage />}></Route>
+      <Route exact path="/sign-up" render={() => <SignupPage />}></Route>
 
-        <Route exact path="/sign-up" render={() => <SignupPage />}></Route>
-
-        <Route render={() => <NotFound />} />
-      </Switch>
-    </Suspense>
+      <Route render={() => <NotFound />} />
+    </Switch>
   );
 }
 

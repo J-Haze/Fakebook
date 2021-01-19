@@ -10,7 +10,8 @@
   display: flex;
   flex-direction: column;
   width: 800px;
-  background-color: white;
+  /* background-color: white; */
+  background-color: var(--light-gray);
   min-height: 100vh;
   padding-bottom: 40px;
   align-items: center;
@@ -22,14 +23,14 @@
   margin-right: auto;
   margin-top: 20px;
   margin-bottom: -10px;
-  color: #00b0f0;
+  color: var(--blue);
   font-size: large;
   font-weight: bold;
 }
 
 .card {
   color: whitesmoke;
-  background-color: #00b0f0;
+  background-color: var(--blue);
   width: 750px;
   height: 60px;
   margin: 20px 10px 0px 10px;
@@ -43,7 +44,6 @@
   text-decoration: none;
   color: whitesmoke;
 }
-
 
 .no-blogs {
   margin-top: 20px;

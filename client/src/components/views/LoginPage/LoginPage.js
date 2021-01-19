@@ -14,33 +14,39 @@ function LoginPage(props) {
 
   return (
     <div className="login-cont">
-      <div
-        className="login-content"
-        onClick={(event) => {
-          event.stopPropagation();
-        }}
-      >
-        <div id="title-login"> Log In: </div>
-        <input
-          id="username"
-          className="input"
-          placeholder="Username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
-        <input
-          id="password"
-          className="input"
-          placeholder="Password"
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <div className="error-message-login">{errorMessage}</div>
-        <div id="submit-login" onClick={() => {}}>
-          Log In
+      <div id="cont-1">
+          <div id="fb-signin-logo">fakebook</div>
+          <div id="fb-signin-text">
+            Connect with friends and the world around you on Facebook.
+          </div>
         </div>
-      </div>
+        <div
+          className="login-content"
+          onClick={(event) => {
+            event.stopPropagation();
+          }}
+        >
+          <div id="title-login"> Log In: </div>
+          <input
+            id="username"
+            className="input"
+            placeholder="Username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+          <input
+            id="password"
+            className="input"
+            placeholder="Password"
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <div className="error-message-login">{errorMessage}</div>
+          <div id="submit-login" onClick={() => {}}>
+            Log In
+          </div>
+        </div>
     </div>
   );
 }

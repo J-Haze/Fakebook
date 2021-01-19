@@ -1,29 +1,189 @@
+
+
+/* @media only screen and (max-width: 900px) */
+
+/* #cont-1{
+  min-width: 440px;
+  border: 1px solid green;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+#cont-2{
+min-width: 440px;
+border: 1px solid green;
+display: flex;
+  justify-content: center;
+  align-items: center;
+} */
+
 .login-cont {
-  display: block;
-  left: 0;
-  top: 0;
+  /* display: flex;
+  flex-wrap: wrap;
   width: 100%;
   height: 100vh;
+  justify-content: space-around; */
+
+    display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding-top: 120px;
+  width: min(980, 100%);
+}
+
+.login-text-cont{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* align-items: center; */
+  text-align: center;
+  width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+  /* border: 1px solid red; */
+}
+
+/* .login-text-cont @media only screen and (max-width: 900px) {
+  border: 1px solid pink;
+} */
+
+#fb-signin-logo{
+  color: var(--blue);
+  font-size: 56px;
+  font-weight: bold;
+  border: 1px solid black;
+  height: 106px;
+  width: 301px;
+  margin-top: -28px;
+  font-family: var(--fb-font);
+}
+
+#fb-signin-text{
+  font-size: 24px;
+    line-height: 28px;
+    /* width: auto; */
+    width: 400px;
+    height: 56px;
+    font-weight: normal;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 }
 
 .login-content {
   display: flex;
   flex-direction: column;
-  background-color: #fefefe;
-  margin-left: auto;
+  background-color: #ffffff;
+  /* margin-left: auto;
   margin-right: auto;
   margin-top: 1vh;
   padding: 30px;
-  padding-top: 0px;
-  border: 1px solid #888;
-  border: 1px solid #00b0f0;
+  padding-top: 0px; */
+
+  margin: 40px 0 0;
+  margin: 40px auto 0 auto;
+  padding: 10px 0px 24px;
+
+
+  box-shadow: 0 2px 4px rgba(0, 0, 0, .1), 0 8px 16px rgba(0, 0, 0, .1);
   border-radius: 15px;
-  width: 400px;
   justify-content: center;
   align-items: center;
   color: black;
   margin-top: 40px;
+      /* height: 456px; */
+    height: 345px;
+      width: 396px;
+      border: 1px solid red;
 }
+
+@media only screen and (max-width: 980px) {
+.login-cont {
+  display: flex;
+  /* flex-direction: row; */
+  flex-wrap: wrap;
+  /* left: 0;
+  top: 0; */
+  width: 100%;
+  height: 100vh;
+    /* flex-direction: column; */
+  justify-content: center;
+}
+
+.login-text-cont{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* align-items: center; */
+  text-align: center;
+  width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+  /* border: 1px solid red; */
+}
+
+/* .login-text-cont @media only screen and (max-width: 900px) {
+  border: 1px solid pink;
+} */
+
+#fb-signin-logo{
+  color: var(--blue);
+  font-size: 56px;
+  font-weight: bold;
+  border: 1px solid black;
+  height: 106px;
+  width: 301px;
+  margin-top: -28px;
+  font-family: var(--fb-font);
+}
+
+#fb-signin-text{
+  font-size: 24px;
+    line-height: 28px;
+    /* width: auto; */
+    width: 400px;
+    height: 56px;
+    font-weight: normal;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.login-content {
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+  /* margin-left: auto;
+  margin-right: auto;
+  margin-top: 1vh;
+  padding: 30px;
+  padding-top: 0px; */
+
+  margin: 40px 0 0;
+  margin: 40px auto 0 auto;
+  padding: 10px 0px 24px;
+
+
+  box-shadow: 0 2px 4px rgba(0, 0, 0, .1), 0 8px 16px rgba(0, 0, 0, .1);
+  border-radius: 15px;
+  justify-content: center;
+  align-items: center;
+  color: black;
+  margin-top: 40px;
+      /* height: 456px; */
+    height: 345px;
+      width: 396px;
+      border: 1px solid red;
+}
+
+}
+
+
+
 
 #title-login {
   display: flex;
@@ -59,7 +219,7 @@
 }
 
 .error-message-login {
-  color: red;
+  color: var(--red);
   margin-top: 5px;
   margin-bottom: -10px;
 }
@@ -81,7 +241,7 @@
   cursor: pointer;
   line-height: inherit;
   --bg-opacity: 1;
-  background-color: #00b0f0;
+  background-color: var(--blue);
   border-radius: 0.25rem;
   border-width: 0;
   font-size: 1.125rem;
@@ -115,5 +275,5 @@
   --text-opacity: 1;
   color: rgba(255, 255, 255, var(--text-opacity));
   --bg-opacity: 1;
-  background-color: #00b0f0bb;
+  background-color: var(--blue);
 }
