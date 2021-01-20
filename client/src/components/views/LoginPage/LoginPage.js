@@ -5,12 +5,37 @@ import "./LoginPage.css";
 import { useHistory } from "react-router-dom";
 
 function LoginPage(props) {
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const [errorMessage, setErrorMessage] = useState("");
 
   const history = useHistory();
+
+  // if (props.isLoggedIn) {
+  //   history.push("/");
+  // }
+
+  const submitLogin = () => {
+    Axios.post("/user/log-in", {
+      email: email,
+      password: password,
+    })
+      .then((res) => {
+        if (res.data.message) {
+          setErrorMessage(res.data.message);
+        } else {
+          setErrorMessage("");
+          setEmail("");
+          setPassword("");
+          window.localStorage.setItem("token", JSON.stringify(res.data.token));
+          props.setTokenRefresh(!props.tokenRefresh);
+          // history.go(-1);
+          props.setIsLoggedIn(true);
+        }
+      })
+      .catch((error) => console.log("error", error));
+  };
 
   return (
     <div className="login-cont">
@@ -27,11 +52,11 @@ function LoginPage(props) {
         }}
       >
         <input
-          id="username"
+          id="email"
           className="input-login"
           placeholder="Email"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
         />
         <input
           id="password"
@@ -42,7 +67,13 @@ function LoginPage(props) {
           onChange={(e) => setPassword(e.target.value)}
         />
         <div className="error-message-login">{errorMessage}</div>
-        <div id="submit-login" className="login-btn" onClick={() => {}}>
+        <div
+          id="submit-login"
+          className="login-btn"
+          onClick={() => {
+            submitLogin();
+          }}
+        >
           Log In
         </div>
         <div id="submit-fb-login" className="login-btn" onClick={() => {}}>

@@ -24,7 +24,19 @@ function App() {
       <Route
         exact
         path="/"
-        render={() => (isLoggedIn ? <HomePage /> : <LoginPage />)}
+        render={() =>
+          isLoggedIn ? (
+            <HomePage />
+          ) : (
+            <LoginPage
+              isLoggedIn={isLoggedIn}
+              setIsLoggedIn={setIsLoggedIn}
+              setCurrentUser={setCurrentUser}
+              setTokenRefresh={setTokenRefresh}
+              tokenRefresh={tokenRefresh}
+            />
+          )
+        }
       ></Route>
 
       <Route exact path="/log-in" render={() => <LoginPage />}></Route>
