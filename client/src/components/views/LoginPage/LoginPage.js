@@ -4,17 +4,23 @@ import Axios from "axios";
 import "./LoginPage.css";
 import { useHistory } from "react-router-dom";
 
+import SignupModal from "./Sections/SignupModal"
+
 function LoginPage(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const [errorMessage, setErrorMessage] = useState("");
 
+  // const [signupModalOpen, setSignupModalOpen] = useState(false);
+  const [signupModalOpen, setSignupModalOpen] = useState(true);
+
   const history = useHistory();
 
   // if (props.isLoggedIn) {
   //   history.push("/");
   // }
+
 
   const submitLogin = () => {
     Axios.post("/user/log-in", {
@@ -39,6 +45,9 @@ function LoginPage(props) {
 
   return (
     <div className="login-cont">
+      {signupModalOpen && (
+        <SignupModal setSignupModalOpen={setSignupModalOpen} />
+      )}
       <div className="login-text-cont">
         <div id="fb-signin-logo">fakebook</div>
         <div id="fb-signin-text">
@@ -85,7 +94,7 @@ function LoginPage(props) {
         <div
           id="submit-new-account-login"
           className="login-btn"
-          onClick={() => {}}
+          onClick={() => { setSignupModalOpen(true)}}
         >
           Create New Account
         </div>
