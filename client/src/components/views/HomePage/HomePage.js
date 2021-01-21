@@ -7,6 +7,7 @@ function HomePage(props) {
     <>
       <div id="home">
         Home Page
+         {props.currentUser}
       </div>
     </>
   );

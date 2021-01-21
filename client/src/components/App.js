@@ -26,7 +26,9 @@ function App() {
         path="/"
         render={() =>
           isLoggedIn ? (
-            <HomePage />
+            <HomePage 
+              currentUser={currentUser}
+            />
           ) : (
             <LoginPage
               isLoggedIn={isLoggedIn}

@@ -1,3 +1,13 @@
+@font-face {
+  font-family: "SFProDisplay-Bold";
+  src: url("./assets/FontsFree-Net-SFProDisplay-Bold.ttf");
+}
+
+@font-face {
+  font-family: "SFProDisplay-Regular";
+  src: url("./assets/FontsFree-Net-SFProDisplay-Regular.ttf");
+}
+
 :root {
   /* Newest blue */
   --blue: #1877f2;
@@ -6,7 +16,7 @@
   /* --medium-blue: #6d84b4;
   --light-blue: #afbdd4;
   --lighter-blue: #d8dfea; */
-  --green: #42B72a;
+  --green: #42b72a;
   --light-gray: #f0f2f5;
   --dark-gray: #e4e6eb;
   --red: #ff0000;
@@ -33,9 +43,9 @@ code {
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, SFProDisplay-Regular,
+    "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
+    "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial,

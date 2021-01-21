@@ -1,3 +1,13 @@
+@font-face{
+  font-family: 'SFProDisplay-Bold';
+  src: url('../../../assets/FontsFree-Net-SFProDisplay-Bold.ttf');
+}
+
+@font-face{
+  font-family: 'SFProDisplay-Regular';
+  src: url('../../../assets/FontsFree-Net-SFProDisplay-Regular.ttf');
+}
+
 .login-cont {
   display: flex;
   justify-content: space-around;
@@ -245,8 +255,8 @@
   /* border: 1px solid #888; */
   height: 465px;
   width: 432px;
-  justify-content: center;
-  align-items: center;
+  /* justify-content: center; */
+  /* align-items: center; */
   color: black;
 
   padding: 1rem;
@@ -255,13 +265,50 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.1);
 }
 
+#signup-header{
+  display: flex;
+  flex-direction: column;
+
+  border: 1px solid black;
+  /* width: 200px; */
+}
+
+#signup-header-top{
+  display: flex;
+  border: 1px solid black;
+  
+}
+
+#signup-header-title{
+    color: #1c1e21;
+    font-family: SFProDisplay-Bold, Helvetica, Arial, sans-serif;
+    font-size: 32px;
+    line-height: 38px;
+    margin-bottom: 0;
+}
+
+#signup-header-subtitle{
+
+      color: #606770;
+    font-family: SFProText-Regular, Helvetica, Arial, sans-serif;
+    font-size: 15px;
+    line-height: 24px;
+
+
+
+}
+
 .close {
   color: #aaa;
   float: right;
-  margin-left: 100%;
-  font-size: 28px;
+  /* margin-left: 100%; */
+  margin-left: auto;
+  margin-right: 0px;
+  margin-top: -20px;
+  font-size: 32px;
   height: 10px;
   font-weight: bold;
+  border: 1px solid red;
 }
 
 .close:hover,
@@ -269,6 +316,12 @@
   color: black;
   text-decoration: none;
   cursor: pointer;
+}
+
+.input-signup{
+        font-family: SFProDisplay-Regular, Helvetica, Arial, sans-serif;
+    font-size: 15px;
+    line-height: 16px;
 }
 
 #action-message {
