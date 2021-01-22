@@ -73,8 +73,8 @@ html {
   border-style: solid;
   border-color: #e2e8f0;
   font-family: inherit;
-  margin: 0;
-  margin-top: 20px;
+  /* margin: 0; */
+  /* margin-top: 20px; */
   overflow: visible;
   line-height: inherit;
   color: inherit;
@@ -116,4 +116,8 @@ input.error {
 .icon {
   height: 18px;
   width: auto;
+}
+
+.flex{
+  display: flex;
 }
