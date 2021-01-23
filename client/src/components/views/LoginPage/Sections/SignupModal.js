@@ -8,13 +8,15 @@ import { useHistory } from "react-router-dom";
 const filter = new badWords();
 
 function SignupModal(props) {
-  const [firstname, setFirstName] = useState("");
-  const [lasstname, setLastName] = useState("");
+  const currentYear = new Date().getFullYear();
+
+  const [firstname, setFirstname] = useState("");
+  const [lastname, setLastname] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [birthMonth, setBirthMonth] = useState(1);
   const [birthDay, setBirthDay] = useState(1);
-  const [birthYear, setBirthYear] = useState(2021);
+  const [birthYear, setBirthYear] = useState(currentYear);
   const [gender, setGender] = useState("");
 
   const [errorMessage, setErrorMessage] = useState("");
@@ -32,8 +34,14 @@ function SignupModal(props) {
   }, []);
 
   const submitSignUp = () => {
-    if (filter.isProfane(username)) {
-      alert("Username contains a word that is not allowed.");
+    if (filter.isProfane(firstname)) {
+      alert("Firstname contains a word that is not allowed.");
+      setFirstname("");
+      return;
+    }
+
+    if (filter.isProfane(lastname)) {
+      alert("Lastname contains a word that is not allowed.");
       setFirstname("");
       return;
     }
@@ -50,7 +58,7 @@ function SignupModal(props) {
 
     if (
       !/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(
-        email.value
+        email
       )
     ) {
       setErrorMessage("Please enter a valid email address.");
@@ -76,24 +84,36 @@ function SignupModal(props) {
       return;
     }
 
+    if (gender == "") {
+      setErrorMessage("Please select a gender");
+      return;
+    }
+
     Axios.post("/user/new", {
       firstname: firstname,
       lastname: lastname,
       email: email,
       password: password,
       birthDate: birthDate,
+      gender: gender,
     })
       .then((res) => {
         if (res.data.message) {
+          console.log("Error: request");
           setErrorMessage(res.data.message);
         } else {
           setErrorMessage("");
-          setUsername("");
+          setFirstname("");
+          setLastname("");
           setPassword("");
-          setConfirmPassword("");
+          setBirthMonth(1);
+          setBirthDay(1);
+          setBirthYear(currentYear);
+          setGender("");
+          setPassword("");
 
           Axios.post("/user/log-in", {
-            username: username,
+            email: email,
             password: password,
           }).then((res) => {
             if (res.data.message) {
@@ -103,10 +123,12 @@ function SignupModal(props) {
                 "token",
                 JSON.stringify(res.data.token)
               );
-              props.setTokenRefresh(!props.tokenRefresh);
+                props.setTokenRefresh(!props.tokenRefresh);
+                props.setSignupModalOpen(false);
               props.setIsLoggedIn(true);
-              props.fetchUsers();
-              history.go(-1);
+              //   props.fetchUsers();
+              //   history.go(-1);
+              
             }
           });
         }
@@ -115,7 +137,6 @@ function SignupModal(props) {
   };
 
   const yearOptions = [];
-  const currentYear = new Date().getFullYear();
 
   console.log("cy", currentYear);
 
@@ -152,14 +173,14 @@ function SignupModal(props) {
               className="input-signup"
               placeholder="First name"
               value={firstname}
-              onChange={(e) => setFirstName(e.target.value)}
+              onChange={(e) => setFirstname(e.target.value)}
             />
             <input
               id="lastname"
               className="input-signup"
               placeholder="Last name"
-              value={firstname}
-              onChange={(e) => setLastName(e.target.value)}
+              value={lastname}
+              onChange={(e) => setLastname(e.target.value)}
             />
           </div>
           <input
@@ -173,7 +194,8 @@ function SignupModal(props) {
             id="password"
             className="input-signup input-marg"
             placeholder="New password"
-            value={email}
+            type="password"
+            value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
           <div className="signup-label">Birthday</div>
@@ -182,7 +204,8 @@ function SignupModal(props) {
               className="form-select"
               name="birthMonth"
               id="birthMonth"
-              defaultValue="1"
+              defaultValue={birthMonth}
+              onChange={(e) => setBirthMonth(e.target.value)}
             >
               <option value="1">Jan</option>
               <option value="2">Feb</option>
@@ -201,7 +224,8 @@ function SignupModal(props) {
               className="form-select"
               name="birthDay"
               id="birthDay"
-              defaultValue="1"
+              defaultValue={birthDay}
+              onChange={(e) => setBirthDay(e.target.value)}
             >
               <option key="1">1</option>
               {[...Array(32).keys()].splice(2).map((day) => (
@@ -215,10 +239,11 @@ function SignupModal(props) {
               className="form-select"
               name="birthYear"
               id="birthYear"
-              defaultValue={currentYear}
+              defaultValue={birthYear}
+              onChange={(e) => setBirthYear(e.target.value)}
             >
               <option value={currentYear} key={currentYear}>
-                2021
+                {currentYear}
               </option>
               {yearOptions.map((year) => (
                 <option value={year} key={year}>
@@ -231,13 +256,13 @@ function SignupModal(props) {
           <div id="gender-row">
             <div className="radio-box">
               <label className="gender-radio">
-                {/* &nbsp; */}
                 Female
                 <input
                   type="radio"
                   name="gender"
                   value="female"
                   className="circle"
+                  onChange={(e) => setGender(e.target.value)}
                   required
                 />
               </label>
@@ -250,6 +275,7 @@ function SignupModal(props) {
                   name="gender"
                   value="male"
                   className="circle"
+                  onChange={(e) => setGender(e.target.value)}
                   required
                 />
               </label>
@@ -262,47 +288,22 @@ function SignupModal(props) {
                   name="gender"
                   value="other"
                   className="circle"
+                  onChange={(e) => setGender(e.target.value)}
                   required
                 />
               </label>
             </div>
           </div>
-
-          {/* Error Message Here */}
           <div className="error-message-signup">{errorMessage}</div>
           <div
             id="submit-signup"
             onClick={() => {
               submitSignUp();
-              //   Redirect
-              //   props.setSignupModalOpen(false);
             }}
           >
-            {" "}
             Sign Up
           </div>
         </form>
-
-        {/* <div id="submit-btn-cont">
-          <div
-            id="submit-decline"
-            className="confirmation-btn"
-            onClick={() => {
-              props.setSignupModalOpen(false);
-            }}
-          >
-            Cancel
-          </div>
-          <div
-            id="submit-confirmation"
-            className="confirmation-btn"
-            onClick={() => {
-              //   props.deletePost(props.postid);
-            }}
-          >
-            Delete
-          </div>
-        </div> */}
       </div>
     </div>
   );

@@ -125,9 +125,9 @@ exports.post_user_login = function (req, res, next) {
     console.log(err);
     if (err || !user) {
       console.log("error or no user");
-      console.log("err", err)
-      console.log("user", user)
-      console.log("info", info)
+      console.log("err", err);
+      console.log("user", user);
+      console.log("info", info);
       return res.json({
         message: "Incorrect Email or Password.",
       });

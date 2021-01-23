@@ -4,7 +4,7 @@ import Axios from "axios";
 import "./LoginPage.css";
 import { useHistory } from "react-router-dom";
 
-import SignupModal from "./Sections/SignupModal"
+import SignupModal from "./Sections/SignupModal";
 
 function LoginPage(props) {
   const [email, setEmail] = useState("");
@@ -13,14 +13,13 @@ function LoginPage(props) {
   const [errorMessage, setErrorMessage] = useState("");
 
   // const [signupModalOpen, setSignupModalOpen] = useState(false);
-  const [signupModalOpen, setSignupModalOpen] = useState(true);
+  const [signupModalOpen, setSignupModalOpen] = useState(false);
 
   const history = useHistory();
 
   // if (props.isLoggedIn) {
   //   history.push("/");
   // }
-
 
   const submitLogin = () => {
     Axios.post("/user/log-in", {
@@ -46,7 +45,14 @@ function LoginPage(props) {
   return (
     <div className="login-cont">
       {signupModalOpen && (
-        <SignupModal setSignupModalOpen={setSignupModalOpen} />
+        <SignupModal
+          setSignupModalOpen={setSignupModalOpen}
+          isLoggedIn={props.isLoggedIn}
+          setIsLoggedIn={props.setIsLoggedIn}
+          setCurrentUser={props.setCurrentUser}
+          setTokenRefresh={props.setTokenRefresh}
+          tokenRefresh={props.tokenRefresh}
+        />
       )}
       <div className="login-text-cont">
         <div id="fb-signin-logo">fakebook</div>
@@ -94,7 +100,9 @@ function LoginPage(props) {
         <div
           id="submit-new-account-login"
           className="login-btn"
-          onClick={() => { setSignupModalOpen(true)}}
+          onClick={() => {
+            setSignupModalOpen(true);
+          }}
         >
           Create New Account
         </div>
