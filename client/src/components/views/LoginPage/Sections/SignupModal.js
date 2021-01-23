@@ -51,7 +51,7 @@ function SignupModal(props) {
       return;
     }
 
-    if (lastname.length < 2 || lastname.length > 15) {
+    if (lastname.length < 2 || lastname.length > 15) { 
       setErrorMessage("Please enter a last name between 2 and 15 characters.");
       return;
     }
