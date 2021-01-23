@@ -1,4 +1,4 @@
-.signup-cont {
+/* .signup-cont {
   display: block;
   left: 0;
   top: 0;
@@ -23,9 +23,9 @@
   align-items: center;
   color: black;
   margin-top: 40px;
-}
+} */
 
-#title-signup {
+/* #title-signup {
   display: flex;
   align-items: center;
   width: 100%;
@@ -40,9 +40,9 @@
   width: 208px;
   margin-top: 5px;
   margin-bottom: -15px;
-}
+} */
 
-#submit-signup {
+/* #submit-signup {
   display: flex;
   text-align: center;
   justify-content: center;
@@ -94,11 +94,11 @@
   color: rgba(255, 255, 255, var(--text-opacity));
   --bg-opacity: 1;
   background-color: var(--blue);
-}
+} */
 
-#bottom {
+/* #bottom {
   width: 100%;
   margin-left: 200px;
   margin-top: 10px;
   margin-bottom: 30px;
-}
+} */

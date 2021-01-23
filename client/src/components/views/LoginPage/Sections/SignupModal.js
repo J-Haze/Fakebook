@@ -91,6 +91,15 @@ function SignupModal(props) {
   //       .catch((error) => console.log("error", error));
   //   };
 
+  const yearOptions = [];
+  const currentYear = new Date().getFullYear();
+
+  console.log("cy", currentYear);
+
+  for (let i = currentYear - 1; i > 1910; i--) {
+    yearOptions.push(i);
+  }
+
   return (
     <div className="signup-modal">
       <div
@@ -132,18 +141,121 @@ function SignupModal(props) {
           </div>
           <input
             id="email"
-            className="input-signup"
+            className="input-signup input-marg"
             placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
           <input
             id="password"
-            className="input-signup"
+            className="input-signup input-marg"
             placeholder="New password"
             value={email}
             onChange={(e) => setPassword(e.target.value)}
           />
+          <div className="signup-label">Birthday</div>
+          <div id="date-row">
+            <select
+              className="form-select"
+              name="birthMonth"
+              id="birthMonth"
+              defaultValue="1"
+            >
+              <option value="1">Jan</option>
+              <option value="2">Feb</option>
+              <option value="3">Mar</option>
+              <option value="4">Apr</option>
+              <option value="5">May</option>
+              <option value="6">June</option>
+              <option value="7">July</option>
+              <option value="8">Aug</option>
+              <option value="9">Sep</option>
+              <option value="10">Oct</option>
+              <option value="11">Nov</option>
+              <option value="12">Dec</option>
+            </select>
+            <select
+              className="form-select"
+              name="birthDay"
+              id="birthDay"
+              defaultValue="1"
+            >
+              <option key="1">1</option>
+              {[...Array(32).keys()].splice(2).map((day) => (
+                <option value={day} key={day}>
+                  {day}
+                </option>
+              ))}
+            </select>
+
+            <select
+              className="form-select"
+              name="birthYear"
+              id="birthYear"
+              defaultValue={currentYear}
+            >
+              <option value={currentYear} key={currentYear}>
+                2021
+              </option>
+              {yearOptions.map((year) => (
+                <option value={year} key={year}>
+                  {year}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="signup-label">Gender</div>
+          <div id="gender-row">
+            <div className="radio-box">
+              <label className="gender-radio">
+                {/* &nbsp; */}
+                Female
+                <input
+                  type="radio"
+                  name="gender"
+                  value="female"
+                  className="circle"
+                  required
+                />
+              </label>
+            </div>
+            <div className="radio-box rb-mid">
+              <label className="gender-radio">
+                Male
+                <input
+                  type="radio"
+                  name="gender"
+                  value="male"
+                  className="circle"
+                  required
+                />
+              </label>
+            </div>
+            <div className="radio-box">
+              <label className="gender-radio">
+                Other
+                <input
+                  type="radio"
+                  name="gender"
+                  value="other"
+                  className="circle"
+                  required
+                />
+              </label>
+            </div>
+          </div>
+
+          {/* Error Message Here */}
+          <div className="error-message-signup">{errorMessage}</div>
+          <div
+            id="submit-signup"
+            onClick={() => {
+              //   props.setSignupModalOpen(false);
+            }}
+          >
+            {" "}
+            Sign Up
+          </div>
         </form>
 
         {/* <div id="submit-btn-cont">
