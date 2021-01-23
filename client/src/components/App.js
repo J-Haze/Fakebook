@@ -8,7 +8,6 @@ import Header from "./views/Header/Header";
 
 import HomePage from "./views/HomePage/HomePage.js";
 import LoginPage from "./views/LoginPage/LoginPage.js";
-import SignupPage from "./views/SignupPage/SignupPage.js";
 import NotFound from "./views/NotFound/NotFound.js";
 
 function App() {
@@ -25,11 +24,7 @@ function App() {
         exact
         path="/"
         render={() =>
-          isLoggedIn ? (
-            <HomePage 
-              currentUser={currentUser}
-            />
-          ) : (
+          !isLoggedIn ? (
             <LoginPage
               isLoggedIn={isLoggedIn}
               setIsLoggedIn={setIsLoggedIn}
@@ -37,13 +32,13 @@ function App() {
               setTokenRefresh={setTokenRefresh}
               tokenRefresh={tokenRefresh}
             />
+          ) : (
+            <HomePage currentUser={currentUser} />
           )
         }
       ></Route>
 
       <Route exact path="/log-in" render={() => <LoginPage />}></Route>
-
-      <Route exact path="/sign-up" render={() => <SignupPage />}></Route>
 
       <Route render={() => <NotFound />} />
     </Switch>

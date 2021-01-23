@@ -24,7 +24,7 @@
   /* margin-bottom: auto; */
   /* margin-left: 40px; */
   margin-left: auto;
-  margin-right: 80px;
+  margin-right: 160px;
   /* border: 1px solid black; */
 }
 
@@ -42,7 +42,7 @@
 }
 
 .login-content {
-  margin-top: -60px;
+  margin-top: -15px;
   /* margin-right: 40px; */
   margin-right: auto;
   height: 315px;
@@ -516,7 +516,7 @@
   align-items: center;
   margin-top: 7px;
   margin-bottom: auto;
-    font-family: Helvetica, Arial, sans-serif;
+  font-family: Helvetica, Arial, sans-serif;
   font-size: 15px;
   font-stretch: 100%;
   font-style: normal;
@@ -525,7 +525,7 @@
   font-variant-ligatures: normal;
   font-variant-numeric: normal;
   /* font-weight: 700; */
-} 
+}
 
 #submit-signup {
   display: flex;
@@ -552,52 +552,10 @@
   font-variant-ligatures: normal;
   font-variant-numeric: normal;
   font-weight: 700;
-
 }
 
-#submit-signup:hover{
+#submit-signup:hover {
   cursor: pointer;
   background-image: linear-gradient(rgb(121, 188, 100));
   background-color: rgb(121, 188, 100);
-}
-
-#submit-btn-cont {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  width: 400px;
-}
-
-.confirmation-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  margin-top: 15px;
-  margin-top: 10px;
-  height: 25px;
-  width: 120px;
-  font-size: 1.1em;
-  font-weight: bold;
-  border: 3px solid #00b0f0;
-}
-
-.confirmation-btn:hover {
-  cursor: pointer;
-}
-
-#submit-decline {
-  border: 3px solid #00b0f0;
-}
-
-#submit-decline:hover {
-  background-color: #00b0f0;
-}
-
-#submit-confirmation {
-  border: 3px solid red;
-}
-
-#submit-confirmation:hover {
-  background-color: red;
 }
