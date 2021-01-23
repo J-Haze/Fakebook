@@ -5,6 +5,8 @@ import "../LoginPage.css";
 import badWords from "bad-words";
 import { useHistory } from "react-router-dom";
 
+const filter = new badWords();
+
 function SignupModal(props) {
   const [firstname, setFirstName] = useState("");
   const [lasstname, setLastName] = useState("");
@@ -29,67 +31,88 @@ function SignupModal(props) {
     }
   }, []);
 
-  //   const submitSignUp = () => {
-  //     if (filter.isProfane(username)) {
-  //       alert("Username contains a word that is not allowed.");
-  //       setUsername("");
-  //       return;
-  //     }
+  const submitSignUp = () => {
+    if (filter.isProfane(username)) {
+      alert("Username contains a word that is not allowed.");
+      setFirstname("");
+      return;
+    }
 
-  //     if (username.length < 3 || username.length > 15) {
-  //       setErrorMessage(
-  //         "Please enter a Username between 2 and 15 characters."
-  //       );
-  //       return;
-  //     }
+    if (firstname.length < 2 || firstname.length > 15) {
+      setErrorMessage("Please enter a Firstname between 2 and 15 characters.");
+      return;
+    }
 
-  //     if (password.length < 3 || password.length > 15) {
-  //       setErrorMessage(
-  //         "Please enter a Password between 2 and 15 characters."
-  //       );
-  //       return;
-  //     }
+    if (lastname.length < 2 || lastname.length > 15) {
+      setErrorMessage("Please enter a Lastname between 2 and 15 characters.");
+      return;
+    }
 
-  //     if (password !== confirmPassword) {
-  //       setErrorMessage("Passwords do not match");
-  //       return;
-  //     }
+    if (
+      !/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(
+        email.value
+      )
+    ) {
+      setErrorMessage("Please enter a valid email address.");
+      return;
+    }
 
-  //     Axios.post("/user/new", {
-  //       username: username,
-  //       password: password,
-  //       confirmPassword: confirmPassword,
-  //     })
-  //       .then((res) => {
-  //         if (res.data.message) {
-  //           setErrorMessage(res.data.message);
-  //         } else {
-  //           setErrorMessage("");
-  //           setUsername("");
-  //           setPassword("");
-  //           setConfirmPassword("");
+    if (password.length < 8 || password.length > 15) {
+      setErrorMessage("Please enter a Password between 8 and 15 characters.");
+      return;
+    }
 
-  //           Axios.post("/user/log-in", {
-  //             username: username,
-  //             password: password,
-  //           }).then((res) => {
-  //             if (res.data.message) {
-  //               setErrorMessage(res.data.message);
-  //             } else {
-  //               window.localStorage.setItem(
-  //                 "token",
-  //                 JSON.stringify(res.data.token)
-  //               );
-  //               props.setTokenRefresh(!props.tokenRefresh);
-  //               props.setIsLoggedIn(true);
-  //               props.fetchUsers();
-  //               history.go(-1);
-  //             }
-  //           });
-  //         }
-  //       })
-  //       .catch((error) => console.log("error", error));
-  //   };
+    let birthDate = `${birthMonth}-${birthDay}-${birthYear}`;
+    console.log("birthDate:", birthDate);
+
+    if (
+      (birthMonth == 2 && birthDay > 29) ||
+      (birthMonth == 4 && (birthDay = 31)) ||
+      (birthMonth == 6 && (birthDay = 31)) ||
+      (birthMonth == 9 && (birthDay = 31)) ||
+      (birthMonth == 11 && (birthDay = 31))
+    ) {
+      setErrorMessage("Please enter a valid date of birth");
+      return;
+    }
+
+    Axios.post("/user/new", {
+      firstname: firstname,
+      lastname: lastname,
+      email: email,
+      password: password,
+      birthDate: birthDate,
+    })
+      .then((res) => {
+        if (res.data.message) {
+          setErrorMessage(res.data.message);
+        } else {
+          setErrorMessage("");
+          setUsername("");
+          setPassword("");
+          setConfirmPassword("");
+
+          Axios.post("/user/log-in", {
+            username: username,
+            password: password,
+          }).then((res) => {
+            if (res.data.message) {
+              setErrorMessage(res.data.message);
+            } else {
+              window.localStorage.setItem(
+                "token",
+                JSON.stringify(res.data.token)
+              );
+              props.setTokenRefresh(!props.tokenRefresh);
+              props.setIsLoggedIn(true);
+              props.fetchUsers();
+              history.go(-1);
+            }
+          });
+        }
+      })
+      .catch((error) => console.log("error", error));
+  };
 
   const yearOptions = [];
   const currentYear = new Date().getFullYear();
@@ -250,6 +273,8 @@ function SignupModal(props) {
           <div
             id="submit-signup"
             onClick={() => {
+              submitSignUp();
+              //   Redirect
               //   props.setSignupModalOpen(false);
             }}
           >
