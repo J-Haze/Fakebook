@@ -47,12 +47,12 @@ function SignupModal(props) {
     }
 
     if (firstname.length < 2 || firstname.length > 15) {
-      setErrorMessage("Please enter a Firstname between 2 and 15 characters.");
+      setErrorMessage("Please enter a first name between 2 and 15 characters.");
       return;
     }
 
     if (lastname.length < 2 || lastname.length > 15) {
-      setErrorMessage("Please enter a Lastname between 2 and 15 characters.");
+      setErrorMessage("Please enter a last name between 2 and 15 characters.");
       return;
     }
 
@@ -75,10 +75,10 @@ function SignupModal(props) {
 
     if (
       (birthMonth == 2 && birthDay > 29) ||
-      (birthMonth == 4 && (birthDay = 31)) ||
-      (birthMonth == 6 && (birthDay = 31)) ||
-      (birthMonth == 9 && (birthDay = 31)) ||
-      (birthMonth == 11 && (birthDay = 31))
+      (birthMonth == 4 && birthDay == 31) ||
+      (birthMonth == 6 && birthDay == 31) ||
+      (birthMonth == 9 && birthDay == 31) ||
+      (birthMonth == 11 && birthDay == 31)
     ) {
       setErrorMessage("Please enter a valid date of birth");
       return;
@@ -123,12 +123,11 @@ function SignupModal(props) {
                 "token",
                 JSON.stringify(res.data.token)
               );
-                props.setTokenRefresh(!props.tokenRefresh);
-                props.setSignupModalOpen(false);
+              props.setTokenRefresh(!props.tokenRefresh);
+              props.setSignupModalOpen(false);
               props.setIsLoggedIn(true);
               //   props.fetchUsers();
               //   history.go(-1);
-              
             }
           });
         }
