@@ -21,8 +21,8 @@ function HomePage(props) {
 
   return (
     <> 
-      <div>Home Page</div>
-      {/* <div id="home">
+      {/* <div>Home Page</div> */}
+      <div id="home">
         {props.loading ? (
           <div>Loading... </div>
         ) : postCount === 0 ? (
@@ -45,7 +45,7 @@ function HomePage(props) {
             )}
           </div>
         )}
-      </div> */}
+      </div>
     </>
   );
 }
