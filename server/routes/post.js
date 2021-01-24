@@ -7,13 +7,13 @@ var comment_controller = require("../controllers/comment_controller");
 const auth = require("../middleware/auth");
 
 // GET - Get all posts
-router.get("/", post_controller.get_posts);
+router.get("/", auth, post_controller.get_posts);
 
 // // POST new blog post
 router.post("/new", auth, post_controller.post_create_post);
 
 //Get specific post
-router.get("/:postid", post_controller.get_post);
+router.get("/:postid", auth, post_controller.get_post);
 
 //Update specific post
 router.put("/:postid", auth, post_controller.edit_post);
@@ -40,7 +40,7 @@ router.delete("/:postid", auth, post_controller.delete_post);
 //Comments
 
 //Post a comment on a post
-// router.post("/:postid/comment", auth, comment_controller.post_create_comment);
+router.post("/:postid/comment", auth, comment_controller.post_create_comment);
 
 //Delete a comment
 router.delete("/:postid/:commentid", auth, comment_controller.delete_comment);
@@ -59,6 +59,6 @@ router.put(
 );
 
 // GET - Get comments from specific post
-router.get("/:postid/comments", post_controller.get_comments);
+router.get("/:postid/comments", auth, post_controller.get_comments);
 
 module.exports = router;

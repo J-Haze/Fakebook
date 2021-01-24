@@ -13,10 +13,59 @@ import NotFound from "./views/NotFound/NotFound.js";
 function App() {
   const [loading, setLoading] = useState(true);
   const [currentUser, setCurrentUser] = useState("");
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  // const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [tokenRefresh, setTokenRefresh] = useState(true);
+  const [allPosts, setAllPosts] = useState([]);
+  const [displayedPosts, setDisplayedPosts] = useState([]);
+  const [allUsers, setAllUsers] = useState([]);
+  const [allFriends, setFriends] = useState([]);
 
   const history = useHistory();
+
+  const fetchPosts = () => {
+    setLoading(true);
+    Axios.get("/post/").then((res) => {
+      let allPostsArray = res.data;
+      let reversedArray = allPostsArray.reverse();
+      setAllPosts(allPostsArray.reverse());
+      setDisplayedPosts(allPostsArray.reverse());
+      setLoading(false);
+    });
+  };
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      fetchPosts();
+    }
+  }, [isLoggedIn]);
+
+  const fetchUsers = () => {
+    Axios.get("/user/users").then((res) => {
+      setAllUsers(res.data);
+    });
+  };
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      fetchUsers();
+    }
+  }, [isLoggedIn]);
+
+  useEffect(() => {
+    Axios.get("/user/", {
+      headers: {
+        Authorization: `Bearer ${JSON.parse(
+          window.localStorage.getItem("token")
+        )}`,
+      },
+    })
+      .then((res) => {
+        setCurrentUser(res.data);
+        setIsLoggedIn(true);
+      })
+      .catch((error) => console.log("error", error));
+  }, [tokenRefresh]);
 
   return (
     <Switch>
@@ -34,10 +83,10 @@ function App() {
             />
           ) : (
             <HomePage
-                currentUser={currentUser}
-                isLoggedIn={isLoggedIn}
-              fetchBlogs={fetchPosts}
-              displayedBlogs={displayedPosts}
+              currentUser={currentUser}
+              isLoggedIn={isLoggedIn}
+              fetchPosts={fetchPosts}
+              displayedPosts={displayedPosts}
               loading={loading}
             />
           )

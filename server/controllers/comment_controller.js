@@ -26,7 +26,7 @@ exports.post_create_comment = [
           text: req.body.text,
           parent: postid,
           author: authData._id,
-          username: authData.username,
+          likesList: [],
           isPublished: true,
         });
 

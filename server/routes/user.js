@@ -37,21 +37,21 @@ router.get('/auth/facebook/callback', user_controller.facebook_callback);
 
 
 // GET - Get all users
-router.get("/users", user_controller.get_users);
+router.get("/users", auth, user_controller.get_users);
 
 // // GET - Get all friends
-// router.get("/friends", user_controller.get_friends);
+// router.get("/friends", auth, user_controller.get_friends);
 
 //Get all posts from current user
 router.get("/posts", auth, user_controller.get_currentUser_posts);
 
 //Get all posts by specific author
-router.get("/:userid/posts", user_controller.get_user_posts);
+router.get("/:userid/posts", auth, user_controller.get_user_posts);
 
 //Friend someone
-// router.put("/:userid/friend", user_controller.friend_user);
+// router.put("/:userid/friend", auth, user_controller.friend_user);
 
 //Unfriend someone
-// router.put("/:userid/unfriend", user_controller.unfriend_user);
+// router.put("/:userid/unfriend", auth, user_controller.unfriend_user);
 
 module.exports = router;
