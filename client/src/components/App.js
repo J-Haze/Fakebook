@@ -33,7 +33,13 @@ function App() {
               tokenRefresh={tokenRefresh}
             />
           ) : (
-            <HomePage currentUser={currentUser} />
+            <HomePage
+                currentUser={currentUser}
+                isLoggedIn={isLoggedIn}
+              fetchBlogs={fetchPosts}
+              displayedBlogs={displayedPosts}
+              loading={loading}
+            />
           )
         }
       ></Route>

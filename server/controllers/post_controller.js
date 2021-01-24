@@ -16,17 +16,9 @@ exports.get_posts = (req, res, next) => {
   });
 };
 
-exports.get_create_post = function (req, res, next) {
-  //Render Sign-Up page
-  res.json({
-    message: "Get New Post Form",
-  });
-};
-
 exports.post_create_post = [
   // Validate and sanitize fields.
-  body("title", "Title must not be empty.").trim().isLength({ min: 1 }),
-  body("text", "Post body must not be empty.").trim().isLength({ min: 1 }),
+  body("text", "Can't submit a blank post").not().isEmpty().trim(),
   body("timestamp").escape(),
 
   (req, res) => {
@@ -37,10 +29,10 @@ exports.post_create_post = [
       } else {
         // Create a Post object with escaped and trimmed data.
         var post = new Post({
-          title: req.body.title,
           text: req.body.text,
-          author_id: authData._id,
-          author: authData.username,
+          image: "",
+          likesList: [],
+          author: authData._id,
           isPublished: true,
         });
 
