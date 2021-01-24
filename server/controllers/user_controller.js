@@ -153,6 +153,43 @@ exports.post_user_login = function (req, res, next) {
   })(req, res);
 };
 
+exports.facebook_callback = (req, res, next) => {
+  passport.authenticate("facebook", { session: false }, function (
+    err,
+    user,
+    info
+  ) {
+        console.log("made it here");
+    if (err || !user) {
+      console.log("error or no user");
+      console.log("err", err);
+      console.log("user", user);
+      console.log("info", info);
+      return res.json({
+        message: "Could not verify Facebook account",
+      });
+    }
+    // if (err) res.send(err);
+    jwt.sign(
+      { _id: user._id, email: user.email },
+      //Production:
+      // process.env.JWT_SECRET,
+      //Local
+      keys.secretOrKey,
+      { expiresIn: 3600 },
+      (err, token) => {
+        if (err) {
+          return res.status(400).json(err);
+        }
+        res.json({
+          token: token,
+          user: { _id: user._id, email: user.email },
+        });
+      }
+    );
+  })(req, res);
+};
+
 // exports.user_logout_get = function (req, res) {
 //   req.logOut();
 // };

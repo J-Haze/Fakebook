@@ -13,7 +13,7 @@ import NotFound from "./views/NotFound/NotFound.js";
 function App() {
   const [loading, setLoading] = useState(true);
   const [currentUser, setCurrentUser] = useState("");
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [tokenRefresh, setTokenRefresh] = useState(true);
 
   const history = useHistory();

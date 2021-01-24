@@ -4,6 +4,8 @@ import Axios from "axios";
 import "./LoginPage.css";
 import { useHistory } from "react-router-dom";
 
+import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
+
 import SignupModal from "./Sections/SignupModal";
 
 function LoginPage(props) {
@@ -42,6 +44,55 @@ function LoginPage(props) {
       .catch((error) => console.log("error", error));
   };
 
+  const submitFBLogin = () => {
+//Action is a get not a post, so I think something else is going on
+
+    Axios.get("/user/auth/facebook")
+      .then((res) => {
+        console.log("here1")
+        console.log('res', res)
+        if (res.data.message) {
+          setErrorMessage(res.data.message);
+          console.log(res.data.message);
+        } else {
+          setErrorMessage("");
+          setEmail("");
+          setPassword("");
+          console.log(res.data.token)
+          window.localStorage.setItem("token", JSON.stringify(res.data.token));
+          props.setTokenRefresh(!props.tokenRefresh);
+          // history.go(-1);
+          props.setIsLoggedIn(true);
+        }
+      })
+      .catch((error) => console.log("error", error));
+  }
+
+  // const Facebook = ({ handleFBLogin }) => {
+  // const componentClicked = () => {};
+
+  //   const responseFacebook = (res) => {
+  //   console.log("facebook res:", res)
+  //     handleFBLogin(res.accessToken);
+      
+  //     Axios.get("/user/auth/facebook")
+  //     .then((res) => {
+  //       if (res.data.message) {
+  //         setErrorMessage(res.data.message);
+  //       } else {
+  //         setErrorMessage("");
+  //         setEmail("");
+  //         setPassword("");
+  //         window.localStorage.setItem("token", JSON.stringify(res.data.token));
+  //         props.setTokenRefresh(!props.tokenRefresh);
+  //         // history.go(-1);
+  //         props.setIsLoggedIn(true);
+  //       }
+  //     })
+  //     .catch((error) => console.log("error", error));
+  // };
+
+    
   return (
     <div className="login-cont">
       {signupModalOpen && (
@@ -91,9 +142,47 @@ function LoginPage(props) {
         >
           Log In
         </div>
-        <div id="submit-fb-login" className="login-btn" onClick={() => {}}>
+{/* 
+        <FacebookLogin
+          appId="566877284195455"
+          autoLoad={true}
+          fields="displayName, photos, email"
+          onClick={componentClicked}
+          callback={responseFacebook}
+          render={(renderProps) => (
+            <div
+              id="submit-fb-login"
+              className="login-btn"
+              // onClick={() => {
+              //   submitFBLogin();
+              // }}
+              onClick={renderProps.onClick}
+            >
+              Log In with Facebook
+            </div>)}
+        /> */}
+
+        <div
+          id="submit-fb-login"
+          className="login-btn"
+          onClick={() => {
+            submitFBLogin();
+          }}
+        >
           Log In with Facebook
         </div>
+
+        {/* <a
+          href={
+            process.env.NODE_ENV === "development"
+              ? "http://localhost:3000/user/auth/facebook"
+              : ""
+          }
+                    id="submit-fb-login"
+          className="login-btn"
+        >
+          Log In with Facebook
+        </a> */}
         <div id="submit-guest-login" className="login-btn" onClick={() => {}}>
           Test Drive a Guest Account
         </div>
