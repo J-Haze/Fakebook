@@ -20,6 +20,7 @@ exports.get_current_user = (req, res, next) => {
           console.log(err);
           return res.json(err);
         }
+        console.log(user) //Delete at end
         res.json(user);
         next();
       });
@@ -122,6 +123,7 @@ exports.post_user_login = function (req, res, next) {
     user,
     info
   ) {
+    console.log("h1")
     console.log(err);
     if (err || !user) {
       console.log("error or no user");

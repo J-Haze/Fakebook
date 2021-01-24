@@ -166,7 +166,7 @@ function LoginPage(props) {
           id="submit-fb-login"
           className="login-btn"
           onClick={() => {
-            submitFBLogin();
+            // submitFBLogin();
           }}
         >
           Log In with Facebook

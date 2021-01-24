@@ -19,6 +19,7 @@ exports.get_posts = (req, res, next) => {
 exports.post_create_post = [
   // Validate and sanitize fields.
   body("text", "Can't submit a blank post").not().isEmpty().trim(),
+  // Add image thing later
   body("timestamp").escape(),
 
   (req, res) => {
