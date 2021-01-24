@@ -23,9 +23,36 @@ function App() {
 
   const history = useHistory();
 
+  //If there is a user logged in, it sets currentUser and isLoggedIn
+    useEffect(() => {
+      Axios.get("/user/", {
+        headers: {
+          Authorization: `Bearer ${JSON.parse(
+            window.localStorage.getItem("token")
+          )}`,
+        },
+      })
+        .then((res) => {
+          setCurrentUser(res.data);
+          setIsLoggedIn(true);
+        })
+        .catch((error) => console.log("error", error));
+    }, [tokenRefresh]);
+
+
+  // Move this stuff to other sections (you don't need if for the signup page)
+
   const fetchPosts = () => {
     setLoading(true);
-    Axios.get("/post/").then((res) => {
+    Axios.get("/post/",
+            {
+        headers: {
+          Authorization: `Bearer ${JSON.parse(
+            window.localStorage.getItem("token")
+          )}`,
+        },
+      }
+    ).then((res) => {
       let allPostsArray = res.data;
       let reversedArray = allPostsArray.reverse();
       setAllPosts(allPostsArray.reverse());
@@ -41,7 +68,14 @@ function App() {
   }, [isLoggedIn]);
 
   const fetchUsers = () => {
-    Axios.get("/user/users").then((res) => {
+    Axios.get("/user/users", {
+      headers: {
+        Authorization: `Bearer ${JSON.parse(
+          window.localStorage.getItem("token")
+        )}`,
+      },
+    }
+    ).then((res) => {
       setAllUsers(res.data);
     });
   };
@@ -52,20 +86,7 @@ function App() {
     }
   }, [isLoggedIn]);
 
-  useEffect(() => {
-    Axios.get("/user/", {
-      headers: {
-        Authorization: `Bearer ${JSON.parse(
-          window.localStorage.getItem("token")
-        )}`,
-      },
-    })
-      .then((res) => {
-        setCurrentUser(res.data);
-        setIsLoggedIn(true);
-      })
-      .catch((error) => console.log("error", error));
-  }, [tokenRefresh]);
+//^^^
 
   return (
     <Switch>

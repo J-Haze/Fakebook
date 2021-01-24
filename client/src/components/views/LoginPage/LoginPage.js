@@ -25,7 +25,7 @@ function LoginPage(props) {
 
   const submitLogin = () => {
     Axios.post("/user/log-in", {
-      email: email,
+      email: email.toLowerCase(),
       password: password,
     })
       .then((res) => {

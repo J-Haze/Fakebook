@@ -92,7 +92,7 @@ function SignupModal(props) {
     Axios.post("/user/new", {
       firstname: firstname,
       lastname: lastname,
-      email: email,
+      email: email.toLowerCase(),
       password: password,
       birthDate: birthDate,
       gender: gender,
@@ -112,8 +112,9 @@ function SignupModal(props) {
           setGender("");
           setPassword("");
 
+          //Should I use a log in???
           Axios.post("/user/log-in", {
-            email: email,
+            email: email.toLowerCase(),
             password: password,
           }).then((res) => {
             if (res.data.message) {

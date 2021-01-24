@@ -42,7 +42,17 @@ exports.post_create_user = [
   //Validate and sanitize fields.
   body("firstname", "Please enter a first name").not().isEmpty().trim(),
   body("lastname", "Please enter a last name").not().isEmpty().trim(),
-  body("email", "Please enter an email").isEmail().not().isEmpty().trim(),
+  // body("email", "Please enter an email")
+  //   .isEmail()
+  //   .normalizeEmail()
+  //   .not()
+  //   .isEmpty()
+  //   .trim(),
+  body("email", "Please enter an email")
+    .isEmail()
+    .not()
+    .isEmpty()
+    .trim(),
   body("password", "Please enter a password").not().isEmpty().trim(),
   body("birthDate", "Please enter a birth date").not().isEmpty().trim(),
   body("gender", "Please enter a gender").not().isEmpty().trim(),
@@ -51,6 +61,9 @@ exports.post_create_user = [
   async (req, res, next) => {
     // Extract the validation errors from a request.
     const errors = validationResult(req);
+
+    // let emailLower = req.body.email.toLowerCase();
+    // console.log("emailLower", emailLower)
 
     // Create a User object with escaped and trimmed data.
     var user = new User({
