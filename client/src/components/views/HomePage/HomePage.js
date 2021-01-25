@@ -44,9 +44,9 @@ function HomePage(props) {
                 className="new-post-card-row"
               ></div> */}
             </div>
-            <div className="main-subtitle">All Posts:</div>
+            {/* <div className="main-subtitle">All Posts:</div> */}
             {props.displayedPosts.map((post) =>
-              post.isPublished ? <Card key={post._id} post={post} /> : ""
+              post.isPublished ? <Card key={post._id} post={post} currentUser={props.currentUser}/> : ""
             )}
           </div>
         {/* )} */}
