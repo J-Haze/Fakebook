@@ -20,31 +20,36 @@ function HomePage(props) {
   }, [props.displayedPosts]);
 
   return (
-    <> 
+    <>
       {/* <div>Home Page</div> */}
       <div id="home">
-        {props.loading ? (
+        {/* {props.loading ? (
           <div>Loading... </div>
         ) : postCount === 0 ? (
           <div className="black-text no-blogs">
-              No posts have been posted yet.
-                 {props.currentUser}
+            No posts have been posted yet.
+            {props.currentUser}
           </div>
-        ) : (
+        ) : ( */}
           <div id="home-blog-cont">
+            <div id="new-post-card">
+            <div id="new-post-card-top" className="new-post-card-row">
+              <div className="prof-icon">
+                {/* <ProfileImage /> */}
+              </div>
+              <div id="woym-btn" >What's on your mind, {props.currentUser.firstname}?</div> 
+              </div>
+              <div
+                id="new-post-card-bottom"
+                className="new-post-card-row"
+              ></div>
+            </div>
             <div className="main-subtitle">All Posts:</div>
-                {props.displayedPosts.map((post) =>
-                  post.isPublished ? (
-                    <Card
-                      key={post._id}
-                      post={post}
-                />
-              ) : (
-                ""
-              )
+            {props.displayedPosts.map((post) =>
+              post.isPublished ? <Card key={post._id} post={post} /> : ""
             )}
           </div>
-        )}
+        {/* )} */}
       </div>
     </>
   );

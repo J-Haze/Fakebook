@@ -9,17 +9,21 @@ import bellLogo from "../../../assets/bell.png";
 import friendsLogo from "../../../assets/friend.png";
 
 function Header(props) {
+  const history = useHistory();
+
+  function logOut() {
+    props.setIsLoggedIn(false);
+    props.setCurrentUser("");
+    localStorage.setItem("token", JSON.stringify("No token"));
+    // history.go(0);
+  }
 
   return (
     <div id="header">
       <div id="header-container">
         {/* <div id="title">Title</div> */}
         <div id="header-left-menu">
-          <Link
-            id="fb-icon-cont"
-            className="link-header"
-            to={`/user/${props.currentUser._id}`}
-          >
+          <Link id="fb-icon-cont" className="link-header" to={`/`}>
             <img className="fb-icon" src={fLogo} alt="fb logo" />
           </Link>
         </div>
@@ -27,7 +31,7 @@ function Header(props) {
           <Link
             id="friends-cont"
             className="link hover-gray"
-            to={`/user/${props.currentUser._id}`}
+            to={`/user/friends`}
           >
             <img
               className="friends-icon"
@@ -38,7 +42,7 @@ function Header(props) {
           <Link
             id="bell-cont"
             className="link hover-gray"
-            to={`/user/${props.currentUser._id}`}
+            to={`/user/notifications`}
           >
             <img
               className="bell-icon"
@@ -47,13 +51,25 @@ function Header(props) {
             />
           </Link>
 
-          <Link
+          <div
+            id="prof-header"
+            className="prof-icon"
+            onClick={() => {
+              
+            }}
+          >
+            {/* <img className="logout-icon" src={logoutLogo} alt="logout icon" /> */}
+          </div>
+
+          <div
             id="logout-cont"
-            className="link hover-gray"
-            to={`/user/${props.currentUser._id}`}
+            className="hover-gray"
+            onClick={() => {
+              logOut();
+            }}
           >
             <img className="logout-icon" src={logoutLogo} alt="logout icon" />
-          </Link>
+          </div>
         </div>
       </div>
     </div>

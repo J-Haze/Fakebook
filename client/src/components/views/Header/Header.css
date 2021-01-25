@@ -8,8 +8,8 @@
   min-width: 800px;
   /* box-shadow: 0 15px 30px 5px #6d6c6c; */
   /* box-shadow: 0 0px 0px 01px #6d6c6c; */
-  box-shadow: 0 0 5px #000000;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.1);
+  /* box-shadow: 0 0 5px #000000; */
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1), 0 1px 4px rgba(0, 0, 0, 0.1);
 }
 
 #header-container {
@@ -64,13 +64,14 @@
 .fb-icon {
   height: 40px;
   width: auto;
+  /* width: 40px; */
   /* border: 1px solid black; */
 }
 
 #friends-cont{
   /* border: 1px solid black; */
-  height: 45px;
-  width: 45px;
+  height: 40px;
+  width: 40px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -84,7 +85,7 @@
 }
 
 .friends-icon {
-  height: 32px;
+  height: 30px;
   margin-bottom: 2px;
   width: auto;
 }
@@ -93,8 +94,8 @@
 
 #bell-cont{
   /* border: 1px solid black; */
-  height: 45px;
-  width: 45px;
+  height: 40px;
+  width: 40px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -108,15 +109,21 @@
 }
 
 .bell-icon {
-  height: 28px;
+  height: 26px;
   margin-bottom: 2px;
   width: auto;
 }
 
+#prof-header{
+  margin-right: 10px;
+}
+
+/* Also uses .prof-icon in index */
+
 #logout-cont{
   /* border: 1px solid black; */
-  height: 45px;
-  width: 45px;
+  height: 40px;
+  width: 40px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -127,10 +134,11 @@
 
 #logout-cont:hover{
   background-color: var(--dark-gray);
+  cursor: pointer;
 }
 
 .logout-icon {
-  height: 28px;
+  height: 26px;
   /* margin-bottom: 2px; */
   margin-left: 4px;
   width: auto;
