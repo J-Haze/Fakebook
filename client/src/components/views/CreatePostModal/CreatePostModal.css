@@ -128,7 +128,8 @@
   font-weight: 600;
   line-height: 20px;
   /* border: 1px solid black; */
-  margin-top: 4px;
+  margin-top: 10px;
+  margin-left: 6px;
 }
 
 .input-create-post {
@@ -149,6 +150,12 @@
   /* border: 1px solid black; */
 }
 
+.input-create-post:focus {
+  /* border: white;
+    border: none; */
+  outline: none !important;
+}
+
 #create-post-img-row {
   height: 58.5px;
   /* border: 1px solid black; */
@@ -166,6 +173,10 @@
   font-weight: 550;
   line-height: 20px;
   font-family: "Segoe UI", Helvetica, Arial;
+}
+
+#add-img-btn:hover {
+    cursor: pointer;
 }
 
 #create-post-bottom-row {
@@ -220,6 +231,5 @@
 
 #submit-create-post-full:hover {
   cursor: pointer;
-  background-image: linear-gradient(rgb(121, 188, 100));
-  background-color: rgb(121, 188, 100);
+  background-color: rgb(81, 101, 255);
 }

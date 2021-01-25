@@ -11,8 +11,9 @@ import { useHistory } from "react-router-dom";
 const filter = new badWords();
 
 function CreatePostModal(props) {
-//   const [title, setTitle] = useState(props.initialTitle);
+  //   const [title, setTitle] = useState(props.initialTitle);
   const [text, setText] = useState("");
+  const [addImageOpen, setAddImageOpen] = useState(false);
 
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -24,69 +25,59 @@ function CreatePostModal(props) {
 
   const history = useHistory();
 
+  //   const submitCreatePost = () => {
+  //     console.log("submitted");
+  //   };
+
   const submitCreatePost = () => {
-    console.log("submitted");
+    if (filter.isProfane(text)) {
+      alert("Post contains a word that is not allowed.");
+      return;
+    }
+
+    if (text.length < 1) {
+      setErrorMessage("Post must not be blank");
+      alert("Post must not be blank");
+      return;
+    }
+
+    if (text.length > 1000) {
+      setErrorMessage("Post must less than 1000 characters");
+      alert("Post must less than 1000 characters");
+      return;
+    }
+
+    Axios.put(
+      `/post/${props.postid}`,
+      {
+        text: text,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${JSON.parse(
+            window.localStorage.getItem("token")
+          )}`,
+        },
+      }
+    )
+      .then((res, err) => {
+        setErrorMessage("");
+        props.fetchPosts();
+        //   props.whitePencil();
+        props.setCreatePostModalOpen(false);
+        //   history.push(`/post/${props.postid}`);
+      })
+      .catch((error) => console.log("error", error));
   };
 
-  //   const submitCreatePost = () => {
-  //     if (filter.isProfane(title)) {
-  //       alert("Title contains a word that is not allowed.");
-  //       setTitle("");
-  //       return;
-  //     }
+  // let handleEditorChange = (content, editor) => {
+  //   setMainText(content);
+  // };
 
-  //     if (title.length < 1) {
-  //       setErrorMessage("Title field must not be blank");
-  //       return;
-  //     }
-
-  //     if (title.length > 100) {
-  //       setErrorMessage("Title field must less than 100 characters");
-  //       return;
-  //     }
-
-  //     if (mainText.length < 1) {
-  //       setErrorMessage("Post body must not be empty");
-  //       return;
-  //     }
-
-  //     if (mainText.length > 10000) {
-  //       setErrorMessage("Post body must be less than 10,000 characters");
-  //       return;
-  //     }
-
-  //     Axios.put(
-  //       `/post/${props.postid}`,
-  //       {
-  //         title: title,
-  //         text: mainText,
-  //       },
-  //       {
-  //         headers: {
-  //           Authorization: `Bearer ${JSON.parse(
-  //             window.localStorage.getItem("token")
-  //           )}`,
-  //         },
-  //       }
-  //     )
-  //       .then((res, err) => {
-  //         setErrorMessage("");
-  //         props.fetchBlogs();
-  //         props.whitePencil();
-  //         props.hideEditModal();
-  //         history.push(`/post/${props.postid}`);
-  //       })
-  //       .catch((error) => console.log("error", error));
-  //   };
-
-  //   let handleEditorChange = (content, editor) => {
-  //     setMainText(content);
-  //   };
-
-  //   let goBack = () => {
-  //     props.whitePencil();
-  //     props.hideEditModal();
-  //   };
+  // let goBack = () => {
+  //   props.whitePencil();
+  //   props.hideEditModal();
+  // };
 
   return (
     <div className="create-post-modal">
@@ -143,14 +134,22 @@ function CreatePostModal(props) {
             {/* <div className="error-message-create-post">{errorMessage}</div> */}
           </div>
           <div id="create-post-img-row">
-            <div id="add-img-btn">Add Image to Your Post</div>
+            {addImageOpen ? (
+              <div>File Upload</div>
+            ) : (
+              <div
+                id="add-img-btn"
+                onClick={() => {
+                  setAddImageOpen(true);
+                }}
+              >
+                Add Image to Your Post
+              </div>
+            )}
           </div>
           <div id="create-post-bottom-row">
             {text.length == 0 ? (
-              <div
-                id="submit-create-post-empty"
-                className="submit-create-post"
-              >
+              <div id="submit-create-post-empty" className="submit-create-post">
                 Post
               </div>
             ) : (

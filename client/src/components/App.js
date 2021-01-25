@@ -113,6 +113,7 @@ function App() {
             createPostModalOpen={createPostModalOpen}
             setCreatePostModalOpen={setCreatePostModalOpen}
             currentUser={currentUser}
+            fetchPosts={fetchPosts}
           />
         )}
         <Switch>
