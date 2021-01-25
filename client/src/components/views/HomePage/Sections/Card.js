@@ -2,8 +2,11 @@ import React, { useState, useEffect } from "react";
 import moment from "moment";
 import { Link } from "react-router-dom";
 
-import thumbBlack from "../../../../assets/thumbs-up-solid.svg";
+// import thumbBlack from "../../../../assets/thumbs-up-solid.svg";
+import thumbBlack from "../../../../assets/thumbs-up-regular-gray.svg";
 import thumbBlue from "../../../../assets/thumbs-up-solid-light-blue.svg";
+
+// https://fontawesome.com/icons/thumbs-up?style=light
 
 function Card(props) {
   const [likeCount, setLikeCount] = useState(Math.floor(Math.random() * 21));

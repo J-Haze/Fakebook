@@ -136,7 +136,7 @@
 .card-row-three {
   display: flex;
   height: 22px;
-    font-family: "Segoe UI Historic", "Segoe UI", Helvetica, Arial, sans-serif;
+  font-family: "Segoe UI Historic", "Segoe UI", Helvetica, Arial, sans-serif;
   font-size: 15px;
   font-weight: 400;
   line-height: 20px;
@@ -144,17 +144,17 @@
   margin-bottom: 10px;
 }
 
-.like-count{
+.like-count {
   margin-left: 0px;
   margin-right: auto;
 }
 
-.comment-count{
+.comment-count {
   margin-left: auto;
   margin-right: 0px;
 }
 
-.comment-count:hover{
+.comment-count:hover {
   text-decoration: underline;
   cursor: pointer;
 }
@@ -167,42 +167,52 @@
   display: flex;
 }
 
-.like-box{
+.like-box {
+  color: var(--text-gray);
   width: 50%;
   margin: 3px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-family: "Segoe UI Historic", "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: 15px;
+  font-weight: 550;
+  line-height: 20px;
 }
 
-.like-box:hover{
-  background-color: var(--light-gray);
+.like-box:hover {
+  background-color: var(--dark-gray);
   cursor: pointer;
 }
 
-.thumb{
-  height: 15px;
-  width: 15px;
-  font-family: FontAwesome;
+.thumb {
+  height: 17px;
+  width: 17px;
+  margin-right: 7px;
 }
 
-
-
-
-
-.comment-box{
+.comment-box {
+  color: var(--text-gray);
   width: 50%;
   margin: 3px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-family: "Segoe UI Historic", "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: 15px;
+  font-weight: 550;
+  line-height: 20px;
 }
 
-.comment-box:hover{
+.comment-box:hover {
   background-color: var(--light-gray);
   cursor: pointer;
 }
-
 
 .card-row-five {
-  
 }
-
-
 
 /* .card-title {
   font-size: large;
