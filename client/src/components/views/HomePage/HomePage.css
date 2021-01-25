@@ -103,23 +103,63 @@
   padding: 12px 16px;
 }
 
-.card-row-one{
+.card-title {
+  margin-left: 6px;
+}
+
+.card-username {
+  font-family: "Segoe UI Historic", "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 20px;
+}
+
+.card-date {
+  font-family: "Segoe UI Historic", "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 16px;
+}
+
+.card-row-one {
   height: 48px;
   display: flex;
 }
 
-.card-row-two{
-font-family: "Segoe UI Historic", "Segoe UI", Helvetica, Arial, sans-serif;
-font-size: 24px;
-font-weight: 400;
-line-height: 28.0008px;
+.card-row-two {
+  font-family: "Segoe UI Historic", "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 28.0008px;
 }
 
-.card-row-three{
+.card-row-three {
   display: flex;
+  height: 22px;
+    font-family: "Segoe UI Historic", "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
-.card-row-four{
+.like-count{
+  margin-left: 0px;
+  margin-right: auto;
+}
+
+.comment-count{
+  margin-left: auto;
+  margin-right: 0px;
+}
+
+.comment-count:hover{
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.card-row-four {
   height: 44px;
   width: 100%;
   border-top: 1px solid var(--dark-gray);
@@ -127,20 +167,37 @@ line-height: 28.0008px;
   display: flex;
 }
 
-.card-row-five{
-  
+.like-box{
+  width: 50%;
+  margin: 3px;
+}
+
+.thumb{
+  height: 40px;
+  width: 40px;
+  color: black;
+  font-family: FontAwesome;
+}
+
+.like-box:hover{
+  background-color: var(--light-gray);
+  cursor: pointer;
+}
+
+.comment-box:hover{
+  width: 50%;
+  margin: 3px;
+}
+
+.comment-box:hover{
+  background-color: var(--light-gray);
+  cursor: pointer;
 }
 
 
-
-
-
-
-
-
-
-
-
+.card-row-five {
+  
+}
 
 
 
