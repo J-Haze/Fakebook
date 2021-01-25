@@ -20,13 +20,17 @@
 }
 
 #new-post-card {
-  height: 123px;
+  /* height: 123px; */
+  /* height: 61.5px; */
+  height: 70px;
   background-color: white;
   /* border: 1px solid black; */
   width: 680px;
   margin-top: 15px;
   border-radius: 8px;
   box-sizing: border-box;
+  /* display: flex; */
+  /* align-items: center; */
 
   padding-bottom: 10px;
   padding-left: 16px;
@@ -34,13 +38,19 @@
   padding-top: 12px;
 }
 
-.new-post-card-row {
+#new-post-card-top {
+  display: flex;
+  margin-top: 3px;
+  margin-bottom: auto;
+}
+
+/* .new-post-card-row {
   height: 50%;
   width: 100%;
   display: flex;
-}
+} */
 
-#woym-btn{
+#woym-btn {
   height: 40px;
   width: 600px;
   box-sizing: border-box;
@@ -50,16 +60,21 @@
   background-color: var(--light-gray);
   margin-left: auto;
   margin-right: 0px;
+  /* text-align: center; */
+  /* line-height: 15px; */
+
+  font-family: "Segoe UI Historic", "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: 17px;
+  color: rgb(101, 103, 107);
 }
 
-#woym-btn:hover{
+#woym-btn:hover {
   background-color: var(--dark-gray);
   cursor: pointer;
 }
 
-
-#new-post-card-bottom{
-    border-top: 1px solid var(--dark-gray);
+#new-post-card-bottom {
+  border-top: 1px solid var(--dark-gray);
 }
 
 .main-subtitle {

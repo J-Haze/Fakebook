@@ -39,10 +39,10 @@ function HomePage(props) {
               </div>
               <div id="woym-btn" >What's on your mind, {props.currentUser.firstname}?</div> 
               </div>
-              <div
+              {/* <div
                 id="new-post-card-bottom"
                 className="new-post-card-row"
-              ></div>
+              ></div> */}
             </div>
             <div className="main-subtitle">All Posts:</div>
             {props.displayedPosts.map((post) =>
