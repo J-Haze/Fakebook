@@ -172,19 +172,22 @@
   margin: 3px;
 }
 
-.thumb{
-  height: 40px;
-  width: 40px;
-  color: black;
-  font-family: FontAwesome;
-}
-
 .like-box:hover{
   background-color: var(--light-gray);
   cursor: pointer;
 }
 
-.comment-box:hover{
+.thumb{
+  height: 15px;
+  width: 15px;
+  font-family: FontAwesome;
+}
+
+
+
+
+
+.comment-box{
   width: 50%;
   margin: 3px;
 }

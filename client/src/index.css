@@ -118,17 +118,21 @@ input.error {
   width: auto;
 }
 
-.flex{
+.flex {
   display: flex;
 }
 
-.prof-icon{
+.prof-icon {
   background-color: var(--dark-gray);
   border-radius: 50%;
   height: 40px;
   width: 40px;
 }
 
-.prof-icon:hover{
+.prof-icon:hover {
   cursor: pointer;
+}
+
+.blue {
+  color: var(--blue);
 }
