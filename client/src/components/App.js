@@ -9,6 +9,7 @@ import Header from "./views/Header/Header";
 import HomePage from "./views/HomePage/HomePage.js";
 import LoginPage from "./views/LoginPage/LoginPage.js";
 import NotFound from "./views/NotFound/NotFound.js";
+import CreatePostModal from "./views/CreatePostModal/CreatePostModal.js"
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -20,6 +21,8 @@ function App() {
   const [displayedPosts, setDisplayedPosts] = useState([]);
   const [allUsers, setAllUsers] = useState([]);
   const [allFriends, setFriends] = useState([]);
+
+  const [createPostModalOpen, setCreatePostModalOpen] = useState(true);
 
   const history = useHistory();
 
@@ -105,6 +108,13 @@ function App() {
           // isViewingProfile={isViewingProfile}
           // setIsViewingProfile={setIsViewingProfile}
         />
+        {createPostModalOpen && (
+          <CreatePostModal
+            createPostModalOpen={createPostModalOpen}
+            setCreatePostModalOpen={setCreatePostModalOpen}
+            currentUser={currentUser}
+          />
+        )}
         <Switch>
           <Route
             exact
@@ -116,6 +126,8 @@ function App() {
                 fetchPosts={fetchPosts}
                 displayedPosts={displayedPosts}
                 loading={loading}
+                createPostModalOpen={createPostModalOpen}
+                setCreatePostModalOpen={setCreatePostModalOpen}
               />
             )}
           ></Route>

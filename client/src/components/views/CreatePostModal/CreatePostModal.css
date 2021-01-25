@@ -1,0 +1,185 @@
+/* create-post Modal */
+.create-post-modal {
+  display: block;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  /* background-color: rgb(0, 0, 0); */
+  /* background-color: rgba(0, 0, 0, 0.4); */
+  background-color: rgba(235, 235, 235, 0.8);
+}
+
+.create-post-modal-content {
+  position: relative;
+  top: 43%;
+  transform: translateY(-47%);
+  display: flex;
+  flex-direction: column;
+  margin-left: auto;
+  margin-right: auto;
+
+  height: 428px;
+  width: 500px;
+  padding: 0px 16px;
+
+  color: black;
+
+  /* padding: 1rem; */
+  border-radius: 6px;
+  background: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+#create-post-header {
+  display: flex;
+  flex-direction: column;
+  /* padding: 1rem; */
+  height: 132pxpx;
+  box-sizing: border-box;
+  /* border: 1px solid black; */
+  /* width: 200px; */
+  padding: 10px 16px;
+}
+
+#create-post-header-top {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  /* border: 1px solid black; */
+}
+
+#create-post-header-title {
+  color: #1c1e21;
+  font-family: "Segoe UI Historic", "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 24px;
+  /* margin-bottom: 0; */
+  margin-left: 180px;
+  margin-right: auto;
+}
+
+/* #create-post-header-subtitle {
+  color: #606770;
+  font-family: SFProText-Regular, Helvetica, Arial, sans-serif;
+  font-size: 15px;
+  line-height: 24px;
+} */
+
+.close-create-post {
+  height: 35px;
+  width: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--light-gray);
+  border-radius: 50%;
+  /* margin-right: 10px; */
+
+  color: #aaa;
+  float: right;
+  /* margin-left: 100%; */
+  margin-left: auto;
+  margin-right: -12px;
+  /* margin-top: -17px; */
+  font-size: 32px;
+  /* height: 10px; */
+  font-weight: bold;
+  /* border: 1px solid red; */
+  text-align: center;
+  padding-bottom: 7px;
+  box-sizing: border-box;
+}
+
+.close-create-post:hover,
+.close-create-post:focus {
+  /* color: black; */
+  background-color: var(--dark-gray);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+#create-post-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  /* width: 100%; */
+  padding: 1rem;
+  /* border: 1px solid rgb(204, 208, 213); */
+  border-top: 1px solid rgb(204, 208, 213);
+  /* border: rgb(204, 208, 213) */
+}
+
+#create-post-mid-row {
+  /* border: 1px solid red; */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 153.5px;
+}
+
+.input-create-post {
+  font-family: "Segoe UI Historic", "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: 24px;
+  padding: 11px;
+  width: auto;
+  display: inline-block;
+  text-align: start;
+  padding-top: -100px;
+  /* padding-bottom: 50px; */
+  min-height: 153.5px;
+  line-height: 28px;
+  font-weight: 400;
+  resize: none;
+  border: white;
+
+  /* border: 1px solid black; */
+}
+
+#create-post-img-row {
+  height: 58.5px;
+  border: 1px solid black;
+}
+
+#create-post-bottom-row {
+  height: auto;
+  border: 1px solid red;
+  margin-bottom: -5px;
+}
+
+#submit-create-post {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: auto;
+  margin-bottom: 0px;
+  color: white;
+  width: 194px;
+  background-color: rgb(0, 164, 0);
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  height: 36px;
+  line-height: 16.08px;
+  border-radius: 6px;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 18px;
+  font-stretch: 100%;
+  font-style: normal;
+  font-variant-caps: normal;
+  font-variant-east-asian: normal;
+  font-variant-ligatures: normal;
+  font-variant-numeric: normal;
+  font-weight: 700;
+}
+
+#submit-create-post:hover {
+  cursor: pointer;
+  background-image: linear-gradient(rgb(121, 188, 100));
+  background-color: rgb(121, 188, 100);
+}
