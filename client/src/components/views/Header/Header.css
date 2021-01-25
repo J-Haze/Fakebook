@@ -67,8 +67,78 @@
   /* border: 1px solid black; */
 }
 
+#friends-cont{
+  /* border: 1px solid black; */
+  height: 45px;
+  width: 45px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+    background-color: var(--light-gray);
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+#friends-cont:hover{
+  background-color: var(--dark-gray);
+}
+
+.friends-icon {
+  height: 32px;
+  margin-bottom: 2px;
+  width: auto;
+}
+
+
+
+#bell-cont{
+  /* border: 1px solid black; */
+  height: 45px;
+  width: 45px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+    background-color: var(--light-gray);
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+#bell-cont:hover{
+  background-color: var(--dark-gray);
+}
+
+.bell-icon {
+  height: 28px;
+  margin-bottom: 2px;
+  width: auto;
+}
+
 #logout-cont{
   /* border: 1px solid black; */
+  height: 45px;
+  width: 45px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+    background-color: var(--light-gray);
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+#logout-cont:hover{
+  background-color: var(--dark-gray);
+}
+
+.logout-icon {
+  height: 28px;
+  /* margin-bottom: 2px; */
+  margin-left: 4px;
+  width: auto;
+}
+
+
+
+/* #logout-cont{
   height: 100%;
   display: flex;
   justify-content: center;
@@ -78,8 +148,7 @@
 .logout-icon {
   height: 45px;
   width: auto;
-  /* border: 1px solid black; */
-}
+} */
 
 
 .header-btn-cont {
