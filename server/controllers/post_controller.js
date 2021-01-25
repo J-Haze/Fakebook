@@ -43,8 +43,6 @@ exports.post_create_post = [
             console.log(err);
             return err;
           }
-          // Successful - redirect to home.
-          // res.redirect("/");
           res.json({
             message: "Post created",
             post: post,

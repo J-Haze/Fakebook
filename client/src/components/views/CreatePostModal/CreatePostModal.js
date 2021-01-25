@@ -8,6 +8,8 @@ import { useHistory } from "react-router-dom";
 
 // import Editor from "../../HelperComponents/Editor";
 
+import ImageUpload from "./Sections/ImageUpload.js"
+
 const filter = new badWords();
 
 function CreatePostModal(props) {
@@ -47,8 +49,8 @@ function CreatePostModal(props) {
       return;
     }
 
-    Axios.put(
-      `/post/${props.postid}`,
+    Axios.post(
+      `/post/new`,
       {
         text: text,
       },
@@ -140,7 +142,9 @@ function CreatePostModal(props) {
           </div>
           <div id="create-post-img-row">
             {addImageOpen ? (
-              <div>File Upload</div>
+                          <div id="create-post-img-upload-cont">
+                          <ImageUpload />
+                          </div>
             ) : (
               <div
                 id="add-img-btn"
