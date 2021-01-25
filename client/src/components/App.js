@@ -22,7 +22,8 @@ function App() {
   const [allUsers, setAllUsers] = useState([]);
   const [allFriends, setFriends] = useState([]);
 
-  const [createPostModalOpen, setCreatePostModalOpen] = useState(true);
+  // const [createPostModalOpen, setCreatePostModalOpen] = useState(true);
+  const [createPostModalOpen, setCreatePostModalOpen] = useState(false);
 
   const history = useHistory();
 
@@ -105,6 +106,7 @@ function App() {
           setIsLoggedIn={setIsLoggedIn}
           setCurrentUser={setCurrentUser}
           currentUser={currentUser}
+          setCreatePostModalOpen={setCreatePostModalOpen}
           // isViewingProfile={isViewingProfile}
           // setIsViewingProfile={setIsViewingProfile}
         />

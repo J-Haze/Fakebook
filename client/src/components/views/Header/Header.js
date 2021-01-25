@@ -28,6 +28,15 @@ function Header(props) {
           </Link>
         </div>
         <div id="header-right-menu">
+          <div
+            id="add-post-header"
+            onClick={() => {
+              props.setCreatePostModalOpen(true);
+            }}
+          >
+            {" "}
+            +
+          </div>
           <Link
             id="friends-cont"
             className="link hover-gray"
@@ -51,13 +60,7 @@ function Header(props) {
             />
           </Link>
 
-          <div
-            id="prof-header"
-            className="prof-icon"
-            onClick={() => {
-              
-            }}
-          >
+          <div id="prof-header" className="prof-icon" onClick={() => {}}>
             {/* <img className="logout-icon" src={logoutLogo} alt="logout icon" /> */}
           </div>
 
