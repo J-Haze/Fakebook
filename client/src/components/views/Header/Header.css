@@ -1,8 +1,15 @@
 #header {
-  height: 100px;
-  color: whitesmoke;
-  background-color: var(--blue);
+  height: 56px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: black;
+  background-color: white;
   min-width: 800px;
+  /* box-shadow: 0 15px 30px 5px #6d6c6c; */
+  /* box-shadow: 0 0px 0px 01px #6d6c6c; */
+  box-shadow: 0 0 5px #000000;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.1);
 }
 
 #header-container {
@@ -15,10 +22,65 @@
   width: 800px;
 }
 
-#title {
+/* #title {
   font-size: 3em;
   margin-left: 10px;
+} */
+
+#header-left-menu{
+  /* border: 1px solid black; */
+    display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 0px;
+  margin-right: auto;
+  height: 100%;
+  /* border: 1px solid black; */
 }
+
+#header-right-menu{
+  /* border: 1px solid black; */
+   display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  margin-left: auto;
+  margin-right: 0px;
+}
+
+.link-header {
+  text-decoration: none;
+  color: white;
+}
+
+#fb-icon-cont{
+  /* border: 1px solid black; */
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.fb-icon {
+  height: 40px;
+  width: auto;
+  /* border: 1px solid black; */
+}
+
+#logout-cont{
+  /* border: 1px solid black; */
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logout-icon {
+  height: 45px;
+  width: auto;
+  /* border: 1px solid black; */
+}
+
 
 .header-btn-cont {
   margin-left: auto;
@@ -32,12 +94,12 @@
   display: flex;
 }
 
-.header-btn {
+/* .header-btn {
   margin-left: 10px;
   margin-right: 10px;
   margin-top: 10px;
   font-weight: 500;
-}
+} */
 
 .header-btn:hover {
   cursor: pointer;

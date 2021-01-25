@@ -24,35 +24,32 @@ function App() {
   const history = useHistory();
 
   //If there is a user logged in, it sets currentUser and isLoggedIn
-    useEffect(() => {
-      Axios.get("/user/", {
-        headers: {
-          Authorization: `Bearer ${JSON.parse(
-            window.localStorage.getItem("token")
-          )}`,
-        },
+  useEffect(() => {
+    Axios.get("/user/", {
+      headers: {
+        Authorization: `Bearer ${JSON.parse(
+          window.localStorage.getItem("token")
+        )}`,
+      },
+    })
+      .then((res) => {
+        setCurrentUser(res.data);
+        setIsLoggedIn(true);
       })
-        .then((res) => {
-          setCurrentUser(res.data);
-          setIsLoggedIn(true);
-        })
-        .catch((error) => console.log("error", error));
-    }, [tokenRefresh]);
-
+      .catch((error) => console.log("error", error));
+  }, [tokenRefresh]);
 
   // Move this stuff to other sections (you don't need if for the signup page)
 
   const fetchPosts = () => {
     setLoading(true);
-    Axios.get("/post/",
-            {
-        headers: {
-          Authorization: `Bearer ${JSON.parse(
-            window.localStorage.getItem("token")
-          )}`,
-        },
-      }
-    ).then((res) => {
+    Axios.get("/post/", {
+      headers: {
+        Authorization: `Bearer ${JSON.parse(
+          window.localStorage.getItem("token")
+        )}`,
+      },
+    }).then((res) => {
       let allPostsArray = res.data;
       let reversedArray = allPostsArray.reverse();
       setAllPosts(allPostsArray.reverse());
@@ -74,8 +71,7 @@ function App() {
           window.localStorage.getItem("token")
         )}`,
       },
-    }
-    ).then((res) => {
+    }).then((res) => {
       setAllUsers(res.data);
     });
   };
@@ -86,39 +82,49 @@ function App() {
     }
   }, [isLoggedIn]);
 
-//^^^
+  //^^^
 
-  return (
-    <Switch>
-      <Route
-        exact
-        path="/"
-        render={() =>
-          !isLoggedIn ? (
-            <LoginPage
-              isLoggedIn={isLoggedIn}
-              setIsLoggedIn={setIsLoggedIn}
-              setCurrentUser={setCurrentUser}
-              setTokenRefresh={setTokenRefresh}
-              tokenRefresh={tokenRefresh}
-            />
-          ) : (
-            <HomePage
-              currentUser={currentUser}
-              isLoggedIn={isLoggedIn}
-              fetchPosts={fetchPosts}
-              displayedPosts={displayedPosts}
-              loading={loading}
-            />
-          )
-        }
-      ></Route>
+  if (!isLoggedIn) {
+    return (
+      <LoginPage
+        isLoggedIn={isLoggedIn}
+        setIsLoggedIn={setIsLoggedIn}
+        setCurrentUser={setCurrentUser}
+        setTokenRefresh={setTokenRefresh}
+        tokenRefresh={tokenRefresh}
+      />
+    );
+  } else {
+    return (
+      <div>
+        <Header
+          isLoggedIn={isLoggedIn}
+          setIsLoggedIn={setIsLoggedIn}
+          setCurrentUser={setCurrentUser}
+          currentUser={currentUser}
+          // isViewingProfile={isViewingProfile}
+          // setIsViewingProfile={setIsViewingProfile}
+        />
+        <Switch>
+          <Route
+            exact
+            path="/"
+            render={() => (
+              <HomePage
+                currentUser={currentUser}
+                isLoggedIn={isLoggedIn}
+                fetchPosts={fetchPosts}
+                displayedPosts={displayedPosts}
+                loading={loading}
+              />
+            )}
+          ></Route>
 
-      <Route exact path="/log-in" render={() => <LoginPage />}></Route>
-
-      <Route render={() => <NotFound />} />
-    </Switch>
-  );
+          <Route render={() => <NotFound />} />
+        </Switch>
+      </div>
+    );
+  }
 }
 
 export default App;
