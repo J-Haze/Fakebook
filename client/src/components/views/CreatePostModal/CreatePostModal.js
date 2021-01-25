@@ -114,14 +114,14 @@ function CreatePostModal(props) {
             <div className="card-row-one">
               <div className="prof-icon"></div>
               <div className="flex-down card-title">
-                <div className="card-username">
+                <div className="create-post-username">
                   {props.currentUser.firstname} {props.currentUser.lastname}
                 </div>
-                <div className="card-date">
-                  {/* {moment(props.post.createdAt).format("ll")} at{" "}
-                  {moment(props.post.createdAt).format("LT")} */}
-                  {/* Placeholder */}
-                </div>
+                {/* <div className="card-date">
+                  {moment(props.post.createdAt).format("ll")} at{" "}
+                  {moment(props.post.createdAt).format("LT")}
+                  Placeholder
+                </div> */}
               </div>
             </div>
             {/* <input
@@ -142,16 +142,28 @@ function CreatePostModal(props) {
             />
             {/* <div className="error-message-create-post">{errorMessage}</div> */}
           </div>
-          <div id="create-post-img-row">Add Image to Your Post</div>
+          <div id="create-post-img-row">
+            <div id="add-img-btn">Add Image to Your Post</div>
+          </div>
           <div id="create-post-bottom-row">
-            <div
-              id="submit-create-post"
-              onClick={() => {
-                submitCreatePost();
-              }}
-            >
-              Post
-            </div>
+            {text.length == 0 ? (
+              <div
+                id="submit-create-post-empty"
+                className="submit-create-post"
+              >
+                Post
+              </div>
+            ) : (
+              <div
+                id="submit-create-post-full"
+                className="submit-create-post"
+                onClick={() => {
+                  submitCreatePost();
+                }}
+              >
+                Post
+              </div>
+            )}
           </div>
         </form>
       </div>
