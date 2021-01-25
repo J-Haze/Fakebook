@@ -47,7 +47,8 @@ function HomePage(props) {
             {/* <div className="main-subtitle">All Posts:</div> */}
             {props.displayedPosts.map((post) =>
               post.isPublished ? <Card key={post._id} post={post} currentUser={props.currentUser}/> : ""
-            )}
+          )}
+          <div> No more posts.</div>
           </div>
         {/* )} */}
       </div>

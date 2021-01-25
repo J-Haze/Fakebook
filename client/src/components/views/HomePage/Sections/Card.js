@@ -23,7 +23,7 @@ function Card(props) {
 
   function toggleLike() {
     if (likedByCurrentUser == false) {
-      console.log("liked")
+      console.log("liked");
       setLikedByCurrentUser(true);
       //Use "like backend"
     } else {
@@ -31,6 +31,11 @@ function Card(props) {
       setLikedByCurrentUser(false);
       //Use "unlike" backend!
     }
+  }
+
+  function showComments() {
+    //Need to add
+    console.log("show comments");
   }
 
   return (
@@ -51,7 +56,14 @@ function Card(props) {
         <div className="card-row-two">{props.post.text}</div>
         <div className="card-row-three">
           <div className="like-count">{likeCount} Likes</div>
-          <div className="comment-count">{commentCount} Comments</div>
+          <div
+            className="comment-count"
+            onClick={() => {
+              showComments();
+            }}
+          >
+            {commentCount} Comments
+          </div>
         </div>
         <div className="card-row-four">
           <div
@@ -74,7 +86,14 @@ function Card(props) {
               </div>
             )}
           </div>
-          <div className="comment-box">Comment</div>
+          <div
+            className="comment-box"
+            onClick={() => {
+              showComments();
+            }}
+          >
+            Comment
+          </div>
         </div>
       </div>
       <div className="card-row-five"></div>
