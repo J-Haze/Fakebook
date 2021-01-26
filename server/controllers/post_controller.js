@@ -3,6 +3,9 @@ const { body, validationResult, check } = require("express-validator");
 const bcrypt = require("bcryptjs");
 const async = require("async");
 const jwt = require("jsonwebtoken");
+var fs = require("fs");
+var path = require("path");
+// const multer = require("multer");
 require("dotenv").config();
 
 var User = require("../models/User");
@@ -16,11 +19,31 @@ exports.get_posts = (req, res, next) => {
   });
 };
 
+// const upload = multer({
+//   storage: storage,
+//   fileFilter: fileFilter,
+//   limits: 5 * 1024 * 1024,
+// }).single("image");
+
+var multer = require("multer");
+
+var storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "uploads");
+  },
+  filename: (req, file, cb) => {
+    cb(null, file.fieldname + "-" + Date.now());
+  },
+});
+
+var upload = multer({ storage: storage });
+
 exports.post_create_post = [
   // Validate and sanitize fields.
   body("text", "Can't submit a blank post").not().isEmpty().trim(),
   // Add image thing later
   body("timestamp").escape(),
+  upload.single("image"),
 
   (req, res) => {
     jwt.verify(req.token, process.env.JWT_SECRET, (err, authData) => {
@@ -28,14 +51,49 @@ exports.post_create_post = [
         console.log(err);
         res.sendStatus(403);
       } else {
-        // Create a Post object with escaped and trimmed data.
-        var post = new Post({
-          text: req.body.text,
-          image: "",
-          likesList: [],
-          author: authData._id,
-          isPublished: true,
-        });
+        if (req.file) {
+          const originalName = req.file.originalname.split(".");
+          const format = originalName[originalName.length - 1];
+
+          var post = new Post({
+            text: req.body.text,
+            image: {
+              data: fs.readFileSync(
+                // path.join(__dirname + "/uploads/" + req.file.filename)
+                path.join(__dirname + "/uploads/" + format)
+              ),
+              contentType: "image/png",
+            },
+            likesList: [],
+            author: authData._id,
+            isPublished: true,
+          });
+        } else {
+          var post = new Post({
+            text: req.body.text,
+            image: {
+              data: "",
+              contentType: "",
+            },
+            likesList: [],
+            author: authData._id,
+            isPublished: true,
+          });
+        }
+
+        // // Create a Post object with escaped and trimmed data.
+        // var post = new Post({
+        //   text: req.body.text,
+        //   image: {
+        //     data: fs.readFileSync(
+        //       path.join(__dirname + "/uploads/" + req.file.filename)
+        //     ),
+        //     contentType: "image/png",
+        //   },
+        //   likesList: [],
+        //   author: authData._id,
+        //   isPublished: true,
+        // });
 
         // Data from form is valid. Save book.
         post.save(function (err) {

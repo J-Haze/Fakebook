@@ -4,7 +4,11 @@ const Schema = mongoose.Schema;
 const postSchema = mongoose.Schema(
   {
     text: { type: String, required: true },
-    image: {type: String, default: ""},
+    // image: { type: String, default: "" },
+    image: { 
+       data: Buffer, 
+       contentType: String 
+    },
     likesList: [{type: Schema.Types.ObjectId, ref: 'User', required: true}],
     author: { type: Schema.Types.ObjectId, ref: "User" },
     // author: { type: Schema.Types.String, ref: "User" },

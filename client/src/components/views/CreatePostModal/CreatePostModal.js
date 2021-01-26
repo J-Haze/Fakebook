@@ -8,14 +8,15 @@ import { useHistory } from "react-router-dom";
 
 // import Editor from "../../HelperComponents/Editor";
 
-import ImageUpload from "./Sections/ImageUpload.js"
+// import ImageUpload from "./Sections/ImageUpload.js"
 
 const filter = new badWords();
 
 function CreatePostModal(props) {
   //   const [title, setTitle] = useState(props.initialTitle);
-  const [text, setText] = useState("");
-  const [addImageOpen, setAddImageOpen] = useState(false);
+    const [text, setText] = useState("");
+    const [imgUpload, setImgUpload] = useState("")
+    const [addImageOpen, setAddImageOpen] = useState(false);
 
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -142,9 +143,20 @@ function CreatePostModal(props) {
           </div>
           <div id="create-post-img-row">
             {addImageOpen ? (
-                          <div id="create-post-img-upload-cont">
-                          <ImageUpload />
-                          </div>
+              <div id="create-post-img-upload-cont">
+                {/* <ImageUpload /> */}
+                {/* <form> */}
+                <label htmlFor="image">Upload Image</label>
+                <input
+                  type="file"
+                  id="image"
+                  name="image"
+                  value={imgUpload}
+                  onChange={(e) => setImgUpload(e.target.value)}
+                />
+
+                {/* </form> */}
+              </div>
             ) : (
               <div
                 id="add-img-btn"

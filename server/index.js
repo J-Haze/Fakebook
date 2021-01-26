@@ -7,6 +7,7 @@ const cookieParser = require("cookie-parser");
 var logger = require("morgan");
 var flash = require("connect-flash");
 const bcrypt = require("bcryptjs");
+var multer = require("multer");
 require("./config/passport");
 
 const session = require("express-session");
@@ -55,6 +56,27 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+// app.use(multer({ dest: ‘./uploads/’,
+//   rename: function (fieldname, filename) {
+//     return filename;
+//   },
+// }));
+
+//set up multer for storing uploaded files
+ 
+// var multer = require('multer');
+ 
+// var storage = multer.diskStorage({
+//     destination: (req, file, cb) => {
+//         cb(null, 'uploads')
+//     },
+//     filename: (req, file, cb) => {
+//         cb(null, file.fieldname + '-' + Date.now())
+//     }
+// });
+ 
+// var upload = multer({ storage: storage });
+
 // // Serve static assets if in production
 // if (process.env.NODE_ENV === "production") {
 //   // Set static folder
@@ -85,6 +107,8 @@ app.use("/", indexRouter);
 app.use("/user", userRouter);
 app.use("/post", postRouter);
 app.use("/request", postRouter);
+
+
 
 // // Serve static assets if in production
 // if (process.env.NODE_ENV === "production") {

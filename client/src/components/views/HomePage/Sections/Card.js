@@ -54,6 +54,18 @@ function Card(props) {
           </div>
         </div>
         <div className="card-row-two">{props.post.text}</div>
+        {/* <div> {props.post.image.data} </div> */}
+        {props.post.image ? (
+          <div>
+            <img
+              src={`data:image/<%=${props.post.image}.contentType%>;base64, <%=${props.post.image}.data.toString('base64')%>`}
+              //     "data:image/<%=image.img.contentType%>;base64,
+              // <%=image.img.data.toString('base64')%>"
+            />
+          </div>
+        ) : (
+          ""
+        )}
         <div className="card-row-three">
           <div className="like-count">{likeCount} Likes</div>
           <div

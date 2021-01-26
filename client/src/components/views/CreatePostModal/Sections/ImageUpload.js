@@ -109,6 +109,14 @@ import React, { useState } from "react";
 
 function ImageUpload(props) {
 
+    return (
+        //  <div>
+        //         <label for="image">Upload Image</label>
+        //         <input type="file" id="image"
+        //         name="image" value="" required          
+        //                />
+        //     </div>
+    )
 }
 
 export default ImageUpload;
