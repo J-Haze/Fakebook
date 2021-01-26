@@ -57,11 +57,12 @@ function Card(props) {
         {/* <div> {props.post.image.data} </div> */}
         {props.post.image ? (
           <div>
-            <img
+            {/* <img
               src={`data:image/<%=${props.post.image}.contentType%>;base64, <%=${props.post.image}.data.toString('base64')%>`}
               //     "data:image/<%=image.img.contentType%>;base64,
               // <%=image.img.data.toString('base64')%>"
-            />
+            /> */}
+            <div>{props.post.image.data && <img src={props.post.image.data} width="100%" />}</div>
           </div>
         ) : (
           ""

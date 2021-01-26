@@ -27,16 +27,54 @@ exports.get_posts = (req, res, next) => {
 
 var multer = require("multer");
 
+// var storage = multer.diskStorage({
+//   destination: (req, file, cb) => {
+//     cb(null, "uploads");
+//   },
+//   filename: (req, file, cb) => {
+//     cb(null, file.fieldname + "-" + Date.now());
+//   },
+// });
+
+// var upload = multer({ storage: storage });
+
+// var image = mongoose.model("image", imgSchema);
+
+// // Create storage engine
+// const storage = new GridFsStorage({
+//   url: mongoURI,
+//   file: (req, file) => {
+//     return new Promise((resolve, reject) => {
+//       crypto.randomBytes(16, (err, buf) => {
+//         if (err) {
+//           return reject(err)
+//         }
+//         const filename = file.originalname
+//         const fileInfo = {
+//           filename: filename,
+//           bucketName: 'uploads',
+//         }
+//         resolve(fileInfo)
+//       })
+//     })
+//   },
+// })
+
+// const upload = multer({ storage })
+
+// SET STORAGE
 var storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, "uploads");
+  destination: function (req, file, cb) {
+    cb(null, "../../uploads");
+    // cb(null, "uploads");
   },
-  filename: (req, file, cb) => {
+  filename: function (req, file, cb) {
     cb(null, file.fieldname + "-" + Date.now());
   },
 });
-
 var upload = multer({ storage: storage });
+
+
 
 exports.post_create_post = [
   // Validate and sanitize fields.
@@ -51,24 +89,34 @@ exports.post_create_post = [
         console.log(err);
         res.sendStatus(403);
       } else {
+        // console.log("req", req)
         if (req.file) {
-          const originalName = req.file.originalname.split(".");
-          const format = originalName[originalName.length - 1];
+          console.log("yes file")
+          // const originalName = req.file.originalname.split(".");
+          // const format = originalName[originalName.length - 1];
+          var img = fs.readFileSync(req.file.path);
+          var encode_img = img.toString("base64");
+          var final_img = {
+            contentType: req.file.mimetype,
+            image: new Buffer(encode_img, "base64"),
+          };
 
           var post = new Post({
             text: req.body.text,
-            image: {
-              data: fs.readFileSync(
-                // path.join(__dirname + "/uploads/" + req.file.filename)
-                path.join(__dirname + "/uploads/" + format)
-              ),
-              contentType: "image/png",
-            },
+            // image: {
+            //   data: fs.readFileSync(
+            //     // path.join(__dirname + "/uploads/" + req.file.filename)
+            //     path.join(__dirname + "/uploads/" + format)
+            //   ),
+            //   contentType: "image/png",
+            // },
+            image: final_img,
             likesList: [],
             author: authData._id,
             isPublished: true,
           });
         } else {
+          console.log("no file")
           var post = new Post({
             text: req.body.text,
             image: {

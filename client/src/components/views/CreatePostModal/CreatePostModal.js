@@ -16,6 +16,7 @@ function CreatePostModal(props) {
   //   const [title, setTitle] = useState(props.initialTitle);
     const [text, setText] = useState("");
     const [imgUpload, setImgUpload] = useState("")
+    const [imgPreview, setImgPreview] = useState("")
     const [addImageOpen, setAddImageOpen] = useState(false);
 
   const [errorMessage, setErrorMessage] = useState("");
@@ -32,46 +33,74 @@ function CreatePostModal(props) {
   //     console.log("submitted");
   //   };
 
+    const handleChange = (e) => {
+        console.log("e.target.value:", e.target.value)
+      setImgUpload(e.target.value);
+    //   setImgPreview(URL.createObjectURL(e.target.value));
+    };
+
+    const handleCancel = () => {
+      setImgUpload("");
+      setImgPreview("");
+    };
+
   const submitCreatePost = () => {
-    if (filter.isProfane(text)) {
-      alert("Post contains a word that is not allowed.");
-      return;
-    }
+          if (filter.isProfane(text)) {
+            alert("Post contains a word that is not allowed.");
+            return;
+          }
 
-    if (text.length < 1) {
-      setErrorMessage("Post must not be blank");
-      alert("Post must not be blank");
-      return;
-    }
+          if (text.length < 1) {
+            setErrorMessage("Post must not be blank");
+            alert("Post must not be blank");
+            return;
+          }
 
-    if (text.length > 1000) {
-      setErrorMessage("Post must less than 1000 characters");
-      alert("Post must less than 1000 characters");
-      return;
-    }
+          if (text.length > 1000) {
+            setErrorMessage("Post must less than 1000 characters");
+            alert("Post must less than 1000 characters");
+            return;
+          }
 
-    Axios.post(
-      `/post/new`,
-      {
-        text: text,
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${JSON.parse(
-            window.localStorage.getItem("token")
-          )}`,
-        },
-      }
-    )
-      .then((res, err) => {
-        setErrorMessage("");
-        props.fetchPosts();
-        //   props.whitePencil();
-        props.setCreatePostModalOpen(false);
-        //   history.push(`/post/${props.postid}`);
-      })
-      .catch((error) => console.log("error", error));
-  };
+          //   if (imgUpload) {
+          //       const formData = new FormData();
+          //       formData.append("img-file", imgUpload);
+          //   } else {
+          //       let formData = "";
+          //   }
+      
+      console.log("here imgUpload", imgUpload)
+
+          const formData = new FormData();
+                formData.append("image", imgUpload);
+
+                console.log("formData", formData)
+
+          Axios.post(
+            `/post/new`,
+            {
+              text: text,
+              image: formData,
+            },
+            {
+              headers: {
+                Authorization: `Bearer ${JSON.parse(
+                  window.localStorage.getItem("token")
+                )}`,
+                 "content-type": "multipart/form-data",
+              },
+            }
+          )
+            .then((res, err) => {
+              console.log("imgUpload2", imgUpload);
+              setErrorMessage("");
+              props.fetchPosts();
+              //   props.whitePencil();
+              props.setCreatePostModalOpen(false);
+              //   history.push(`/post/${props.postid}`);
+            })
+            .catch((error) => console.log("error", error));
+        };;
 
   // let handleEditorChange = (content, editor) => {
   //   setMainText(content);
@@ -139,6 +168,7 @@ function CreatePostModal(props) {
               value={text}
               onChange={(e) => setText(e.target.value)}
             />
+            {imgPreview ? <img src={imgPreview} width="100%" /> : ""}
             {/* <div className="error-message-create-post">{errorMessage}</div> */}
           </div>
           <div id="create-post-img-row">
@@ -152,7 +182,8 @@ function CreatePostModal(props) {
                   id="image"
                   name="image"
                   value={imgUpload}
-                  onChange={(e) => setImgUpload(e.target.value)}
+                                  onChange={(e) => handleChange(e)}
+                                  accept="image/*"
                 />
 
                 {/* </form> */}

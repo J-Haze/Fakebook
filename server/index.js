@@ -96,6 +96,42 @@ app.use(bodyParser.json());
 //   });
 // }
 
+// // Create storage engine
+// const storage = new GridFsStorage({
+//   url: mongoURI,
+//   file: (req, file) => {
+//     return new Promise((resolve, reject) => {
+//       crypto.randomBytes(16, (err, buf) => {
+//         if (err) {
+//           return reject(err)
+//         }
+//         const filename = file.originalname
+//         const fileInfo = {
+//           filename: filename,
+//           bucketName: 'uploads',
+//         }
+//         resolve(fileInfo)
+//       })
+//     })
+//   },
+// })
+
+// const upload = multer({ storage })
+
+// var multer = require("multer");
+
+// // SET STORAGE
+// var storage = multer.diskStorage({
+//   destination: function (req, file, cb) {
+//     cb(null, "../../uploads");
+//     // cb(null, "uploads");
+//   },
+//   filename: function (req, file, cb) {
+//     cb(null, file.fieldname + "-" + Date.now());
+//   },
+// });
+// var upload = multer({ storage: storage });
+
 //Routers
 var indexRouter = require("./routes/index");
 var userRouter = require("./routes/user");
