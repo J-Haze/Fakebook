@@ -65,99 +65,127 @@ var multer = require("multer");
 // SET STORAGE
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, "../../uploads");
+    // destination: function (req, form, cb) {
+    // console.log("internal request", req)
+    // console.log("form", form)
+    // form
+    console.log("here file0", file);
+    cb(null, "uploads/");
+    // cb(null, "../../uploads");
     // cb(null, "uploads");
   },
   filename: function (req, file, cb) {
-    cb(null, file.fieldname + "-" + Date.now());
+    console.log("here file1", file)
+    cb(null, Date.now() + "-" + file.fieldname);
+  },
+  fileFilter: (req, file, cb) => {
+    console.log("here file", file)
+    const ext = path.extname(file.originalname);
+    //must be jpg or png to upload
+    if (ext !== ".jpg" || ext !== ".png") {
+      return cb(res.status(400).end("only jpg, png are allowed"), false);
+    }
+    cb(null, true);
   },
 });
-var upload = multer({ storage: storage });
+
+var upload = multer({ storage: storage, limits: { fileSize: 1000000 } }).single(
+  "file"
+);
 
 
 
-exports.post_create_post = [
+exports.post_create_post = (req, res, next) => {
   // Validate and sanitize fields.
-  body("text", "Can't submit a blank post").not().isEmpty().trim(),
+  // body("text", "Can't submit a blank post").not().isEmpty().trim(),
   // Add image thing later
-  body("timestamp").escape(),
-  upload.single("image"),
-
-  (req, res) => {
-    jwt.verify(req.token, process.env.JWT_SECRET, (err, authData) => {
-      if (err) {
-        console.log(err);
-        res.sendStatus(403);
-      } else {
-        // console.log("req", req)
-        if (req.file) {
-          console.log("yes file")
-          // const originalName = req.file.originalname.split(".");
-          // const format = originalName[originalName.length - 1];
-          var img = fs.readFileSync(req.file.path);
-          var encode_img = img.toString("base64");
-          var final_img = {
-            contentType: req.file.mimetype,
-            image: new Buffer(encode_img, "base64"),
-          };
-
-          var post = new Post({
-            text: req.body.text,
-            // image: {
-            //   data: fs.readFileSync(
-            //     // path.join(__dirname + "/uploads/" + req.file.filename)
-            //     path.join(__dirname + "/uploads/" + format)
-            //   ),
-            //   contentType: "image/png",
-            // },
-            image: final_img,
-            likesList: [],
-            author: authData._id,
-            isPublished: true,
-          });
+  // body("timestamp").escape(),
+  // (req, res) => {
+  console.log("blah", req)
+  // console.log("try", req.body)
+    
+      jwt.verify(req.token, process.env.JWT_SECRET, (err, authData) => {
+        if (err) {
+          console.log(err);
+          res.sendStatus(403);
         } else {
-          console.log("no file")
-          var post = new Post({
-            text: req.body.text,
-            image: {
-              data: "",
-              contentType: "",
-            },
-            likesList: [],
-            author: authData._id,
-            isPublished: true,
+          // console.log("req", req)
+          upload(req, res, (err) => {
+            // console.log("request:", req);
+            console.log("request body:", req.body);
+
+            if (req.file) {
+              console.log("yes file");
+
+              // var img = fs.readFileSync(req.file.path);
+              // var encode_img = img.toString("base64");
+              // var final_img = {
+              //   contentType: req.file.mimetype,
+              //   image: new Buffer(encode_img, "base64"),
+              // };
+
+              var post = new Post({
+                text: req.body.text,
+                // image: {
+                //   data: fs.readFileSync(
+                //     // path.join(__dirname + "/uploads/" + req.file.filename)
+                //     path.join(__dirname + "/uploads/" + format)
+                //   ),
+                //   contentType: "image/png",
+                // },
+                image: {
+                  data: fs.readFileSync(
+                    path.join(__dirname + "/uploads/" + req.file.filename)
+                  ),
+                  contentType: "image/png",
+                },
+                likesList: [],
+                author: authData._id,
+                isPublished: true,
+              });
+            } else {
+              console.log("no file");
+              var post = new Post({
+                text: req.body.text,
+                image: {
+                  data: "",
+                  contentType: "",
+                },
+                likesList: [],
+                author: authData._id,
+                isPublished: true,
+              });
+            }
+
+            // // Create a Post object with escaped and trimmed data.
+            // var post = new Post({
+            //   text: req.body.text,
+            //   image: {
+            //     data: fs.readFileSync(
+            //       path.join(__dirname + "/uploads/" + req.file.filename)
+            //     ),
+            //     contentType: "image/png",
+            //   },
+            //   likesList: [],
+            //   author: authData._id,
+            //   isPublished: true,
+            // });
+
+            // Data from form is valid. Save book.
+            post.save(function (err) {
+              if (err) {
+                console.log(err);
+                return err;
+              }
+              res.json({
+                message: "Post created",
+                post: post,
+              });
+            });
           });
         }
-
-        // // Create a Post object with escaped and trimmed data.
-        // var post = new Post({
-        //   text: req.body.text,
-        //   image: {
-        //     data: fs.readFileSync(
-        //       path.join(__dirname + "/uploads/" + req.file.filename)
-        //     ),
-        //     contentType: "image/png",
-        //   },
-        //   likesList: [],
-        //   author: authData._id,
-        //   isPublished: true,
-        // });
-
-        // Data from form is valid. Save book.
-        post.save(function (err) {
-          if (err) {
-            console.log(err);
-            return err;
-          }
-          res.json({
-            message: "Post created",
-            post: post,
-          });
-        });
-      }
-    });
-  },
-];
+      });
+    }
 
 exports.get_post = (req, res, next) => {
   const { body, validationResult, check } = require("express-validator");

@@ -14,10 +14,10 @@ const filter = new badWords();
 
 function CreatePostModal(props) {
   //   const [title, setTitle] = useState(props.initialTitle);
-    const [text, setText] = useState("");
-    const [imgUpload, setImgUpload] = useState("")
-    const [imgPreview, setImgPreview] = useState("")
-    const [addImageOpen, setAddImageOpen] = useState(false);
+  const [text, setText] = useState("");
+  const [imgUpload, setImgUpload] = useState(null);
+  const [imgPreview, setImgPreview] = useState("");
+  const [addImageOpen, setAddImageOpen] = useState(false);
 
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -33,74 +33,90 @@ function CreatePostModal(props) {
   //     console.log("submitted");
   //   };
 
-    const handleChange = (e) => {
-        console.log("e.target.value:", e.target.value)
-      setImgUpload(e.target.value);
+  const handleChange = (e) => {
+    console.log("e.target.value:", e.target.value);
+    setImgUpload(e.target.value);
     //   setImgPreview(URL.createObjectURL(e.target.value));
-    };
+  };
 
-    const handleCancel = () => {
-      setImgUpload("");
-      setImgPreview("");
-    };
+  const handleCancel = () => {
+    setImgUpload("");
+    setImgPreview("");
+  };
 
   const submitCreatePost = () => {
-          if (filter.isProfane(text)) {
-            alert("Post contains a word that is not allowed.");
-            return;
-          }
+    if (filter.isProfane(text)) {
+      alert("Post contains a word that is not allowed.");
+      return;
+    }
 
-          if (text.length < 1) {
-            setErrorMessage("Post must not be blank");
-            alert("Post must not be blank");
-            return;
-          }
+    if (text.length < 1) {
+      setErrorMessage("Post must not be blank");
+      alert("Post must not be blank");
+      return;
+    }
 
-          if (text.length > 1000) {
-            setErrorMessage("Post must less than 1000 characters");
-            alert("Post must less than 1000 characters");
-            return;
-          }
+    if (text.length > 1000) {
+      setErrorMessage("Post must less than 1000 characters");
+      alert("Post must less than 1000 characters");
+      return;
+    }
 
-          //   if (imgUpload) {
-          //       const formData = new FormData();
-          //       formData.append("img-file", imgUpload);
-          //   } else {
-          //       let formData = "";
-          //   }
-      
-      console.log("here imgUpload", imgUpload)
+    //   if (imgUpload) {
+    //       const formData = new FormData();
+    //       formData.append("img-file", imgUpload);
+    //   } else {
+    //       let formData = "";
+    //   }
 
-          const formData = new FormData();
-                formData.append("image", imgUpload);
+    console.log("here imgUpload", imgUpload);
 
-                console.log("formData", formData)
+    const formData = new FormData();
+    console.log("formData1", formData);
+    //   console.log("text", text);
+      console.log("image", imgUpload);
+    //   let textVar = text;
+    //   let imageVar = imgUpload;
+    //   let file = {
+    //       text: textVar,
+    //       image: imgUpload
+    //   }
+    formData.append("text", text);
+    formData.append("image", imgUpload);
+    //   formData.append("myFile", file)
 
-          Axios.post(
-            `/post/new`,
-            {
-              text: text,
-              image: formData,
-            },
-            {
-              headers: {
-                Authorization: `Bearer ${JSON.parse(
-                  window.localStorage.getItem("token")
-                )}`,
-                 "content-type": "multipart/form-data",
-              },
-            }
-          )
-            .then((res, err) => {
-              console.log("imgUpload2", imgUpload);
-              setErrorMessage("");
-              props.fetchPosts();
-              //   props.whitePencil();
-              props.setCreatePostModalOpen(false);
-              //   history.push(`/post/${props.postid}`);
-            })
-            .catch((error) => console.log("error", error));
-        };;
+    console.log("formData2", formData);
+
+    Axios.post(
+      `/post/new`,
+      // {
+      //   text: text,
+      //   image: formData,
+      // },
+      formData,
+      {
+        headers: {
+          Authorization: `Bearer ${JSON.parse(
+            window.localStorage.getItem("token")
+          )}`,
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    )
+      .then((res, err) => {
+        console.log("imgUpload2", imgUpload);
+        setErrorMessage("");
+        // if success then set image preview
+        props.fetchPosts();
+        //   props.whitePencil();
+        props.setCreatePostModalOpen(false);
+        //   history.push(`/post/${props.postid}`);
+      })
+      .catch((error) => {
+        alert("Failed to submit image.");
+        console.log("error", error);
+      });
+  };
 
   // let handleEditorChange = (content, editor) => {
   //   setMainText(content);
@@ -168,7 +184,16 @@ function CreatePostModal(props) {
               value={text}
               onChange={(e) => setText(e.target.value)}
             />
-            {imgPreview ? <img src={imgPreview} width="100%" /> : ""}
+            {/* {imgPreview ? <img src={imgPreview} width="100%" /> : ""} */}
+            {imgPreview ? (
+              <img
+                id="scroll-img"
+                src={`http://localhost:5000/${imgPreview}`}
+                // alt={`productImg-${index}`}
+              />
+            ) : (
+              ""
+            )}
             {/* <div className="error-message-create-post">{errorMessage}</div> */}
           </div>
           <div id="create-post-img-row">
@@ -181,9 +206,9 @@ function CreatePostModal(props) {
                   type="file"
                   id="image"
                   name="image"
-                  value={imgUpload}
-                                  onChange={(e) => handleChange(e)}
-                                  accept="image/*"
+                //   value={imgUpload}
+                  onChange={(e) => handleChange(e)}
+                  accept="image/*"
                 />
 
                 {/* </form> */}
