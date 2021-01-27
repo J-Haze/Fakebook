@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useRef } from "react";
 import { useState, useEffect } from "react";
 import Axios from "axios";
 import "./CreatePostModal.css";
 
 import badWords from "bad-words";
 import { useHistory } from "react-router-dom";
+
+import FileUploader from "./Sections/FileUploader"
 
 // import Editor from "../../HelperComponents/Editor";
 
@@ -34,13 +36,24 @@ function CreatePostModal(props) {
   //   };
 
   const handleChange = (e) => {
-    console.log("e.target.value:", e.target.value);
-    setImgUpload(e.target.value);
+    console.log("e.target:", e.target);
+      setImgUpload(e.target.value);
+      setImgUpload(e.target.files[0])
+      
+      
+//   setImgUpload(
+//   e.target.files
+// )
+
+
+
+    //   console.log("e.target:", e.target);
+    //   setImgUpload(e.target);
     //   setImgPreview(URL.createObjectURL(e.target.value));
-  };
+  }; 
 
   const handleCancel = () => {
-    setImgUpload("");
+    setImgUpload(null);
     setImgPreview("");
   };
 
@@ -71,6 +84,15 @@ function CreatePostModal(props) {
 
     console.log("here imgUpload", imgUpload);
 
+      
+//Get rid of so that you can submit posts without images too 
+      if (!imgUpload) {
+          alert("Please upload an image")
+          return
+      }
+
+      console.log("typeOf", typeof(imgUpload))
+
     const formData = new FormData();
     console.log("formData1", formData);
     //   console.log("text", text);
@@ -84,8 +106,11 @@ function CreatePostModal(props) {
     formData.append("text", text);
     formData.append("image", imgUpload);
     //   formData.append("myFile", file)
+      
+      console.log({imgUpload})
 
-    console.log("formData2", formData);
+      console.log("formData2", formData);
+      console.log({formData})
 
     Axios.post(
       `/post/new`,
@@ -126,6 +151,27 @@ function CreatePostModal(props) {
   //   props.whitePencil();
   //   props.hideEditModal();
   // };
+    
+//     const FileUploader = ({onFileSelect}) => {
+//     const fileInput = useRef(null)
+
+//     const handleFileInput = (e) => {
+//   // handle validations
+//   const file = e.target.files[0];
+//   if (file.size > 1024)
+//     onFileSelectError({ error: "File size cannot exceed more than 1MB" });
+//   else onFileSelectSuccess(file);
+// };
+
+//     return (
+//         <div className="file-uploader">
+//             <input type="file" onChange={handleFileInput}/>
+//             <button onClick={e => fileInput.current && fileInput.current.click()} className="btn btn-primary"></button>
+//         </div>
+//     )
+// }
+
+    
 
   return (
     <div
@@ -198,21 +244,10 @@ function CreatePostModal(props) {
           </div>
           <div id="create-post-img-row">
             {addImageOpen ? (
-              <div id="create-post-img-upload-cont">
-                {/* <ImageUpload /> */}
-                {/* <form> */}
-                <label htmlFor="image">Upload Image</label>
-                <input
-                  type="file"
-                  id="image"
-                  name="image"
-                //   value={imgUpload}
-                  onChange={(e) => handleChange(e)}
-                  accept="image/*"
-                />
-
-                {/* </form> */}
-              </div>
+                          <FileUploader
+                              onFileSelectSuccess={(file) => setImgUpload(file)}
+                              onFileSelectError={({ error }) => alert(error)} 
+                              />
             ) : (
               <div
                 id="add-img-btn"

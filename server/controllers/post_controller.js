@@ -89,103 +89,96 @@ var storage = multer.diskStorage({
   },
 });
 
-var upload = multer({ storage: storage, limits: { fileSize: 1000000 } }).single(
-  "file"
-);
+var upload = multer({ storage: storage, limits: { fileSize: 1000000 } });
 
 
 
-exports.post_create_post = (req, res, next) => {
+exports.post_create_post = [
   // Validate and sanitize fields.
   // body("text", "Can't submit a blank post").not().isEmpty().trim(),
   // Add image thing later
   // body("timestamp").escape(),
-  // (req, res) => {
-  console.log("blah", req)
-  // console.log("try", req.body)
+
+  upload.single('file'),
+  (req, res) => {
+    console.log("blah", req)
+    console.log("try", req.body)
+    console.log("token", req.token)
+     if (req.file) {
+      console.log("req.file", req.file)
+    }
     
-      jwt.verify(req.token, process.env.JWT_SECRET, (err, authData) => {
-        if (err) {
-          console.log(err);
-          res.sendStatus(403);
+    jwt.verify(req.token, process.env.JWT_SECRET, (err, authData) => {
+      if (err) {
+        console.log(err);
+        res.sendStatus(403);
+      } else {
+        // console.log("req", req)
+        // upload(req, res, (err) => {
+        // console.log("request:", req);
+        console.log("request body:", req.body);
+        console.log("req.body.text", req.body.text)
+        console.log("req.body.image", req.body.image)
+        console.log("authdata", authData)
+
+        if (req.body.image) {
+          console.log("yes image");
+
+          // var img = fs.readFileSync(req.file.path);
+          // var encode_img = img.toString("base64");
+          // var final_img = {
+          //   contentType: req.file.mimetype,
+          //   image: new Buffer(encode_img, "base64"),
+          // };
+
+          var post = new Post({
+            text: req.body.text,
+            // image: {
+            //   data: fs.readFileSync(
+            //     // path.join(__dirname + "/uploads/" + req.file.filename)
+            //     path.join(__dirname + "/uploads/" + format)
+            //   ),
+            //   contentType: "image/png",
+            // },
+            image: {
+              data: fs.readFileSync(
+                // path.join(__dirname + "/uploads/" + req.file.filename)
+                path.join(__dirname + "/uploads/" + req.body.image)
+              ),
+              contentType: "image/png",
+            },
+            likesList: [],
+            author: authData._id,
+            isPublished: true,
+          });
         } else {
-          // console.log("req", req)
-          upload(req, res, (err) => {
-            // console.log("request:", req);
-            console.log("request body:", req.body);
-
-            if (req.file) {
-              console.log("yes file");
-
-              // var img = fs.readFileSync(req.file.path);
-              // var encode_img = img.toString("base64");
-              // var final_img = {
-              //   contentType: req.file.mimetype,
-              //   image: new Buffer(encode_img, "base64"),
-              // };
-
-              var post = new Post({
-                text: req.body.text,
-                // image: {
-                //   data: fs.readFileSync(
-                //     // path.join(__dirname + "/uploads/" + req.file.filename)
-                //     path.join(__dirname + "/uploads/" + format)
-                //   ),
-                //   contentType: "image/png",
-                // },
-                image: {
-                  data: fs.readFileSync(
-                    path.join(__dirname + "/uploads/" + req.file.filename)
-                  ),
-                  contentType: "image/png",
-                },
-                likesList: [],
-                author: authData._id,
-                isPublished: true,
-              });
-            } else {
-              console.log("no file");
-              var post = new Post({
-                text: req.body.text,
-                image: {
-                  data: "",
-                  contentType: "",
-                },
-                likesList: [],
-                author: authData._id,
-                isPublished: true,
-              });
-            }
-
-            // // Create a Post object with escaped and trimmed data.
-            // var post = new Post({
-            //   text: req.body.text,
-            //   image: {
-            //     data: fs.readFileSync(
-            //       path.join(__dirname + "/uploads/" + req.file.filename)
-            //     ),
-            //     contentType: "image/png",
-            //   },
-            //   likesList: [],
-            //   author: authData._id,
-            //   isPublished: true,
-            // });
-
-            // Data from form is valid. Save book.
-            post.save(function (err) {
-              if (err) {
-                console.log(err);
-                return err;
-              }
-              res.json({
-                message: "Post created",
-                post: post,
-              });
-            });
+          console.log("no image");
+          var post = new Post({
+            text: req.body.text,
+            image: {
+              data: "",
+              contentType: "",
+            },
+            likesList: [],
+            author: authData._id,
+            isPublished: true,
           });
         }
-      });
-    }
+        
+        post.save(function (err) {
+          if (err) {
+            console.log(err);
+            return err;
+          }
+          res.json({
+            message: "Post created",
+            post: post,
+          });
+        });
+      }
+    })
+  }
+]
 
 exports.get_post = (req, res, next) => {
   const { body, validationResult, check } = require("express-validator");
