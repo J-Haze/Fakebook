@@ -104,7 +104,7 @@ function CreatePostModal(props) {
     //       image: imgUpload
     //   }
     formData.append("text", text);
-    formData.append("image", imgUpload);
+    formData.append("file", imgUpload);
     //   formData.append("myFile", file)
       
       console.log({imgUpload})

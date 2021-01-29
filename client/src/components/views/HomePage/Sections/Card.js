@@ -38,6 +38,9 @@ function Card(props) {
     console.log("show comments");
   }
 
+  console.log("image", props.post.image);
+  console.log("image.data", props.post.image.data);
+
   return (
     <div className="card">
       <div className="main-card">
@@ -62,7 +65,17 @@ function Card(props) {
               //     "data:image/<%=image.img.contentType%>;base64,
               // <%=image.img.data.toString('base64')%>"
             /> */}
-            <div>{props.post.image.data && <img src={props.post.image.data} width="100%" />}</div>
+            <div>Yes image</div>
+            {/* <div>{props.post.image.data && <img src={props.post.image.data} width="100%" />}</div> */}
+            <div>
+              {props.post.image && (
+                <img
+                  id="scroll-img"
+                  src={`http://localhost:5000/${props.post.image}`}
+                  // alt={`productImg-${index}`}
+                />
+              )}
+            </div>
           </div>
         ) : (
           ""

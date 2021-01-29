@@ -5,16 +5,17 @@ const postSchema = mongoose.Schema(
   {
     text: { type: String, required: true },
     // image: { type: String, default: "" },
-    image: { 
-       data: Buffer, 
-       contentType: String 
-    },
-    likesList: [{type: Schema.Types.ObjectId, ref: 'User', required: true}],
+    // image: {
+    //   contentType: String,
+    //   data: Buffer,
+    // },
+    image: { type: Object },
+    likesList: [{ type: Schema.Types.ObjectId, ref: "User", required: true }],
     author: { type: Schema.Types.ObjectId, ref: "User" },
     // author: { type: Schema.Types.String, ref: "User" },
     isPublished: { type: Boolean, default: true },
   },
-  { timestamps: true } 
+  { timestamps: true }
 );
 
 module.exports = mongoose.model("Post", postSchema);
