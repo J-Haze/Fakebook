@@ -61,7 +61,13 @@ function HomePage(props) {
               ""
             )
           )}
-          <div> No more posts.</div>
+          <div className="no-posts">
+            <div className="no-posts-header">No More Posts</div>
+            <div className="no-posts-subheader">
+              Add more friends to see more posts in your News Feed
+            </div>
+            <div className="no-posts-btn"> Find Friends</div>
+          </div>
         </div>
         {/* )} */}
       </div>
