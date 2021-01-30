@@ -6,7 +6,7 @@ import "./CreatePostModal.css";
 import badWords from "bad-words";
 import { useHistory } from "react-router-dom";
 
-import FileUploader from "./Sections/FileUploader"
+import FileUploader from "./Sections/FileUploader";
 
 // import Editor from "../../HelperComponents/Editor";
 
@@ -37,20 +37,23 @@ function CreatePostModal(props) {
 
   const handleChange = (e) => {
     console.log("e.target:", e.target);
-      setImgUpload(e.target.value);
-      setImgUpload(e.target.files[0])
-      
-      
-//   setImgUpload(
-//   e.target.files
-// )
+    setImgUpload(e.target.value);
+    setImgUpload(e.target.files[0]);
 
-
+    //   setImgUpload(
+    //   e.target.files
+    // )
 
     //   console.log("e.target:", e.target);
     //   setImgUpload(e.target);
     //   setImgPreview(URL.createObjectURL(e.target.value));
-  }; 
+  };
+
+//   const resetImgForm = () => {
+//     if (addImageOpen) {
+//       document.getElementById("create-post-form-img-upload").reset();
+//     }
+//   };
 
   const handleCancel = () => {
     setImgUpload(null);
@@ -63,7 +66,7 @@ function CreatePostModal(props) {
     //   return;
     // }
 
-    if (text.length < 1 && (imgUpload == "")) {
+    if (text.length < 1 && imgUpload == "") {
       setErrorMessage("Post must not be blank");
       alert("Post must not be blank");
       return;
@@ -84,19 +87,18 @@ function CreatePostModal(props) {
 
     console.log("here imgUpload", imgUpload);
 
-      
-//Get rid of so that you can submit posts without images too 
+    //Get rid of so that you can submit posts without images too
     //   if (!imgUpload) {
     //       alert("Please upload an image")
     //       return
     //   }
 
-      console.log("typeOf", typeof(imgUpload))
+    console.log("typeOf", typeof imgUpload);
 
     const formData = new FormData();
     console.log("formData1", formData);
     //   console.log("text", text);
-      console.log("image", imgUpload);
+    console.log("image", imgUpload);
     //   let textVar = text;
     //   let imageVar = imgUpload;
     //   let file = {
@@ -106,11 +108,11 @@ function CreatePostModal(props) {
     formData.append("text", text);
     formData.append("file", imgUpload);
     //   formData.append("myFile", file)
-      
-      console.log({imgUpload})
 
-      console.log("formData2", formData);
-      console.log({formData})
+    console.log({ imgUpload });
+
+    console.log("formData2", formData);
+    console.log({ formData });
 
     Axios.post(
       `/post/new`,
@@ -132,8 +134,8 @@ function CreatePostModal(props) {
         console.log("imgUpload2", imgUpload);
         setErrorMessage("");
         // if success then set image preview
-          props.fetchPosts();
-          setText("")
+        props.fetchPosts();
+        setText("");
         //   props.whitePencil();
         props.setCreatePostModalOpen(false);
         //   history.push(`/post/${props.postid}`);
@@ -152,27 +154,25 @@ function CreatePostModal(props) {
   //   props.whitePencil();
   //   props.hideEditModal();
   // };
-    
-//     const FileUploader = ({onFileSelect}) => {
-//     const fileInput = useRef(null)
 
-//     const handleFileInput = (e) => {
-//   // handle validations
-//   const file = e.target.files[0];
-//   if (file.size > 1024)
-//     onFileSelectError({ error: "File size cannot exceed more than 1MB" });
-//   else onFileSelectSuccess(file);
-// };
+  //     const FileUploader = ({onFileSelect}) => {
+  //     const fileInput = useRef(null)
 
-//     return (
-//         <div className="file-uploader">
-//             <input type="file" onChange={handleFileInput}/>
-//             <button onClick={e => fileInput.current && fileInput.current.click()} className="btn btn-primary"></button>
-//         </div>
-//     )
-// }
+  //     const handleFileInput = (e) => {
+  //   // handle validations
+  //   const file = e.target.files[0];
+  //   if (file.size > 1024)
+  //     onFileSelectError({ error: "File size cannot exceed more than 1MB" });
+  //   else onFileSelectSuccess(file);
+  // };
 
-    
+  //     return (
+  //         <div className="file-uploader">
+  //             <input type="file" onChange={handleFileInput}/>
+  //             <button onClick={e => fileInput.current && fileInput.current.click()} className="btn btn-primary"></button>
+  //         </div>
+  //     )
+  // }
 
   return (
     <div
@@ -247,8 +247,11 @@ function CreatePostModal(props) {
             {addImageOpen ? (
               <div className="create-post-image-upload">
                 <FileUploader
+                  id="create-post-form-img-upload"
                   onFileSelectSuccess={(file) => setImgUpload(file)}
                   onFileSelectError={({ error }) => alert(error)}
+                                //   resetImgForm={resetImgForm}
+                                  setImgUpload={setImgUpload}
                 />
               </div>
             ) : (

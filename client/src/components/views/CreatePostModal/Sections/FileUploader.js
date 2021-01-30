@@ -6,11 +6,19 @@ const FileUploader = (props) => {
   const handleFileInput = (e) => {
     // handle validations
     const file = e.target.files[0];
-    if (file.size > 1000000)
-      props.onFileSelectError({
-        error: "File size cannot exceed more than 1MB",
-      });
-    else props.onFileSelectSuccess(file);
+    if (file) {
+      if (file.size > 5000000) {
+        props.onFileSelectError({
+          error: "File size cannot exceed more than 5MB",
+        });
+      }
+      else props.onFileSelectSuccess(file);
+    } else {
+      // document.getElementsByClassName("file-uploader")
+      // document.getElementById("create-post-form-img-upload").reset();
+      // document.getElementByClassName("file-uploader").reset();
+      props.setImgUpload(null)
+    }
   };
 
   return (

@@ -60,7 +60,7 @@ function Card(props) {
         {props.post.image ? (
           <div>
             <div>
-              {props.post.image && (
+              {props.post.image.filename && (
                 <div>
                   <img
                     className="card-image"

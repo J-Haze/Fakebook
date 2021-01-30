@@ -102,11 +102,17 @@ exports.post_create_post = [
         // console.log("req.body.image", req.body.image);
         console.log("authdata", authData);
 
-        if (req.files) {
+        
+          let finalText = "";
+          if (req.body.text) {
+            finalText = req.body.text;
+          } 
+
+        if (req.files.length > 0) {
           console.log("yes file");
           console.log("req.file2", req.files[0]);
 
-          console.log("req.files.path", req.files[0].path);
+          // console.log("req.files.path", req.files[0].path);
 
           var img = fs.readFileSync(req.files[0].path);
           var encode_img = img.toString("base64");
@@ -116,10 +122,6 @@ exports.post_create_post = [
           };
 
 
-          let finalText = "";
-          if (req.body.text) {
-            finalText = req.body.text;
-          } 
 
           var post = new Post({
             text: finalText,
