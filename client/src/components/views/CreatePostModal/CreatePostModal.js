@@ -34,6 +34,10 @@ function CreatePostModal(props) {
   //   const submitCreatePost = () => {
   //     console.log("submitted");
   //   };
+    
+  function isEmpty(str) {
+    return str.replace(/^\s+|\s+$/g, "").length == 0;
+  }
 
   const handleChange = (e) => {
     console.log("e.target:", e.target);
@@ -66,11 +70,19 @@ function CreatePostModal(props) {
     //   return;
     // }
 
-    if (text.length < 1 && imgUpload == "") {
-      setErrorMessage("Post must not be blank");
-      alert("Post must not be blank");
-      return;
-    }
+      if (!text && !imgUpload) {
+          setErrorMessage("Post must not be blank");
+          alert("Post must not be blank");
+          return;
+      }
+      
+      if (text) {      
+          if (isEmpty(text) && !imgUpload) {
+            setErrorMessage("Post must not be blank");
+            alert("Post must not be blank");
+            return;
+          }
+      }
 
     if (text.length > 1000) {
       setErrorMessage("Post must less than 1000 characters");
@@ -78,41 +90,9 @@ function CreatePostModal(props) {
       return;
     }
 
-    //   if (imgUpload) {
-    //       const formData = new FormData();
-    //       formData.append("img-file", imgUpload);
-    //   } else {
-    //       let formData = "";
-    //   }
-
-    console.log("here imgUpload", imgUpload);
-
-    //Get rid of so that you can submit posts without images too
-    //   if (!imgUpload) {
-    //       alert("Please upload an image")
-    //       return
-    //   }
-
-    console.log("typeOf", typeof imgUpload);
-
     const formData = new FormData();
-    console.log("formData1", formData);
-    //   console.log("text", text);
-    console.log("image", imgUpload);
-    //   let textVar = text;
-    //   let imageVar = imgUpload;
-    //   let file = {
-    //       text: textVar,
-    //       image: imgUpload
-    //   }
     formData.append("text", text);
     formData.append("file", imgUpload);
-    //   formData.append("myFile", file)
-
-    console.log({ imgUpload });
-
-    console.log("formData2", formData);
-    console.log({ formData });
 
     Axios.post(
       `/post/new`,
