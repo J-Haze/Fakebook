@@ -133,6 +133,10 @@
   line-height: 28.0008px;
 }
 
+.card-image{
+  width: 100%;
+}
+
 .card-row-three {
   display: flex;
   height: 22px;

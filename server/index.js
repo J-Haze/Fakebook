@@ -32,13 +32,13 @@ const connect = mongoose
   .then(() => console.log("MongoDB Connected..."))
   .catch((err) => console.log(err));
 
-// if (process.env.NODE_ENV === "production") {
-//   app.use(express.static("client/build"));
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
 
-//   app.get("*", (req, res) => {
-//     res.sendFile(path.resolve(__dirname, "../client", "build", "index.html")); // relative path
-//   });
-// }
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "../client", "build", "index.html")); // relative path
+  });
+}
 
 app.use(flash());
 app.use(session({ secret: "cats", resave: false, saveUninitialized: true }));
@@ -56,82 +56,6 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-// app.use(multer({ dest: ‘./uploads/’,
-//   rename: function (fieldname, filename) {
-//     return filename;
-//   },
-// }));
-
-//set up multer for storing uploaded files
- 
-// var multer = require('multer');
- 
-// var storage = multer.diskStorage({
-//     destination: (req, file, cb) => {
-//         cb(null, 'uploads')
-//     },
-//     filename: (req, file, cb) => {
-//         cb(null, file.fieldname + '-' + Date.now())
-//     }
-// });
- 
-// var upload = multer({ storage: storage });
-
-// // Serve static assets if in production
-// if (process.env.NODE_ENV === "production") {
-//   // Set static folder
-//   // All the javascript and css files will be read and served from this folder
-//   // app.use(express.static("/build"));
-//   // app.use(express.static("../client/build"));
-//   //  app.use(express.static("./client/build"));
-
-//   app.use(express.static("client/build"));
-
-//   // index.html for all page routes    html or routing and naviagtion
-//   app.get("*", (req, res) => {
-//     // res.sendFile(path.resolve(__dirname, "./build", "build", "index.html"));
-
-//     res.sendFile(path.resolve(__dirname, "../client", "build", "index.html"));
-//     // res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
-//   });
-// }
-
-// // Create storage engine
-// const storage = new GridFsStorage({
-//   url: mongoURI,
-//   file: (req, file) => {
-//     return new Promise((resolve, reject) => {
-//       crypto.randomBytes(16, (err, buf) => {
-//         if (err) {
-//           return reject(err)
-//         }
-//         const filename = file.originalname
-//         const fileInfo = {
-//           filename: filename,
-//           bucketName: 'uploads',
-//         }
-//         resolve(fileInfo)
-//       })
-//     })
-//   },
-// })
-
-// const upload = multer({ storage })
-
-// var multer = require("multer");
-
-// // SET STORAGE
-// var storage = multer.diskStorage({
-//   destination: function (req, file, cb) {
-//     cb(null, "../../uploads");
-//     // cb(null, "uploads");
-//   },
-//   filename: function (req, file, cb) {
-//     cb(null, file.fieldname + "-" + Date.now());
-//   },
-// });
-// var upload = multer({ storage: storage });
-
 //Routers
 var indexRouter = require("./routes/index");
 var userRouter = require("./routes/user");
@@ -144,80 +68,8 @@ app.use("/user", userRouter);
 app.use("/post", postRouter);
 app.use("/request", postRouter);
 
+app.use("/uploads", express.static("uploads"));
 
-
-// // Serve static assets if in production
-// if (process.env.NODE_ENV === "production") {
-//   // Set static folder
-//   // All the javascript and css files will be read and served from this folder
-//   // app.use(express.static("/build"));
-//   // app.use(express.static("../client/build"));
-//   //  app.use(express.static("./client/build"));
-
-//   app.use(express.static("client/build"));
-
-//   // index.html for all page routes    html or routing and naviagtion
-//   app.get("*", (req, res) => {
-//     // res.sendFile(path.resolve(__dirname, "./build", "build", "index.html"));
-
-//     // res.sendFile(path.resolve(__dirname, "../client", "build", "index.html"));
-//     res.sendFile(path.resolve(__dirname, "../client", "build", "index.html"));
-//   });
-// }
-
-// // catch 404 and forward to error handler
-// app.use(function (req, res, next) {
-//   next(createError(404));
-// });
-
-// // error handler
-// app.use(function (err, req, res, next) {
-//   // set locals, only providing error in development
-//   res.locals.message = err.message;
-//   res.locals.error = req.app.get("env") === "development" ? err : {};
-
-//   // render the error page
-//   res.status(err.status || 500);
-//   // res.render("error");
-// });
-
-// // Serve static assets if in production
-// if (process.env.NODE_ENV === "production") {
-//   // Set static folder
-//   // All the javascript and css files will be read and served from this folder
-//   // app.use(express.static("/build"));
-//   // app.use(express.static("../client/build"));
-//   //  app.use(express.static("./client/build"));
-
-//   app.use(express.static("client/build"));
-
-//   // index.html for all page routes    html or routing and naviagtion
-//   app.get("*", (req, res) => {
-//     // res.sendFile(path.resolve(__dirname, "./build", "build", "index.html"));
-
-//     // res.sendFile(path.resolve(__dirname, "../client", "build", "index.html"));
-//     res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
-//   });
-// }
-
-// // Serve static assets if in production
-// if (process.env.NODE_ENV === "production") {
-//   // Set static folder
-//   // All the javascript and css files will be read and served from this folder
-//   // app.use(express.static("/build"));
-//   // app.use(express.static("../client/build"));
-//   //  app.use(express.static("./client/build"));
-
-//   app.use(express.static("../client/build"));
-
-//   // index.html for all page routes    html or routing and naviagtion
-//   app.get("*", (req, res) => {
-//     // res.sendFile(path.resolve(__dirname, "./build", "build", "index.html"));
-
-//     res.sendFile(path.resolve(__dirname, "../client", "build", "index.html"));
-//     // res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
-//   });
-// }
 
 // if (process.env.NODE_ENV === "production") {
 //   app.use(express.static("client/build"));
@@ -226,14 +78,6 @@ app.use("/request", postRouter);
 //     res.sendFile(path.resolve(__dirname, "../client", "build", "index.html")); // relative path
 //   });
 // }
-
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static("client/build"));
-
-  app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "../client", "build", "index.html")); // relative path
-  });
-}
 
 const port = process.env.PORT || 5000;
 

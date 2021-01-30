@@ -69,11 +69,36 @@ function Card(props) {
             {/* <div>{props.post.image.data && <img src={props.post.image.data} width="100%" />}</div> */}
             <div>
               {props.post.image && (
-                <img
-                  id="scroll-img"
-                  src={`http://localhost:5000/${props.post.image}`}
-                  // alt={`productImg-${index}`}
-                />
+                <div>
+                  {/* <img
+                    id="scroll-img"
+                    src={`../../../../../uploads\\${props.post.image.filename}`}
+                    // src={`http://localhost:3000/uploads/${props.post.image.filename}`}
+                    // src={props.post.}
+                    alt={`productImg-${props.post.image.filename}`}
+                  />
+                  <img
+                    id="scroll-img"
+                    // src={`../../../../../uploads/${props.post.image.filename}`}
+                    src={`http://localhost:3000/uploads\\${props.post.image.filename}`}
+                    // src={props.post.}
+                    // alt={`productImg-${index}`}
+                  /> */}
+                  <img
+                    className="card-image"
+                    // src={`../../../../../uploads/${props.post.image.filename}`}
+                    src={`http://localhost:5000/uploads/${props.post.image.filename}`}
+                    // src={props.post.}
+                    // alt={`productImg-${index}`}
+                  />
+                  {/* <img
+                    id="scroll-img"
+                    src={`../../../../../uploads\\${props.post.image.filename}`}
+                    // src={`http://localhost:3000/uploads/${props.post.image.filename}`}
+                    // src={props.post.}
+                    alt={`productImg-${props.post.image.filename}`}
+                  /> */}
+                </div>
               )}
             </div>
           </div>

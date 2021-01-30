@@ -33,7 +33,8 @@ var storage = multer.diskStorage({
   },
   filename: function (req, file, cb) {
     // console.log("here file1", file)
-    cb(null, Date.now() + "-" + file.fieldname);
+    // cb(null, Date.now() + "-" + file.fieldname);
+    cb(null, `${Date.now()}_${file.originalname}`);
   },
   fileFilter: (req, file, cb) => {
     // console.log("here file", file)
@@ -73,13 +74,19 @@ exports.post_create_post = [
   // Add image thing later
   // body("timestamp").escape(),
 
-  upload.single("file"),
+  // upload.single("file"),
+  upload.any("file"),
   (req, res) => {
     console.log("blah", req);
     console.log("try", req.body);
     console.log("token", req.token);
-    if (req.file) {
-      console.log("req.file", req.file);
+    console.log("file", req.body.file)
+    console.log("file2", req.body[0])
+
+    console.log("files[0]", req.files[0])
+    // console.log({req.body})
+    if (req.files) {
+      console.log("req.files", req.files[0]);
     }
 
     jwt.verify(req.token, process.env.JWT_SECRET, (err, authData) => {
@@ -95,14 +102,16 @@ exports.post_create_post = [
         // console.log("req.body.image", req.body.image);
         console.log("authdata", authData);
 
-        if (req.file) {
+        if (req.files) {
           console.log("yes file");
-          console.log("req.file2", req.file);
+          console.log("req.file2", req.files[0]);
 
-          var img = fs.readFileSync(req.file.path);
+          console.log("req.files.path", req.files[0].path);
+
+          var img = fs.readFileSync(req.files[0].path);
           var encode_img = img.toString("base64");
           var final_img = {
-            contentType: req.file.mimetype,
+            contentType: req.files[0].mimetype,
             image: new Buffer.from(encode_img, "base64"),
           };
 
@@ -124,18 +133,25 @@ exports.post_create_post = [
             // },
             // image: final_img,
             image: {
-              fieldname: req.file.fieldname,
-              originalname: req.file.originalname,
-              encoding: req.file.encoding,
-              mimetype: req.file.mimetype,
-              destination: req.file.destination,
-              filename: req.file.filename,
+              fieldname: req.files[0].fieldname,
+              originalname: req.files[0].originalname,
+              encoding: req.files[0].encoding,
+              mimetype: req.files[0].mimetype,
+              destination: req.files[0].destination,
+              filename: req.files[0].filename,
               // path: 'uploads\\1611900591809-file',
               // path: fs.readFileSync(
               //   path.join(__dirname + "/uploads/" + req.file.filename)
               // ),
               path: fs.readFileSync(
-                path.join("http://localhost:3000/uploads/" + req.file.filename)
+                // path.join("http://localhost:3000/uploads/" + req.file.filename)
+                // path.join(__dirname + "/uploads/" + req.file.filename)
+                path.join(
+                  __dirname,
+                  "../..",
+                  "/uploads/" + req.files[0].filename
+                )
+                // path.join("/uploads/" + req.file.filename)
               ),
               encoded: final_img,
               contentType: "image/png",
@@ -149,8 +165,15 @@ exports.post_create_post = [
           var post = new Post({
             text: req.body.text,
             image: {
+              fieldname: "",
+              originalname: "",
+              encoding: "",
+              mimetype: "",
+              destination: "",
+              filename: "",
+              path: "",
+              encoded: "",
               contentType: "",
-              image: "",
             },
             likesList: [],
             author: authData._id,
@@ -160,11 +183,17 @@ exports.post_create_post = [
 
         post.save(function (err) {
           if (err) {
+            console.log("Failed to save");
             console.log(err);
-            return err;
+            return res.status(400).json({
+              success: false,
+              err,
+            });
           }
+          console.log("New Post:", post);
           res.json({
             message: "Post created",
+            success: true,
             post: post,
           });
         });
