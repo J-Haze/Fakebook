@@ -3,13 +3,13 @@
   display: flex;
   align-items: center;
   min-height: 100%;
-  min-width: 680px;
+  min-width: 500px;
 }
 
 #home-blog-cont {
   display: flex;
   flex-direction: column;
-  width: 680px;
+  width: 500px;
   /* background-color: white; */
   /* background-color: var(--light-gray); */
   /* background-color: white; */
@@ -25,7 +25,7 @@
   height: 70px;
   background-color: white;
   /* border: 1px solid black; */
-  width: 680px;
+  width: 500px;
   margin-top: 15px;
   border-radius: 8px;
   box-sizing: border-box;
@@ -53,7 +53,8 @@
 
 #woym-btn {
   height: 40px;
-  width: 600px;
+  /* width: 600px; */
+  width: 420px;
   box-sizing: border-box;
   padding: 8px 12px;
   /* border: 1px solid black; */
@@ -93,7 +94,7 @@
 .card {
   background-color: white;
   color: #050505;
-  width: 680px;
+  width: 500px;
   /* height: 60px; */
   margin: 20px 10px 0px 10px;
   box-sizing: border-box;
@@ -133,7 +134,7 @@
   line-height: 28.0008px;
 }
 
-.card-image{
+.card-image {
   width: 100%;
 }
 

@@ -18,7 +18,7 @@ const FileUploader = (props) => {
       <input type="file" onChange={handleFileInput} />
       <button
         onClick={(e) => fileInput.current && fileInput.current.click()}
-        className="btn btn-primary"
+        className="hide"
       ></button>
     </div>
   );

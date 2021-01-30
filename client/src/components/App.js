@@ -23,7 +23,7 @@ function App() {
   const [allFriends, setFriends] = useState([]);
 
   // const [createPostModalOpen, setCreatePostModalOpen] = useState(true);
-  const [createPostModalOpen, setCreatePostModalOpen] = useState(false);
+  const [createPostModalOpen, setCreatePostModalOpen] = useState(true);
 
   const history = useHistory();
 

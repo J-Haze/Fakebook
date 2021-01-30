@@ -115,8 +115,14 @@ exports.post_create_post = [
             image: new Buffer.from(encode_img, "base64"),
           };
 
+
+          let finalText = "";
+          if (req.body.text) {
+            finalText = req.body.text;
+          } 
+
           var post = new Post({
-            text: req.body.text,
+            text: finalText,
             // image: {
             //   data: fs.readFileSync(
             //     // path.join(__dirname + "/uploads/" + req.file.filename)
@@ -163,7 +169,7 @@ exports.post_create_post = [
         } else {
           console.log("no image");
           var post = new Post({
-            text: req.body.text,
+            text: finalText,
             image: {
               fieldname: "",
               originalname: "",

@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const postSchema = mongoose.Schema(
   {
-    text: { type: String, required: true },
+    text: { type: String },
     // image: { type: String, default: "" },
     // image: {
     //   contentType: String,

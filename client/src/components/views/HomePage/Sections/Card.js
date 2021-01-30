@@ -57,47 +57,15 @@ function Card(props) {
           </div>
         </div>
         <div className="card-row-two">{props.post.text}</div>
-        {/* <div> {props.post.image.data} </div> */}
         {props.post.image ? (
           <div>
-            {/* <img
-              src={`data:image/<%=${props.post.image}.contentType%>;base64, <%=${props.post.image}.data.toString('base64')%>`}
-              //     "data:image/<%=image.img.contentType%>;base64,
-              // <%=image.img.data.toString('base64')%>"
-            /> */}
-            <div>Yes image</div>
-            {/* <div>{props.post.image.data && <img src={props.post.image.data} width="100%" />}</div> */}
             <div>
               {props.post.image && (
                 <div>
-                  {/* <img
-                    id="scroll-img"
-                    src={`../../../../../uploads\\${props.post.image.filename}`}
-                    // src={`http://localhost:3000/uploads/${props.post.image.filename}`}
-                    // src={props.post.}
-                    alt={`productImg-${props.post.image.filename}`}
-                  />
-                  <img
-                    id="scroll-img"
-                    // src={`../../../../../uploads/${props.post.image.filename}`}
-                    src={`http://localhost:3000/uploads\\${props.post.image.filename}`}
-                    // src={props.post.}
-                    // alt={`productImg-${index}`}
-                  /> */}
                   <img
                     className="card-image"
-                    // src={`../../../../../uploads/${props.post.image.filename}`}
                     src={`http://localhost:5000/uploads/${props.post.image.filename}`}
-                    // src={props.post.}
-                    // alt={`productImg-${index}`}
                   />
-                  {/* <img
-                    id="scroll-img"
-                    src={`../../../../../uploads\\${props.post.image.filename}`}
-                    // src={`http://localhost:3000/uploads/${props.post.image.filename}`}
-                    // src={props.post.}
-                    alt={`productImg-${props.post.image.filename}`}
-                  /> */}
                 </div>
               )}
             </div>

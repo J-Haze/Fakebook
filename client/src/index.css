@@ -138,3 +138,14 @@ input.error {
 .blue {
   color: var(--blue);
 }
+
+.hide{
+  display: none;
+}
+
+.file-uploader{
+  /* border: 1px solid green; */
+    display: flex;
+  justify-content: center;
+  align-items: center;
+}

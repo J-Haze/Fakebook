@@ -58,12 +58,12 @@ function CreatePostModal(props) {
   };
 
   const submitCreatePost = () => {
-    if (filter.isProfane(text)) {
-      alert("Post contains a word that is not allowed.");
-      return;
-    }
+    // if (filter.isProfane(text)) {
+    //   alert("Post contains a word that is not allowed.");
+    //   return;
+    // }
 
-    if (text.length < 1) {
+    if (text.length < 1 && (imgUpload == "")) {
       setErrorMessage("Post must not be blank");
       alert("Post must not be blank");
       return;
@@ -86,10 +86,10 @@ function CreatePostModal(props) {
 
       
 //Get rid of so that you can submit posts without images too 
-      if (!imgUpload) {
-          alert("Please upload an image")
-          return
-      }
+    //   if (!imgUpload) {
+    //       alert("Please upload an image")
+    //       return
+    //   }
 
       console.log("typeOf", typeof(imgUpload))
 
@@ -132,13 +132,14 @@ function CreatePostModal(props) {
         console.log("imgUpload2", imgUpload);
         setErrorMessage("");
         // if success then set image preview
-        props.fetchPosts();
+          props.fetchPosts();
+          setText("")
         //   props.whitePencil();
         props.setCreatePostModalOpen(false);
         //   history.push(`/post/${props.postid}`);
       })
       .catch((error) => {
-        alert("Failed to submit image.");
+        alert("Failed to submit");
         console.log("error", error);
       });
   };
@@ -244,10 +245,12 @@ function CreatePostModal(props) {
           </div>
           <div id="create-post-img-row">
             {addImageOpen ? (
-                          <FileUploader
-                              onFileSelectSuccess={(file) => setImgUpload(file)}
-                              onFileSelectError={({ error }) => alert(error)} 
-                              />
+              <div className="create-post-image-upload">
+                <FileUploader
+                  onFileSelectSuccess={(file) => setImgUpload(file)}
+                  onFileSelectError={({ error }) => alert(error)}
+                />
+              </div>
             ) : (
               <div
                 id="add-img-btn"
@@ -260,7 +263,7 @@ function CreatePostModal(props) {
             )}
           </div>
           <div id="create-post-bottom-row">
-            {text.length == 0 ? (
+            {text.length == 0 && !{ imgUpload } ? (
               <div id="submit-create-post-empty" className="submit-create-post">
                 Post
               </div>
