@@ -40,14 +40,10 @@ function Card(props) {
     console.log("show comments");
   }
 
-  console.log("image", props.post.image);
-  // console.log("image.data", props.post.image.data);
+  function deletePost() {
 
-  // function getAuthor() {
+  }
 
-  // }
-
-  // console.log("Post", props.post)
 
   return (
     <div
@@ -91,7 +87,13 @@ function Card(props) {
             >
               <div className="del-post-modal-text">Delete this post?</div>
               <div className="del-post-modal-btn-cont">
-                <div className="del-post-modal-confirm del-post-modal-btn">
+                <div
+                  className="del-post-modal-confirm del-post-modal-btn"
+                  onClick={(event) => {
+                    event.stopPropagation();
+                    deletePost();
+                  }}
+                >
                   Delete
                 </div>
                 <div
