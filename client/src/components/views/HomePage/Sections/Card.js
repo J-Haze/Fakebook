@@ -15,7 +15,7 @@ function Card(props) {
   );
   const [likedByCurrentUser, setLikedByCurrentUser] = useState(false);
 
-  const [deletePostModalOpen, setDeletePostModalOpen] = useState(true);
+  const [deletePostModalOpen, setDeletePostModalOpen] = useState(false);
 
   //Code that calculates like Count
 
@@ -89,7 +89,21 @@ function Card(props) {
                 event.stopPropagation();
               }}
             >
-              Test
+              <div className="del-post-modal-text">Delete this post?</div>
+              <div className="del-post-modal-btn-cont">
+                <div className="del-post-modal-confirm del-post-modal-btn">
+                  Delete
+                </div>
+                <div
+                  className="del-post-modal-cancel del-post-modal-btn"
+                  onClick={(event) => {
+                    event.stopPropagation();
+                    setDeletePostModalOpen(false);
+                  }}
+                >
+                  Cancel
+                </div>
+              </div>
             </div>
           ) : (
             ""
