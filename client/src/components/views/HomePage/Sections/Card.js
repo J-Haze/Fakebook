@@ -8,10 +8,14 @@ import { useHistory } from "react-router-dom";
 import thumbBlack from "../../../../assets/thumbs-up-regular-gray.svg";
 import thumbBlue from "../../../../assets/thumbs-up-solid-light-blue.svg";
 
+import Comments from "./Comments";
+
 // https://fontawesome.com/icons/thumbs-up?style=light
 
 function Card(props) {
-  const [displayedComments, setDisplayedComments] = useState([]);
+  const [displayedComments, setDisplayedComments] = useState([])
+
+  const [commentRefresher, setCommentRefresher] = useState(true);
 
   const [deleteCommentModalOpen, setDeleteCommentModalOpen] = useState(false);
   const [commentToDelete, setCommentToDelete] = useState("");
@@ -80,7 +84,13 @@ function Card(props) {
   }
   
   const fetchComments = () => {
-    Axios.get(`/post/${props._id}/comments`).then((res) => {
+    Axios.get(`/post/${props.post._id}/comments`, {
+      headers: {
+        Authorization: `Bearer ${JSON.parse(
+          window.localStorage.getItem("token")
+        )}`,
+      },
+    }).then((res) => {
       setDisplayedComments(res.data);
     });
   };
@@ -92,7 +102,7 @@ function Card(props) {
 
 // function deleteComment() {
 //     Axios.put(
-//       `/post/${props._id}/${commentToDelete}/unpublish`,
+//       `/post/${props.post._id}/${commentToDelete}/unpublish`,
 //       {},
 //       {
 //         headers: {
@@ -105,7 +115,7 @@ function Card(props) {
 //       .then((res) => {
 //         fetchComments();
 //         hideDeleteCommentModal();
-//         history.push(`/post/${props._id}`);
+//         history.push(`/post/${props.post._id}`);
 //       })
 //       .catch((error) => {
 //         console.log("error", error);
@@ -272,8 +282,8 @@ function Card(props) {
               currentUser={props.currentUser}
               // isLoggedIn={props.isLoggedIn}
               fetchComments={fetchComments}
-              postid={props._id}
-              openDeleteCommentModal={openDeleteCommentModal}
+              postid={props.post._id}
+              // openDeleteCommentModal={openDeleteCommentModal}
               setCommentToDelete={setCommentToDelete}
             />
         ) : ("")

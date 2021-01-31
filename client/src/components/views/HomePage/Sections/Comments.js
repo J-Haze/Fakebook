@@ -49,10 +49,13 @@ function Comments(props) {
         setErrorMessage("");
         setNewComment("");
         props.fetchComments();
-        history.push(`/post/${props.postid}`);
+        // props.setCommentRefresher(!commentRefresher)
+        // history.push(`/post/${props.postid}`);
       })
       .catch((error) => console.log("error", error));
   };
+
+  console.log("Comments", props.comments)
 
   return (
     <div className="comment-section">
@@ -77,7 +80,7 @@ function Comments(props) {
                   <div
                     className="comment-delete"
                     onClick={() => {
-                      props.openDeleteCommentModal(comment._id);
+                      // props.openDeleteCommentModal(comment._id);
                     }}
                   >
                     Delete
@@ -101,18 +104,21 @@ function Comments(props) {
         <div className="no-comments"> No comments on this post.</div>
       )}
       <div className="leave-comment-section">
-        {props.isLoggedIn ? (
+
+
+        
+        {/* {props.isLoggedIn ? ( */}
           <div className="flex-down">
-            <div id="leave-comment-cont">
+            <div className="leave-comment-cont">
               <input
-                id="comment-input"
+                className="comment-input"
                 // className="input"
                 placeholder="Leave a comment"
                 value={newComment}
                 onChange={(e) => setNewComment(e.target.value)}
               />
               <div
-                id="submit-comment-btn"
+                className="submit-comment-btn"
                 onClick={() => {
                   submitComment();
                 }}
@@ -122,7 +128,7 @@ function Comments(props) {
             </div>
             <div className="error-message-comment">{errorMessage}</div>
           </div>
-        ) : (
+        {/* ) : (
           <div className="no-user-cont">
             <div className="no-user-text">
               Please log in to add a comment to this post
@@ -135,11 +141,14 @@ function Comments(props) {
               Log In
             </Link>
           </div>
-        )}
+          )} */}
+        
+
+
       </div>
-      <Link to={`/`} style={{ textDecoration: "none" }} className="back-btn">
+      {/* <Link to={`/`} style={{ textDecoration: "none" }} className="back-btn">
         Home
-      </Link>{" "}
+      </Link>{" "} */}
     </div>
   );
 }
