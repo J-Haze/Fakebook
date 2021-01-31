@@ -77,17 +77,17 @@ exports.post_create_post = [
   // upload.single("file"),
   upload.any("file"),
   (req, res) => {
-    console.log("blah", req);
-    console.log("try", req.body);
-    console.log("token", req.token);
-    console.log("file", req.body.file)
-    console.log("file2", req.body[0])
+    // console.log("blah", req);
+    // console.log("try", req.body);
+    // console.log("token", req.token);
+    // console.log("file", req.body.file);
+    // console.log("file2", req.body[0]);
 
-    console.log("files[0]", req.files[0])
+    // console.log("files[0]", req.files[0]);
     // console.log({req.body})
-    if (req.files) {
-      console.log("req.files", req.files[0]);
-    }
+    // if (req.files) {
+    //   console.log("req.files", req.files[0]);
+    // }
 
     jwt.verify(req.token, process.env.JWT_SECRET, (err, authData) => {
       if (err) {
@@ -98,122 +98,189 @@ exports.post_create_post = [
         // upload(req, res, (err) => {
         // console.log("request:", req);
         console.log("request body:", req.body);
-        console.log("req.body.text", req.body.text);
+        // console.log("req.body.text", req.body.text);
         // console.log("req.body.image", req.body.image);
         console.log("authdata", authData);
 
-        
+        User.findOne({ _id: authData._id }, function (err, user) {
+          if (err) {
+            console.log("Could not find author");
+            return res.json(err);
+          }
+          let postAuthor = user;
+          console.log("postAuthor", postAuthor);
+        // })
+
           let finalText = "";
           if (req.body.text) {
             finalText = req.body.text;
-          } 
+          }
 
-        if (req.files.length > 0) {
-          console.log("yes file");
-          console.log("req.file2", req.files[0]);
+          if (req.files.length > 0) {
+            console.log("yes file");
+            // console.log("req.file2", req.files[0]);
 
-          // console.log("req.files.path", req.files[0].path);
+            // console.log("req.files.path", req.files[0].path);
 
-          var img = fs.readFileSync(req.files[0].path);
-          var encode_img = img.toString("base64");
-          var final_img = {
-            contentType: req.files[0].mimetype,
-            image: new Buffer.from(encode_img, "base64"),
-          };
+            var img = fs.readFileSync(req.files[0].path);
+            var encode_img = img.toString("base64");
+            var final_img = {
+              contentType: req.files[0].mimetype,
+              image: new Buffer.from(encode_img, "base64"),
+            };
 
-
-
-          var post = new Post({
-            text: finalText,
-            // image: {
-            //   data: fs.readFileSync(
-            //     // path.join(__dirname + "/uploads/" + req.file.filename)
-            //     path.join(__dirname + "/uploads/" + format)
-            //   ),
-            //   contentType: "image/png",
-            // },
-            // image: {
-            //   data: fs.readFileSync(
-            //     // path.join(__dirname + "/uploads/" + req.file.filename)
-            //     path.join(__dirname + "/uploads/" + req.body.image)
-            //   ),
-            //   contentType: "image/png",
-            // },
-            // image: final_img,
-            image: {
-              fieldname: req.files[0].fieldname,
-              originalname: req.files[0].originalname,
-              encoding: req.files[0].encoding,
-              mimetype: req.files[0].mimetype,
-              destination: req.files[0].destination,
-              filename: req.files[0].filename,
-              // path: 'uploads\\1611900591809-file',
-              // path: fs.readFileSync(
-              //   path.join(__dirname + "/uploads/" + req.file.filename)
-              // ),
-              path: fs.readFileSync(
-                // path.join("http://localhost:3000/uploads/" + req.file.filename)
-                // path.join(__dirname + "/uploads/" + req.file.filename)
-                path.join(
-                  __dirname,
-                  "../..",
-                  "/uploads/" + req.files[0].filename
-                )
-                // path.join("/uploads/" + req.file.filename)
-              ),
-              encoded: final_img,
-              contentType: "image/png",
-            },
-            likesList: [],
-            author: authData._id,
-            isPublished: true,
-          });
-        } else {
-          console.log("no image");
-          var post = new Post({
-            text: finalText,
-            image: {
-              fieldname: "",
-              originalname: "",
-              encoding: "",
-              mimetype: "",
-              destination: "",
-              filename: "",
-              path: "",
-              encoded: "",
-              contentType: "",
-            },
-            likesList: [],
-            author: authData._id,
-            isPublished: true,
-          });
-        }
-
-        post.save(function (err) {
-          if (err) {
-            console.log("Failed to save");
-            console.log(err);
-            return res.status(400).json({
-              success: false,
-              err,
+            var post = new Post({
+              text: finalText,
+              // image: {
+              //   data: fs.readFileSync(
+              //     // path.join(__dirname + "/uploads/" + req.file.filename)
+              //     path.join(__dirname + "/uploads/" + format)
+              //   ),
+              //   contentType: "image/png",
+              // },
+              // image: {
+              //   data: fs.readFileSync(
+              //     // path.join(__dirname + "/uploads/" + req.file.filename)
+              //     path.join(__dirname + "/uploads/" + req.body.image)
+              //   ),
+              //   contentType: "image/png",
+              // },
+              // image: final_img,
+              image: {
+                fieldname: req.files[0].fieldname,
+                originalname: req.files[0].originalname,
+                encoding: req.files[0].encoding,
+                mimetype: req.files[0].mimetype,
+                destination: req.files[0].destination,
+                filename: req.files[0].filename,
+                // path: 'uploads\\1611900591809-file',
+                // path: fs.readFileSync(
+                //   path.join(__dirname + "/uploads/" + req.file.filename)
+                // ),
+                path: fs.readFileSync(
+                  // path.join("http://localhost:3000/uploads/" + req.file.filename)
+                  // path.join(__dirname + "/uploads/" + req.file.filename)
+                  path.join(
+                    __dirname,
+                    "../..",
+                    "/uploads/" + req.files[0].filename
+                  )
+                  // path.join("/uploads/" + req.file.filename)
+                ),
+                encoded: final_img,
+                contentType: "image/png",
+              },
+              likesList: [],
+              // author: authData._id,
+              author: postAuthor,
+              isPublished: true,
+            });
+          } else {
+            console.log("no image");
+            // console.log("author:", authData);
+            var post = new Post({
+              text: finalText,
+              image: {
+                fieldname: "",
+                originalname: "",
+                encoding: "",
+                mimetype: "",
+                destination: "",
+                filename: "",
+                path: "",
+                encoded: "",
+                contentType: "",
+              },
+              likesList: [],
+              // author: authData._id,
+              author: postAuthor,
+              isPublished: true,
             });
           }
 
+          // User.findOne({ _id: authData._id }, function (err, user) {
+          //   if (err) {
+          //     console.log("Could not find author");
+          //     return res.json(err);
+          //   }
+          //   let postAuthor = user;
+          //   console.log("postAuthor", postAuthor);
+          // });
 
+          post.save(function (err) {
+            if (err) {
+              console.log("Failed to save");
+              console.log(err);
+              return res.status(400).json({
+                success: false,
+                err,
+              });
+            }
 
+            // console.log("New Post:", post);
+            // res.json({
+            //   message: "Post created",
+            //   success: true,
+            //   post: post,
+            // });
 
+            // post
+            //   .populate("author")
+            //   .execPopulate()
+            //   .then(
+            //     // console.log("New Post:", post)
+            //     res.json({
+            //       message: "Post created",
+            //       success: true,
+            //       post: post,
+            //     })
+            //   )
 
-          
-          console.log("New Post:", post);
-          res.json({
-            message: "Post created",
-            success: true,
-            post: post,
+            // (post) => res.json(post))
+            // .catch((err) => res.json(err));
           });
-        });
+
+          console.log("post1", post)
+        
+
+        // post
+        //   .populate("author")
+        //   .then(
+        //     // console.log("New Post:", post)
+        //     res.json({
+        //       message: "Post created",
+        //       success: true,
+        //       post: post,
+        //     })
+        //   )
+        //   .catch((err) => res.json(err));
+
+
+
+          Post.find({author: authData._id})
+            .populate("author")
+            // .execPopulate()
+            // .exec()
+            .then(
+              // console.log("New Post:", post)
+              res.json({
+                message: "Post created",
+                success: true,
+                post: post,
+              })
+          ).then(
+              console.log("new post", post)
+            )
+          .catch((err) => res.json(err));
+        })
+          }
       }
-    });
+      
+    )
   },
+
+  //   });
+  // },
 ];
 
 exports.get_post = (req, res, next) => {

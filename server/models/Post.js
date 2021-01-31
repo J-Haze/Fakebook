@@ -1,6 +1,8 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
+const User = require("./User");
+
 const postSchema = mongoose.Schema(
   {
     text: { type: String },
@@ -10,7 +12,7 @@ const postSchema = mongoose.Schema(
     //   data: Buffer,
     // },
     image: { type: Object },
-    likesList: [{ type: Schema.Types.ObjectId, ref: "User", required: true }],
+    likesList: [{ type: Schema.Types.ObjectId, ref: "User"}],
     author: { type: Schema.Types.ObjectId, ref: "User" },
     // author: { type: Schema.Types.String, ref: "User" },
     isPublished: { type: Boolean, default: true },

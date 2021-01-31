@@ -42,17 +42,20 @@ function Card(props) {
   console.log("image.data", props.post.image.data);
 
   function getAuthor() {
-    
+
   }
+
+  console.log(props.post)
 
   return (
     <div className="card">
       <div className="main-card">
         <div className="card-row-one">
           <div className="prof-icon"></div>
+          {/* <UserAvatar user={post.author} /> */}
           <div className="flex-down card-title">
             <div className="card-username">
-              {props.post.firstname} {props.currentUser.lastname}
+              {props.post.author.firstname} {props.post.author.lastname} {props.post.author}
             </div>
             <div className="card-date">
               {moment(props.post.createdAt).format("ll")} at{" "}
