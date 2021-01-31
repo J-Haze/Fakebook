@@ -55,20 +55,51 @@ function Comments(props) {
       .catch((error) => console.log("error", error));
   };
 
-  console.log("Comments", props.comments)
+  console.log("Comments", props.comments);
 
   return (
     <div className="comment-section">
-      <div className="comment-header">Comments:</div>
+      {/* <div className="comment-header">Comments:</div> */}
       {props.comments.length > 0 ? (
-        <div className="comment-box">
+        <div className="comment-card-box">
           {props.comments.map((comment) =>
             !comment.isPublished ? (
               ""
-            ) : comment.author === props.currentUser._id ? (
+            ) : comment.author._id === props.currentUser._id ? (
               <div key={comment._id} className="comment">
-                <div className="comment-text">{comment.text}</div>
-                <div className="comment-author flex">
+                <div className="comment-row-one">
+                  <div className="prof-icon-small"></div>
+                  <div className="comment-cont-inner">
+                    <div className="comment-bubble">
+                      <div className="comment-username">
+                        {comment.author.firstname} {comment.author.lastname}
+                      </div>
+                      <div className="comment-text">{comment.text}</div>
+                    </div>
+                    {/* <div className="del-comment-cont"> */}
+                    <span
+                      className="del-comment-x"
+                      onClick={(event) => {
+                        event.stopPropagation();
+                        // setDeletePostModalOpen(true);
+                      }}
+                    >
+                      &times;
+                    </span>
+                    {/* </div> */}
+                  </div>
+                  {/* <div
+                    className="comment-delete"
+                    onClick={() => {
+                      // props.openDeleteCommentModal(comment._id);
+                    }}
+                  >
+                    Delete
+                  </div> */}
+                </div>
+                <div className="comment-row-two">Like</div>
+
+                {/* <div className="comment-author flex">
                   <Link
                     className="comment-link space-small"
                     to={`/user/${comment.author}`}
@@ -77,15 +108,7 @@ function Comments(props) {
                   </Link>{" "}
                   on {moment(comment.createdAt).format("LLL")}
                   <div className="space-small">- </div>
-                  <div
-                    className="comment-delete"
-                    onClick={() => {
-                      // props.openDeleteCommentModal(comment._id);
-                    }}
-                  >
-                    Delete
-                  </div>
-                </div>
+                </div> */}
               </div>
             ) : (
               <div key={comment._id} className="comment">
@@ -104,30 +127,27 @@ function Comments(props) {
         <div className="no-comments"> No comments on this post.</div>
       )}
       <div className="leave-comment-section">
-
-
-        
         {/* {props.isLoggedIn ? ( */}
-          <div className="flex-down">
-            <div className="leave-comment-cont">
-              <input
-                className="comment-input"
-                // className="input"
-                placeholder="Leave a comment"
-                value={newComment}
-                onChange={(e) => setNewComment(e.target.value)}
-              />
-              <div
-                className="submit-comment-btn"
-                onClick={() => {
-                  submitComment();
-                }}
-              >
-                Submit
-              </div>
+        <div className="flex-down">
+          <div className="leave-comment-cont">
+            <input
+              className="comment-input"
+              // className="input"
+              placeholder="Leave a comment"
+              value={newComment}
+              onChange={(e) => setNewComment(e.target.value)}
+            />
+            <div
+              className="submit-comment-btn"
+              onClick={() => {
+                submitComment();
+              }}
+            >
+              Submit
             </div>
-            <div className="error-message-comment">{errorMessage}</div>
           </div>
+          <div className="error-message-comment">{errorMessage}</div>
+        </div>
         {/* ) : (
           <div className="no-user-cont">
             <div className="no-user-text">
@@ -142,9 +162,6 @@ function Comments(props) {
             </Link>
           </div>
           )} */}
-        
-
-
       </div>
       {/* <Link to={`/`} style={{ textDecoration: "none" }} className="back-btn">
         Home

@@ -1,6 +1,8 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
+const User = require("./User");
+
 const commentSchema = mongoose.Schema(
   {
     text: { type: String, required: true },

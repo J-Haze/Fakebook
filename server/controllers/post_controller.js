@@ -345,7 +345,7 @@ exports.get_post = (req, res, next) => {
       }
       let postWithComments = [post, postComments];
       res.json(postWithComments);
-    });
+    }).populate("author")
   }).populate("author");
 };
 
@@ -590,5 +590,5 @@ exports.get_comments = (req, res, next) => {
       return res.json(err);
     }
     res.json(postComments);
-  });
+  }).populate("author");
 };
