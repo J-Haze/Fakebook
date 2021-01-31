@@ -217,7 +217,9 @@ function Card(props) {
       </div>
       <div className="card-row-five"> 
         {commentsOpen ? (
-          <div>Comments</div>) : ("")
+          <div className="comment-cont">
+          
+            Comments</div>) : ("")
       }
       
       
