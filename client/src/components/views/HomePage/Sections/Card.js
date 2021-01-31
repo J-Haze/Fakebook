@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import moment from "moment";
 import { Link } from "react-router-dom";
+import Axios from "axios";
+import { useHistory } from "react-router-dom";
 
 // import thumbBlack from "../../../../assets/thumbs-up-solid.svg";
 import thumbBlack from "../../../../assets/thumbs-up-regular-gray.svg";
@@ -16,6 +18,8 @@ function Card(props) {
   const [likedByCurrentUser, setLikedByCurrentUser] = useState(false);
 
   const [deletePostModalOpen, setDeletePostModalOpen] = useState(false);
+
+   const history = useHistory();
 
   //Code that calculates like Count
 
@@ -40,9 +44,33 @@ function Card(props) {
     console.log("show comments");
   }
 
-  function deletePost() {
-
-  }
+ function deletePost(postid) {
+   Axios.put(
+     `/post/${props.post._id}/unpublish`,
+     {},
+     {
+       headers: {
+         Authorization: `Bearer ${JSON.parse(
+           window.localStorage.getItem("token")
+         )}`,
+       },
+     }
+   )
+     .then((res) => {
+      //  if (res.data.message) {
+      //    alert(res.data.message);
+      //    return
+      //  }
+       setDeletePostModalOpen(false);
+       props.fetchPosts();
+      //  history.push(`/user/${currentUser._id}`);
+      history.go(0);
+     })
+     .catch((error) => {
+       console.log("error", error);
+       alert("Cannot delete this post.")
+     });
+ }
 
 
   return (

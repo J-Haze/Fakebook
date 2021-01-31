@@ -56,6 +56,7 @@ function HomePage(props) {
                 key={post._id}
                 post={post}
                 currentUser={props.currentUser}
+                fetchPosts={props.fetchPosts}
               />
             ) : (
               ""

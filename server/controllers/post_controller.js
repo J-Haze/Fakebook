@@ -16,7 +16,7 @@ exports.get_posts = (req, res, next) => {
   Post.find((err, posts) => {
     if (err) return res.json(err);
     res.json(posts);
-  }).populate("author")
+  }).populate("author");
 };
 
 // SET STORAGE
@@ -41,16 +41,16 @@ var storage = multer.diskStorage({
     const ext = path.extname(file.originalname);
     //must be jpg or png to upload
     // if (ext !== ".jpg" || ext !== ".png") {
-      if (
-        ext !== ".png" &&
-        ext !== ".jpg" &&
-        ext !== ".gif" &&
-        ext !== ".jpeg" &&
-        ext !== ".svg" &&
-        ext !== ".jpg"
-      ) {
-        return cb(res.status(400).end("Only images are allowed."));
-      }
+    if (
+      ext !== ".png" &&
+      ext !== ".jpg" &&
+      ext !== ".gif" &&
+      ext !== ".jpeg" &&
+      ext !== ".svg" &&
+      ext !== ".jpg"
+    ) {
+      return cb(res.status(400).end("Only images are allowed."));
+    }
     cb(null, true);
   },
 });
@@ -140,7 +140,7 @@ exports.post_create_post = [
             const splitName = req.files[0].originalname.split(".");
             const format = splitName[splitName.length - 1];
 
-            console.log("format", format)
+            console.log("format", format);
 
             var post = new Post({
               text: finalText,
@@ -349,6 +349,8 @@ exports.get_post = (req, res, next) => {
   });
 };
 
+//Not used
+
 exports.edit_post = [
   body("title", "Title must not be empty.").trim().isLength({ min: 1 }),
   body("text", "Post body must not be empty.").trim().isLength({ min: 1 }),
@@ -381,12 +383,12 @@ exports.edit_post = [
               //Verify that edittor is the post author
               if (authData._id != originalPost.author_id) {
                 console.log(
-                  "Cannot unpublish this post because you are not the post's author or an admin"
+                  "Cannot edit this post because you are not the post's author or an admin"
                 );
                 return res
                   .status(400)
                   .json(
-                    "Cannot unpublish this post because you are not the post's author or an admin"
+                    "Cannotedit this post because you are not the post's author or an admin"
                   );
               }
             }
@@ -478,6 +480,8 @@ exports.unpublish_post = (req, res, next) => {
       const { postid } = req.params;
       isPublished = false;
 
+      console.log("postid", postid)
+
       //Checks if you're an admin
       User.findOne({ _id: authData._id }, (err, user) => {
         if (err) {
@@ -485,24 +489,27 @@ exports.unpublish_post = (req, res, next) => {
           return res.json(err);
         }
 
+        console.log("authData._id", authData._id);
+
         Post.findOne({ _id: postid }, (err, originalPost) => {
           if (err) {
             console.log(err);
             return res.json(err);
           }
 
+          console.log("originalPost", originalPost)
+
           if (!user.isAdmin) {
             //If user isn't an admin, then check if they are the original author_id
             //Verify that edittor is the post author
-            if (authData._id != originalPost.author_id) {
+            if (authData._id != originalPost.author._id) {
               console.log(
-                "Cannot unpublish this post because you are not the post's author or an admin"
+                "Cannot delete this post because you are not the post's author"
               );
-              return res
-                .status(400)
-                .json(
-                  "Cannot unpublish this post because you are not the post's author or an admin"
-                );
+              return res.status(400).json({
+                message:
+                  "Cannot delete this post because you are not the post's author",
+              });
             }
           }
 
