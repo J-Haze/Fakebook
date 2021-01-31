@@ -39,13 +39,13 @@ function Card(props) {
   }
 
   console.log("image", props.post.image);
-  console.log("image.data", props.post.image.data);
+  // console.log("image.data", props.post.image.data);
 
-  function getAuthor() {
+  // function getAuthor() {
 
-  }
+  // }
 
-  console.log("Post", props.post)
+  // console.log("Post", props.post)
 
   return (
     <div className="card">

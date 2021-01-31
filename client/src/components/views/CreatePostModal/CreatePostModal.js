@@ -13,6 +13,7 @@ import FileUploader from "./Sections/FileUploader";
 // import ImageUpload from "./Sections/ImageUpload.js"
 
 const filter = new badWords();
+var path = require("path");
 
 function CreatePostModal(props) {
   //   const [title, setTitle] = useState(props.initialTitle);
@@ -34,14 +35,14 @@ function CreatePostModal(props) {
   //   const submitCreatePost = () => {
   //     console.log("submitted");
   //   };
-    
+
   function isEmpty(str) {
     return str.replace(/^\s+|\s+$/g, "").length == 0;
   }
 
   const handleChange = (e) => {
-    console.log("e.target:", e.target);
-    setImgUpload(e.target.value);
+    // console.log("e.target:", e.target);
+    // setImgUpload(e.target.value);
     setImgUpload(e.target.files[0]);
 
     //   setImgUpload(
@@ -53,11 +54,11 @@ function CreatePostModal(props) {
     //   setImgPreview(URL.createObjectURL(e.target.value));
   };
 
-//   const resetImgForm = () => {
-//     if (addImageOpen) {
-//       document.getElementById("create-post-form-img-upload").reset();
-//     }
-//   };
+  //   const resetImgForm = () => {
+  //     if (addImageOpen) {
+  //       document.getElementById("create-post-form-img-upload").reset();
+  //     }
+  //   };
 
   const handleCancel = () => {
     setImgUpload(null);
@@ -70,24 +71,43 @@ function CreatePostModal(props) {
     //   return;
     // }
 
-      if (!text && !imgUpload) {
-          setErrorMessage("Post must not be blank");
-          alert("Post must not be blank");
-          return;
+    if (!text && !imgUpload) {
+      setErrorMessage("Post must not be blank");
+      alert("Post must not be blank");
+      return;
+    }
+
+    if (text) {
+      if (isEmpty(text) && !imgUpload) {
+        setErrorMessage("Post must not be blank");
+        alert("Post must not be blank");
+        return;
       }
-      
-      if (text) {      
-          if (isEmpty(text) && !imgUpload) {
-            setErrorMessage("Post must not be blank");
-            alert("Post must not be blank");
-            return;
-          }
-      }
+    }
 
     if (text.length > 1000) {
       setErrorMessage("Post must less than 1000 characters");
       alert("Post must less than 1000 characters");
       return;
+    }
+
+    // console.log("imgUpload", imgUpload)
+
+    if (imgUpload) {
+      let ext = path.extname(imgUpload.name);
+      console.log("ext", ext);
+      if (
+        ext !== ".png" &&
+        ext !== ".jpg" &&
+        ext !== ".gif" &&
+        ext !== ".jpeg" &&
+        ext !== ".svg" &&
+        ext !== ".jpg"
+      ) {
+        setErrorMessage("Only image uploads are allowed");
+        alert("Only image uploads are allowed");
+        return;
+      }
     }
 
     const formData = new FormData();
@@ -230,8 +250,8 @@ function CreatePostModal(props) {
                   id="create-post-form-img-upload"
                   onFileSelectSuccess={(file) => setImgUpload(file)}
                   onFileSelectError={({ error }) => alert(error)}
-                                //   resetImgForm={resetImgForm}
-                                  setImgUpload={setImgUpload}
+                  //   resetImgForm={resetImgForm}
+                  setImgUpload={setImgUpload}
                 />
               </div>
             ) : (
