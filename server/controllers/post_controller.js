@@ -40,14 +40,22 @@ var storage = multer.diskStorage({
     // console.log("here file", file)
     const ext = path.extname(file.originalname);
     //must be jpg or png to upload
-    if (ext !== ".jpg" || ext !== ".png") {
-      return cb(res.status(400).end("only jpg, png are allowed"), false);
-    }
+    // if (ext !== ".jpg" || ext !== ".png") {
+      if (
+        ext !== ".png" &&
+        ext !== ".jpg" &&
+        ext !== ".gif" &&
+        ext !== ".jpeg" &&
+        ext !== ".svg" &&
+        ext !== ".jpg"
+      ) {
+        return cb(res.status(400).end("Only images are allowed."));
+      }
     cb(null, true);
   },
 });
 
-var upload = multer({ storage: storage, limits: { fileSize: 1000000 } });
+var upload = multer({ storage: storage, limits: { fileSize: 5000000 } });
 
 // var storage = multer.diskStorage({
 //   destination: (req, file, cb) => {
@@ -129,6 +137,11 @@ exports.post_create_post = [
               image: new Buffer.from(encode_img, "base64"),
             };
 
+            const splitName = req.files[0].originalname.split(".");
+            const format = splitName[splitName.length - 1];
+
+            console.log("format", format)
+
             var post = new Post({
               text: finalText,
               // image: {
@@ -168,7 +181,8 @@ exports.post_create_post = [
                   // path.join("/uploads/" + req.file.filename)
                 ),
                 encoded: final_img,
-                contentType: "image/png",
+                contentType: `image/{format}`,
+                // contentType: "image/png",
               },
               likesList: [],
               author: authData._id,

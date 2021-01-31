@@ -38,4 +38,8 @@ yarn-error.log*
 
  /uploads
 
+ \uploads
+
+ 
+
  ../uploads
