@@ -11,6 +11,11 @@ import thumbBlue from "../../../../assets/thumbs-up-solid-light-blue.svg";
 // https://fontawesome.com/icons/thumbs-up?style=light
 
 function Card(props) {
+  const [displayedComments, setDisplayedComments] = useState([]);
+
+  const [deleteCommentModalOpen, setDeleteCommentModalOpen] = useState(false);
+  const [commentToDelete, setCommentToDelete] = useState("");
+
   const [likeCount, setLikeCount] = useState(Math.floor(Math.random() * 21));
   const [commentCount, setCommentCount] = useState(
     Math.floor(Math.random() * 21)
@@ -72,7 +77,52 @@ function Card(props) {
        console.log("error", error);
        alert("Cannot delete this post.")
      });
- }
+  }
+  
+  const fetchComments = () => {
+    Axios.get(`/post/${props._id}/comments`).then((res) => {
+      setDisplayedComments(res.data);
+    });
+  };
+
+  useEffect(() => {
+    fetchComments();
+  }, []);
+
+
+// function deleteComment() {
+//     Axios.put(
+//       `/post/${props._id}/${commentToDelete}/unpublish`,
+//       {},
+//       {
+//         headers: {
+//           Authorization: `Bearer ${JSON.parse(
+//             window.localStorage.getItem("token")
+//           )}`,
+//         },
+//       }
+//     )
+//       .then((res) => {
+//         fetchComments();
+//         hideDeleteCommentModal();
+//         history.push(`/post/${props._id}`);
+//       })
+//       .catch((error) => {
+//         console.log("error", error);
+//       });
+//   }
+
+//   const openDeleteCommentModal = (commentid) => {
+//     setCommentToDelete(commentid);
+//     setDeleteCommentModalOpen(true);
+//   };
+
+//   const hideDeleteCommentModal = () => {
+//     setCommentToDelete("");
+//     setDeleteCommentModalOpen(false);
+//   };
+
+
 
   //Close comments on unmount
   useEffect(() => {
@@ -207,7 +257,7 @@ function Card(props) {
           <div
             className="comment-box"
             onClick={() => {
-              setCommentsOpen(true)
+              setCommentsOpen(true);
               //Focus on Comment input
             }}
           >
@@ -215,14 +265,19 @@ function Card(props) {
           </div>
         </div>
       </div>
-      <div className="card-row-five"> 
+      <div className="card-row-five">
         {commentsOpen ? (
-          <div className="comment-cont">
-          
-            Comments</div>) : ("")
-      }
-      
-      
+            <Comments
+              comments={displayedComments}
+              currentUser={props.currentUser}
+              // isLoggedIn={props.isLoggedIn}
+              fetchComments={fetchComments}
+              postid={props._id}
+              openDeleteCommentModal={openDeleteCommentModal}
+              setCommentToDelete={setCommentToDelete}
+            />
+        ) : ("")
+        }
       </div>
     </div>
   );
