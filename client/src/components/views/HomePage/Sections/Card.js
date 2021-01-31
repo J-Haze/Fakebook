@@ -161,7 +161,7 @@ function Card(props) {
           <div className="prof-icon"></div>
           {/* <UserAvatar user={post.author} /> */}
           <div className="flex-down card-title">
-            <div className="card-username">
+            <div className="card-username hover-under">
               {props.post.author.firstname} {props.post.author.lastname}
             </div>
             <div className="card-date">

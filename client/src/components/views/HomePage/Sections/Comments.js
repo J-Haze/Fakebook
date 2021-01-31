@@ -65,28 +65,30 @@ function Comments(props) {
           {props.comments.map((comment) =>
             !comment.isPublished ? (
               ""
-            ) : comment.author._id === props.currentUser._id ? (
+            ) : (
               <div key={comment._id} className="comment">
                 <div className="comment-row-one">
                   <div className="prof-icon-small"></div>
                   <div className="comment-cont-inner">
                     <div className="comment-bubble">
-                      <div className="comment-username">
+                      <div className="comment-username hover-under">
                         {comment.author.firstname} {comment.author.lastname}
                       </div>
                       <div className="comment-text">{comment.text}</div>
                     </div>
-                    {/* <div className="del-comment-cont"> */}
-                    <span
-                      className="del-comment-x"
-                      onClick={(event) => {
-                        event.stopPropagation();
-                        // setDeletePostModalOpen(true);
-                      }}
-                    >
-                      &times;
-                    </span>
-                    {/* </div> */}
+                    {comment.author._id === props.currentUser._id ? (
+                      <span
+                        className="del-comment-x"
+                        onClick={(event) => {
+                          event.stopPropagation();
+                          // setDeletePostModalOpen(true);
+                        }}
+                      >
+                        &times;
+                      </span>
+                    ) : (
+                      ""
+                    )}
                   </div>
                   {/* <div
                     className="comment-delete"
@@ -97,7 +99,12 @@ function Comments(props) {
                     Delete
                   </div> */}
                 </div>
-                <div className="comment-row-two">Like</div>
+                <div className="comment-row-two">
+                  <div className="comment-like hover-under">Like</div>
+                  <div className="comment-time">
+                    · {moment(comment.createdAt).fromNow()}
+                  </div>
+                </div>
 
                 {/* <div className="comment-author flex">
                   <Link
@@ -110,43 +117,38 @@ function Comments(props) {
                   <div className="space-small">- </div>
                 </div> */}
               </div>
-            ) : (
-              <div key={comment._id} className="comment">
-                <div className="comment-text">{comment.text}</div>
-                <div className="comment-author">
-                  <Link className="comment-link" to={`/user/${comment.author}`}>
-                    - Commented by <strong>{comment.username}</strong>
-                  </Link>{" "}
-                  on {moment(comment.createdAt).format("LLL")}
-                </div>
-              </div>
             )
           )}
         </div>
       ) : (
-        <div className="no-comments"> No comments on this post.</div>
+        ""
       )}
       <div className="leave-comment-section">
         {/* {props.isLoggedIn ? ( */}
-        <div className="flex-down">
-          <div className="leave-comment-cont">
-            <input
-              className="comment-input"
-              // className="input"
-              placeholder="Leave a comment"
-              value={newComment}
-              onChange={(e) => setNewComment(e.target.value)}
-            />
-            <div
-              className="submit-comment-btn"
-              onClick={() => {
-                submitComment();
-              }}
-            >
-              Submit
+        {/* <div className="flex-down"> */}
+        <div className="leave-comment-cont">
+          <div className="prof-icon-small"></div>
+          <div className="leave-comment-cont-inner">
+            <div className="leave-comment-bubble">
+              <input
+                className="comment-input"
+                // className="input"
+                placeholder="Leave a comment"
+                value={newComment}
+                onChange={(e) => setNewComment(e.target.value)}
+              />
+              <div
+                className="submit-comment-btn"
+                onClick={() => {
+                  submitComment();
+                }}
+              >
+                Submit
+              </div>
             </div>
+            {/* </div> */}
+            <div className="error-message-comment">{errorMessage}</div>
           </div>
-          <div className="error-message-comment">{errorMessage}</div>
         </div>
         {/* ) : (
           <div className="no-user-cont">

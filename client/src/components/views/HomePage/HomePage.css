@@ -468,6 +468,29 @@
   cursor: pointer;
 }
 
+.comment-row-two{
+  display: flex;
+  margin-left: 52px;
+  margin-top: 3px;
+}
+
+.comment-like{
+font-family: "Segoe UI Historic", "Segoe UI", Helvetica, Arial, sans-serif;
+font-size: 12px;
+font-weight: 700;
+line-height: 12px;
+color: rgb(101, 103, 107);
+}
+
+.comment-time{
+font-family: "Segoe UI Historic", "Segoe UI", Helvetica, Arial, sans-serif;
+font-size: 12px;
+font-weight: 400;
+line-height: 12px;
+color: rgb(101, 103, 107);
+margin-left: 4px;
+}
+
 /* .comment-delete {
 }
 
@@ -477,16 +500,15 @@
 } */
 
 /* not used? */
-.comment-header {
+/* .comment-header {
   font-size: 1.1em;
   font-weight: 500;
   margin-bottom: 10px;
 }
-
-.no-comments {
+/* .no-comments {
   color: black;
   margin-left: 5px;
-}
+} */ */
 
 .leave-comment-section {
   margin-top: 30px;
@@ -494,19 +516,40 @@
   border-bottom: 1px solid gray;
 }
 
-#leave-comment-cont {
+.leave-comment-cont {
+  display: flex;
+  /* flex-direction: column;
+  align-items: center;
+  height: 60px; */
+}
+
+.leave-comment-cont-inner {
   display: flex;
   align-items: center;
   height: 60px;
+  /* border: 1px solid red; */
+}
+
+.leave-comment-bubble {
+  display: flex;
+  /* flex-direction: column; */
+  /* align-items: center; */
+  min-height: 50px;
+  max-width: 400px;
+  
+  background-color: var(--light-gray);
+  padding: 8px 12px;
+  box-sizing: border-box;
+  border-radius: 18px;
 }
 
 .comment-input {
-  border: 1px solid red;
+  /* border: 1px solid red; */
   font-size: 0.9em;
   --text-opacity: 1;
   box-sizing: border-box;
-  border-style: solid;
-  border-color: #e2e8f0;
+  border-style: none;
+  /* border-color: #e2e8f0; */
   font-family: inherit;
   overflow: visible;
   line-height: inherit;
@@ -520,27 +563,27 @@
   padding-left: 5px;
   padding-right: 1rem;
   height: 30px;
-  width: 100%;
+  /* width: 100%; */
 }
 
 .submit-comment-btn {
   height: 30px;
   width: 60px;
-  border: 1px solid #00b0f0;
+  /* border: 1px solid #00b0f0; */
   border-radius: 3px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-left: 10px;
-  margin-right: 10px;
+  margin-left: auto;
+  margin-right: 0px;
   line-height: 0;
   padding: 2px 2px 2px 2px;
   box-sizing: border-box;
 }
 
 .submit-comment-btn:hover {
-  background-color: #00b0f0;
-  color: whitesmoke;
+  background-color: var(--dark-gray);
+  /* color: whitesmoke; */
   cursor: pointer;
 }
 
