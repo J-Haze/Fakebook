@@ -45,7 +45,7 @@ function Card(props) {
 
   }
 
-  console.log(props.post)
+  console.log("Post", props.post)
 
   return (
     <div className="card">
@@ -55,7 +55,7 @@ function Card(props) {
           {/* <UserAvatar user={post.author} /> */}
           <div className="flex-down card-title">
             <div className="card-username">
-              {props.post.author.firstname} {props.post.author.lastname} {props.post.author}
+              {props.post.author.firstname} {props.post.author.lastname}
             </div>
             <div className="card-date">
               {moment(props.post.createdAt).format("ll")} at{" "}

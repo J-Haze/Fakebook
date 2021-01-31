@@ -16,7 +16,7 @@ exports.get_posts = (req, res, next) => {
   Post.find((err, posts) => {
     if (err) return res.json(err);
     res.json(posts);
-  });
+  }).populate("author")
 };
 
 // SET STORAGE
@@ -109,7 +109,7 @@ exports.post_create_post = [
           }
           let postAuthor = user;
           console.log("postAuthor", postAuthor);
-        // })
+          // })
 
           let finalText = "";
           if (req.body.text) {
@@ -171,8 +171,8 @@ exports.post_create_post = [
                 contentType: "image/png",
               },
               likesList: [],
-              // author: authData._id,
-              author: postAuthor,
+              author: authData._id,
+              // author: postAuthor,
               isPublished: true,
             });
           } else {
@@ -192,8 +192,8 @@ exports.post_create_post = [
                 contentType: "",
               },
               likesList: [],
-              // author: authData._id,
-              author: postAuthor,
+              author: authData._id,
+              // author: postAuthor,
               isPublished: true,
             });
           }
@@ -217,12 +217,16 @@ exports.post_create_post = [
               });
             }
 
-            // console.log("New Post:", post);
-            // res.json({
-            //   message: "Post created",
-            //   success: true,
-            //   post: post,
-            // });
+            post.author = postAuthor;
+
+            console.log("New Post:", post);
+            console.log("Post author", postAuthor);
+            return res.json({
+              message: "Post created",
+              success: true,
+              post: post,
+              // postAuthor: postAuthor
+            });
 
             // post
             //   .populate("author")
@@ -240,43 +244,70 @@ exports.post_create_post = [
             // .catch((err) => res.json(err));
           });
 
-          console.log("post1", post)
-        
+          // console.log("post1", post);
 
-        // post
-        //   .populate("author")
-        //   .then(
-        //     // console.log("New Post:", post)
-        //     res.json({
-        //       message: "Post created",
-        //       success: true,
-        //       post: post,
-        //     })
-        //   )
-        //   .catch((err) => res.json(err));
+          // post
+          //   .populate("author")
+          //   .then(
+          //     // console.log("New Post:", post)
+          //     res.json({
+          //       message: "Post created",
+          //       success: true,
+          //       post: post,
+          //     })
+          //   )
+          //   .catch((err) => res.json(err));
 
+          // console.log("authData._id", authData._id);
 
+          // Post.find({ author: authData._id })
+          //   .populate("author")
+          //   // .execPopulate()
+          //   // .exec()
+          //   .exec(function (err, newPost) {
+          //     if (err) return handleError(err);
+          //     console.log("New Post", newPost);
+          //     // console.log("newPost.author.firstname", newPost.author.firstname);
+          //     // prints "The author is Bob Smith"
+          //   })
+          //   //   .then(
+          //   //     // console.log("New Post:", post)
+          //   //     res.json({
+          //   //       message: "Post created",
+          //   //       success: true,
+          //   //       post: post,
+          //   //     })
+          //   // ).then(
+          //   //     console.log("new post", post)
+          //   //   )
+          //   // .catch((err) => res.json(err));
 
-          Post.find({author: authData._id})
-            .populate("author")
-            // .execPopulate()
-            // .exec()
-            .then(
-              // console.log("New Post:", post)
-              res.json({
-                message: "Post created",
-                success: true,
-                post: post,
-              })
-          ).then(
-              console.log("new post", post)
-            )
-          .catch((err) => res.json(err));
-        })
-          }
+          // Post.find({ author: authData._id })
+          //   .populate("author")
+          //   // .execPopulate()
+          //   // .exec()
+          //   // .exec(function (err, newPost) {
+          //   //   if (err) return handleError(err);
+          //   //   console.log("New Post", newPost);
+          //   //   // console.log("newPost.author.firstname", newPost.author.firstname);
+          //   //   // prints "The author is Bob Smith"
+          //   // })
+          //   .then(
+          //     (newPost) => {
+          //       res.json({
+          //         message: "Post created",
+          //         success: true,
+          //         post: post,
+          //         newPost: newPost,
+          //       });
+          //     }
+          //     // console.log("New Post:", post)
+          //   )
+          //   .then(console.log("new post", newPost))
+          //   .catch((err) => res.json(err));
+        });
       }
-      
-    )
+    });
   },
 
   //   });
