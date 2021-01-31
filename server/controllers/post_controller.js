@@ -346,7 +346,7 @@ exports.get_post = (req, res, next) => {
       let postWithComments = [post, postComments];
       res.json(postWithComments);
     });
-  });
+  }).populate("author");
 };
 
 //Not used
@@ -480,7 +480,7 @@ exports.unpublish_post = (req, res, next) => {
       const { postid } = req.params;
       isPublished = false;
 
-      console.log("postid", postid)
+      console.log("postid", postid);
 
       //Checks if you're an admin
       User.findOne({ _id: authData._id }, (err, user) => {
@@ -497,7 +497,7 @@ exports.unpublish_post = (req, res, next) => {
             return res.json(err);
           }
 
-          console.log("originalPost", originalPost)
+          console.log("originalPost", originalPost);
 
           if (!user.isAdmin) {
             //If user isn't an admin, then check if they are the original author_id
