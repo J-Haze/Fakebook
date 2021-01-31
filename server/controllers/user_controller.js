@@ -20,7 +20,7 @@ exports.get_current_user = (req, res, next) => {
           console.log(err);
           return res.json(err);
         }
-        console.log(user) //Delete at end
+        console.log(user); //Delete at end
         res.json(user);
         next();
       });
@@ -48,11 +48,7 @@ exports.post_create_user = [
   //   .not()
   //   .isEmpty()
   //   .trim(),
-  body("email", "Please enter an email")
-    .isEmail()
-    .not()
-    .isEmpty()
-    .trim(),
+  body("email", "Please enter an email").isEmail().not().isEmpty().trim(),
   body("password", "Please enter a password").not().isEmpty().trim(),
   body("birthDate", "Please enter a birth date").not().isEmpty().trim(),
   body("gender", "Please enter a gender").not().isEmpty().trim(),
@@ -136,7 +132,7 @@ exports.post_user_login = function (req, res, next) {
     user,
     info
   ) {
-    console.log("h1")
+    console.log("h1");
     console.log(err);
     if (err || !user) {
       console.log("error or no user");
@@ -154,7 +150,7 @@ exports.post_user_login = function (req, res, next) {
       // process.env.JWT_SECRET,
       //Local
       keys.secretOrKey,
-      { expiresIn: 3600 },
+      { expiresIn: 36000 },
       (err, token) => {
         if (err) {
           return res.status(400).json(err);
@@ -174,7 +170,7 @@ exports.facebook_callback = (req, res, next) => {
     user,
     info
   ) {
-        console.log("made it here");
+    console.log("made it here");
     if (err || !user) {
       console.log("error or no user");
       console.log("err", err);
@@ -191,7 +187,7 @@ exports.facebook_callback = (req, res, next) => {
       // process.env.JWT_SECRET,
       //Local
       keys.secretOrKey,
-      { expiresIn: 3600 },
+      { expiresIn: 36000 },
       (err, token) => {
         if (err) {
           return res.status(400).json(err);

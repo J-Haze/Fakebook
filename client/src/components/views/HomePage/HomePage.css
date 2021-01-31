@@ -127,6 +127,59 @@
   display: flex;
 }
 
+.del-post-x {
+  height: 35px;
+  width: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--light-gray);
+  border-radius: 50%;
+  /* margin-right: 10px; */
+
+  color: #aaa;
+  float: right;
+  /* margin-left: 100%; */
+  margin-left: auto;
+  margin-right: -4px;
+  /* margin-top: -17px; */
+  font-size: 32px;
+  /* height: 10px; */
+  font-weight: bold;
+  /* border: 1px solid red; */
+  text-align: center;
+  padding-bottom: 7px;
+  box-sizing: border-box;
+}
+
+.del-post-x:hover,
+.del-post-x:focus {
+  /* color: black; */
+  background-color: var(--dark-gray);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.del-post-modal {
+  border: 1px solid black;
+  background-color: white;
+  height: 50px;
+  width: 50px;
+  /* float: right; */
+  /* z-index: 1; */
+  position: absolute;
+  /* position: fixed; */
+  /* position: relative; */
+  display: block;
+  /* display: inline-block; */
+  margin-top: 15px;
+  margin-left: 402px;
+  /* transform: translate(886px, 812px) translate(-100%, 0px); */
+  /* margin-right: 0px; */
+  /* margin-left: 100%; */
+  /* margin-right: -999px; */
+}
+
 .card-row-two {
   font-family: "Segoe UI Historic", "Segoe UI", Helvetica, Arial, sans-serif;
   font-size: 24px;
@@ -292,8 +345,8 @@
   border-radius: 6px;
 }
 
-.no-posts-btn:hover{
+.no-posts-btn:hover {
   cursor: pointer;
   background-color: rgb(24, 119, 242);
-  background-color: #1B74E4;
+  background-color: #1b74e4;
 }

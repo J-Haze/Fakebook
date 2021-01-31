@@ -15,6 +15,8 @@ function Card(props) {
   );
   const [likedByCurrentUser, setLikedByCurrentUser] = useState(false);
 
+  const [deletePostModalOpen, setDeletePostModalOpen] = useState(true);
+
   //Code that calculates like Count
 
   //Code that calculates commentCount
@@ -48,7 +50,12 @@ function Card(props) {
   // console.log("Post", props.post)
 
   return (
-    <div className="card">
+    <div
+      className="card"
+      onClick={() => {
+        setDeletePostModalOpen(false);
+      }}
+    >
       <div className="main-card">
         <div className="card-row-one">
           <div className="prof-icon"></div>
@@ -62,6 +69,31 @@ function Card(props) {
               {moment(props.post.createdAt).format("LT")}
             </div>
           </div>
+          {props.post.author._id == props.currentUser._id ? (
+            <span
+              className="del-post-x"
+              onClick={(event) => {
+                event.stopPropagation();
+                setDeletePostModalOpen(true);
+              }}
+            >
+              &times;
+            </span>
+          ) : (
+            ""
+          )}
+          {deletePostModalOpen ? (
+            <div
+              className="del-post-modal"
+              onClick={(event) => {
+                event.stopPropagation();
+              }}
+            >
+              Test
+            </div>
+          ) : (
+            ""
+          )}
         </div>
         <div className="card-row-two">{props.post.text}</div>
         {props.post.image ? (
