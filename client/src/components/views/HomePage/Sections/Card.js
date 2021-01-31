@@ -19,6 +19,8 @@ function Card(props) {
 
   const [deletePostModalOpen, setDeletePostModalOpen] = useState(false);
 
+  const [commentsOpen, setCommentsOpen] = useState(true);
+
    const history = useHistory();
 
   //Code that calculates like Count
@@ -39,10 +41,10 @@ function Card(props) {
     }
   }
 
-  function showComments() {
-    //Need to add
-    console.log("show comments");
-  }
+  // function showComments() {
+  //   //Need to add
+  //   console.log("show comments");
+  // }
 
  function deletePost(postid) {
    Axios.put(
@@ -72,6 +74,20 @@ function Card(props) {
      });
  }
 
+  //Close comments on unmount
+  useEffect(() => {
+    return function cleanup() {
+      setCommentsOpen(false);
+    };
+  }, []);
+
+  function toggleCommentsOpen() {
+    if (commentsOpen == true) {
+      setCommentsOpen(false)
+    } else {
+      setCommentsOpen(true)
+    }
+  }
 
   return (
     <div
@@ -161,7 +177,7 @@ function Card(props) {
           <div
             className="comment-count"
             onClick={() => {
-              showComments();
+              toggleCommentsOpen();
             }}
           >
             {commentCount} Comments
@@ -191,14 +207,21 @@ function Card(props) {
           <div
             className="comment-box"
             onClick={() => {
-              showComments();
+              setCommentsOpen(true)
+              //Focus on Comment input
             }}
           >
             Comment
           </div>
         </div>
       </div>
-      <div className="card-row-five"> Comments here</div>
+      <div className="card-row-five"> 
+        {commentsOpen ? (
+          <div>Comments</div>) : ("")
+      }
+      
+      
+      </div>
     </div>
   );
 }

@@ -231,10 +231,13 @@
   font-size: 24px;
   font-weight: 400;
   line-height: 28.0008px;
+  /* overflow-y: ; */
+  overflow-wrap: break-word;
 }
 
 .card-image {
   width: 100%;
+  margin-top: 20px;
 }
 
 .card-row-three {
