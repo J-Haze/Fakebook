@@ -7,6 +7,8 @@ import Axios from "axios";
 import badWords from "bad-words";
 import { useHistory } from "react-router-dom";
 
+import Comment from "./Comment";
+
 const filter = new badWords();
 
 function Comments(props) {
@@ -99,91 +101,7 @@ function Comments(props) {
             !comment.isPublished ? (
               ""
             ) : (
-              <div key={comment._id} className="comment">
-                <div className="comment-row-one">
-                  <div className="prof-icon-small"></div>
-                  <div className="comment-cont-inner">
-                    <div className="comment-bubble">
-                      <div className="comment-username hover-under">
-                        {comment.author.firstname} {comment.author.lastname}
-                      </div>
-                      <div className="comment-text">{comment.text}</div>
-                    </div>
-                    {comment.author._id === props.currentUser._id ? (
-                      <span
-                        className="del-comment-x"
-                        onClick={(event) => {
-                          event.stopPropagation();
-                          setDeleteCommentModalOpen(true);
-                        }}
-                      >
-                        &times;
-                      </span>
-                    ) : (
-                      ""
-                    )}
-                    {deleteCommentModalOpen ? (
-                      <div
-                        className="del-post-modal"
-                        onClick={(event) => {
-                          event.stopPropagation();
-                        }}
-                      >
-                        <div className="del-post-modal-text">
-                          Delete this post?
-                        </div>
-                        <div className="del-post-modal-btn-cont">
-                          <div
-                            className="del-post-modal-confirm del-post-modal-btn"
-                            onClick={(event) => {
-                              event.stopPropagation();
-                              deleteComment(comment._id);
-                            }}
-                          >
-                            Delete
-                          </div>
-                          <div
-                            className="del-post-modal-cancel del-post-modal-btn"
-                            onClick={(event) => {
-                              event.stopPropagation();
-                              setDeleteCommentModalOpen(false);
-                            }}
-                          >
-                            Cancel
-                          </div>
-                        </div>
-                      </div>
-                    ) : (
-                      ""
-                    )}
-                  </div>
-                  {/* <div
-                    className="comment-delete"
-                    onClick={() => {
-                      // props.openDeleteCommentModal(comment._id);
-                    }}
-                  >
-                    Delete
-                  </div> */}
-                </div>
-                <div className="comment-row-two">
-                  <div className="comment-like hover-under">Like</div>
-                  <div className="comment-time">
-                    · {moment(comment.createdAt).fromNow()}
-                  </div>
-                </div>
-
-                {/* <div className="comment-author flex">
-                  <Link
-                    className="comment-link space-small"
-                    to={`/user/${comment.author}`}
-                  >
-                    - Commented by <strong>{comment.username}</strong>
-                  </Link>{" "}
-                  on {moment(comment.createdAt).format("LLL")}
-                  <div className="space-small">- </div>
-                </div> */}
-              </div>
+              <Comment comment={comment} currentUser={props.currentUser} />
             )
           )}
         </div>
