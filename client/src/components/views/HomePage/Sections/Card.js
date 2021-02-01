@@ -15,7 +15,7 @@ import Comments from "./Comments";
 function Card(props) {
   const [displayedComments, setDisplayedComments] = useState([])
 
-  const [commentRefresher, setCommentRefresher] = useState(true);
+  // const [commentRefresher, setCommentRefresher] = useState(true);
 
   // const [deleteCommentModalOpen, setDeleteCommentModalOpen] = useState(false);
   // const [commentToDelete, setCommentToDelete] = useState("");
@@ -31,7 +31,7 @@ function Card(props) {
 
   const [deletePostModalOpen, setDeletePostModalOpen] = useState(false);
 
-  const [commentsOpen, setCommentsOpen] = useState(true);
+  const [commentsOpen, setCommentsOpen] = useState(false);
 
    const history = useHistory();
 

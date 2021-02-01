@@ -14,41 +14,42 @@ function Comments(props) {
   const [errorMessage, setErrorMessage] = useState("");
 
   const [deleteCommentModalOpen, setDeleteCommentModalOpen] = useState(false);
-  const [commentToDelete, setCommentToDelete] = useState("");
+//   const [commentToDelete, setCommentToDelete] = useState("");
 
   const history = useHistory();
 
   function deleteComment(commentid) {
-    // Axios.put(
-    //   `/post/${props.post._id}/unpublish`,
-    //   {},
-    //   {
-    //     headers: {
-    //       Authorization: `Bearer ${JSON.parse(
-    //         window.localStorage.getItem("token")
-    //       )}`,
-    //     },
-    //   }
-    // )
-    //   .then((res) => {
-    //     //  if (res.data.message) {
-    //     //    alert(res.data.message);
-    //     //    return
-    //     //  }
-    //     setDeletePostModalOpen(false);
-    //     props.fetchPosts();
-    //     //  history.push(`/user/${currentUser._id}`);
-    //     history.go(0);
-    //   })
-    //   .catch((error) => {
-    //     console.log("error", error);
-    //     alert("Cannot delete this post.");
-    //   });
+    Axios.put(
+      `/post/${props.postid}/${props.comment._id}/unpublish`,
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${JSON.parse(
+            window.localStorage.getItem("token")
+          )}`,
+        },
+      }
+    )
+      .then((res) => {
+        //  if (res.data.message) {
+        //    alert(res.data.message);
+        //    return
+        //  }
+          setDeleteCommentModalOpen(false);
+          props.fetchComments();
+        // props.fetchPosts();
+        //  history.push(`/user/${currentUser._id}`);
+        // history.go(0);
+      })
+      .catch((error) => {
+        console.log("error", error);
+        alert("Cannot delete this post.");
+      });
 
-    console.log(commentid);
+    // console.log(commentid);
     }
     
-    console.log("comment:", props.comment)
+    // console.log("comment:", props.comment)
 
   return (
     (
@@ -77,13 +78,13 @@ function Comments(props) {
                     )}
                     {deleteCommentModalOpen ? (
                       <div
-                        className="del-post-modal"
+                        className="del-comment-modal"
                         onClick={(event) => {
                           event.stopPropagation();
                         }}
                       >
-                        <div className="del-post-modal-text">
-                          Delete this post?
+                        <div className="del-comment-modal-text">
+                          Delete this comment?
                         </div>
                         <div className="del-post-modal-btn-cont">
                           <div

@@ -15,8 +15,8 @@ function Comments(props) {
   const [newComment, setNewComment] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
-  const [deleteCommentModalOpen, setDeleteCommentModalOpen] = useState(false);
-  const [commentToDelete, setCommentToDelete] = useState("");
+  // const [deleteCommentModalOpen, setDeleteCommentModalOpen] = useState(false);
+  // const [commentToDelete, setCommentToDelete] = useState("");
 
   const history = useHistory();
 
@@ -60,35 +60,35 @@ function Comments(props) {
       .catch((error) => console.log("error", error));
   };
 
-  function deleteComment(commentid) {
-    // Axios.put(
-    //   `/post/${props.post._id}/unpublish`,
-    //   {},
-    //   {
-    //     headers: {
-    //       Authorization: `Bearer ${JSON.parse(
-    //         window.localStorage.getItem("token")
-    //       )}`,
-    //     },
-    //   }
-    // )
-    //   .then((res) => {
-    //     //  if (res.data.message) {
-    //     //    alert(res.data.message);
-    //     //    return
-    //     //  }
-    //     setDeletePostModalOpen(false);
-    //     props.fetchPosts();
-    //     //  history.push(`/user/${currentUser._id}`);
-    //     history.go(0);
-    //   })
-    //   .catch((error) => {
-    //     console.log("error", error);
-    //     alert("Cannot delete this post.");
-    //   });
+  // function deleteComment(commentid) {
+  //   // Axios.put(
+  //   //   `/post/${props.post._id}/unpublish`,
+  //   //   {},
+  //   //   {
+  //   //     headers: {
+  //   //       Authorization: `Bearer ${JSON.parse(
+  //   //         window.localStorage.getItem("token")
+  //   //       )}`,
+  //   //     },
+  //   //   }
+  //   // )
+  //   //   .then((res) => {
+  //   //     //  if (res.data.message) {
+  //   //     //    alert(res.data.message);
+  //   //     //    return
+  //   //     //  }
+  //   //     setDeletePostModalOpen(false);
+  //   //     props.fetchPosts();
+  //   //     //  history.push(`/user/${currentUser._id}`);
+  //   //     history.go(0);
+  //   //   })
+  //   //   .catch((error) => {
+  //   //     console.log("error", error);
+  //   //     alert("Cannot delete this post.");
+  //   //   });
 
-    console.log(commentid);
-  }
+  //   console.log(commentid);
+  // }
 
   console.log("Comments", props.comments);
 
@@ -101,7 +101,13 @@ function Comments(props) {
             !comment.isPublished ? (
               ""
             ) : (
-              <Comment comment={comment} currentUser={props.currentUser} />
+              <Comment
+                key={comment._id}
+                comment={comment}
+                currentUser={props.currentUser}
+                fetchComments={props.fetchComments}
+                postid={props.postid}
+              />
             )
           )}
         </div>
