@@ -130,10 +130,10 @@ function Comments(props) {
           <div className="prof-icon-small"></div>
           <div className="leave-comment-cont-inner">
             <div className="leave-comment-bubble">
-              <input
+              <textarea
                 className="comment-input"
                 // className="input"
-                placeholder="Leave a comment"
+                placeholder="Write a comment..."
                 value={newComment}
                 onChange={(e) => setNewComment(e.target.value)}
               />
