@@ -618,6 +618,16 @@
   cursor: pointer;
 }
 
+.error-message-comment {
+  color: var(--red);
+  /* margin-top: -8px; */
+  margin-bottom: -8px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  text-align: center;
+}
+
 .no-posts {
   background-color: white;
   color: rgb(101, 103, 107);

@@ -17,13 +17,16 @@ function Card(props) {
 
   const [commentRefresher, setCommentRefresher] = useState(true);
 
-  const [deleteCommentModalOpen, setDeleteCommentModalOpen] = useState(false);
-  const [commentToDelete, setCommentToDelete] = useState("");
+  // const [deleteCommentModalOpen, setDeleteCommentModalOpen] = useState(false);
+  // const [commentToDelete, setCommentToDelete] = useState("");
 
   const [likeCount, setLikeCount] = useState(Math.floor(Math.random() * 21));
-  const [commentCount, setCommentCount] = useState(
-    Math.floor(Math.random() * 21)
-  );
+  // const [commentCount, setCommentCount] = useState(
+  //   Math.floor(Math.random() * 21)
+  // );
+  const [commentCount, setCommentCount] = useState('');
+
+
   const [likedByCurrentUser, setLikedByCurrentUser] = useState(false);
 
   const [deletePostModalOpen, setDeletePostModalOpen] = useState(false);
@@ -98,6 +101,10 @@ function Card(props) {
   useEffect(() => {
     fetchComments();
   }, []);
+
+  useEffect(() => {
+    setCommentCount(displayedComments.length)
+  }, [displayedComments]);
 
 
 // function deleteComment() {
@@ -284,7 +291,7 @@ function Card(props) {
               fetchComments={fetchComments}
               postid={props.post._id}
               // openDeleteCommentModal={openDeleteCommentModal}
-              setCommentToDelete={setCommentToDelete}
+              // setCommentToDelete={setCommentToDelete}
             />
         ) : ("")
         }

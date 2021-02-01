@@ -13,6 +13,9 @@ function Comments(props) {
   const [newComment, setNewComment] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
+  const [deleteCommentModalOpen, setDeleteCommentModalOpen] = useState(false);
+  const [commentToDelete, setCommentToDelete] = useState("");
+
   const history = useHistory();
 
   const submitComment = () => {
@@ -55,6 +58,36 @@ function Comments(props) {
       .catch((error) => console.log("error", error));
   };
 
+  function deleteComment(commentid) {
+    // Axios.put(
+    //   `/post/${props.post._id}/unpublish`,
+    //   {},
+    //   {
+    //     headers: {
+    //       Authorization: `Bearer ${JSON.parse(
+    //         window.localStorage.getItem("token")
+    //       )}`,
+    //     },
+    //   }
+    // )
+    //   .then((res) => {
+    //     //  if (res.data.message) {
+    //     //    alert(res.data.message);
+    //     //    return
+    //     //  }
+    //     setDeletePostModalOpen(false);
+    //     props.fetchPosts();
+    //     //  history.push(`/user/${currentUser._id}`);
+    //     history.go(0);
+    //   })
+    //   .catch((error) => {
+    //     console.log("error", error);
+    //     alert("Cannot delete this post.");
+    //   });
+
+    console.log(commentid);
+  }
+
   console.log("Comments", props.comments);
 
   return (
@@ -81,11 +114,45 @@ function Comments(props) {
                         className="del-comment-x"
                         onClick={(event) => {
                           event.stopPropagation();
-                          // setDeletePostModalOpen(true);
+                          setDeleteCommentModalOpen(true);
                         }}
                       >
                         &times;
                       </span>
+                    ) : (
+                      ""
+                    )}
+                    {deleteCommentModalOpen ? (
+                      <div
+                        className="del-post-modal"
+                        onClick={(event) => {
+                          event.stopPropagation();
+                        }}
+                      >
+                        <div className="del-post-modal-text">
+                          Delete this post?
+                        </div>
+                        <div className="del-post-modal-btn-cont">
+                          <div
+                            className="del-post-modal-confirm del-post-modal-btn"
+                            onClick={(event) => {
+                              event.stopPropagation();
+                              deleteComment(comment._id);
+                            }}
+                          >
+                            Delete
+                          </div>
+                          <div
+                            className="del-post-modal-cancel del-post-modal-btn"
+                            onClick={(event) => {
+                              event.stopPropagation();
+                              setDeleteCommentModalOpen(false);
+                            }}
+                          >
+                            Cancel
+                          </div>
+                        </div>
+                      </div>
                     ) : (
                       ""
                     )}
@@ -147,9 +214,14 @@ function Comments(props) {
               </div>
             </div>
             {/* </div> */}
-            <div className="error-message-comment">{errorMessage}</div>
           </div>
         </div>
+        {errorMessage ? (
+          <div className="error-message-comment">{errorMessage}</div>
+        ) : (
+          ""
+        )}
+
         {/* ) : (
           <div className="no-user-cont">
             <div className="no-user-text">
