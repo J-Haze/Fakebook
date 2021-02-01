@@ -42,6 +42,7 @@ function Card(props) {
   //Code that searches for current user in the liked list and then sets likedByCurrentUser
 
   function likePost() {
+    setLikedByCurrentUser(true);
     Axios.put(
       `/post/${props.post._id}/like`,
       {},
@@ -63,11 +64,13 @@ function Card(props) {
       })
       .catch((error) => {
         console.log("error", error);
+        setLikedByCurrentUser(false);
         //  alert("Cannot like this post.");
       });
   }
 
   function unlikePost() {
+    setLikedByCurrentUser(false);
     Axios.put(
       `/post/${props.post._id}/unlike`,
       {},
@@ -89,9 +92,32 @@ function Card(props) {
       })
       .catch((error) => {
         console.log("error", error);
+        setLikedByCurrentUser(true);
         //  alert("Cannot like this post.");
       });
   }
+
+    function checkIfLiked() {
+      console.log("here1");
+      if (
+        props.post.likesList.length == 0 ||
+        props.post.likesList.length == undefined
+      ) {
+        console.log("here2");
+        setLikedByCurrentUser(false);
+        return;
+      }
+      if (props.post.likesList.indexOf(props.currentUser._id) != -1) {
+        console.log("here3");
+        setLikedByCurrentUser(true);
+      } else {
+        setLikedByCurrentUser(false);
+      }
+    }
+
+    useEffect(() => {
+      checkIfLiked();
+    }, []);
 
   function toggleLike() {
     if (likedByCurrentUser == false) {
@@ -173,27 +199,7 @@ function Card(props) {
     setCommentCount(displayedComments.length);
   }, [displayedComments]);
 
-  function checkIfLiked() {
-    console.log("here1");
-    if (
-      props.post.likesList.length == 0 ||
-      props.post.likesList.length == undefined
-    ) {
-      console.log("here2");
-      setLikedByCurrentUser(false);
-      return;
-    }
-    if (props.post.likesList.indexOf(props.currentUser._id) != -1) {
-      console.log("here3");
-      setLikedByCurrentUser(true);
-    } else {
-      setLikedByCurrentUser(false);
-    }
-  }
 
-  useEffect(() => {
-    checkIfLiked();
-  }, []);
 
   function calculateLikes() {
     if (

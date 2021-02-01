@@ -192,7 +192,8 @@ exports.like_comment = (req, res, next) => {
           if (orignialLikes.length == 0 || orignialLikes == undefined) {
             newLikes = [authData._id];
           } else {
-            newLikes = originalLikes.push(authData._id);
+            // newLikes = originalLikes.push(authData._id);
+            newLikes.push(authData._id);
           }
 
           console.log("orignialLikes3", orignialLikes);
