@@ -330,7 +330,7 @@
 .comment-section {
   color: black;
   margin-top: 8px;
-  margin-bottom: 65px;
+  /* margin-bottom: 65px; */
   margin-left: 0px;
   width: 100%;
 }
@@ -509,10 +509,9 @@
   color: black;
   margin-left: 5px;
 } */
-*/ .leave-comment-section {
-  margin-top: 30px;
-  border-top: 1px solid gray;
-  border-bottom: 1px solid gray;
+*/ 
+.leave-comment-section {
+
 }
 
 .leave-comment-cont {
@@ -554,10 +553,11 @@
   box-sizing: border-box;
   font-family: inherit;
   overflow: visible;
-  line-height: inherit;
+  /* line-height: inherit; */
   color: inherit;
   /* padding: 8px 12px; */
-  height: 20px;
+  min-height: 20px;
+  /* height: 100%; */
   max-width: 400px;
   /* width: 100%; */
   overflow-x: hidden;
@@ -577,8 +577,8 @@
   /* text-overflow: wrap; */
   /* overflow:  */
   /* white-space: nowrap; */
-  color: rgb(101, 103, 107);
-  color: rgb(5, 5, 5);
+  /* color: rgb(101, 103, 107); */
+  color: rgb(28, 30, 33);
   cursor: text;
   overflow-wrap: break-word;
   word-break: break-all;
@@ -586,6 +586,7 @@
   resize: none;
   /* text-align: center; */
   /* vertical-align: middle; */
+  wrap:"soft";
 }
 
 .comment-input:focus {

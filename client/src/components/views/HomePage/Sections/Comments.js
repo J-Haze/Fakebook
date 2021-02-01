@@ -130,7 +130,7 @@ function Comments(props) {
           <div className="prof-icon-small"></div>
           <div className="leave-comment-cont-inner">
             <div className="leave-comment-bubble">
-              <textarea
+              <input
                 className="comment-input"
                 // className="input"
                 placeholder="Write a comment..."
