@@ -9,6 +9,7 @@ import thumbBlack from "../../../../assets/thumbs-up-regular-gray.svg";
 import thumbBlue from "../../../../assets/thumbs-up-solid-light-blue.svg";
 
 import Comments from "./Comments";
+// import { like_post } from "../../../../../../server/controllers/post_controller";
 
 // https://fontawesome.com/icons/thumbs-up?style=light
 
@@ -41,15 +42,68 @@ function Card(props) {
 
   //Code that searches for current user in the liked list and then sets likedByCurrentUser
 
+  function likePost() {
+     Axios.put(
+       `/post/${props.post._id}/like`,
+       {},
+       {
+         headers: {
+           Authorization: `Bearer ${JSON.parse(
+             window.localStorage.getItem("token")
+           )}`,
+         },
+       }
+     )
+       .then((res) => {
+         console.log("liked");
+         setLikedByCurrentUser(true);
+
+        //  props.fetchPosts();
+         //  history.push(`/user/${currentUser._id}`);
+        //  history.go(0);
+       })
+       .catch((error) => {
+         console.log("error", error);
+        //  alert("Cannot like this post.");
+       });
+  }
+
+    function unlikePost() {
+      Axios.put(
+        `/post/${props.post._id}/unlike`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${JSON.parse(
+              window.localStorage.getItem("token")
+            )}`,
+          },
+        }
+      )
+        .then((res) => {
+          console.log("unliked");
+          setLikedByCurrentUser(false);
+
+          //  props.fetchPosts();
+          //  history.push(`/user/${currentUser._id}`);
+          //  history.go(0);
+        })
+        .catch((error) => {
+          console.log("error", error);
+          //  alert("Cannot like this post.");
+        });
+    }
+
   function toggleLike() {
     if (likedByCurrentUser == false) {
-      console.log("liked");
-      setLikedByCurrentUser(true);
+      
       //Use "like backend"
+      likePost();
     } else {
       console.log("unliked");
-      setLikedByCurrentUser(false);
+      // setLikedByCurrentUser(false);
       //Use "unlike" backend!
+      unlikePost();
     }
   }
 
@@ -105,6 +159,24 @@ function Card(props) {
   useEffect(() => {
     setCommentCount(displayedComments.length)
   }, [displayedComments]);
+
+
+  function checkIfLiked() {
+    console.log("here1")
+    if (props.post.likesList.length == 0 || props.post.likesList.length == undefined) {
+      console.log("here2");
+      setLikedByCurrentUser(false)
+      return
+    }
+    if (props.post.likesList.indexOf(props.currentUser._id) != -1) {
+      console.log("here3");
+      setLikedByCurrentUser(true);
+    }
+  }
+
+   useEffect(() => {
+     checkIfLiked();
+   }, []);
 
 
 // function deleteComment() {

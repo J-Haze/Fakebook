@@ -22,7 +22,7 @@ router.put("/:postid", auth, post_controller.edit_post);
 router.put("/:postid", auth, post_controller.edit_post);
 
 //Like a specific post
-// router.put("/:postid/like", auth, post_controller.like_post);
+router.put("/:postid/like", auth, post_controller.like_post);
 
 //Unlike a specific post
 // router.put("/:postid/unlike", auth, post_controller.unlike_post);

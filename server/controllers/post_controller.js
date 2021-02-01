@@ -345,7 +345,7 @@ exports.get_post = (req, res, next) => {
       }
       let postWithComments = [post, postComments];
       res.json(postWithComments);
-    }).populate("author")
+    }).populate("author");
   }).populate("author");
 };
 
@@ -415,6 +415,142 @@ exports.edit_post = [
   },
 ];
 
+exports.like_post = (req, res, next) => {
+  jwt.verify(req.token, process.env.JWT_SECRET, (err, authData) => {
+    if (err) {
+      console.log(err);
+      res.sendStatus(403);
+    } else {
+      const { body, validationResult, check } = require("express-validator");
+      const { postid } = req.params;
+
+      //Checks if you're an admin
+      User.findOne({ _id: authData._id }, (err, user) => {
+        if (err) {
+          console.log(err);
+          return res.json(err);
+        }
+
+        Post.findOne({ _id: postid }, (err, originalPost) => {
+          if (err) {
+            console.log(err);
+            return res.json(err);
+          }
+
+          console.log("originalPost.likesList", originalPost.likesList);
+
+          let orignialLikes = originalPost.likesList;
+
+          console.log("orignialLikes1", orignialLikes);
+
+          // if current user ID is in likesList array then return
+          if (orignialLikes) {
+            if (orignialLikes.indexOf(authData._id) != -1) {
+              return res.json("You've already liked this post");
+            }
+          }
+
+          console.log("orignialLikes2", orignialLikes);
+
+          let newLikes = [];
+
+          if (orignialLikes.length == 0 || orignialLikes == undefined) {
+            newLikes = [authData._id];
+          } else {
+            newLikes = originalLikes.push(authData._id);
+          }
+
+          console.log("orignialLikes3", orignialLikes);
+
+          Post.findOneAndUpdate(
+            { _id: postid },
+            { likesList: newLikes },
+            { useFindAndModify: false, new: true },
+            (err, updatedPost) => {
+              if (err) {
+                console.log(err);
+                return res.json(err);
+              }
+              res.json({
+                message: "Post created",
+                post: updatedPost,
+              });
+            }
+          );
+        });
+      });
+    }
+  });
+};
+
+exports.unlike_post = (req, res, next) => {
+  jwt.verify(req.token, process.env.JWT_SECRET, (err, authData) => {
+    if (err) {
+      console.log(err);
+      res.sendStatus(403);
+    } else {
+      const { body, validationResult, check } = require("express-validator");
+      const { postid } = req.params;
+
+      //Checks if you're an admin
+      User.findOne({ _id: authData._id }, (err, user) => {
+        if (err) {
+          console.log(err);
+          return res.json(err);
+        }
+
+        Post.findOne({ _id: postid }, (err, originalPost) => {
+          if (err) {
+            console.log(err);
+            return res.json(err);
+          }
+
+          console.log("originalPost.likesList", originalPost.likesList);
+
+          let orignialLikes = originalPost.likesList;
+
+          console.log("orignialLikes1", orignialLikes);
+
+          // if current user ID is in likesList array then return
+          if (orignialLikes) {
+            if (orignialLikes.indexOf(authData._id) != -1) {
+              return res.json("You've already liked this post");
+            }
+          }
+
+          console.log("orignialLikes2", orignialLikes);
+
+          let newLikes = [];
+
+          if (orignialLikes.length == 0 || orignialLikes == undefined) {
+            newLikes = [authData._id];
+          } else {
+            newLikes = originalLikes.push(authData._id);
+          }
+
+          console.log("orignialLikes3", orignialLikes);
+
+          Post.findOneAndUpdate(
+            { _id: postid },
+            { likesList: newLikes },
+            { useFindAndModify: false, new: true },
+            (err, updatedPost) => {
+              if (err) {
+                console.log(err);
+                return res.json(err);
+              }
+              res.json({
+                message: "Post created",
+                post: updatedPost,
+              });
+            }
+          );
+        });
+      });
+    }
+  });
+};
+
 exports.publish_post = (req, res, next) => {
   jwt.verify(req.token, process.env.JWT_SECRET, (err, authData) => {
     if (err) {
@@ -443,12 +579,12 @@ exports.publish_post = (req, res, next) => {
             //Verify that edittor is the post author
             if (authData._id != originalPost.author_id) {
               console.log(
-                "Cannot unpublish this post because you are not the post's author or an admin"
+                "Cannot publish this post because you are not the post's author or an admin"
               );
               return res
                 .status(400)
                 .json(
-                  "Cannot unpublish this post because you are not the post's author or an admin"
+                  "Cannot publish this post because you are not the post's author or an admin"
                 );
             }
           }
