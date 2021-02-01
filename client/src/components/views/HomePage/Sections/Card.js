@@ -276,9 +276,17 @@ function Card(props) {
           <div className="prof-icon"></div>
           {/* <UserAvatar user={post.author} /> */}
           <div className="flex-down card-title">
-            <div className="card-username hover-under">
+            <Link
+              className="link card-username hover-under"
+              to={`/user/${props.post.author._id}`}
+            >
               {props.post.author.firstname} {props.post.author.lastname}
-            </div>
+            </Link>
+
+            {/* <div className="card-username hover-under">
+              {props.post.author.firstname} {props.post.author.lastname}
+            </div> */}
+
             <div className="card-date">
               {moment(props.post.createdAt).format("ll")} at{" "}
               {moment(props.post.createdAt).format("LT")}

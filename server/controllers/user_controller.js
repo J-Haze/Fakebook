@@ -28,13 +28,30 @@ exports.get_current_user = (req, res, next) => {
   });
 };
 
+// exports.get_users = (req, res, next) => {
+//   User.find((err, users) => {
+//     if (err) {
+//       console.log(err);
+//       return res.json(err);
+//     }
+//     res.json(users);
+//   });
+// };
+
 exports.get_users = (req, res, next) => {
-  User.find((err, users) => {
+  jwt.verify(req.token, process.env.JWT_SECRET, (err, authData) => {
     if (err) {
       console.log(err);
-      return res.json(err);
+      res.sendStatus(403);
+    } else {
+      User.find((err, users) => {
+        if (err) {
+          console.log(err);
+          return res.json(err);
+        }
+        res.json(users);
+      });
     }
-    res.json(users);
   });
 };
 

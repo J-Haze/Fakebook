@@ -8,8 +8,9 @@ import Header from "./views/Header/Header";
 
 import HomePage from "./views/HomePage/HomePage.js";
 import LoginPage from "./views/LoginPage/LoginPage.js";
+import UserPage from "./views/UserPage/UserPage.js"
 import NotFound from "./views/NotFound/NotFound.js";
-import CreatePostModal from "./views/CreatePostModal/CreatePostModal.js"
+import CreatePostModal from "./views/CreatePostModal/CreatePostModal.js";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -68,6 +69,22 @@ function App() {
     }
   }, [isLoggedIn]);
 
+  // const fetchUsers = () => {
+  //   Axios.get("/user/users", {
+  //     headers: {
+  //       Authorization: `Bearer ${JSON.parse(
+  //         window.localStorage.getItem("token")
+  //       )}`,
+  //     },
+  //   }).then((res) => {
+  //     setAllUsers(res.data);
+  //   });
+  // };
+
+  // useEffect(() => {
+  //   fetchUsers();
+  // }, []);
+
   const fetchUsers = () => {
     Axios.get("/user/users", {
       headers: {
@@ -76,6 +93,9 @@ function App() {
         )}`,
       },
     }).then((res) => {
+      console.log("res.data", res.data)
+      let allUsersArray = res.data
+      setAllUsers(allUsersArray);
       setAllUsers(res.data);
     });
   };
@@ -83,6 +103,7 @@ function App() {
   useEffect(() => {
     if (isLoggedIn) {
       fetchUsers();
+      console.log("All Users:", allUsers)
     }
   }, [isLoggedIn]);
 
@@ -134,6 +155,21 @@ function App() {
               />
             )}
           ></Route>
+
+          {allUsers.map((user) => (
+            <Route
+              exact
+              key={user._id}
+              path={`/user/${user._id}`}
+              render={() => (
+                <UserPage
+                  {...user}
+                  currentUser={currentUser}
+                  // setIsViewingProfile={setIsViewingProfile}
+                />
+              )}
+            ></Route>
+          ))}
 
           <Route render={() => <NotFound />} />
         </Switch>
