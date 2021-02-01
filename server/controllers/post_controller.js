@@ -452,7 +452,7 @@ exports.like_post = (req, res, next) => {
 
           console.log("orignialLikes2", orignialLikes);
 
-          let newLikes = [];
+          let newLikes = orignialLikes;
 
           if (orignialLikes.length == 0 || orignialLikes == undefined) {
             newLikes = [authData._id];
@@ -492,7 +492,6 @@ exports.unlike_post = (req, res, next) => {
       const { body, validationResult, check } = require("express-validator");
       const { postid } = req.params;
 
-      //Checks if you're an admin
       User.findOne({ _id: authData._id }, (err, user) => {
         if (err) {
           console.log(err);
@@ -511,29 +510,39 @@ exports.unlike_post = (req, res, next) => {
 
           console.log("orignialLikes1", orignialLikes);
 
-          // if current user ID is in likesList array then return
-          if (orignialLikes) {
-            if (orignialLikes.indexOf(authData._id) != -1) {
-              return res.json("You've already liked this post");
-            }
+          if (orignialLikes.length == 0 || orignialLikes == undefined) {
+            return res.json("You haven't liked this post");
           }
 
           console.log("orignialLikes2", orignialLikes);
+          console.log("authData._id", authData._id);
 
-          let newLikes = [];
+          let newLikes = orignialLikes;
 
-          if (orignialLikes.length == 0 || orignialLikes == undefined) {
-            newLikes = [authData._id];
-          } else {
-            newLikes = originalLikes.push(authData._id);
-          }
+          // if current user ID is in likesList array then return
+          if (newLikes.indexOf(authData._id) != -1) {
+              console.log("match")
+              newLikes.splice(
+                newLikes.indexOf(authData._id)
+              );
+            } else {
+              return res.json("You haven't liked this post");
+            }
 
+            console.log("newLikes3", newLikes);
           console.log("orignialLikes3", orignialLikes);
 
           Post.findOneAndUpdate(
-            { _id: postid },
-            { likesList: newLikes },
-            { useFindAndModify: false, new: true },
+            {
+              _id: postid,
+            },
+            {
+              likesList: newLikes,
+            },
+            {
+              useFindAndModify: false,
+              new: true,
+            },
             (err, updatedPost) => {
               if (err) {
                 console.log(err);

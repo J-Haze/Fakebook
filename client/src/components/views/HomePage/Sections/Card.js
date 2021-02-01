@@ -171,6 +171,8 @@ function Card(props) {
     if (props.post.likesList.indexOf(props.currentUser._id) != -1) {
       console.log("here3");
       setLikedByCurrentUser(true);
+    } else {
+      setLikedByCurrentUser(false);
     }
   }
 
