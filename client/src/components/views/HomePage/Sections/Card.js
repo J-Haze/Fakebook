@@ -146,7 +146,22 @@ function Card(props) {
         )}`,
       },
     }).then((res) => {
-      setDisplayedComments(res.data);
+      let publishedComments = [];
+      for (let i = 0; i < res.data.length; i++) {
+        if (res.data[i].isPublished) {
+          if (publishedComments.length == 0 || publishedComments == undefined) {
+            publishedComments = [res.data[i]];
+          } else {
+            // console.log(publishedComments)
+            // console.log(res.data[i]);
+            // publishedComments.typeof()
+            // publishedComments = publishedComments.push(res.data[i]);
+            publishedComments.push(res.data[i]);
+          }
+        }
+      }
+      setDisplayedComments(publishedComments);
+      // setDisplayedComments(res.data);
     });
   };
 
@@ -348,8 +363,6 @@ function Card(props) {
               toggleLike();
             }}
           >
-            {/* <i class="fas fa-thumbs-up thumb">&#xf164;</i> */}
-            {/* <i src={thumb}></i> */}
             {likedByCurrentUser ? (
               <div className="flex">
                 <img src={thumbBlue} className="thumb"></img>

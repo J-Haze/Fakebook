@@ -121,12 +121,12 @@ exports.unpublish_comment = (req, res, next) => {
             //Verify that edittor is the post author
             if (authData._id != originalComment.author) {
               console.log(
-                "Cannot unpublish this comment because you are not the post's author or an admin"
+                "Cannot unpublish this comment because you are not the comment's author or an admin"
               );
               return res
                 .status(400)
                 .json(
-                  "Cannot unpublish this comment because you are not the post's author or an admin"
+                  "Cannot unpublish this comment because you are not the comment's author or an admin"
                 );
             }
           }
@@ -142,6 +142,149 @@ exports.unpublish_comment = (req, res, next) => {
               } else {
                 res.json(updatedComment);
               }
+            }
+          );
+        });
+      });
+    }
+  });
+};
+
+exports.like_comment = (req, res, next) => {
+  jwt.verify(req.token, process.env.JWT_SECRET, (err, authData) => {
+    if (err) {
+      console.log(err);
+      res.sendStatus(403);
+    } else {
+      const { body, validationResult, check } = require("express-validator");
+      const { postid, commentid } = req.params;
+
+      //Checks if you're an admin
+      User.findOne({ _id: authData._id }, (err, user) => {
+        if (err) {
+          console.log(err);
+          return res.json(err);
+        }
+
+        Comment.findOne({ _id: commentid }, (err, originalComment) => {
+          if (err) {
+            console.log(err);
+            return res.json(err);
+          }
+
+          console.log("originalComment.likesList", originalComment.likesList);
+
+          let orignialLikes = originalComment.likesList;
+
+          console.log("orignialLikes1", orignialLikes);
+
+          // if current user ID is in likesList array then return
+          if (orignialLikes) {
+            if (orignialLikes.indexOf(authData._id) != -1) {
+              return res.json("You've already liked this comment");
+            }
+          }
+
+          console.log("orignialLikes2", orignialLikes);
+
+          let newLikes = orignialLikes;
+
+          if (orignialLikes.length == 0 || orignialLikes == undefined) {
+            newLikes = [authData._id];
+          } else {
+            newLikes = originalLikes.push(authData._id);
+          }
+
+          console.log("orignialLikes3", orignialLikes);
+
+          Comment.findOneAndUpdate(
+            { _id: commentid },
+            { likesList: newLikes },
+            { useFindAndModify: false, new: true },
+            (err, updatedComment) => {
+              if (err) {
+                console.log(err);
+                return res.json(err);
+              }
+              res.json({
+                message: "Comment created",
+                comment: updatedComment,
+              });
+            }
+          );
+        });
+      });
+    }
+  });
+};
+
+exports.unlike_comment = (req, res, next) => {
+  jwt.verify(req.token, process.env.JWT_SECRET, (err, authData) => {
+    if (err) {
+      console.log(err);
+      res.sendStatus(403);
+    } else {
+      const { body, validationResult, check } = require("express-validator");
+      const { postid, commentid } = req.params;
+
+      User.findOne({ _id: authData._id }, (err, user) => {
+        if (err) {
+          console.log(err);
+          return res.json(err);
+        }
+
+        Post.findOne({ _id: commentid }, (err, originalPost) => {
+          if (err) {
+            console.log(err);
+            return res.json(err);
+          }
+
+          console.log("originalComment.likesList", originalComment.likesList);
+
+          let orignialLikes = originalComment.likesList;
+
+          console.log("orignialLikes1", orignialLikes);
+
+          if (orignialLikes.length == 0 || orignialLikes == undefined) {
+            return res.json("You haven't liked this comment");
+          }
+
+          console.log("orignialLikes2", orignialLikes);
+          console.log("authData._id", authData._id);
+
+          let newLikes = orignialLikes;
+
+          // if current user ID is in likesList array then return
+          if (newLikes.indexOf(authData._id) != -1) {
+            console.log("match");
+            newLikes.splice(newLikes.indexOf(authData._id));
+          } else {
+            return res.json("You haven't liked this comment");
+          }
+
+          console.log("newLikes3", newLikes);
+          console.log("orignialLikes3", orignialLikes);
+
+          Comment.findOneAndUpdate(
+            {
+              _id: commentid,
+            },
+            {
+              likesList: newLikes,
+            },
+            {
+              useFindAndModify: false,
+              new: true,
+            },
+            (err, updatedComment) => {
+              if (err) {
+                console.log(err);
+                return res.json(err);
+              }
+              res.json({
+                message: "Comment created",
+                comment: updatedComment,
+              });
             }
           );
         });

@@ -46,10 +46,10 @@ router.post("/:postid/comment", auth, comment_controller.post_create_comment);
 router.delete("/:postid/:commentid", auth, comment_controller.delete_comment);
 
 //Like a comment
-// router.put("/:postid/:commentid/like", auth, comment_controller.like_comment);
+router.put("/:postid/:commentid/like", auth, comment_controller.like_comment);
 
 //Unlike a comment
-// router.put("/:postid/:commentid/unlike", auth, comment_controller.unlike_comment);
+router.put("/:postid/:commentid/unlike", auth, comment_controller.unlike_comment);
 
 //Unpublish a comment
 router.put(

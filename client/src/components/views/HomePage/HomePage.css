@@ -552,6 +552,14 @@
   color: rgb(101, 103, 107);
 }
 
+.comment-like-blue {
+  font-family: "Segoe UI Historic", "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 12px;
+  color: var(--blue);
+}
+
 .comment-time {
   font-family: "Segoe UI Historic", "Segoe UI", Helvetica, Arial, sans-serif;
   font-size: 12px;
