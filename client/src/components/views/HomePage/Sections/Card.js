@@ -14,19 +14,18 @@ import Comments from "./Comments";
 // https://fontawesome.com/icons/thumbs-up?style=light
 
 function Card(props) {
-  const [displayedComments, setDisplayedComments] = useState([])
+  const [displayedComments, setDisplayedComments] = useState([]);
 
   // const [commentRefresher, setCommentRefresher] = useState(true);
 
   // const [deleteCommentModalOpen, setDeleteCommentModalOpen] = useState(false);
   // const [commentToDelete, setCommentToDelete] = useState("");
 
-  const [likeCount, setLikeCount] = useState(Math.floor(Math.random() * 21));
+  const [likeCount, setLikeCount] = useState(0);
   // const [commentCount, setCommentCount] = useState(
   //   Math.floor(Math.random() * 21)
   // );
-  const [commentCount, setCommentCount] = useState('');
-
+  const [commentCount, setCommentCount] = useState(0);
 
   const [likedByCurrentUser, setLikedByCurrentUser] = useState(false);
 
@@ -34,7 +33,7 @@ function Card(props) {
 
   const [commentsOpen, setCommentsOpen] = useState(false);
 
-   const history = useHistory();
+  const history = useHistory();
 
   //Code that calculates like Count
 
@@ -43,60 +42,59 @@ function Card(props) {
   //Code that searches for current user in the liked list and then sets likedByCurrentUser
 
   function likePost() {
-     Axios.put(
-       `/post/${props.post._id}/like`,
-       {},
-       {
-         headers: {
-           Authorization: `Bearer ${JSON.parse(
-             window.localStorage.getItem("token")
-           )}`,
-         },
-       }
-     )
-       .then((res) => {
-         console.log("liked");
-         setLikedByCurrentUser(true);
+    Axios.put(
+      `/post/${props.post._id}/like`,
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${JSON.parse(
+            window.localStorage.getItem("token")
+          )}`,
+        },
+      }
+    )
+      .then((res) => {
+        console.log("liked");
+        setLikedByCurrentUser(true);
 
         //  props.fetchPosts();
-         //  history.push(`/user/${currentUser._id}`);
+        //  history.push(`/user/${currentUser._id}`);
         //  history.go(0);
-       })
-       .catch((error) => {
-         console.log("error", error);
+      })
+      .catch((error) => {
+        console.log("error", error);
         //  alert("Cannot like this post.");
-       });
+      });
   }
 
-    function unlikePost() {
-      Axios.put(
-        `/post/${props.post._id}/unlike`,
-        {},
-        {
-          headers: {
-            Authorization: `Bearer ${JSON.parse(
-              window.localStorage.getItem("token")
-            )}`,
-          },
-        }
-      )
-        .then((res) => {
-          console.log("unliked");
-          setLikedByCurrentUser(false);
+  function unlikePost() {
+    Axios.put(
+      `/post/${props.post._id}/unlike`,
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${JSON.parse(
+            window.localStorage.getItem("token")
+          )}`,
+        },
+      }
+    )
+      .then((res) => {
+        console.log("unliked");
+        setLikedByCurrentUser(false);
 
-          //  props.fetchPosts();
-          //  history.push(`/user/${currentUser._id}`);
-          //  history.go(0);
-        })
-        .catch((error) => {
-          console.log("error", error);
-          //  alert("Cannot like this post.");
-        });
-    }
+        //  props.fetchPosts();
+        //  history.push(`/user/${currentUser._id}`);
+        //  history.go(0);
+      })
+      .catch((error) => {
+        console.log("error", error);
+        //  alert("Cannot like this post.");
+      });
+  }
 
   function toggleLike() {
     if (likedByCurrentUser == false) {
-      
       //Use "like backend"
       likePost();
     } else {
@@ -112,34 +110,34 @@ function Card(props) {
   //   console.log("show comments");
   // }
 
- function deletePost(postid) {
-   Axios.put(
-     `/post/${props.post._id}/unpublish`,
-     {},
-     {
-       headers: {
-         Authorization: `Bearer ${JSON.parse(
-           window.localStorage.getItem("token")
-         )}`,
-       },
-     }
-   )
-     .then((res) => {
-      //  if (res.data.message) {
-      //    alert(res.data.message);
-      //    return
-      //  }
-       setDeletePostModalOpen(false);
-       props.fetchPosts();
-      //  history.push(`/user/${currentUser._id}`);
-      history.go(0);
-     })
-     .catch((error) => {
-       console.log("error", error);
-       alert("Cannot delete this post.")
-     });
+  function deletePost(postid) {
+    Axios.put(
+      `/post/${props.post._id}/unpublish`,
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${JSON.parse(
+            window.localStorage.getItem("token")
+          )}`,
+        },
+      }
+    )
+      .then((res) => {
+        //  if (res.data.message) {
+        //    alert(res.data.message);
+        //    return
+        //  }
+        setDeletePostModalOpen(false);
+        props.fetchPosts();
+        //  history.push(`/user/${currentUser._id}`);
+        history.go(0);
+      })
+      .catch((error) => {
+        console.log("error", error);
+        alert("Cannot delete this post.");
+      });
   }
-  
+
   const fetchComments = () => {
     Axios.get(`/post/${props.post._id}/comments`, {
       headers: {
@@ -157,16 +155,18 @@ function Card(props) {
   }, []);
 
   useEffect(() => {
-    setCommentCount(displayedComments.length)
+    setCommentCount(displayedComments.length);
   }, [displayedComments]);
 
-
   function checkIfLiked() {
-    console.log("here1")
-    if (props.post.likesList.length == 0 || props.post.likesList.length == undefined) {
+    console.log("here1");
+    if (
+      props.post.likesList.length == 0 ||
+      props.post.likesList.length == undefined
+    ) {
       console.log("here2");
-      setLikedByCurrentUser(false)
-      return
+      setLikedByCurrentUser(false);
+      return;
     }
     if (props.post.likesList.indexOf(props.currentUser._id) != -1) {
       console.log("here3");
@@ -176,44 +176,57 @@ function Card(props) {
     }
   }
 
-   useEffect(() => {
-     checkIfLiked();
-   }, []);
+  useEffect(() => {
+    checkIfLiked();
+  }, []);
 
+  function calculateLikes() {
+    if (
+      props.post.likesList.length == 0 ||
+      props.post.likesList.length == undefined
+    ) {
+      setLikeCount(0);
+      return;
+    } else {
+      setLikeCount(props.post.likesList.length);
+    }
+  }
 
-// function deleteComment() {
-//     Axios.put(
-//       `/post/${props.post._id}/${commentToDelete}/unpublish`,
-//       {},
-//       {
-//         headers: {
-//           Authorization: `Bearer ${JSON.parse(
-//             window.localStorage.getItem("token")
-//           )}`,
-//         },
-//       }
-//     )
-//       .then((res) => {
-//         fetchComments();
-//         hideDeleteCommentModal();
-//         history.push(`/post/${props.post._id}`);
-//       })
-//       .catch((error) => {
-//         console.log("error", error);
-//       });
-//   }
+  useEffect(() => {
+    calculateLikes();
+  }, [likedByCurrentUser]);
 
-//   const openDeleteCommentModal = (commentid) => {
-//     setCommentToDelete(commentid);
-//     setDeleteCommentModalOpen(true);
-//   };
+  // function deleteComment() {
+  //     Axios.put(
+  //       `/post/${props.post._id}/${commentToDelete}/unpublish`,
+  //       {},
+  //       {
+  //         headers: {
+  //           Authorization: `Bearer ${JSON.parse(
+  //             window.localStorage.getItem("token")
+  //           )}`,
+  //         },
+  //       }
+  //     )
+  //       .then((res) => {
+  //         fetchComments();
+  //         hideDeleteCommentModal();
+  //         history.push(`/post/${props.post._id}`);
+  //       })
+  //       .catch((error) => {
+  //         console.log("error", error);
+  //       });
+  //   }
 
-//   const hideDeleteCommentModal = () => {
-//     setCommentToDelete("");
-//     setDeleteCommentModalOpen(false);
-//   };
+  //   const openDeleteCommentModal = (commentid) => {
+  //     setCommentToDelete(commentid);
+  //     setDeleteCommentModalOpen(true);
+  //   };
 
-
+  //   const hideDeleteCommentModal = () => {
+  //     setCommentToDelete("");
+  //     setDeleteCommentModalOpen(false);
+  //   };
 
   //Close comments on unmount
   useEffect(() => {
@@ -224,9 +237,9 @@ function Card(props) {
 
   function toggleCommentsOpen() {
     if (commentsOpen == true) {
-      setCommentsOpen(false)
+      setCommentsOpen(false);
     } else {
-      setCommentsOpen(true)
+      setCommentsOpen(true);
     }
   }
 
@@ -314,7 +327,11 @@ function Card(props) {
           ""
         )}
         <div className="card-row-three">
-          <div className="like-count">{likeCount} Likes</div>
+          {likeCount == 1 ? (
+            <div className="like-count">{likeCount} Like</div>
+          ) : (
+            <div className="like-count">{likeCount} Likes</div>
+          )}
           <div
             className="comment-count"
             onClick={() => {
@@ -358,17 +375,18 @@ function Card(props) {
       </div>
       <div className="card-row-five">
         {commentsOpen ? (
-            <Comments
-              comments={displayedComments}
-              currentUser={props.currentUser}
-              // isLoggedIn={props.isLoggedIn}
-              fetchComments={fetchComments}
-              postid={props.post._id}
-              // openDeleteCommentModal={openDeleteCommentModal}
-              // setCommentToDelete={setCommentToDelete}
-            />
-        ) : ("")
-        }
+          <Comments
+            comments={displayedComments}
+            currentUser={props.currentUser}
+            // isLoggedIn={props.isLoggedIn}
+            fetchComments={fetchComments}
+            postid={props.post._id}
+            // openDeleteCommentModal={openDeleteCommentModal}
+            // setCommentToDelete={setCommentToDelete}
+          />
+        ) : (
+          ""
+        )}
       </div>
     </div>
   );
