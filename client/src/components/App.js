@@ -167,6 +167,8 @@ function App() {
                   currentUser={currentUser}
                   fetchPosts={fetchPosts}
                   displayedPosts={displayedPosts}
+                  createPostModalOpen={createPostModalOpen}
+                  setCreatePostModalOpen={setCreatePostModalOpen}
                   // setIsViewingProfile={setIsViewingProfile}
                 />
               )}

@@ -77,6 +77,8 @@ function UserPage(props) {
           currentUser={props.currentUser}
           fetchPosts={props.fetchPosts}
           displayedPosts={props.displayedPosts}
+          createPostModalOpen={props.createPostModalOpen}
+          setCreatePostModalOpen={props.setCreatePostModalOpen}
         />
       ) : pageType == "FriendPage" ? (
         <FriendPage

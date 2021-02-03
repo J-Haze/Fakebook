@@ -7,9 +7,38 @@ import Card from "../../HomePage/Sections/Card.js";
 import "../UserPage.css";
 
 function CurrentUserPage(props) {
-
+    const [userPosts, setUserPosts] = useState([]);
 
     
+
+    useEffect(() => {
+        let userPostArray = [];
+
+
+// let publishedComments = [];
+//       for (let i = 0; i < res.data.length; i++) {
+//         if (res.data[i].isPublished) {
+//           if (publishedComments.length == 0 || publishedComments == undefined) {
+//             publishedComments = [res.data[i]];
+//           } else {
+//             // console.log(publishedComments)
+//             // console.log(res.data[i]);
+//             // publishedComments.typeof()
+//             // publishedComments = publishedComments.push(res.data[i]);
+//             publishedComments.push(res.data[i]);
+//           }
+//         }
+//       }
+//       setDisplayedComments(publishedComments);
+//       // setDisplayedComments(res.data);
+//     });
+//   };
+
+
+
+        
+    }, [props.displayedPosts])
+
 
 
 
