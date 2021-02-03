@@ -1,6 +1,7 @@
 #user-page {
   display: flex;
   justify-content: center;
+  border: 1px solid green;
 }
 
 #current-user-page {
@@ -17,6 +18,7 @@
   /* padding-left: 16px;
   padding-right: 16px; */
   width: 908px;
+  /* width: 892px; */
 }
 
 /* Make width 500px if screen is less than 860 */
@@ -25,21 +27,28 @@
   width: 392px;
   box-sizing: border-box;
   
-  padding: 12px 16px;
+  padding: 0px 8px;
+box-sizing: border-box;
+  border: 1px solid red;
 }
 
 #user-info-box{
-    width: 360px;
+    width: 376px;
     background-color: white;
   color: #050505;
   border-radius: 8px;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-
+box-sizing: border-box;
   height: 50px;
+  margin-top: 16px;
 }
 
 #user-post-cont {
-  width: 500px;
-padding: 12px 16px;
+  width: 516px;
+  box-sizing: border-box;
+/* padding: 8px 16px; */
+
+padding: 0px 8px;
   /* background-color: white; */
+  border: 1px solid blue;
 }

@@ -7,6 +7,12 @@ import Card from "../../HomePage/Sections/Card.js";
 import "../UserPage.css";
 
 function CurrentUserPage(props) {
+
+
+    
+
+
+
     return (
       <div id="current-user-page">
         {/* <div id="user-page-content-cont"> */}

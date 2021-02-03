@@ -62,6 +62,13 @@ function UserPage(props) {
   //       props.setIsViewingProfile(false);
   //     };
   //   }, [props.currentUser, props.username]);
+    
+    
+    
+    
+    
+    
+    //code that takes displayedPosts and outputs user posts
 
   return (
     <div id="user-page">
