@@ -66,11 +66,21 @@ function UserPage(props) {
   return (
     <div id="user-page">
       {pageType == "CurrentUserPage" ? (
-        <CurrentUserPage />
+        <CurrentUserPage
+          currentUser={props.currentUser}
+          fetchPosts={props.fetchPosts}
+          displayedPosts={props.displayedPosts}
+        />
       ) : pageType == "FriendPage" ? (
-        <FriendPage />
+        <FriendPage
+          currentUser={props.currentUser}
+          fetchPosts={props.fetchPosts}
+        />
       ) : (
-        <NonFriendPage />
+        <NonFriendPage
+          currentUser={props.currentUser}
+          fetchPosts={props.fetchPosts}
+        />
       )}
     </div>
   );

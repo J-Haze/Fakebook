@@ -165,6 +165,8 @@ function App() {
                 <UserPage
                   {...user}
                   currentUser={currentUser}
+                  fetchPosts={fetchPosts}
+                  displayedPosts={displayedPosts}
                   // setIsViewingProfile={setIsViewingProfile}
                 />
               )}
