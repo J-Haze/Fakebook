@@ -14,7 +14,9 @@ function UserPage(props) {
   const [blogCount, setBlogCount] = useState(0);
   const [loading, setLoading] = useState(true);
 
-  const [pageType, setPageType] = useState("NonFriendPage");
+    const [pageType, setPageType] = useState("NonFriendPage");
+    
+    // console.log("here1", props.currentUser)
 
   useEffect(() => {
     if (props._id === props.currentUser._id) {

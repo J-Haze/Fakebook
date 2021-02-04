@@ -98,7 +98,7 @@ function Card(props) {
   }
 
     function checkIfLiked() {
-      console.log("here1");
+    //   console.log("here1");
       if (
         props.post.likesList.length == 0 ||
         props.post.likesList.length == undefined

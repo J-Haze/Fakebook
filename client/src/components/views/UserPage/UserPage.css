@@ -9,7 +9,7 @@
   justify-content: center;
   /* align-items: center; */
   width: 100%;
-  border: 1px solid black;
+  /* border: 1px solid black; */
 
   box-sizing: border-box;
   height: 100%;
@@ -28,9 +28,30 @@
   box-sizing: border-box;
   
   padding: 0px 8px;
-box-sizing: border-box;
-  border: 1px solid red;
+  box-sizing: border-box;
+  /* border: 1px solid red; */
 }
+
+.prof-icon-big {
+  background-color: var(--dark-gray);
+  border-radius: 50%;
+  height: 175px;
+  width: 175px;
+
+  margin-top: 12px;
+
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.prof-icon:hover {
+  cursor: pointer;
+}
+
+
+
+
+
 
 #user-info-box{
     width: 376px;
@@ -47,8 +68,45 @@ box-sizing: border-box;
   width: 516px;
   box-sizing: border-box;
 /* padding: 8px 16px; */
+/* margin-top: -19px; */
 
 padding: 0px 8px;
   /* background-color: white; */
-  border: 1px solid blue;
+  /* border: 1px solid blue; */
 }
+
+.user-card-username {
+  font-family: "Segoe UI Historic", "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: 22px;
+  font-weight: 900;
+  line-height: 20px;
+  color: #050505;
+display: flex;
+justify-content: center;
+  margin-top: 20px;
+  margin-bottom: 16px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

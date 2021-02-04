@@ -19,7 +19,8 @@ function App() {
   // const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [tokenRefresh, setTokenRefresh] = useState(true);
   const [allPosts, setAllPosts] = useState([]);
-  const [displayedPosts, setDisplayedPosts] = useState([]);
+  // const [displayedPosts, setDisplayedPosts] = useState("");
+    const [displayedPosts, setDisplayedPosts] = useState([]);
   const [allUsers, setAllUsers] = useState([]);
   const [allFriends, setFriends] = useState([]);
 
