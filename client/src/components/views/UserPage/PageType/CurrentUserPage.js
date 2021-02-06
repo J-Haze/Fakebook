@@ -9,6 +9,8 @@ import "../UserPage.css";
 function CurrentUserPage(props) {
   const [userPosts, setUserPosts] = useState([]);
 
+    const [friendCount, setFriendCount] = useState(0);
+
   useEffect(() => {
     let userPostArray = [];
 
@@ -34,6 +36,22 @@ function CurrentUserPage(props) {
     // setDisplayedComments(res.data);
   }, [props.displayedPosts]);
 
+      function calculateFriendCount() {
+        if (
+          props.currentUser.friendList.length == 0 ||
+          props.currentUser.friendList.length == undefined
+        ) {
+          setFriendCount(0);
+          return;
+        } else {
+          setFriendCount(props.currentUser.friendList.length);
+        }
+      }
+
+      useEffect(() => {
+        calculateFriendCount();
+      }, []);
+
   return (
     <div id="current-user-page">
       {/* <div id="user-page-content-cont"> */}
@@ -42,26 +60,79 @@ function CurrentUserPage(props) {
         <div className="user-card-username">
           {props.currentUser.firstname} {props.currentUser.lastname}
         </div>
+
         <div id="user-info-box">
+          {/* <span
+            // className="del-post-x"
+            onClick={(event) => {
+              //   event.stopPropagation();
+              //   setDeletePostModalOpen(true);
+            }}
+          >
+            Edit Profile
+          </span> */}
+
           <div id="bio-cont">
-            <div id="bio-header">Bio</div>
+            <div className="flex">
+              <div id="bio-header" className="user-info-header">
+                Bio
+              </div>
+              <span
+                className="edit-user-prof"
+                onClick={(event) => {
+                  //   event.stopPropagation();
+                  //   setDeletePostModalOpen(true);
+                }}
+              >
+                Edit Profile
+              </span>
+            </div>
             {/* Edit profile float */}
-            <div id="bio">{/* location */}</div>
+            <div id="bio" className="user-info-text">
+              {props.currentUser.bio}
+            </div>
           </div>
 
           <div id="location-cont">
-            <div id="location-header">Location</div>
+            <div id="location-header" className="user-info-header">
+              Location
+            </div>
             {/* Edit profile float */}
-            <div id="location">{/* location */}</div>
+            <div id="location" className="user-info-text">
+              {props.currentUser.location}
+            </div>
+          </div>
 
-            <div id="occupation-cont">
-              <div id="occupation-header">Occupation</div>
-              {/* Edit profile float */}
-              <div id="occupation">{/* location */}</div>
+          <div id="occupation-cont">
+            <div id="occupation-header" className="user-info-header">
+              Occupation
+            </div>
+            {/* Edit profile float */}
+            <div id="occupation" className="user-info-text">
+              {props.currentUser.occupation}
             </div>
           </div>
         </div>
-        <div id="user-friends-box"></div>
+        <div id="user-friends-box">
+          <div className="flex">
+            <div id="friend-header">Friends</div>
+            <span
+              className="see-all-friends"
+              onClick={(event) => {
+                //   event.stopPropagation();
+                //   setDeletePostModalOpen(true);
+              }}
+            >
+              See All Friends
+            </span>
+          </div>
+          {friendCount == 1 ? (
+            <div id="friend-text">1 friend</div>
+          ) : (
+            <div id="friend-text">{friendCount} friends</div>
+          )}
+          <div id=""></div>
+        </div>
       </div>
       <div id="user-post-cont">
         <div id="new-post-card">

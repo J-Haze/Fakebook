@@ -23,13 +23,13 @@
 
 /* Make width 500px if screen is less than 860 */
 #user-info-cont {
-  
   width: 392px;
   box-sizing: border-box;
-  
+
   padding: 0px 8px;
-  box-sizing: border-box;
+  /* box-sizing: border-box; */
   /* border: 1px solid red; */
+  margin-right: 8px;
 }
 
 .prof-icon-big {
@@ -48,31 +48,17 @@
   cursor: pointer;
 }
 
-
-
-
-
-
-#user-info-box{
-    width: 376px;
-    background-color: white;
+#user-info-box {
+  width: 376px;
+  background-color: white;
   color: #050505;
   border-radius: 8px;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-box-sizing: border-box;
-  height: 50px;
-  margin-top: 16px;
-}
-
-#user-post-cont {
-  width: 516px;
   box-sizing: border-box;
-/* padding: 8px 16px; */
-/* margin-top: -19px; */
-
-padding: 0px 8px;
-  /* background-color: white; */
-  /* border: 1px solid blue; */
+  height: 160px;
+  margin-top: 32px;
+  padding: 13px;
+  box-sizing: border-box;
 }
 
 .user-card-username {
@@ -81,32 +67,179 @@ padding: 0px 8px;
   font-weight: 900;
   line-height: 20px;
   color: #050505;
-display: flex;
-justify-content: center;
+  display: flex;
+  justify-content: center;
   margin-top: 20px;
   margin-bottom: 16px;
 }
 
+#user-info-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
 
+.edit-user-prof {
+  /* height: 35px;
+  width: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--light-gray);
+  border-radius: 50%;
 
+  color: #aaa;
+  float: right;
+  margin-left: auto;
+  margin-right: -4px;
+  font-size: 32px;
+  font-weight: bold;
+  text-align: center;
+  padding-bottom: 7px;
+  box-sizing: border-box; */
 
+  font-weight: 400px;
+  margin-right: 0px;
+  margin-left: auto;
+  /* border: 1px solid red; */
+  color: rgb(106, 106, 106);
+}
 
+.edit-user-prof:hover,
+.edit-user-prof:focus {
+  /* background-color: var(--dark-gray);
+  text-decoration: none;
+  cursor: pointer; */
 
+  text-decoration: underline;
+  cursor: pointer;
+}
 
+.user-info-header {
+  /* font-weight: bold; */
 
+  font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 19.9995px;
+  text-align: start;
+  /* text-decoration-thickness: auto; */
+  word-break: break-word;
 
+  /* border: 1px solid black; */
+}
 
+.user-info-text {
+  font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 19.9995px;
+  text-align: start;
+  /* text-decoration-thickness: auto; */
+  word-break: break-word;
+}
 
+#bio-cont {
+  /* border: 1px solid black; */
+  /* display: flex; */
+}
 
+#location-cont {
+  /* display: flex; */
+}
 
+#occupation-cont {
+  /* display: flex; */
+}
 
+#user-info-box {
+  width: 376px;
+  background-color: white;
+  color: #050505;
+  border-radius: 8px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  box-sizing: border-box;
+  height: 160px;
+  margin-top: 32px;
+  padding: 13px;
+  box-sizing: border-box;
+}
 
+#user-friends-box {
+  width: 500px;
+  box-sizing: border-box;
+  /* padding: 8px 16px; */
 
+  margin-top: 16px;
 
+  /* padding: 0px 8px; */
+  background-color: white;
+  border: 1px solid blue;
 
+  width: 376px;
+  background-color: white;
+  color: #050505;
+  border-radius: 8px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  box-sizing: border-box;
+  height: 160px;
+  margin-top: 16px;
+  padding: 13px;
+  padding: 20px 16px;
+}
 
+#friend-header {
+  font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 24px;
+  word-break: break-word;
+  color: rgb(5, 5, 5);
+}
 
+.see-all-friends {
+  /* height: 35px;
+  width: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--light-gray);
+  border-radius: 50%;
 
+  color: #aaa;
+  float: right;
+  margin-left: auto;
+  margin-right: -4px;
+  font-size: 32px;
+  font-weight: bold;
+  text-align: center;
+  padding-bottom: 7px;
+  box-sizing: border-box; */
 
+  font-weight: 400px;
+  font-size: 17px;
+  margin-right: 0px;
+  margin-left: auto;
+  /* border: 1px solid red; */
+  color: #1876f2;
+}
 
+.see-all-friends:hover,
+.see-all-friends:focus {
+  /* background-color: var(--dark-gray);
+  text-decoration: none;
+  cursor: pointer; */
 
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+#friend-text {
+  font-family: "Segoe UI Historic", "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 20.0005px;
+  text-align: left;
+  word-break: break-word;
+  margin-top: 8px;
+}

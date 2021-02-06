@@ -143,6 +143,10 @@ input.error {
   display: none;
 }
 
+.flex{
+  display: flex;
+}
+
 .file-uploader{
   /* border: 1px solid green; */
     display: flex;
