@@ -23,7 +23,7 @@ exports.get_current_user = (req, res, next) => {
         console.log(user); //Delete at end
         res.json(user);
         next();
-      });
+      }).populate("friendList");
     }
   });
 };

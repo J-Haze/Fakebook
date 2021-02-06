@@ -27,14 +27,17 @@ router.post("/log-in", user_controller.post_user_login);
 // Redirect the user to Facebook for authentication.  When complete,
 // Facebook will redirect the user back to the application at
 //     /auth/facebook/callback
-router.get('/auth/facebook', passport.authenticate('facebook', {session: false}));
+router.get(
+  "/auth/facebook",
+  passport.authenticate("facebook", { session: false })
+);
+//^^Currently not used
 
 // Facebook will redirect the user to this URL after approval.  Finish the
 // authentication process by attempting to obtain an access token.  If
 // access was granted, the user will be logged in.  Otherwise,
 // authentication has failed.
-router.get('/auth/facebook/callback', user_controller.facebook_callback);
-
+router.get("/auth/facebook/callback", user_controller.facebook_callback);
 
 // GET - Get all users
 router.get("/users", auth, user_controller.get_users);

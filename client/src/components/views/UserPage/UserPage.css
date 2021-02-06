@@ -44,7 +44,7 @@
   margin-right: auto;
 }
 
-.prof-icon:hover {
+.prof-icon-big:hover {
   cursor: pointer;
 }
 
@@ -174,7 +174,7 @@
 
   /* padding: 0px 8px; */
   background-color: white;
-  border: 1px solid blue;
+  /* border: 1px solid blue; */
 
   width: 376px;
   background-color: white;
@@ -182,7 +182,7 @@
   border-radius: 8px;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
   box-sizing: border-box;
-  height: 160px;
+  /* height: 160px; */
   margin-top: 16px;
   padding: 13px;
   padding: 20px 16px;
@@ -243,3 +243,35 @@
   word-break: break-word;
   margin-top: 8px;
 }
+
+#friend-icon-cont{
+    border: 1px solid blue;
+    width: 452px;
+    box-sizing: border-box;
+    width: 100%;
+    margin-top: 16px;
+}
+
+
+.friend-icon-box{
+    height: 140px;
+    width: 102px;
+    border: 1px solid black;
+}
+
+.prof-icon-friendList {
+  background-color: var(--dark-gray);
+  border-radius: 8px;
+  height: 102px;
+  width: 102px;
+}
+
+.prof-icon-friendList:hover {
+  cursor: pointer;
+}
+
+
+
+
+
+

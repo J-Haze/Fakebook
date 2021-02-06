@@ -9,7 +9,7 @@ import "../UserPage.css";
 function CurrentUserPage(props) {
   const [userPosts, setUserPosts] = useState([]);
 
-    const [friendCount, setFriendCount] = useState(0);
+  const [friendCount, setFriendCount] = useState(0);
 
   useEffect(() => {
     let userPostArray = [];
@@ -36,21 +36,21 @@ function CurrentUserPage(props) {
     // setDisplayedComments(res.data);
   }, [props.displayedPosts]);
 
-      function calculateFriendCount() {
-        if (
-          props.currentUser.friendList.length == 0 ||
-          props.currentUser.friendList.length == undefined
-        ) {
-          setFriendCount(0);
-          return;
-        } else {
-          setFriendCount(props.currentUser.friendList.length);
-        }
-      }
+  function calculateFriendCount() {
+    if (
+      props.currentUser.friendList.length == 0 ||
+      props.currentUser.friendList.length == undefined
+    ) {
+      setFriendCount(0);
+      return;
+    } else {
+      setFriendCount(props.currentUser.friendList.length);
+    }
+  }
 
-      useEffect(() => {
-        calculateFriendCount();
-      }, []);
+  useEffect(() => {
+    calculateFriendCount();
+  }, []);
 
   return (
     <div id="current-user-page">
@@ -131,7 +131,22 @@ function CurrentUserPage(props) {
           ) : (
             <div id="friend-text">{friendCount} friends</div>
           )}
-          <div id=""></div>
+          {props.currentUser.friendList.length > 0 && (
+            <div id="friend-icon-cont">
+              {props.currentUser.friendList.map((friend) =>
+                friend.isPublished ? (
+                  <div className="friend-icon-box">
+                    <div className="prof-icon-friendList">{/* <ProfileImage /> */}</div>
+                    <div>
+                      {friend.firstname} {friend.lastname}
+                    </div>
+                  </div>
+                ) : (
+                  ""
+                )
+              )}
+            </div>
+          )}
         </div>
       </div>
       <div id="user-post-cont">
