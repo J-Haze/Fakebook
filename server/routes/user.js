@@ -10,7 +10,7 @@ const auth = require("../middleware/auth");
 router.get("/", auth, user_controller.get_current_user);
 
 // //Edit current User
-// router.put("/", auth, user_controller.edit_current_user);
+router.put("/", auth, user_controller.edit_current_user);
 
 // //Delete current user
 // router.delete("/", auth, user_controller.delete_current_user);

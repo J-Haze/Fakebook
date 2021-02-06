@@ -18,8 +18,7 @@ router.get("/:postid", auth, post_controller.get_post);
 //Update specific post
 router.put("/:postid", auth, post_controller.edit_post);
 
-//Update specific post
-router.put("/:postid", auth, post_controller.edit_post);
+
 
 //Like a specific post
 router.put("/:postid/like", auth, post_controller.like_post);

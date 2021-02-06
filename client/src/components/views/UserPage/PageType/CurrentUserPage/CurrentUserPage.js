@@ -2,14 +2,18 @@ import React from "react";
 import { useState, useEffect } from "react";
 import Axios from "axios";
 
-import Card from "../../HomePage/Sections/Card.js";
+import Card from "../../../HomePage/Sections/Card.js";
+import EditUserModal from "./Sections/EditUserModal.js";
 
-import "../UserPage.css";
+import "../../UserPage.css";
 
 function CurrentUserPage(props) {
   const [userPosts, setUserPosts] = useState([]);
 
   const [friendCount, setFriendCount] = useState(0);
+
+  // const [createPostModalOpen, setCreatePostModalOpen] = useState(true);
+  const [editUserModalOpen, setEditUserModalOpen] = useState(false);
 
   useEffect(() => {
     let userPostArray = [];
@@ -54,6 +58,14 @@ function CurrentUserPage(props) {
 
   return (
     <div id="current-user-page">
+      {editUserModalOpen && (
+        <EditUserModal
+          // createPostModalOpen={createPostModalOpen}
+          // setCreatePostModalOpen={setCreatePostModalOpen}
+          // currentUser={currentUser}
+          // fetchPosts={fetchPosts}
+        />
+      )}
       {/* <div id="user-page-content-cont"> */}
       <div id="user-info-cont">
         <div className="prof-icon-big"></div>
@@ -136,7 +148,9 @@ function CurrentUserPage(props) {
               {props.currentUser.friendList.map((friend) =>
                 friend.isPublished ? (
                   <div className="friend-icon-box">
-                    <div className="prof-icon-friendList">{/* <ProfileImage /> */}</div>
+                    <div className="prof-icon-friendList">
+                      {/* <ProfileImage /> */}
+                    </div>
                     <div>
                       {friend.firstname} {friend.lastname}
                     </div>

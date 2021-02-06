@@ -4,6 +4,9 @@ const bcrypt = require("bcryptjs");
 const async = require("async");
 const jwt = require("jsonwebtoken");
 const keys = require("../config/keys");
+var fs = require("fs");
+var path = require("path");
+const multer = require("multer");
 require("dotenv").config();
 
 var User = require("../models/User");
@@ -50,7 +53,7 @@ exports.get_users = (req, res, next) => {
           return res.json(err);
         }
         res.json(users);
-      });
+      }).populate("friendList");
     }
   });
 };
@@ -88,6 +91,9 @@ exports.post_create_user = [
       gender: req.body.gender,
       friendList: [],
       photo: "",
+      bio: "",
+      location: "",
+      occupation:"",
       realFacebookID: "",
       isPublished: true,
     });
@@ -141,6 +147,111 @@ exports.post_create_user = [
       }
     }
   },
+];
+// SET STORAGE
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    // destination: function (req, form, cb) {
+    // console.log("internal request", req)
+    // console.log("form", form)
+    // form
+    // console.log("here file0", file);
+    cb(null, "uploads/");
+    // cb(null, "../../uploads");
+    // cb(null, "uploads");
+  },
+  filename: function (req, file, cb) {
+    // console.log("here file1", file)
+    // cb(null, Date.now() + "-" + file.fieldname);
+    cb(null, `${Date.now()}_${file.originalname}`);
+  },
+  fileFilter: (req, file, cb) => {
+    // console.log("here file", file)
+    const ext = path.extname(file.originalname);
+    //must be jpg or png to upload
+    // if (ext !== ".jpg" || ext !== ".png") {
+    if (
+      ext !== ".png" &&
+      ext !== ".jpg" &&
+      ext !== ".gif" &&
+      ext !== ".jpeg" &&
+      ext !== ".svg" &&
+      ext !== ".jpg"
+    ) {
+      return cb(res.status(400).end("Only images are allowed."));
+    }
+    cb(null, true);
+  },
+});
+
+var upload = multer({ storage: storage, limits: { fileSize: 5000000 } });
+
+
+exports.edit_current_user = [
+  // upload.any("file"),
+  (req, res, next) => {
+    jwt.verify(req.token, process.env.JWT_SECRET, (err, authData) => {
+      if (err) {
+        console.log(err);
+        res.sendStatus(403);
+      } else {
+        const { body, validationResult, check } = require("express-validator");
+        // const { userid } = req.params;
+        // const { title, text } = req.body;
+
+        bio = req.body.bio;
+        location = req.body.location;
+        occupation = req.body.occupation;
+        photo = "";
+
+        //Checks if you're an admin
+        // User.findOne({ _id: authData._id }, (err, user) => {
+        //   if (err) {
+        //     console.log(err);
+        //     return res.json(err);
+        //   }
+
+        // User.findOne({ _id: authData._id }, (err, originalUser) => {
+        //   if (err) {
+        //     console.log(err);
+        //     return res.json(err);
+        //   }
+
+        // if (!user.isAdmin) {
+        //   //If user isn't an admin, then check if they are the original author
+        //   //Verify that edittor is the post author
+        //   if (authData._id != originalUser.author_id) {
+        //     console.log(
+        //       "Cannot edit this post because you are not the post's author or an admin"
+        //     );
+        //     return res
+        //       .status(400)
+        //       .json(
+        //         "Cannotedit this post because you are not the post's author or an admin"
+        //       );
+        //   }
+        // }
+
+        User.findOneAndUpdate(
+          { _id: authData._id },
+          { bio, location, occupation, photo },
+          { useFindAndModify: false, new: true },
+          (err, updatedUser) => {
+            if (err) {
+              console.log(err);
+              return res.json(err);
+            }
+            res.json({
+              message: "User created",
+              post: updatedUser,
+            });
+          }
+        )
+      }
+    }
+  
+    );
+  }
 ];
 
 exports.post_user_login = function (req, res, next) {
@@ -237,7 +348,7 @@ exports.get_currentUser_posts = (req, res, next) => {
         }
         res.json(posts);
         next();
-      });
+      }).populate("author")
     }
   });
 };
@@ -252,5 +363,5 @@ exports.get_user_posts = (req, res, next) => {
     }
     res.json(posts);
     next();
-  });
+  }).populate("author")
 };

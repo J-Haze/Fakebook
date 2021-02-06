@@ -1,7 +1,7 @@
 import React from "react";
 import Card from "../HomePage/Sections/Card.js";
 
-import CurrentUserPage from "./PageType/CurrentUserPage.js"
+import CurrentUserPage from "./PageType/CurrentUserPage/CurrentUserPage.js"
 import FriendPage from "./PageType/FriendPage.js";
 import NonFriendPage from "./PageType/NonFriendPage.js";
 
