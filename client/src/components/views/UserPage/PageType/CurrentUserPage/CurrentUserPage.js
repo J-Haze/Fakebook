@@ -6,14 +6,15 @@ import Card from "../../../HomePage/Sections/Card.js";
 import EditUserModal from "./Sections/EditUserModal.js";
 
 import "../../UserPage.css";
+import { isThisQuarter } from "date-fns";
 
 function CurrentUserPage(props) {
   const [userPosts, setUserPosts] = useState([]);
 
   const [friendCount, setFriendCount] = useState(0);
 
-  // const [createPostModalOpen, setCreatePostModalOpen] = useState(true);
-  const [editUserModalOpen, setEditUserModalOpen] = useState(false);
+   const [editUserModalOpen, setEditUserModalOpen] = useState(true);
+  // const [editUserModalOpen, setEditUserModalOpen] = useState(false);
 
   useEffect(() => {
     let userPostArray = [];
@@ -61,7 +62,7 @@ function CurrentUserPage(props) {
       {editUserModalOpen && (
         <EditUserModal
           // createPostModalOpen={createPostModalOpen}
-          // setCreatePostModalOpen={setCreatePostModalOpen}
+          setEditUserModalOpen={setEditUserModalOpen}
           // currentUser={currentUser}
           // fetchPosts={fetchPosts}
         />
@@ -92,8 +93,8 @@ function CurrentUserPage(props) {
               <span
                 className="edit-user-prof"
                 onClick={(event) => {
-                  //   event.stopPropagation();
-                  //   setDeletePostModalOpen(true);
+                    // event.stopPropagation();
+                    setEditUserModalOpen(true);
                 }}
               >
                 Edit Profile

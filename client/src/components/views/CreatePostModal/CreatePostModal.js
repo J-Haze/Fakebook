@@ -266,7 +266,7 @@ function CreatePostModal(props) {
             )}
           </div>
           <div id="create-post-bottom-row">
-            {text.length == 0 && !{ imgUpload } ? (
+            {text.length == 0 && !imgUpload ? (
               <div id="submit-create-post-empty" className="submit-create-post">
                 Post
               </div>

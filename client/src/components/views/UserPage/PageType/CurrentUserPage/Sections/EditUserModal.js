@@ -17,7 +17,9 @@ var path = require("path");
 
 function EditUserModal(props) {
   //   const [title, setTitle] = useState(props.initialTitle);
-  const [text, setText] = useState("");
+  const [bioText, setBioText] = useState("");
+
+
   const [imgUpload, setImgUpload] = useState(null);
   const [imgPreview, setImgPreview] = useState("");
   const [addImageOpen, setAddImageOpen] = useState(false);
@@ -26,7 +28,7 @@ function EditUserModal(props) {
 
   useEffect(() => {
     return function cleanup() {
-      props.setCreatePostModalOpen(false);
+      props.setEditUserModalOpen(false);
     };
   }, []);
 
@@ -66,30 +68,25 @@ function EditUserModal(props) {
   };
 
   const submitCreatePost = () => {
-    // if (filter.isProfane(text)) {
-    //   alert("Post contains a word that is not allowed.");
+    // if (!text && !imgUpload) {
+    //   setErrorMessage("Post must not be blank");
+    //   alert("Post must not be blank");
     //   return;
     // }
 
-    if (!text && !imgUpload) {
-      setErrorMessage("Post must not be blank");
-      alert("Post must not be blank");
-      return;
-    }
+    // if (text) {
+    //   if (isEmpty(text) && !imgUpload) {
+    //     setErrorMessage("Post must not be blank");
+    //     alert("Post must not be blank");
+    //     return;
+    //   }
+    // }
 
-    if (text) {
-      if (isEmpty(text) && !imgUpload) {
-        setErrorMessage("Post must not be blank");
-        alert("Post must not be blank");
-        return;
-      }
-    }
-
-    if (text.length > 1000) {
-      setErrorMessage("Post must less than 1000 characters");
-      alert("Post must less than 1000 characters");
-      return;
-    }
+    // if (text.length > 1000) {
+    //   setErrorMessage("Post must less than 1000 characters");
+    //   alert("Post must less than 1000 characters");
+    //   return;
+    // }
 
     // console.log("imgUpload", imgUpload)
 
@@ -111,7 +108,7 @@ function EditUserModal(props) {
     }
 
     const formData = new FormData();
-    formData.append("text", text);
+    formData.append("bio", bioText);
     formData.append("file", imgUpload);
 
     Axios.post(
@@ -134,10 +131,10 @@ function EditUserModal(props) {
         console.log("imgUpload2", imgUpload);
         setErrorMessage("");
         // if success then set image preview
-        props.fetchPosts();
-        setText("");
+        // props.fetchPosts();
+        setBioText("");
         //   props.whitePencil();
-        props.setCreatePostModalOpen(false);
+        props.setEditUserModalOpen(false);
         //   history.push(`/post/${props.postid}`);
       })
       .catch((error) => {
@@ -173,12 +170,15 @@ function EditUserModal(props) {
   //         </div>
   //     )
   // }
+  console.log("bioText.length", bioText.length);
+  console.log("imgUpload", imgUpload)
+  // bioText.length == 0 && !{ imgUpload };
 
   return (
     <div
       className="create-post-modal"
       onClick={() => {
-        props.setCreatePostModalOpen(false);
+        props.setEditUserModalOpen(false);
       }}
     >
       <div
@@ -189,11 +189,11 @@ function EditUserModal(props) {
       >
         <div id="create-post-header">
           <div id="create-post-header-top">
-            <div id="create-post-header-title">Create Post</div>
+            <div id="create-post-header-title">Edit Your Profile</div>
             <span
               className="close-create-post"
               onClick={() => {
-                props.setCreatePostModalOpen(false);
+                props.setEditUserModalOpen(false);
               }}
             >
               &times;
@@ -201,20 +201,18 @@ function EditUserModal(props) {
           </div>
         </div>
         <form id="create-post-container">
+          <input />
+          <input />
+          <input />
           <div id="create-post-mid-row">
-            <div className="card-row-one">
+            {/* <div className="card-row-one">
               <div className="prof-icon"></div>
               <div className="flex-down card-title">
                 <div className="create-post-username">
                   {props.currentUser.firstname} {props.currentUser.lastname}
                 </div>
-                {/* <div className="card-date">
-                  {moment(props.post.createdAt).format("ll")} at{" "}
-                  {moment(props.post.createdAt).format("LT")}
-                  Placeholder
-                </div> */}
               </div>
-            </div>
+            </div> */}
             {/* <input
                           id="woym-input"
                           type="textarea"
@@ -223,14 +221,14 @@ function EditUserModal(props) {
               value={text}
               onChange={(e) => setText(e.target.value)}
             /> */}
-            <textarea
+            {/* <textarea
               id="woym-input"
               type="textarea"
               className="input-create-post"
               placeholder={`What's on your mind, ${props.currentUser.firstname}?`}
               value={text}
               onChange={(e) => setText(e.target.value)}
-            />
+            /> */}
             {/* {imgPreview ? <img src={imgPreview} width="100%" /> : ""} */}
             {imgPreview ? (
               <img
@@ -261,12 +259,12 @@ function EditUserModal(props) {
                   setAddImageOpen(true);
                 }}
               >
-                Add Image to Your Post
+                Update Profile Picture
               </div>
             )}
           </div>
           <div id="create-post-bottom-row">
-            {text.length == 0 && !{ imgUpload } ? (
+            {bioText.length == 0 && (!imgUpload) ? (
               <div id="submit-create-post-empty" className="submit-create-post">
                 Post
               </div>
@@ -278,7 +276,7 @@ function EditUserModal(props) {
                   submitCreatePost();
                 }}
               >
-                Post
+                Save
               </div>
             )}
           </div>
