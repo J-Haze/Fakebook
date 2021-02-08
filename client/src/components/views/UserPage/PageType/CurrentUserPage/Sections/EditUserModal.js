@@ -19,8 +19,9 @@ function EditUserModal(props) {
   //   const [title, setTitle] = useState(props.initialTitle);
   const [bioText, setBioText] = useState(props.currentUser.bio);
   const [locationText, setLocationText] = useState(props.currentUser.location);
-  const [occupationText, setOccupationText] = useState(props.currentUser.occupation);
-
+  const [occupationText, setOccupationText] = useState(
+    props.currentUser.occupation
+  );
 
   const [imgUpload, setImgUpload] = useState(null);
   const [imgPreview, setImgPreview] = useState("");
@@ -69,7 +70,7 @@ function EditUserModal(props) {
     setImgPreview("");
   };
 
-  const submitCreatePost = () => {
+  const submitEditUser = () => {
     // if (!text && !imgUpload) {
     //   setErrorMessage("Post must not be blank");
     //   alert("Post must not be blank");
@@ -84,11 +85,15 @@ function EditUserModal(props) {
     //   }
     // }
 
-    // if (text.length > 1000) {
-    //   setErrorMessage("Post must less than 1000 characters");
-    //   alert("Post must less than 1000 characters");
-    //   return;
-    // }
+    if (
+      bioText.length > 140 ||
+      locationText.length > 140 ||
+      occupationText.length > 140
+    ) {
+      setErrorMessage("Fields are limited to 140 characters.");
+      alert("Fields are limited to 140 characters.");
+      return;
+    }
 
     // console.log("imgUpload", imgUpload)
 
@@ -111,12 +116,16 @@ function EditUserModal(props) {
 
     const formData = new FormData();
     formData.append("bio", bioText);
+    formData.append("location", locationText);
+    formData.append("occupation", occupationText);
     formData.append("file", imgUpload);
 
-    Axios.post(
-      `/post/new`,
+    Axios.put(
+      `/user/`,
       // {
-      //   text: text,
+      //   bio: bioText,
+      //   location: locationText,
+      //   occupation: occupationText,
       //   image: formData,
       // },
       formData,
@@ -135,9 +144,12 @@ function EditUserModal(props) {
         // if success then set image preview
         // props.fetchPosts();
         setBioText("");
+        setLocationText("");
+        setOccupationText("");
         //   props.whitePencil();
+        // history.push(`/user/${props.currentUser._id}`);
         props.setEditUserModalOpen(false);
-        //   history.push(`/post/${props.postid}`);
+        history.go(0);
       })
       .catch((error) => {
         alert("Failed to submit");
@@ -172,8 +184,8 @@ function EditUserModal(props) {
   //         </div>
   //     )
   // }
-  console.log("bioText.length", bioText.length);
-  console.log("imgUpload", imgUpload)
+  // console.log("bioText.length", bioText.length);
+  console.log("imgUpload", imgUpload);
   // bioText.length == 0 && !{ imgUpload };
 
   return (
@@ -295,9 +307,9 @@ function EditUserModal(props) {
             )}
           </div>
           <div id="edit-user-bottom-row">
-            {bioText.length == 0 && !imgUpload ? (
+            {/* {bioText.length == 0 && !imgUpload ? (
               <div id="submit-edit-user-empty" className="submit-edit-user">
-                Post
+                Save
               </div>
             ) : (
               <div
@@ -309,7 +321,17 @@ function EditUserModal(props) {
               >
                 Save
               </div>
-            )}
+            )} */}
+
+            <div
+              id="submit-edit-user-full"
+              className="submit-edit-user"
+              onClick={() => {
+                submitEditUser();
+              }}
+            >
+              Save
+            </div>
           </div>
         </form>
       </div>

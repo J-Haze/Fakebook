@@ -1,7 +1,7 @@
 #user-page {
   display: flex;
   justify-content: center;
-  border: 1px solid green;
+  /* border: 1px solid green; */
 }
 
 #current-user-page {

@@ -13,8 +13,8 @@ function CurrentUserPage(props) {
 
   const [friendCount, setFriendCount] = useState(0);
 
-   const [editUserModalOpen, setEditUserModalOpen] = useState(true);
-  // const [editUserModalOpen, setEditUserModalOpen] = useState(false);
+  //  const [editUserModalOpen, setEditUserModalOpen] = useState(true);
+  const [editUserModalOpen, setEditUserModalOpen] = useState(false);
 
   useEffect(() => {
     let userPostArray = [];
@@ -148,7 +148,7 @@ function CurrentUserPage(props) {
             <div id="friend-icon-cont">
               {props.currentUser.friendList.map((friend) =>
                 friend.isPublished ? (
-                  <div className="friend-icon-box">
+                  <div className="friend-icon-box" key={friend._id}>
                     <div className="prof-icon-friendList">
                       {/* <ProfileImage /> */}
                     </div>

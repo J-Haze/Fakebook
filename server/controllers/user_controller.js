@@ -188,7 +188,7 @@ var upload = multer({ storage: storage, limits: { fileSize: 5000000 } });
 
 
 exports.edit_current_user = [
-  // upload.any("file"),
+  upload.any("file"),
   (req, res, next) => {
     jwt.verify(req.token, process.env.JWT_SECRET, (err, authData) => {
       if (err) {
