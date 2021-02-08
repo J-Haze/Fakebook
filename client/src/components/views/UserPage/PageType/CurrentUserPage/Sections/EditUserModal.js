@@ -17,7 +17,9 @@ var path = require("path");
 
 function EditUserModal(props) {
   //   const [title, setTitle] = useState(props.initialTitle);
-  const [bioText, setBioText] = useState("");
+  const [bioText, setBioText] = useState(props.currentUser.bio);
+  const [locationText, setLocationText] = useState(props.currentUser.location);
+  const [occupationText, setOccupationText] = useState(props.currentUser.occupation);
 
 
   const [imgUpload, setImgUpload] = useState(null);
@@ -58,7 +60,7 @@ function EditUserModal(props) {
 
   //   const resetImgForm = () => {
   //     if (addImageOpen) {
-  //       document.getElementById("create-post-form-img-upload").reset();
+  //       document.getElementById("edit-user-form-img-upload").reset();
   //     }
   //   };
 
@@ -176,22 +178,22 @@ function EditUserModal(props) {
 
   return (
     <div
-      className="create-post-modal"
+      className="edit-user-modal"
       onClick={() => {
         props.setEditUserModalOpen(false);
       }}
     >
       <div
-        className="create-post-modal-content"
+        className="edit-user-modal-content"
         onClick={(event) => {
           event.stopPropagation();
         }}
       >
-        <div id="create-post-header">
-          <div id="create-post-header-top">
-            <div id="create-post-header-title">Edit Your Profile</div>
+        <div id="edit-user-header">
+          <div id="edit-user-header-top">
+            <div id="edit-user-header-title">Edit Your Profile</div>
             <span
-              className="close-create-post"
+              className="close-edit-user"
               onClick={() => {
                 props.setEditUserModalOpen(false);
               }}
@@ -200,15 +202,44 @@ function EditUserModal(props) {
             </span>
           </div>
         </div>
-        <form id="create-post-container">
-          <input />
-          <input />
-          <input />
-          <div id="create-post-mid-row">
+        <form id="edit-user-container">
+          <div className="edit-bio-cont edit-cont">
+            <div className="edit-bio-text edit-text">
+              A little bit about yourself:
+            </div>
+            <input
+              className="edit-bio-input edit-input"
+              // type="text"
+              // className="input-edit-user"
+              // placeholder={`bioText`}
+              value={bioText}
+              onChange={(e) => setBioText(e.target.value)}
+            />
+          </div>
+
+          <div className="edit-location-cont edit-cont">
+            <div className="edit-location-text edit-text">Location:</div>
+            <input
+              className="edit-location-input edit-input"
+              value={locationText}
+              onChange={(e) => setLocationText(e.target.value)}
+            />
+          </div>
+
+          <div className="edit-occupation-cont edit-cont">
+            <div className="edit-occupation-text edit-text">Occupation:</div>
+            <input
+              className="edit-occupation-input edit-input"
+              value={occupationText}
+              onChange={(e) => setOccupationText(e.target.value)}
+            />
+          </div>
+
+          <div id="edit-user-mid-row">
             {/* <div className="card-row-one">
               <div className="prof-icon"></div>
               <div className="flex-down card-title">
-                <div className="create-post-username">
+                <div className="edit-user-username">
                   {props.currentUser.firstname} {props.currentUser.lastname}
                 </div>
               </div>
@@ -216,7 +247,7 @@ function EditUserModal(props) {
             {/* <input
                           id="woym-input"
                           type="textarea"
-              className="input-create-post"
+              className="input-edit-user"
               placeholder={`What's on your mind, ${props.currentUser.firstname}?`}
               value={text}
               onChange={(e) => setText(e.target.value)}
@@ -224,7 +255,7 @@ function EditUserModal(props) {
             {/* <textarea
               id="woym-input"
               type="textarea"
-              className="input-create-post"
+              className="input-edit-user"
               placeholder={`What's on your mind, ${props.currentUser.firstname}?`}
               value={text}
               onChange={(e) => setText(e.target.value)}
@@ -239,13 +270,13 @@ function EditUserModal(props) {
             ) : (
               ""
             )}
-            {/* <div className="error-message-create-post">{errorMessage}</div> */}
+            {/* <div className="error-message-edit-user">{errorMessage}</div> */}
           </div>
-          <div id="create-post-img-row">
+          <div id="edit-user-img-row">
             {addImageOpen ? (
-              <div className="create-post-image-upload">
+              <div className="edit-user-image-upload">
                 <FileUploaderUser
-                  id="create-post-form-img-upload"
+                  id="edit-user-form-img-upload"
                   onFileSelectSuccess={(file) => setImgUpload(file)}
                   onFileSelectError={({ error }) => alert(error)}
                   //   resetImgForm={resetImgForm}
@@ -254,7 +285,7 @@ function EditUserModal(props) {
               </div>
             ) : (
               <div
-                id="add-img-btn"
+                id="add-img-edit-btn"
                 onClick={() => {
                   setAddImageOpen(true);
                 }}
@@ -263,15 +294,15 @@ function EditUserModal(props) {
               </div>
             )}
           </div>
-          <div id="create-post-bottom-row">
-            {bioText.length == 0 && (!imgUpload) ? (
-              <div id="submit-create-post-empty" className="submit-create-post">
+          <div id="edit-user-bottom-row">
+            {bioText.length == 0 && !imgUpload ? (
+              <div id="submit-edit-user-empty" className="submit-edit-user">
                 Post
               </div>
             ) : (
               <div
-                id="submit-create-post-full"
-                className="submit-create-post"
+                id="submit-edit-user-full"
+                className="submit-edit-user"
                 onClick={() => {
                   submitCreatePost();
                 }}

@@ -63,7 +63,7 @@ function CurrentUserPage(props) {
         <EditUserModal
           // createPostModalOpen={createPostModalOpen}
           setEditUserModalOpen={setEditUserModalOpen}
-          // currentUser={currentUser}
+          currentUser={props.currentUser}
           // fetchPosts={fetchPosts}
         />
       )}
