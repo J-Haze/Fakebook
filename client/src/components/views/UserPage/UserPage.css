@@ -43,6 +43,8 @@
   /* border: 1px solid blue; */
 
   flex-basis: 360px;
+  display: flex;
+  flex-direction: column;
 
   /* position: fixed; */
   /* top: 50%; */
@@ -79,6 +81,22 @@
   /* overflow-y: hidden; */
 }
 
+.prof-pic-big {
+  border-radius: 50%;
+  height: 175px;
+  width: 175px;
+
+  margin-top: 12px;
+
+  margin-left: auto;
+  margin-right: auto;
+  /* margin-left: 50px; */
+}
+
+/* .prof-pic-big:hover {
+  cursor: pointer;
+} */
+
 .prof-icon-big {
   background-color: var(--dark-gray);
   border-radius: 50%;
@@ -91,9 +109,9 @@
   margin-right: auto;
 }
 
-.prof-icon-big:hover {
+/* .prof-icon-big:hover {
   cursor: pointer;
-}
+} */
 
 .user-card-username {
   font-family: "Segoe UI Historic", "Segoe UI", Helvetica, Arial, sans-serif;

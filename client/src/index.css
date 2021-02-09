@@ -123,6 +123,17 @@ input.error {
 .flex {
   display: flex;
 }
+.prof-pic {
+    border-radius: 50%;
+  height: 40px;
+  width: 40px;
+  /* margin-top: 20px; */
+  /* border-radius: 50%; */
+}
+
+.prof-pic:hover {
+  cursor: pointer;
+}
 
 .prof-icon {
   background-color: var(--dark-gray);
@@ -159,10 +170,3 @@ input.error {
   cursor: pointer;
 }
 
-.prof-pic {
-    border-radius: 50%;
-  height: 40px;
-  width: 40px;
-  /* margin-top: 20px; */
-  /* border-radius: 50%; */
-}

@@ -70,7 +70,16 @@ function CurrentUserPage(props) {
       {/* <div id="user-page-content-cont"> */}
       {/* <div className="test"> */}
       <div id="user-info-cont">
-        <div className="prof-icon-big"></div>
+        {props.currentUser.photo ? (
+          <img
+            className="prof-pic-big"
+            alt={`profile-pic-user-${props.currentUser.firstname}-${props.currentUser.lastname}`}
+            src={`http://localhost:5000/uploads/${props.currentUser.photo.filename}`}
+          />
+        ) : (
+          <div className="prof-icon-big"></div>
+        )}
+
         <div className="user-card-username">
           {props.currentUser.firstname} {props.currentUser.lastname}
         </div>
