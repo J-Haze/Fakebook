@@ -113,7 +113,7 @@ function EditUserModal(props) {
 
     if (imgUpload) {
       let ext = path.extname(imgUpload.name);
-      console.log("ext", ext);
+      ext = ext.toLowerCase();
       if (
         ext !== ".png" &&
         ext !== ".jpg" &&

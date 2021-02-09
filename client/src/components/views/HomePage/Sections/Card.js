@@ -8,6 +8,7 @@ import { useHistory } from "react-router-dom";
 import thumbBlack from "../../../../assets/thumbs-up-regular-gray.svg";
 import thumbBlue from "../../../../assets/thumbs-up-solid-light-blue.svg";
 
+import ProfilePic from "../../HelperComponents/ProfilePic.js"
 import Comments from "./Comments";
 // import { like_post } from "../../../../../../server/controllers/post_controller";
 
@@ -273,7 +274,10 @@ function Card(props) {
     >
       <div className="main-card">
         <div className="card-row-one">
-          <div className="prof-icon"></div>
+          {/* <div className="prof-icon"></div> */}
+          <ProfilePic 
+            user={props.post.author}
+          />
           {/* <UserAvatar user={post.author} /> */}
           <div className="flex-down card-title">
             <Link

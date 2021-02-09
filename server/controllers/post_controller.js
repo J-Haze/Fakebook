@@ -39,6 +39,7 @@ var storage = multer.diskStorage({
   fileFilter: (req, file, cb) => {
     // console.log("here file", file)
     const ext = path.extname(file.originalname);
+    ext = ext.toLowerCase();
     //must be jpg or png to upload
     // if (ext !== ".jpg" || ext !== ".png") {
     if (

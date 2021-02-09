@@ -93,7 +93,7 @@ exports.post_create_user = [
       photo: "",
       bio: "",
       location: "",
-      occupation:"",
+      occupation: "",
       realFacebookID: "",
       isPublished: true,
     });
@@ -168,6 +168,7 @@ var storage = multer.diskStorage({
   fileFilter: (req, file, cb) => {
     // console.log("here file", file)
     const ext = path.extname(file.originalname);
+    ext = ext.toLowerCase();
     //must be jpg or png to upload
     // if (ext !== ".jpg" || ext !== ".png") {
     if (
@@ -186,7 +187,6 @@ var storage = multer.diskStorage({
 
 var upload = multer({ storage: storage, limits: { fileSize: 5000000 } });
 
-
 exports.edit_current_user = [
   upload.any("file"),
   (req, res, next) => {
@@ -196,13 +196,47 @@ exports.edit_current_user = [
         res.sendStatus(403);
       } else {
         const { body, validationResult, check } = require("express-validator");
-        // const { userid } = req.params;
-        // const { title, text } = req.body;
 
         bio = req.body.bio;
         location = req.body.location;
         occupation = req.body.occupation;
         photo = "";
+
+        if (req.files.length > 0) {
+          console.log("yes file");
+          // console.log("req.file2", req.files[0]);
+
+          // console.log("req.files.path", req.files[0].path);
+
+          var img = fs.readFileSync(req.files[0].path);
+          var encode_img = img.toString("base64");
+          var final_img = {
+            contentType: req.files[0].mimetype,
+            image: new Buffer.from(encode_img, "base64"),
+          };
+
+          const splitName = req.files[0].originalname.split(".");
+          const format = splitName[splitName.length - 1];
+
+          console.log("format", format);
+
+          photo = {
+            fieldname: req.files[0].fieldname,
+            originalname: req.files[0].originalname,
+            encoding: req.files[0].encoding,
+            mimetype: req.files[0].mimetype,
+            destination: req.files[0].destination,
+            filename: req.files[0].filename,
+            path: fs.readFileSync(
+              path.join(__dirname, "../..", "/uploads/" + req.files[0].filename)
+            ),
+            encoded: final_img,
+            contentType: `image/{format}`,
+          };
+        }
+
+        // const { userid } = req.params;
+        // const { title, text } = req.body;
 
         //Checks if you're an admin
         // User.findOne({ _id: authData._id }, (err, user) => {
@@ -246,12 +280,10 @@ exports.edit_current_user = [
               post: updatedUser,
             });
           }
-        )
+        );
       }
-    }
-  
-    );
-  }
+    });
+  },
 ];
 
 exports.post_user_login = function (req, res, next) {
@@ -348,7 +380,7 @@ exports.get_currentUser_posts = (req, res, next) => {
         }
         res.json(posts);
         next();
-      }).populate("author")
+      }).populate("author");
     }
   });
 };
@@ -363,5 +395,5 @@ exports.get_user_posts = (req, res, next) => {
     }
     res.json(posts);
     next();
-  }).populate("author")
+  }).populate("author");
 };
