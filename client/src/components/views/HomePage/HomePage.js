@@ -4,6 +4,8 @@ import "./HomePage.css";
 
 import Card from "./Sections/Card.js";
 
+import ProfilePic from "../HelperComponents/ProfilePic.js";
+
 function HomePage(props) {
   const [postCount, setPostCount] = useState(0);
 
@@ -35,13 +37,14 @@ function HomePage(props) {
         <div id="home-blog-cont">
           <div id="new-post-card">
             <div id="new-post-card-top" className="new-post-card-row">
-              <Link className="link" to={`/user/${props.currentUser._id}`}>
+              {/* <Link className="link" to={`/user/${props.currentUser._id}`}>
                 <img
                   className="prof-pic"
                   alt={`profile-pic-user-${props.currentUser.firstname}-${props.currentUser.lastname}`}
                   src={`http://localhost:5000/uploads/${props.currentUser.photo.filename}`}
                 />
-              </Link>
+              </Link> */}
+              <ProfilePic user={props.currentUser} />
               <div
                 id="woym-btn"
                 onClick={() => {

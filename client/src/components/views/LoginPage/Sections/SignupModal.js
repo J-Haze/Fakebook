@@ -111,6 +111,7 @@ function SignupModal(props) {
           setBirthYear(currentYear);
           setGender("");
           setPassword("");
+          props.setCurrentUser(res.data);
 
           //Should I use a log in???
           Axios.post("/user/log-in", {
@@ -127,6 +128,7 @@ function SignupModal(props) {
               props.setTokenRefresh(!props.tokenRefresh);
               props.setSignupModalOpen(false);
               props.setIsLoggedIn(true);
+              history.push(`/`);
               //   props.fetchUsers();
               //   history.go(-1);
             }

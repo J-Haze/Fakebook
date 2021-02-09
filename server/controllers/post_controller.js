@@ -182,7 +182,7 @@ exports.post_create_post = [
                   // path.join("/uploads/" + req.file.filename)
                 ),
                 encoded: final_img,
-                contentType: `image/{format}`,
+                contentType: `image/${format}`,
                 // contentType: "image/png",
               },
               likesList: [],

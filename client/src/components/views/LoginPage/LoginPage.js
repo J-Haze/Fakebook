@@ -37,20 +37,20 @@ function LoginPage(props) {
           setPassword("");
           window.localStorage.setItem("token", JSON.stringify(res.data.token));
           props.setTokenRefresh(!props.tokenRefresh);
-          // history.go(-1);
           props.setIsLoggedIn(true);
+          history.push(`/`);
         }
       })
       .catch((error) => console.log("error", error));
   };
 
   const submitFBLogin = () => {
-//Action is a get not a post, so I think something else is going on
+    //Action is a get not a post, so I think something else is going on
 
     Axios.get("/user/auth/facebook")
       .then((res) => {
-        console.log("here1")
-        console.log('res', res)
+        console.log("here1");
+        console.log("res", res);
         if (res.data.message) {
           setErrorMessage(res.data.message);
           console.log(res.data.message);
@@ -58,7 +58,7 @@ function LoginPage(props) {
           setErrorMessage("");
           setEmail("");
           setPassword("");
-          console.log(res.data.token)
+          console.log(res.data.token);
           window.localStorage.setItem("token", JSON.stringify(res.data.token));
           props.setTokenRefresh(!props.tokenRefresh);
           // history.go(-1);
@@ -66,7 +66,7 @@ function LoginPage(props) {
         }
       })
       .catch((error) => console.log("error", error));
-  }
+  };
 
   // const Facebook = ({ handleFBLogin }) => {
   // const componentClicked = () => {};
@@ -74,7 +74,7 @@ function LoginPage(props) {
   //   const responseFacebook = (res) => {
   //   console.log("facebook res:", res)
   //     handleFBLogin(res.accessToken);
-      
+
   //     Axios.get("/user/auth/facebook")
   //     .then((res) => {
   //       if (res.data.message) {
@@ -92,7 +92,6 @@ function LoginPage(props) {
   //     .catch((error) => console.log("error", error));
   // };
 
-    
   return (
     <div className="login-cont">
       {signupModalOpen && (
@@ -142,7 +141,7 @@ function LoginPage(props) {
         >
           Log In
         </div>
-{/* 
+        {/* 
         <FacebookLogin
           appId="566877284195455"
           autoLoad={true}

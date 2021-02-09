@@ -8,6 +8,8 @@ import logoutLogo from "../../../assets/logout-alt.png";
 import bellLogo from "../../../assets/bell.png";
 import friendsLogo from "../../../assets/friend.png";
 
+import ProfilePic from "../HelperComponents/ProfilePic.js"
+
 function Header(props) {
   const history = useHistory();
 
@@ -15,7 +17,7 @@ function Header(props) {
     props.setIsLoggedIn(false);
     props.setCurrentUser("");
     localStorage.setItem("token", JSON.stringify("No token"));
-    // history.go(0);
+    history.push("/");
   }
 
   return (
@@ -61,7 +63,18 @@ function Header(props) {
           </Link>
 
           <div id="prof-header" className="prof-icon" onClick={() => {}}>
-            {/* <img className="logout-icon" src={logoutLogo} alt="logout icon" /> */}
+            {/* {props.currentUser.photo ? 
+            <Link className="link" to={`/user/${props.currentUser._id}`}>
+              <img
+                className="prof-pic"
+                alt={`profile-pic-user-${props.currentUser.firstname}-${props.currentUser.lastname}`}
+                // src={`http://localhost:5000/uploads/${props.currentUser.photo.filename}`}
+              />
+              </Link>
+              :
+              <
+              } */}
+            <ProfilePic user={props.currentUser} />
           </div>
 
           <div

@@ -129,7 +129,21 @@ exports.post_create_user = [
             birthDate: req.body.birthDate,
             gender: req.body.gender,
             friendList: [],
-            photo: "",
+            photo: {
+              fieldname: "file",
+              originalname: "default-prof-pic.png",
+              encoding: "7bit",
+              mimetype: "image/png",
+              destination: "uploads/",
+              // filename: "1612909792160_default-prof-pic.png",
+              filename: "default-prof-pic.png",
+              path: "",
+              encoded: {
+                contentType: "image/png",
+                image: "",
+              },
+              contentType: "image/png",
+            },
             realFacebookID: "",
             isPublished: true,
           });
@@ -200,7 +214,19 @@ exports.edit_current_user = [
         bio = req.body.bio;
         location = req.body.location;
         occupation = req.body.occupation;
-        photo = "";
+        photo = null;
+
+        if (bio == undefined) {
+          bio = "";
+        }
+
+        if (location == undefined) {
+          location = "";
+        }
+
+        if (occupation == undefined) {
+          occupation = "";
+        }
 
         if (req.files.length > 0) {
           console.log("yes file");
@@ -231,7 +257,7 @@ exports.edit_current_user = [
               path.join(__dirname, "../..", "/uploads/" + req.files[0].filename)
             ),
             encoded: final_img,
-            contentType: `image/{format}`,
+            contentType: `image/${format}`,
           };
         }
 
@@ -265,22 +291,39 @@ exports.edit_current_user = [
         //       );
         //   }
         // }
-
-        User.findOneAndUpdate(
-          { _id: authData._id },
-          { bio, location, occupation, photo },
-          { useFindAndModify: false, new: true },
-          (err, updatedUser) => {
-            if (err) {
-              console.log(err);
-              return res.json(err);
+        if (photo == null) {
+          User.findOneAndUpdate(
+            { _id: authData._id },
+            { bio, location, occupation },
+            { useFindAndModify: false, new: true },
+            (err, updatedUser) => {
+              if (err) {
+                console.log(err);
+                return res.json(err);
+              }
+              res.json({
+                message: "User created",
+                post: updatedUser,
+              });
             }
-            res.json({
-              message: "User created",
-              post: updatedUser,
-            });
-          }
-        );
+          );
+        } else {
+          User.findOneAndUpdate(
+            { _id: authData._id },
+            { bio, location, occupation, photo },
+            { useFindAndModify: false, new: true },
+            (err, updatedUser) => {
+              if (err) {
+                console.log(err);
+                return res.json(err);
+              }
+              res.json({
+                message: "User created",
+                post: updatedUser,
+              });
+            }
+          );
+        }
       }
     });
   },

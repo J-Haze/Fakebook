@@ -160,16 +160,11 @@ function CurrentUserPage(props) {
               {props.currentUser.friendList.map((friend) =>
                 friend.isPublished ? (
                   <div className="friend-icon-box" key={friend._id}>
-                    {/* <div className="prof-icon-friendList">
-                    </div> */}
-                    <Link
-                      className="link"
-                      to={`/user/${props.currentUser._id}`}
-                    >
+                    <Link className="link" to={`/user/${friend._id}`}>
                       <img
                         className="prof-pic-friendList"
-                        alt={`profile-pic-user-${props.currentUser.firstname}-${props.currentUser.lastname}`}
-                        src={`http://localhost:5000/uploads/${props.currentUser.photo.filename}`}
+                        alt={`profile-pic-user-${friend.firstname}-${friend.lastname}`}
+                        src={`http://localhost:5000/uploads/${friend.photo.filename}`}
                       />
                     </Link>
                     <div>
