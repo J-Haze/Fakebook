@@ -21,6 +21,11 @@
   /* width: 892px; */
 }
 
+.test {
+  /* border: 1px solid red;
+  height: auto; */
+}
+
 /* Make width 500px if screen is less than 860 */
 #user-info-cont {
   width: 392px;
@@ -30,6 +35,48 @@
   /* box-sizing: border-box; */
   /* border: 1px solid red; */
   margin-right: 8px;
+
+  /* position: -webkit-sticky; Safari */
+  height: auto;
+  /* position: fixed; */
+  /* top: 0; */
+  /* border: 1px solid blue; */
+
+  flex-basis: 360px;
+
+  /* position: fixed; */
+  /* top: 50%; */
+  /* -webkit-transform: translateY(-50%); */
+  /* -ms-transform: translateY(-50%); */
+  /* transform: translateY(-50%); */
+}
+
+#user-info-footer {
+  /* height: auto;
+  position: sticky;
+  top: 0; */
+
+  /* position: sticky;
+  bottom: 0;
+  align-self: flex-end; */
+  /* border: 1px solid green; */
+
+  /* padding-left: 12px;; */
+  margin-top: 8px;
+
+  font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 16.0004px;
+  text-align: left;
+  color: rgb(101, 103, 107);
+  text-decoration-line: none;
+  text-decoration-style: solid;
+  word-break: break-word;
+}
+
+#user-post-cont {
+  /* overflow-y: hidden; */
 }
 
 .prof-icon-big {
@@ -48,19 +95,6 @@
   cursor: pointer;
 }
 
-#user-info-box {
-  width: 376px;
-  background-color: white;
-  color: #050505;
-  border-radius: 8px;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-  box-sizing: border-box;
-  height: 160px;
-  margin-top: 32px;
-  padding: 13px;
-  box-sizing: border-box;
-}
-
 .user-card-username {
   font-family: "Segoe UI Historic", "Segoe UI", Helvetica, Arial, sans-serif;
   font-size: 22px;
@@ -73,11 +107,11 @@
   margin-bottom: 16px;
 }
 
-#user-info-box {
+/* #user-info-box {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-}
+} */
 
 .edit-user-prof {
   /* height: 35px;
@@ -125,6 +159,7 @@
   text-align: start;
   /* text-decoration-thickness: auto; */
   word-break: break-word;
+  margin-bottom: 5px;
 
   /* border: 1px solid black; */
 }
@@ -142,15 +177,34 @@
 #bio-cont {
   /* border: 1px solid black; */
   /* display: flex; */
+  margin-bottom: 15px;
 }
 
 #location-cont {
   /* display: flex; */
+  margin-bottom: 15px;
 }
 
 #occupation-cont {
   /* display: flex; */
+  /* margin-bottom: 15px; */
 }
+
+/* #user-info-box {
+  width: 376px;
+  background-color: white;
+  color: #050505;
+  border-radius: 8px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  box-sizing: border-box;
+  min-height: 160px;
+  margin-top: 32px;
+  padding: 13px;
+  box-sizing: border-box;
+
+    display: flex;
+  flex-direction: column;
+  /* justify-content: space-between; */
 
 #user-info-box {
   width: 376px;
@@ -159,10 +213,12 @@
   border-radius: 8px;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
   box-sizing: border-box;
-  height: 160px;
+  min-height: 160px;
   margin-top: 32px;
   padding: 13px;
   box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
 }
 
 #user-friends-box {
@@ -244,19 +300,18 @@
   margin-top: 8px;
 }
 
-#friend-icon-cont{
-    border: 1px solid blue;
-    width: 452px;
-    box-sizing: border-box;
-    width: 100%;
-    margin-top: 16px;
+#friend-icon-cont {
+  /* border: 1px solid blue; */
+  width: 452px;
+  box-sizing: border-box;
+  width: 100%;
+  margin-top: 16px;
 }
 
-
-.friend-icon-box{
-    height: 140px;
-    width: 102px;
-    border: 1px solid black;
+.friend-icon-box {
+  height: 140px;
+  width: 102px;
+  /* border: 1px solid black; */
 }
 
 .prof-icon-friendList {
@@ -270,8 +325,28 @@
   cursor: pointer;
 }
 
+.no-posts-profile {
+  background-color: white;
+  color: rgb(101, 103, 107);
+  box-sizing: border-box;
+  /* margin-top: 20px; */
+  margin: 20px 0px 20px 0px;
+  /* font-size: 1.2em; */
+  padding: 24px;
+  /* height: 80px; */
+  width: 500px;
+  border-radius: 8px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
 
-
-
-
-
+.no-posts-header-profile {
+  font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 24px;
+  text-align: center;
+  word-break: break-word;
+  height: 24px;
+  margin-top: 6px;
+  margin-bottom: 6px;
+}

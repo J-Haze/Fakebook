@@ -68,6 +68,7 @@ function CurrentUserPage(props) {
         />
       )}
       {/* <div id="user-page-content-cont"> */}
+      {/* <div className="test"> */}
       <div id="user-info-cont">
         <div className="prof-icon-big"></div>
         <div className="user-card-username">
@@ -93,8 +94,8 @@ function CurrentUserPage(props) {
               <span
                 className="edit-user-prof"
                 onClick={(event) => {
-                    // event.stopPropagation();
-                    setEditUserModalOpen(true);
+                  // event.stopPropagation();
+                  setEditUserModalOpen(true);
                 }}
               >
                 Edit Profile
@@ -163,7 +164,12 @@ function CurrentUserPage(props) {
             </div>
           )}
         </div>
+        <div id="user-info-footer">
+          'Fakebook', created by Justin Hazelton, 2021 <br /> No copyright
+          infringement intended.
+        </div>
       </div>
+      {/* </div> */}
       <div id="user-post-cont">
         <div id="new-post-card">
           <div id="new-post-card-top" className="new-post-card-row">
@@ -195,6 +201,10 @@ function CurrentUserPage(props) {
             ""
           )
         )}
+
+        <div className="no-posts-profile">
+          <div className="no-posts-header-profile">No More Posts</div>
+        </div>
       </div>
       {/* </div> */}
     </div>
