@@ -85,13 +85,27 @@ function EditUserModal(props) {
     //   }
     // }
 
-    if (
-      bioText.length > 140 ||
-      locationText.length > 140 ||
-      occupationText.length > 140
-    ) {
-      setErrorMessage("Fields are limited to 140 characters.");
-      alert("Fields are limited to 140 characters.");
+    if (bioText.length > 140) {
+      setErrorMessage("'Bio' is limited to 140 characters.");
+      alert(
+        `'Bio' is limited to 140 characters. Current character count: ${bioText.length}`
+      );
+      return;
+    }
+
+    if (locationText.length > 40) {
+      setErrorMessage("'Location' is limited to 140 characters.");
+      alert(
+        `'Location' is limited to 40 characters. Current character count: ${locationText.length}`
+      );
+      return;
+    }
+
+    if (occupationText.length > 40) {
+      setErrorMessage("'Occupation' is limited to 140 characters.");
+      alert(
+        `'Occupation' is limited to to 40 characters. Current character count: ${occupationText.length}`
+      );
       return;
     }
 
@@ -192,7 +206,7 @@ function EditUserModal(props) {
     <div
       className="edit-user-modal"
       onClick={() => {
-        props.setEditUserModalOpen(false);
+        // props.setEditUserModalOpen(false);
       }}
     >
       <div
