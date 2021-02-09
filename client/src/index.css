@@ -136,11 +136,18 @@ input.error {
 }
 
 .prof-icon {
-  background-color: var(--dark-gray);
+  /* background-color: var(--dark-gray); */
   border-radius: 50%;
   height: 40px;
   width: 40px;
 }
+
+/* .prof-icon {
+  background-color: var(--dark-gray);
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+} */
 
 .prof-icon:hover {
   cursor: pointer;

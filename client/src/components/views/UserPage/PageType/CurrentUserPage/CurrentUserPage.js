@@ -1,6 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import Axios from "axios";
+import { Link } from "react-router-dom";
 
 import Card from "../../../HomePage/Sections/Card.js";
 import EditUserModal from "./Sections/EditUserModal.js";
@@ -159,9 +160,18 @@ function CurrentUserPage(props) {
               {props.currentUser.friendList.map((friend) =>
                 friend.isPublished ? (
                   <div className="friend-icon-box" key={friend._id}>
-                    <div className="prof-icon-friendList">
-                      {/* <ProfileImage /> */}
-                    </div>
+                    {/* <div className="prof-icon-friendList">
+                    </div> */}
+                    <Link
+                      className="link"
+                      to={`/user/${props.currentUser._id}`}
+                    >
+                      <img
+                        className="prof-pic-friendList"
+                        alt={`profile-pic-user-${props.currentUser.firstname}-${props.currentUser.lastname}`}
+                        src={`http://localhost:5000/uploads/${props.currentUser.photo.filename}`}
+                      />
+                    </Link>
                     <div>
                       {friend.firstname} {friend.lastname}
                     </div>
@@ -182,7 +192,13 @@ function CurrentUserPage(props) {
       <div id="user-post-cont">
         <div id="new-post-card">
           <div id="new-post-card-top" className="new-post-card-row">
-            <div className="prof-icon">{/* <ProfileImage /> */}</div>
+            <Link className="link" to={`/user/${props.currentUser._id}`}>
+              <img
+                className="prof-pic"
+                alt={`profile-pic-user-${props.currentUser.firstname}-${props.currentUser.lastname}`}
+                src={`http://localhost:5000/uploads/${props.currentUser.photo.filename}`}
+              />
+            </Link>
             <div
               id="woym-btn"
               onClick={() => {

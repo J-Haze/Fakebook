@@ -332,6 +332,17 @@
   /* border: 1px solid black; */
 }
 
+.prof-pic-friendList {
+  
+  border-radius: 8px;
+  height: 102px;
+  width: 102px;
+}
+
+.prof-pic-friendList:hover {
+  cursor: pointer;
+}
+
 .prof-icon-friendList {
   background-color: var(--dark-gray);
   border-radius: 8px;
