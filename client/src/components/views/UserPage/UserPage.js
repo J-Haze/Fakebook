@@ -1,7 +1,7 @@
 import React from "react";
 import Card from "../HomePage/Sections/Card.js";
 
-import CurrentUserPage from "./PageType/CurrentUserPage/CurrentUserPage.js"
+import CurrentUserPage from "./PageType/CurrentUserPage/CurrentUserPage.js";
 import FriendPage from "./PageType/FriendPage.js";
 import NonFriendPage from "./PageType/NonFriendPage.js";
 
@@ -14,17 +14,34 @@ function UserPage(props) {
   const [blogCount, setBlogCount] = useState(0);
   const [loading, setLoading] = useState(true);
 
-    const [pageType, setPageType] = useState("NonFriendPage");
-    
-    // console.log("here1", props.currentUser)
+  const [pageType, setPageType] = useState("NonFriendPage");
+
+  console.log("here1", props.currentUser);
+  console.log("props._id", props._id);
+
+  let test = props.currentUser.friendList.find((obj) => obj._id == props._id);
+
+  console.log("test", test);
+
+  console.log(
+    "test2",
+    props.currentUser.friendList.find((obj) => obj._id == props._id).length
+  );
 
   useEffect(() => {
     if (props._id === props.currentUser._id) {
       setPageType("CurrentUserPage");
-    } else if (props.currentUser.friendList.indexOf(props._id) != -1) {
-      setPageType("FriendPage");
     } else {
-      setPageType("NonFriendPage");
+      // let isFriendArr = props.currentUser.friendList.find((obj) => obj._id == props._id);
+
+      // console.log("isFriendArr", isFriendArr)
+      // console.log(isFriendArr.length)
+
+      if (props.currentUser.friendList.find((obj) => obj._id == props._id)) {
+        setPageType("FriendPage");
+      } else {
+        setPageType("NonFriendPage");
+      }
     }
   }, [props._id, props.currentUser._id, props.currentUser.friendList]);
 
@@ -64,13 +81,8 @@ function UserPage(props) {
   //       props.setIsViewingProfile(false);
   //     };
   //   }, [props.currentUser, props.username]);
-    
-    
-    
-    
-    
-    
-    //code that takes displayedPosts and outputs user posts
+
+  //code that takes displayedPosts and outputs user posts
 
   return (
     <div id="user-page">

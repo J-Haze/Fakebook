@@ -7,7 +7,6 @@ import Card from "../../../HomePage/Sections/Card.js";
 import EditUserModal from "./Sections/EditUserModal.js";
 
 import "../../UserPage.css";
-import { isThisQuarter } from "date-fns";
 
 function CurrentUserPage(props) {
   const [userPosts, setUserPosts] = useState([]);
