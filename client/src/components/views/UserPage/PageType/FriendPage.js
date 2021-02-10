@@ -14,7 +14,7 @@ function FriendPage(props) {
   const [friendCount, setFriendCount] = useState(0);
 
   //  const [editUserModalOpen, setEditUserModalOpen] = useState(true);
-  const [editUserModalOpen, setEditUserModalOpen] = useState(false);
+  const [unfriendModalOpen, setUnfriendModalOpen] = useState(false);
 
   console.log("user3", props.userProfile);
   // console.log("user4", props.friendList);
@@ -59,18 +59,61 @@ function FriendPage(props) {
     calculateFriendCount();
   }, []);
 
+  function submitUnfriend() {
+    console.log("unfriend");
+  }
+
   return (
     <div id="current-user-page">
-      {/* {editUserModalOpen && (
-        <EditUserModal
-          // createPostModalOpen={createPostModalOpen}
-          setEditUserModalOpen={setEditUserModalOpen}
-          currentUser={props.currentUser}
-          // fetchPosts={fetchPosts}
-        />
-      )} */}
-      {/* <div id="user-page-content-cont"> */}
-      {/* <div className="test"> */}
+      {unfriendModalOpen && (
+        <div
+          className="unfriend-modal"
+          onClick={() => {
+            setUnfriendModalOpen(false);
+          }}
+        >
+          <div
+            className="unfriend-modal-content"
+            onClick={(event) => {
+              event.stopPropagation();
+            }}
+          >
+            <div id="unfriend-header">
+              <div id="unfriend-header-top">
+                <div id="unfriend-header-title">
+                  Unfriend {props.userProfile.firstname}{" "}
+                  {props.userProfile.lastname}
+                </div>
+                <span
+                  className="close-unfriend"
+                  onClick={() => {
+                    setUnfriendModalOpen(false);
+                  }}
+                >
+                  &times;
+                </span>
+              </div>
+            </div>
+            <div id="unfriend-mid-row">
+              <div className="unfriend-mid-row-text">
+                Are you sure to want to remove {props.userProfile.firstname}{" "}
+                {props.userProfile.lastname} as your friend?
+              </div>
+            </div>
+            <div id="unfriend-bottom-row">
+              <div className="cancel-unfriend unfriend-btn">Cancel</div>
+              <div
+                className="submit-unfriend unfriend-btn"
+                onClick={() => {
+                  submitUnfriend();
+                }}
+              >
+                Confirm
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
       <div id="user-info-cont">
         {props.userProfile.photo ? (
           <img
@@ -86,33 +129,25 @@ function FriendPage(props) {
           {props.userProfile.firstname} {props.userProfile.lastname}
         </div>
 
-        <div id="user-info-box">
-          {/* <span
-            // className="del-post-x"
-            onClick={(event) => {
-              //   event.stopPropagation();
-              //   setDeletePostModalOpen(true);
+        <div className="user-info-friend-manage-cont">
+          <div className="user-info-confirm-friend"> &#10003; Friends</div>
+          <div
+            className="user-info-unfriend"
+            onClick={() => {
+              setUnfriendModalOpen(true);
             }}
           >
-            Edit Profile
-          </span> */}
+            Unfriend
+          </div>
+        </div>
 
+        <div id="user-info-box">
           <div id="bio-cont">
             <div className="flex">
               <div id="bio-header" className="user-info-header">
                 Bio
               </div>
-              <span
-                className="edit-user-prof"
-                onClick={(event) => {
-                  // event.stopPropagation();
-                  setEditUserModalOpen(true);
-                }}
-              >
-                Edit Profile
-              </span>
             </div>
-            {/* Edit profile float */}
             <div id="bio" className="user-info-text">
               {props.userProfile.bio}
             </div>
@@ -122,7 +157,6 @@ function FriendPage(props) {
             <div id="location-header" className="user-info-header">
               Location
             </div>
-            {/* Edit profile float */}
             <div id="location" className="user-info-text">
               {props.userProfile.location}
             </div>
@@ -132,7 +166,6 @@ function FriendPage(props) {
             <div id="occupation-header" className="user-info-header">
               Occupation
             </div>
-            {/* Edit profile float */}
             <div id="occupation" className="user-info-text">
               {props.userProfile.occupation}
             </div>
@@ -141,13 +174,7 @@ function FriendPage(props) {
         <div id="user-friends-box">
           <div className="flex">
             <div id="friend-header">Friends</div>
-            <span
-              className="see-all-friends"
-              onClick={(event) => {
-                //   event.stopPropagation();
-                //   setDeletePostModalOpen(true);
-              }}
-            >
+            <span className="see-all-friends" onClick={(event) => {}}>
               See All Friends
             </span>
           </div>
@@ -186,7 +213,7 @@ function FriendPage(props) {
       </div>
       {/* </div> */}
       <div id="user-post-cont">
-        <div id="new-post-card">
+        {/* <div id="new-post-card">
           <div id="new-post-card-top" className="new-post-card-row">
             <Link className="link" to={`/user/${props.userProfile._id}`}>
               <img
@@ -204,12 +231,7 @@ function FriendPage(props) {
               What's on your mind, {props.userProfile.firstname}?
             </div>
           </div>
-          {/* <div
-                id="new-post-card-bottom"
-                className="new-post-card-row"
-              ></div> */}
-        </div>
-        {/* <div className="main-subtitle">All Posts:</div> */}
+        </div> */}
         {userPosts.map((post) =>
           post.isPublished ? (
             <Card
@@ -227,7 +249,6 @@ function FriendPage(props) {
           <div className="no-posts-header-profile">No More Posts</div>
         </div>
       </div>
-      {/* </div> */}
     </div>
   );
 }
