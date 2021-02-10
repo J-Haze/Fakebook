@@ -2,6 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import Axios from "axios";
 import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 import Card from "../..//HomePage/Sections/Card.js";
 // import EditUserModal from "../Current/Sections/EditUserModal.js";
@@ -15,6 +16,8 @@ function FriendPage(props) {
 
   //  const [editUserModalOpen, setEditUserModalOpen] = useState(true);
   const [unfriendModalOpen, setUnfriendModalOpen] = useState(false);
+
+  const history = useHistory();
 
   console.log("user3", props.userProfile);
   // console.log("user4", props.friendList);
@@ -101,7 +104,14 @@ function FriendPage(props) {
               </div>
             </div>
             <div id="unfriend-bottom-row">
-              <div className="cancel-unfriend unfriend-btn">Cancel</div>
+              <div
+                className="cancel-unfriend unfriend-btn"
+                onClick={() => {
+                  setUnfriendModalOpen(false);
+                }}
+              >
+                Cancel
+              </div>
               <div
                 className="submit-unfriend unfriend-btn"
                 onClick={() => {
@@ -174,7 +184,12 @@ function FriendPage(props) {
         <div id="user-friends-box">
           <div className="flex">
             <div id="friend-header">Friends</div>
-            <span className="see-all-friends" onClick={(event) => {}}>
+            <span
+              className="see-all-friends"
+              onClick={(event) => {
+                history.push(`/friends/${props.userProfile._id}`);
+              }}
+            >
               See All Friends
             </span>
           </div>

@@ -2,6 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import Axios from "axios";
 import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 import Card from "../../../HomePage/Sections/Card.js";
 import EditUserModal from "./Sections/EditUserModal.js";
@@ -15,6 +16,8 @@ function CurrentUserPage(props) {
 
   //  const [editUserModalOpen, setEditUserModalOpen] = useState(true);
   const [editUserModalOpen, setEditUserModalOpen] = useState(false);
+
+  const history = useHistory();
 
   useEffect(() => {
     let userPostArray = [];
@@ -144,6 +147,7 @@ function CurrentUserPage(props) {
               onClick={(event) => {
                 //   event.stopPropagation();
                 //   setDeletePostModalOpen(true);
+                history.push(`/friends/${props.currentUser._id}`)
               }}
             >
               See All Friends

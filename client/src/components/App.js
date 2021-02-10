@@ -11,6 +11,7 @@ import LoginPage from "./views/LoginPage/LoginPage.js";
 import UserPage from "./views/UserPage/UserPage.js"
 import NotFound from "./views/NotFound/NotFound.js";
 import CreatePostModal from "./views/CreatePostModal/CreatePostModal.js";
+import FriendListPage from "./views/FriendListPage/FriendListPage";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -171,6 +172,27 @@ function App() {
                   createPostModalOpen={createPostModalOpen}
                   setCreatePostModalOpen={setCreatePostModalOpen}
                   // setIsViewingProfile={setIsViewingProfile}
+                />
+              )}
+            ></Route>
+          ))}
+
+          {allUsers.map((user) => (
+            <Route
+              exact
+              key={user._id}
+              path={`/friends/${user._id}`}
+              render={() => (
+                <FriendListPage
+                  user={user}
+                  currentUser={currentUser}
+
+                  // fetchPosts={fetchPosts}
+                  // displayedPosts={displayedPosts}
+                  // createPostModalOpen={createPostModalOpen}
+                  // setCreatePostModalOpen={setCreatePostModalOpen}
+
+
                 />
               )}
             ></Route>

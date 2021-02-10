@@ -42,7 +42,7 @@ function Header(props) {
           <Link
             id="friends-cont"
             className="link hover-gray"
-            to={`/user/friends`}
+            to={`/friends/${props.currentUser._id}`}
           >
             <img
               className="friends-icon"
@@ -50,6 +50,8 @@ function Header(props) {
               alt="friends icon"
             />
           </Link>
+
+          {/* This should just be an onClick? */}
           <Link
             id="bell-cont"
             className="link hover-gray"
