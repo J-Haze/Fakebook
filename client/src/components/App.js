@@ -164,7 +164,7 @@ function App() {
               path={`/user/${user._id}`}
               render={() => (
                 <UserPage
-                  {...user}
+                  userProfile={user}
                   currentUser={currentUser}
                   fetchPosts={fetchPosts}
                   displayedPosts={displayedPosts}

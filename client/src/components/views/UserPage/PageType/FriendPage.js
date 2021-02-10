@@ -16,40 +16,42 @@ function FriendPage(props) {
   //  const [editUserModalOpen, setEditUserModalOpen] = useState(true);
   const [editUserModalOpen, setEditUserModalOpen] = useState(false);
 
+  console.log("user3", props.userProfile);
+  // console.log("user4", props.friendList);
+
   useEffect(() => {
     let userPostArray = [];
 
-    let ownPosts = [];
     for (let i = 0; i < props.displayedPosts.length; i++) {
       //   console.log(i, props.displayedPosts[i]);
       //   console.log(props.displayedPosts.author);
       //   console.log(props.currentUser);
-      if (props.displayedPosts[i].author._id == props.currentUser._id) {
+      if (props.displayedPosts[i].author._id == props.userProfile._id) {
         // console.log("match");
         // console.log(props.displayedPosts[i].author._id);
         // console.log(props.currentUser._id);
-        if (ownPosts.length == 0 || ownPosts == undefined) {
-          ownPosts = [props.displayedPosts[i]];
+        if (userPostArray.length == 0 || userPostArray == undefined) {
+          userPostArray = [props.displayedPosts[i]];
         } else {
-          ownPosts.push(props.displayedPosts[i]);
+          userPostArray.push(props.displayedPosts[i]);
         }
       }
     }
-    // console.log("ownPosts end", ownPosts);
+    // console.log("userPostArray end", userPostArray);
     // console.log("displayedPosts end", props.displayedPosts);
-    setUserPosts(ownPosts);
+    setUserPosts(userPostArray);
     // setDisplayedComments(res.data);
   }, [props.displayedPosts]);
 
   function calculateFriendCount() {
     if (
-      props.currentUser.friendList.length == 0 ||
-      props.currentUser.friendList.length == undefined
+      props.userProfile.friendList.length == 0 ||
+      props.userProfile.friendList.length == undefined
     ) {
       setFriendCount(0);
       return;
     } else {
-      setFriendCount(props.currentUser.friendList.length);
+      setFriendCount(props.userProfile.friendList.length);
     }
   }
 
@@ -70,18 +72,18 @@ function FriendPage(props) {
       {/* <div id="user-page-content-cont"> */}
       {/* <div className="test"> */}
       <div id="user-info-cont">
-        {props.currentUser.photo ? (
+        {props.userProfile.photo ? (
           <img
             className="prof-pic-big"
-            alt={`profile-pic-user-${props.currentUser.firstname}-${props.currentUser.lastname}`}
-            src={`http://localhost:5000/uploads/${props.currentUser.photo.filename}`}
+            alt={`profile-pic-user-${props.userProfile.firstname}-${props.userProfile.lastname}`}
+            src={`http://localhost:5000/uploads/${props.userProfile.photo.filename}`}
           />
         ) : (
           <div className="prof-icon-big"></div>
         )}
 
         <div className="user-card-username">
-          {props.currentUser.firstname} {props.currentUser.lastname}
+          {props.userProfile.firstname} {props.userProfile.lastname}
         </div>
 
         <div id="user-info-box">
@@ -112,7 +114,7 @@ function FriendPage(props) {
             </div>
             {/* Edit profile float */}
             <div id="bio" className="user-info-text">
-              {props.currentUser.bio}
+              {props.userProfile.bio}
             </div>
           </div>
 
@@ -122,7 +124,7 @@ function FriendPage(props) {
             </div>
             {/* Edit profile float */}
             <div id="location" className="user-info-text">
-              {props.currentUser.location}
+              {props.userProfile.location}
             </div>
           </div>
 
@@ -132,7 +134,7 @@ function FriendPage(props) {
             </div>
             {/* Edit profile float */}
             <div id="occupation" className="user-info-text">
-              {props.currentUser.occupation}
+              {props.userProfile.occupation}
             </div>
           </div>
         </div>
@@ -154,9 +156,9 @@ function FriendPage(props) {
           ) : (
             <div id="friend-text">{friendCount} friends</div>
           )}
-          {props.currentUser.friendList.length > 0 && (
+          {props.userProfile.friendList.length > 0 && (
             <div id="friend-icon-cont">
-              {props.currentUser.friendList.map((friend) =>
+              {props.userProfile.friendList.map((friend) =>
                 friend.isPublished ? (
                   <div className="friend-icon-box" key={friend._id}>
                     <Link className="link" to={`/user/${friend._id}`}>
@@ -186,11 +188,11 @@ function FriendPage(props) {
       <div id="user-post-cont">
         <div id="new-post-card">
           <div id="new-post-card-top" className="new-post-card-row">
-            <Link className="link" to={`/user/${props.currentUser._id}`}>
+            <Link className="link" to={`/user/${props.userProfile._id}`}>
               <img
                 className="prof-pic"
-                alt={`profile-pic-user-${props.currentUser.firstname}-${props.currentUser.lastname}`}
-                src={`http://localhost:5000/uploads/${props.currentUser.photo.filename}`}
+                alt={`profile-pic-user-${props.userProfile.firstname}-${props.userProfile.lastname}`}
+                src={`http://localhost:5000/uploads/${props.userProfile.photo.filename}`}
               />
             </Link>
             <div
@@ -199,7 +201,7 @@ function FriendPage(props) {
                 props.setCreatePostModalOpen(true);
               }}
             >
-              What's on your mind, {props.currentUser.firstname}?
+              What's on your mind, {props.userProfile.firstname}?
             </div>
           </div>
           {/* <div

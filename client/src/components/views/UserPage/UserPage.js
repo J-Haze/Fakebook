@@ -16,34 +16,21 @@ function UserPage(props) {
 
   const [pageType, setPageType] = useState("NonFriendPage");
 
-  console.log("here1", props.currentUser);
-  console.log("props._id", props._id);
-
-  let test = props.currentUser.friendList.find((obj) => obj._id == props._id);
-
-  console.log("test", test);
-
-  console.log(
-    "test2",
-    props.currentUser.friendList.find((obj) => obj._id == props._id).length
-  );
-
   useEffect(() => {
-    if (props._id === props.currentUser._id) {
+    if (props.userProfile._id === props.currentUser._id) {
       setPageType("CurrentUserPage");
     } else {
-      // let isFriendArr = props.currentUser.friendList.find((obj) => obj._id == props._id);
-
-      // console.log("isFriendArr", isFriendArr)
-      // console.log(isFriendArr.length)
-
-      if (props.currentUser.friendList.find((obj) => obj._id == props._id)) {
+      if (props.currentUser.friendList.find((obj) => obj._id == props.userProfile._id)) {
         setPageType("FriendPage");
       } else {
         setPageType("NonFriendPage");
       }
     }
-  }, [props._id, props.currentUser._id, props.currentUser.friendList]);
+  }, [props.userProfile._id, props.currentUser._id, props.currentUser.friendList]);
+
+
+  // console.log("user1", props.user)
+  // console.log("user2", props.friendList);
 
   //   const fetchUserBlogs = () => {
   //     Axios.get(`/user/${props._id}/posts`).then((res) => {
@@ -98,11 +85,14 @@ function UserPage(props) {
         <FriendPage
           currentUser={props.currentUser}
           fetchPosts={props.fetchPosts}
+          displayedPosts={props.displayedPosts}
+          userProfile={props.userProfile}
         />
       ) : (
         <NonFriendPage
           currentUser={props.currentUser}
           fetchPosts={props.fetchPosts}
+          displayedPosts={props.displayedPosts}
         />
       )}
     </div>
