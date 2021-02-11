@@ -1,5 +1,10 @@
 import React from "react";
-import Card from "../HomePage/Sections/Card.js";
+// import Card from "../HomePage/Sections/Card.js";
+import { Link } from "react-router-dom";
+
+import "./FriendListPage.css";
+
+import { useHistory } from "react-router-dom";
 
 // import CurrentUserPage from "./PageType/CurrentUserPage/CurrentUserPage.js";
 // import FriendPage from "./PageType/FriendPage.js";
@@ -17,6 +22,8 @@ function FriendListPage(props) {
   const [loading, setLoading] = useState(true);
 
   const [pageType, setPageType] = useState("FriendListPage");
+
+  const history = useHistory();
 
   console.log("user", props.user._id);
   console.log(props.currentUser._id);
@@ -85,14 +92,50 @@ function FriendListPage(props) {
     <div id="user-page">
       {pageType == "CurrentUserFriendListPage" ? (
         <CurrentUserFriendListPage
-        // currentUser={props.currentUser}
-        // fetchPosts={props.fetchPosts}
-        // displayedPosts={props.displayedPosts}
-        // createPostModalOpen={props.createPostModalOpen}
-        // setCreatePostModalOpen={props.setCreatePostModalOpen}
+          currentUser={props.currentUser}
+          // fetchPosts={props.fetchPosts}
+          // displayedPosts={props.displayedPosts}
+          // createPostModalOpen={props.createPostModalOpen}
+          // setCreatePostModalOpen={props.setCreatePostModalOpen}
         />
       ) : (
-        <div>Friend List Page</div>
+        <div id="friend-list-page">
+          <div className="friend-list-cont">
+            {/* Something for if there's no friends */}
+            <div className="friend-list-header">
+              {props.user.firstname} {props.user.lastname}'s friends:
+            </div>
+
+            {props.user.friendList.map((friend) =>
+              friend.isPublished ? (
+                <div className="friend-card" key={friend._id}>
+                  <Link className="link" to={`/user/${friend._id}`}>
+                    <img
+                      className="prof-pic-friendList-page"
+                      alt={`profile-pic-user-${friend.firstname}-${friend.lastname}`}
+                      src={`http://localhost:5000/uploads/${friend.photo.filename}`}
+                    />
+                  </Link>
+                  <div className="friend-card-info">
+                    <div
+                      className="friend-card-username"
+                      onClick={() => {
+                        history.push(`/user/${friend._id}`);
+                      }}
+                    >
+                      {friend.firstname} {friend.lastname}
+                    </div>
+                    <div className="friend-card-location">
+                      {friend.location}
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                ""
+              )
+            )}
+          </div>
+        </div>
       )}
     </div>
   );

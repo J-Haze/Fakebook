@@ -1,0 +1,85 @@
+#friend-list-page {
+  min-width: 876px;
+  /* ^^ or half of that to go to 1 row? */
+}
+
+.friend-list-cont {
+  background-color: white;
+  /* min-width:  */
+  max-width: 876px;
+  padding: 16px;
+
+  color: #050505;
+
+  margin-top: 16px;
+  box-sizing: border-box;
+  /* padding: 5px 10px; */
+  border-radius: 8px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.friend-list-header {
+  font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 28.0008px;
+  text-align: left;
+  word-break: break-word;
+  color: rgb(5, 5, 5);
+  margin-bottom: 16px;
+}
+
+.friend-card {
+  width: 418px;
+  height: 115px;
+  padding: 16px;
+  box-sizing: border-box;
+  /* border: 1px solid black; */
+  display: flex;
+}
+
+.prof-pic-friendList-page {
+  border-radius: 8px;
+  height: 80px;
+  width: 80px;
+  box-shadow: rgba(0, 0, 0, 0.1);
+}
+
+.prof-pic-friendList-page:hover {
+  cursor: pointer;
+}
+
+.friend-card-info {
+  /* border: 1px solid blue; */
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+  justify-content: center;
+  margin-left: 16px;
+}
+
+.friend-card-username {
+  font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 20.0005px;
+  text-align: start;
+  word-break: break-word;
+  color: #050505;
+}
+
+.friend-card-username:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.friend-card-location {
+  font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 16.0004px;
+  text-align: start;
+  word-break: break-word;
+  color: rgb(101, 103, 107);
+}
