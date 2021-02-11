@@ -63,17 +63,15 @@ function NonFriendPage(props) {
     calculateFriendCount();
   }, []);
 
-  function submitUnfriend() {
-    console.log("unfriend");
-  }
 
-  function acceptRequest() {
-    console.log("Accepted Request");
-  }
 
-  function declineRequest() {
-    console.log("Declined Request");
-  }
+  // function acceptRequest() {
+  //   console.log("Accepted Request");
+  // }
+
+  // function declineRequest() {
+  //   console.log("Declined Request");
+  // }
 
   // return <div id="non-friend-page">Non Friend Page</div>;
   return (
@@ -125,7 +123,7 @@ function NonFriendPage(props) {
               <div
                 className="submit-unfriend unfriend-btn"
                 onClick={() => {
-                  submitUnfriend();
+                  props.submitUnfriend();
                 }}
               >
                 Confirm
@@ -155,7 +153,7 @@ function NonFriendPage(props) {
               className="user-info-confirm-pending"
               onClick={() => {
                 // setUnfriendModalOpen(true);
-                acceptRequest();
+                props.acceptRequest();
               }}
             >
               Confirm Request
@@ -164,7 +162,7 @@ function NonFriendPage(props) {
               className="user-info-delete-pending"
               onClick={() => {
                 // setUnfriendModalOpen(true);
-                declineRequest();
+                props.declineRequest();
               }}
             >
               Delete Request
@@ -179,7 +177,7 @@ function NonFriendPage(props) {
             <div
               className="user-info-sent-req"
               onClick={() => {
-                // setUnfriendModalOpen(true);
+                props.cancelRequest();
               }}
             >
               Cancel Request
@@ -190,7 +188,7 @@ function NonFriendPage(props) {
             <div
               className="user-info-add-friend"
               onClick={() => {
-                // setUnfriendModalOpen(true);
+                props.sendRequest(props.currentUser, props.userProfile);
               }}
             >
               + Add Friend

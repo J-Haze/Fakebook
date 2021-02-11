@@ -821,11 +821,6 @@
   background-color: #c2c6ca;
 }
 
-
-
-
-
-
 .user-info-add-friend-manage-cont {
   display: flex;
   margin-left: auto;
@@ -839,7 +834,7 @@
 .user-info-add-friend {
   /* border: 1px solid black; */
   display: flex;
-  width: 100px;
+  width: 110px;
   justify-content: center;
 
   background-color: var(--dark-gray);
@@ -867,5 +862,3 @@
   cursor: pointer;
   background-color: #c2c6ca;
 }
-
-

@@ -20,14 +20,21 @@ function UserPage(props) {
     if (props.userProfile._id === props.currentUser._id) {
       setPageType("CurrentUserPage");
     } else {
-      if (props.currentUser.friendList.find((obj) => obj._id == props.userProfile._id)) {
+      if (
+        props.currentUser.friendList.find(
+          (obj) => obj._id == props.userProfile._id
+        )
+      ) {
         setPageType("FriendPage");
       } else {
         setPageType("NonFriendPage");
       }
     }
-  }, [props.userProfile._id, props.currentUser._id, props.currentUser.friendList]);
-
+  }, [
+    props.userProfile._id,
+    props.currentUser._id,
+    props.currentUser.friendList,
+  ]);
 
   // console.log("user1", props.user)
   // console.log("user2", props.friendList);
@@ -80,6 +87,11 @@ function UserPage(props) {
           displayedPosts={props.displayedPosts}
           createPostModalOpen={props.createPostModalOpen}
           setCreatePostModalOpen={props.setCreatePostModalOpen}
+          sendRequest={props.sendRequest}
+          cancelRequest={props.cancelRequest}
+          acceptRequest={props.acceptRequest}
+          declineRequest={props.declineRequest}
+          submitUnfriend={props.submitUnfriend}
         />
       ) : pageType == "FriendPage" ? (
         <FriendPage
@@ -87,6 +99,11 @@ function UserPage(props) {
           fetchPosts={props.fetchPosts}
           displayedPosts={props.displayedPosts}
           userProfile={props.userProfile}
+          sendRequest={props.sendRequest}
+          cancelRequest={props.cancelRequest}
+          acceptRequest={props.acceptRequest}
+          declineRequest={props.declineRequest}
+          submitUnfriend={props.submitUnfriend}
         />
       ) : (
         <NonFriendPage
@@ -94,6 +111,11 @@ function UserPage(props) {
           fetchPosts={props.fetchPosts}
           displayedPosts={props.displayedPosts}
           userProfile={props.userProfile}
+          sendRequest={props.sendRequest}
+          cancelRequest={props.cancelRequest}
+          acceptRequest={props.acceptRequest}
+          declineRequest={props.declineRequest}
+          submitUnfriend={props.submitUnfriend}
         />
       )}
     </div>

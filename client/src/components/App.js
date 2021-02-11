@@ -111,6 +111,32 @@ function App() {
 
   //^^^
 
+    const sendRequest = (sender, reciever) => {
+      console.log("Sent Request");
+      console.log("Sender", sender);
+      console.log("Reciever", reciever);
+    };
+
+  const cancelRequest = () => {
+      console.log("Cancel Request");
+    }
+
+  
+
+  const acceptRequest = () => {
+    console.log("Accepted Request");
+  };
+
+
+  const declineRequest = () => {
+  console.log("Declined Request");
+}
+
+  const submitUnfriend = () => {
+    console.log("unfriend");
+  }
+
+
   if (!isLoggedIn) {
     return (
       <LoginPage
@@ -171,6 +197,11 @@ function App() {
                   displayedPosts={displayedPosts}
                   createPostModalOpen={createPostModalOpen}
                   setCreatePostModalOpen={setCreatePostModalOpen}
+                  sendRequest={sendRequest}
+                  cancelRequest={cancelRequest}
+                  acceptRequest={acceptRequest}
+                  declineRequest={declineRequest}
+                  submitUnfriend={submitUnfriend}
                   // setIsViewingProfile={setIsViewingProfile}
                 />
               )}
@@ -186,13 +217,16 @@ function App() {
                 <FriendListPage
                   user={user}
                   currentUser={currentUser}
+                  sendRequest={sendRequest}
+                  cancelRequest={cancelRequest}
+                  acceptRequest={acceptRequest}
+                  declineRequest={declineRequest}
+                  submitUnfriend={submitUnfriend}
 
                   // fetchPosts={fetchPosts}
                   // displayedPosts={displayedPosts}
                   // createPostModalOpen={createPostModalOpen}
                   // setCreatePostModalOpen={setCreatePostModalOpen}
-
-
                 />
               )}
             ></Route>
