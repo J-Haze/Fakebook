@@ -404,6 +404,7 @@
   box-sizing: border-box;
   width: 100%;
   margin-top: 16px;
+  display: flex;
 }
 
 .friend-icon-box {

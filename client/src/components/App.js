@@ -8,7 +8,7 @@ import Header from "./views/Header/Header";
 
 import HomePage from "./views/HomePage/HomePage.js";
 import LoginPage from "./views/LoginPage/LoginPage.js";
-import UserPage from "./views/UserPage/UserPage.js"
+import UserPage from "./views/UserPage/UserPage.js";
 import NotFound from "./views/NotFound/NotFound.js";
 import CreatePostModal from "./views/CreatePostModal/CreatePostModal.js";
 import FriendListPage from "./views/FriendListPage/FriendListPage";
@@ -21,11 +21,12 @@ function App() {
   const [tokenRefresh, setTokenRefresh] = useState(true);
   const [allPosts, setAllPosts] = useState([]);
   // const [displayedPosts, setDisplayedPosts] = useState("");
-    const [displayedPosts, setDisplayedPosts] = useState([]);
+  const [displayedPosts, setDisplayedPosts] = useState([]);
   const [allUsers, setAllUsers] = useState([]);
   const [allFriends, setFriends] = useState([]);
 
   const [sendingRequest, setSendingRequst] = useState(false);
+  const [updateUserPage, setUpdateUserPage] = useState(false);
 
   // const [createPostModalOpen, setCreatePostModalOpen] = useState(true);
   const [createPostModalOpen, setCreatePostModalOpen] = useState(false);
@@ -97,8 +98,8 @@ function App() {
         )}`,
       },
     }).then((res) => {
-      console.log("res.data", res.data)
-      let allUsersArray = res.data
+      console.log("res.data", res.data);
+      let allUsersArray = res.data;
       setAllUsers(allUsersArray);
       setAllUsers(res.data);
     });
@@ -107,16 +108,16 @@ function App() {
   useEffect(() => {
     if (isLoggedIn) {
       fetchUsers();
-      console.log("All Users:", allUsers)
+      console.log("All Users:", allUsers);
     }
   }, [isLoggedIn]);
 
   //^^^
 
-    const sendRequest = (reciever) => {
-      console.log("Sent Request");
-      console.log("Sender", currentUser._id);
-      console.log("Reciever", reciever._id);
+  const sendRequest = (reciever) => {
+    console.log("Sent Request");
+    console.log("Sender", currentUser._id);
+    console.log("Reciever", reciever._id);
 
     Axios.post(
       `/request/`,
@@ -132,7 +133,7 @@ function App() {
       }
     )
       .then((res, err) => {
-        setSendingRequst(!sendingRequest)
+        setSendingRequst(!sendingRequest);
         console.log("Request sent");
         console.log(res);
         //Send notification
@@ -141,22 +142,18 @@ function App() {
         alert("Failed to send request");
         console.log("error", error);
       });
-
-    };
+  };
 
   const cancelRequest = (requestid) => {
-      console.log("Cancel Request");
+    console.log("Cancel Request");
 
-    Axios.delete(
-      `/request/${requestid}`,
-      {
-        headers: {
-          Authorization: `Bearer ${JSON.parse(
-            window.localStorage.getItem("token")
-          )}`,
-        },
-      }
-    )
+    Axios.delete(`/request/${requestid}`, {
+      headers: {
+        Authorization: `Bearer ${JSON.parse(
+          window.localStorage.getItem("token")
+        )}`,
+      },
+    })
       .then((res, err) => {
         setSendingRequst(!sendingRequest);
         console.log("Request cancelled");
@@ -167,47 +164,48 @@ function App() {
         alert("Failed to cancel request");
         console.log("error", error);
       });
-    
-    }
-
-  
+  };
 
   const acceptRequest = (requestid) => {
     // console.log("Accepted Request");
-     Axios.post(
-       `/request/${requestid}/accept`,
-       {
+    Axios.post(
+      `/request/${requestid}/accept`,
+      {
         //  reciever: reciever._id,
-       },
-       {
-         headers: {
-           Authorization: `Bearer ${JSON.parse(
-             window.localStorage.getItem("token")
-           )}`,
-         },
-       }
-     )
-       .then((res, err) => {
-         setSendingRequst(!sendingRequest);
-         console.log("Request accepted");
-         console.log(res);
-         //Send notification
-       })
-       .catch((error) => {
-         alert("Failed to accept request");
-         console.log("error", error);
-       });
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${JSON.parse(
+            window.localStorage.getItem("token")
+          )}`,
+        },
+      }
+    )
+      .then((res, err) => {
+        setSendingRequst(!sendingRequest);
+        //Something to re-render page (change state to "friend")
+        setUpdateUserPage(!updateUserPage);
+        console.log("Request accepted");
+        console.log(res);
+        //Send notification
+      })
+      .catch((error) => {
+        alert("Failed to accept request");
+        console.log("error", error);
+      });
   };
 
-
   const declineRequest = () => {
-  console.log("Declined Request");
-}
+    console.log("Declined Request");
+
+    setUpdateUserPage(!updateUserPage);
+  };
 
   const submitUnfriend = () => {
     console.log("unfriend");
-  }
 
+    setUpdateUserPage(!updateUserPage);
+  };
 
   if (!isLoggedIn) {
     return (
@@ -275,6 +273,7 @@ function App() {
                   declineRequest={declineRequest}
                   submitUnfriend={submitUnfriend}
                   sendingRequest={sendingRequest}
+                  updateUserPage={updateUserPage}
                   // setIsViewingProfile={setIsViewingProfile}
                 />
               )}

@@ -8,7 +8,7 @@ import { useHistory } from "react-router-dom";
 import thumbBlack from "../../../../assets/thumbs-up-regular-gray.svg";
 import thumbBlue from "../../../../assets/thumbs-up-solid-light-blue.svg";
 
-import ProfilePic from "../../HelperComponents/ProfilePic.js"
+import ProfilePic from "../../HelperComponents/ProfilePic.js";
 import Comments from "./Comments";
 // import { like_post } from "../../../../../../server/controllers/post_controller";
 
@@ -29,6 +29,7 @@ function Card(props) {
   const [commentCount, setCommentCount] = useState(0);
 
   const [likedByCurrentUser, setLikedByCurrentUser] = useState(false);
+  const [updateLikes, setUpdateLikes] = useState(false);
 
   const [deletePostModalOpen, setDeletePostModalOpen] = useState(false);
 
@@ -43,7 +44,7 @@ function Card(props) {
   //Code that searches for current user in the liked list and then sets likedByCurrentUser
 
   function likePost() {
-    setLikedByCurrentUser(true);
+    // setLikedByCurrentUser(true);
     Axios.put(
       `/post/${props.post._id}/like`,
       {},
@@ -58,7 +59,10 @@ function Card(props) {
       .then((res) => {
         console.log("liked");
         setLikedByCurrentUser(true);
-
+        // setUpdateLikes(!updateLikes);
+        let newLikes = likeCount + 1
+        setLikeCount(newLikes)
+// console.log("liked2", newLikes, likeCount);
         //  props.fetchPosts();
         //  history.push(`/user/${currentUser._id}`);
         //  history.go(0);
@@ -86,7 +90,10 @@ function Card(props) {
       .then((res) => {
         console.log("unliked");
         setLikedByCurrentUser(false);
+        // setUpdateLikes(!updateLikes);
 
+        let newLikes = likeCount - 1;
+        setLikeCount(newLikes);
         //  props.fetchPosts();
         //  history.push(`/user/${currentUser._id}`);
         //  history.go(0);
@@ -98,27 +105,27 @@ function Card(props) {
       });
   }
 
-    function checkIfLiked() {
+  function checkIfLiked() {
     //   console.log("here1");
-      if (
-        props.post.likesList.length == 0 ||
-        props.post.likesList.length == undefined
-      ) {
-        console.log("here2");
-        setLikedByCurrentUser(false);
-        return;
-      }
-      if (props.post.likesList.indexOf(props.currentUser._id) != -1) {
-        console.log("here3");
-        setLikedByCurrentUser(true);
-      } else {
-        setLikedByCurrentUser(false);
-      }
+    if (
+      props.post.likesList.length == 0 ||
+      props.post.likesList.length == undefined
+    ) {
+      console.log("here2");
+      setLikedByCurrentUser(false);
+      return;
     }
+    if (props.post.likesList.indexOf(props.currentUser._id) != -1) {
+      console.log("here3");
+      setLikedByCurrentUser(true);
+    } else {
+      setLikedByCurrentUser(false);
+    }
+  }
 
-    useEffect(() => {
-      checkIfLiked();
-    }, []);
+  useEffect(() => {
+    checkIfLiked();
+  }, []);
 
   function toggleLike() {
     if (likedByCurrentUser == false) {
@@ -200,9 +207,9 @@ function Card(props) {
     setCommentCount(displayedComments.length);
   }, [displayedComments]);
 
-
-
   function calculateLikes() {
+    props.fetchPosts();
+    console.log("calculatedLikes:", props.post.likesList.length);
     if (
       props.post.likesList.length == 0 ||
       props.post.likesList.length == undefined
@@ -215,8 +222,8 @@ function Card(props) {
   }
 
   useEffect(() => {
-    calculateLikes();
-  }, [likedByCurrentUser]);
+   calculateLikes();
+  }, []);
 
   // function deleteComment() {
   //     Axios.put(
@@ -275,9 +282,7 @@ function Card(props) {
       <div className="main-card">
         <div className="card-row-one">
           {/* <div className="prof-icon"></div> */}
-          <ProfilePic 
-            user={props.post.author}
-          />
+          <ProfilePic user={props.post.author} />
           {/* <UserAvatar user={post.author} /> */}
           <div className="flex-down card-title">
             <Link

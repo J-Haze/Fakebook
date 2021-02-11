@@ -30,10 +30,12 @@ function UserPage(props) {
         setPageType("NonFriendPage");
       }
     }
+    console.log("PageType:", pageType)
   }, [
     props.userProfile._id,
     props.currentUser._id,
-    props.currentUser.friendList,
+      props.currentUser.friendList,
+    props.updateUserPage
   ]);
 
   // console.log("user1", props.user)
