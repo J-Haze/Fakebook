@@ -78,20 +78,42 @@ exports.send_request = (req, res) => {
       console.log(err);
       res.sendStatus(403);
     } else {
-      // const { recieverid } = req.params;
-      var request = new Request({
-        sender: authData._id,
-        reciever: req.body.reciever,
-      });
+      Request.exists(
+        { sender: authData._id, reciever: req.body.reciever },
+        (err, doesExist) => {
+          if (err) return res.json(err);
+          // console.log("exists?", doesExist);
+          if (doesExist) {
+            return res.json("Error, request already exists.");
+          } else {
+            Request.exists(
+              { sender: req.body.reciever, reciever: authData._id },
+              (err, doesExist) => {
+                if (err) return res.json(err);
+                // console.log("exists?", doesExist);
+                if (doesExist) {
+                  return res.json("Error, request already exists.");
+                } else {
+                  // const { recieverid } = req.params;
+                  var request = new Request({
+                    sender: authData._id,
+                    reciever: req.body.reciever,
+                  });
 
-      // Data from form is valid. Save book.
-      request.save(function (err) {
-        if (err) {
-          console.log("err", err);
-          return res.json(err);
+                  // Data from form is valid. Save book.
+                  request.save(function (err) {
+                    if (err) {
+                      console.log("err", err);
+                      return res.json(err);
+                    }
+                    res.json(request);
+                  });
+                }
+              }
+            );
+          }
         }
-        res.json(request);
-      });
+      );
     }
   });
 };
@@ -104,7 +126,7 @@ exports.cancel_request = (req, res) => {
     } else {
       const { requestid } = req.params;
 
-      Post.findOneAndDelete({ _id: requestid }, (err, deletedRequest) => {
+      Request.findOneAndDelete({ _id: requestid }, (err, deletedRequest) => {
         if (err) return res.json(err);
         res.json(deletedRequest);
         // next();

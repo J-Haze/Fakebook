@@ -92,6 +92,7 @@ function UserPage(props) {
           acceptRequest={props.acceptRequest}
           declineRequest={props.declineRequest}
           submitUnfriend={props.submitUnfriend}
+          sendingRequest={props.sendingRequest}
         />
       ) : pageType == "FriendPage" ? (
         <FriendPage
@@ -104,6 +105,7 @@ function UserPage(props) {
           acceptRequest={props.acceptRequest}
           declineRequest={props.declineRequest}
           submitUnfriend={props.submitUnfriend}
+          sendingRequest={props.sendingRequest}
         />
       ) : (
         <NonFriendPage
@@ -116,6 +118,7 @@ function UserPage(props) {
           acceptRequest={props.acceptRequest}
           declineRequest={props.declineRequest}
           submitUnfriend={props.submitUnfriend}
+          sendingRequest={props.sendingRequest}
         />
       )}
     </div>

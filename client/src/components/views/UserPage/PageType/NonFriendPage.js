@@ -18,6 +18,8 @@ function NonFriendPage(props) {
   const [haveIncomingRequest, setHaveIncomingRequest] = useState(false);
   const [haveSentRequest, setHaveSentRequest] = useState(false);
 
+  
+
   const [requestID, setRequestID] = useState();
 
   const history = useHistory();
@@ -103,7 +105,7 @@ function NonFriendPage(props) {
   useEffect(() => {
     // check for requests
     checkForRequest();
-  }, []);
+  }, [props.sendingRequest]);
 
   // function acceptRequest() {
   //   console.log("Accepted Request");
@@ -217,7 +219,7 @@ function NonFriendPage(props) {
             <div
               className="user-info-sent-req"
               onClick={() => {
-                props.cancelRequest();
+                props.cancelRequest(requestID);
               }}
             >
               Cancel Request

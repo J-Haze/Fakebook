@@ -25,6 +25,8 @@ function App() {
   const [allUsers, setAllUsers] = useState([]);
   const [allFriends, setFriends] = useState([]);
 
+  const [sendingRequest, setSendingRequst] = useState(false);
+
   // const [createPostModalOpen, setCreatePostModalOpen] = useState(true);
   const [createPostModalOpen, setCreatePostModalOpen] = useState(false);
 
@@ -130,8 +132,10 @@ function App() {
       }
     )
       .then((res, err) => {
+        setSendingRequst(!sendingRequest)
         console.log("Request sent");
         console.log(res);
+        //Send notification
       })
       .catch((error) => {
         alert("Failed to send request");
@@ -154,8 +158,10 @@ function App() {
       }
     )
       .then((res, err) => {
+        setSendingRequst(!sendingRequest);
         console.log("Request cancelled");
         console.log(res);
+        //Remove notification?
       })
       .catch((error) => {
         alert("Failed to cancel request");
@@ -245,6 +251,7 @@ function App() {
                   acceptRequest={acceptRequest}
                   declineRequest={declineRequest}
                   submitUnfriend={submitUnfriend}
+                  sendingRequest={sendingRequest}
                   // setIsViewingProfile={setIsViewingProfile}
                 />
               )}
@@ -265,6 +272,7 @@ function App() {
                   acceptRequest={acceptRequest}
                   declineRequest={declineRequest}
                   submitUnfriend={submitUnfriend}
+                  sendingRequest={sendingRequest}
 
                   // fetchPosts={fetchPosts}
                   // displayedPosts={displayedPosts}
