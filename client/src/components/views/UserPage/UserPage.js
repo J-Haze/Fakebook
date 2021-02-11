@@ -93,6 +93,7 @@ function UserPage(props) {
           currentUser={props.currentUser}
           fetchPosts={props.fetchPosts}
           displayedPosts={props.displayedPosts}
+          userProfile={props.userProfile}
         />
       )}
     </div>

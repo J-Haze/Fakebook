@@ -8,6 +8,7 @@ import { useHistory } from "react-router-dom";
 
 import { Link } from "react-router-dom";
 import FileUploader from "./Sections/FileUploader";
+import ProfilePic from "../HelperComponents/ProfilePic"
 
 // import Editor from "../../HelperComponents/Editor";
 
@@ -205,12 +206,14 @@ function CreatePostModal(props) {
           <div id="create-post-mid-row">
             <div className="card-row-one">
               <Link className="link" to={`/user/${props.currentUser._id}`}>
-                <img
+                {/* <img
                   className="prof-pic"
                   alt={`profile-pic-user-${props.currentUser.firstname}-${props.currentUser.lastname}`}
                   src={`http://localhost:5000/uploads/${props.currentUser.photo.filename}`}
-                />
+                /> */}
+                <ProfilePic user={props.currentUser} />
               </Link>
+              {/* <ProfilePic user={props.currentUser} /> */}
               <div className="flex-down card-title">
                 <div className="create-post-username">
                   {props.currentUser.firstname} {props.currentUser.lastname}
