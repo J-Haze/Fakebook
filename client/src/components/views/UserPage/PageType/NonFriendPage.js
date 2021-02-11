@@ -17,6 +17,8 @@ function NonFriendPage(props) {
 
   const [hasIncomingRequest, setHasIncomingRequest] = useState(false);
   const [hasSentRequest, setHasSentRequest] = useState(false);
+  
+  const [requestID, setRequestID] = useState();
 
   const history = useHistory();
 
@@ -63,7 +65,27 @@ function NonFriendPage(props) {
     calculateFriendCount();
   }, []);
 
+  function checkForRequest() {
 
+
+//     if () {
+// setHasIncomingRequest(true)
+//       // setRequestID()
+//     } else if () {
+// setHasSentRequest(true)
+//       // setRequestID()
+//     } else {
+//       setHasIncomingRequest(false)
+// setHasSentRequest(false)
+//     }
+    
+    
+  }
+
+  useEffect(() => {
+    // check for requests
+    checkForRequest();
+  }, []);
 
   // function acceptRequest() {
   //   console.log("Accepted Request");
@@ -188,7 +210,7 @@ function NonFriendPage(props) {
             <div
               className="user-info-add-friend"
               onClick={() => {
-                props.sendRequest(props.currentUser, props.userProfile);
+                props.sendRequest(props.userProfile);
               }}
             >
               + Add Friend

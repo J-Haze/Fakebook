@@ -5,23 +5,26 @@ var request_controller = require("../controllers/request_controller");
 
 const auth = require("../middleware/auth");
 
-// GET - Get all recieved request
-// router.get("/", request_controller.get_currentUser_requests_recieved);
-
 // GET - Get all requests
-// router.get("/all", request_controller.get_requests);
+router.get("/all", auth, request_controller.get_requests);
+
+// GET - Get all recieved request
+// router.get("/", auth, request_controller.get_currentUser_requests_recieved);
 
 // GET - Get all sent requests
-// router.get("/sent", request_controller.get_currentUser_requests_sent);
+// router.get("/sent", auth, request_controller.get_currentUser_requests_sent);
 
 // Send friend request from current user to specified user
-// router.post("/:recieverid", request_controller.send_request);
+router.post("/", auth, request_controller.send_request);
+
+// Cancel/Delete a sent friend request
+router.delete("/:requestid", auth, request_controller.cancel_request);
 
 // Accept a friend request
-// router.post("/:requestid/accept", request_controller.accept_request);
+// router.post("/:requestid/accept", auth, request_controller.accept_request);
 
-// Accept a friend request
-// router.post("/:requestid/decline", request_controller.decline_request);
+// Decline a friend request
+// router.post("/:requestid/decline", auth, request_controller.decline_request);
 
 
 module.exports = router;

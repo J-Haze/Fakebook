@@ -111,14 +111,57 @@ function App() {
 
   //^^^
 
-    const sendRequest = (sender, reciever) => {
+    const sendRequest = (reciever) => {
       console.log("Sent Request");
-      console.log("Sender", sender);
-      console.log("Reciever", reciever);
+      console.log("Sender", currentUser._id);
+      console.log("Reciever", reciever._id);
+
+    Axios.post(
+      `/request/`,
+      {
+        reciever: reciever._id,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${JSON.parse(
+            window.localStorage.getItem("token")
+          )}`,
+        },
+      }
+    )
+      .then((res, err) => {
+        console.log("Request sent");
+        console.log(res);
+      })
+      .catch((error) => {
+        alert("Failed to send request");
+        console.log("error", error);
+      });
+
     };
 
-  const cancelRequest = () => {
+  const cancelRequest = (requestid) => {
       console.log("Cancel Request");
+
+    Axios.delete(
+      `/request/${requestid}`,
+      {
+        headers: {
+          Authorization: `Bearer ${JSON.parse(
+            window.localStorage.getItem("token")
+          )}`,
+        },
+      }
+    )
+      .then((res, err) => {
+        console.log("Request cancelled");
+        console.log(res);
+      })
+      .catch((error) => {
+        alert("Failed to cancel request");
+        console.log("error", error);
+      });
+    
     }
 
   
