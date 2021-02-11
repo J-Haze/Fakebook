@@ -145,10 +145,32 @@ function Comments(props) {
   return (
     <div key={props.comment._id} className="comment">
       <div className="comment-row-one">
-        <div className="prof-icon-small"></div>
+        {/* <div className="prof-icon-small"></div> */}
+        {props.comment.author.photo ? (
+          <Link className="link" to={`/user/${props.comment.author._id}`}>
+            <img
+              className="prof-icon-small"
+              alt={`profile-pic-user-${props.comment.author.firstname}-${props.comment.author.lastname}`}
+              src={`http://localhost:5000/uploads/${props.comment.author.photo.filename}`}
+            />
+          </Link>
+        ) : (
+          <Link className="link" to={`/user/${props.comment.author._id}`}>
+            <img
+              className="prof-icon-small"
+              alt={`Default Profile Picture`}
+              src={`http://localhost:5000/uploads/default-prof-pic.png`}
+            />
+          </Link>
+        )}
         <div className="comment-cont-inner">
           <div className="comment-bubble">
-            <div className="comment-username hover-under">
+            <div
+              className="comment-username hover-under"
+              onClick={(event) => {
+                history.push(`/user/${props.comment.author._id}`)
+              }}
+            >
               {props.comment.author.firstname} {props.comment.author.lastname}
             </div>
             <div className="comment-text">{props.comment.text}</div>

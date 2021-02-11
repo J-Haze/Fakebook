@@ -118,7 +118,23 @@ function Comments(props) {
         {/* {props.isLoggedIn ? ( */}
         {/* <div className="flex-down"> */}
         <div className="leave-comment-cont">
-          <div className="prof-icon-small"></div>
+          {props.currentUser.photo ? (
+            <Link className="link" to={`/user/${props.currentUser._id}`}>
+              <img
+                className="prof-icon-small"
+                alt={`profile-pic-user-${props.currentUser.firstname}-${props.currentUser.lastname}`}
+                src={`http://localhost:5000/uploads/${props.currentUser.photo.filename}`}
+              />
+            </Link>
+          ) : (
+            <Link className="link" to={`/user/${props.currentUser._id}`}>
+              <img
+                className="prof-icon-small"
+                alt={`Default Profile Picture`}
+                src={`http://localhost:5000/uploads/default-prof-pic.png`}
+              />
+            </Link>
+          )}
           <div className="leave-comment-cont-inner">
             <div className="leave-comment-bubble">
               <input
