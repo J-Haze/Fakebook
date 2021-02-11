@@ -15,9 +15,8 @@ function NonFriendPage(props) {
   //  const [editUserModalOpen, setEditUserModalOpen] = useState(true);
   const [unfriendModalOpen, setUnfriendModalOpen] = useState(false);
 
-    const [hasIncomingRequest, setHasIncomingRequest] = useState(false);
-  const [hasSentRequest, setHasSentRequest] = useState(true);
-
+  const [hasIncomingRequest, setHasIncomingRequest] = useState(false);
+  const [hasSentRequest, setHasSentRequest] = useState(false);
 
   const history = useHistory();
 
@@ -69,7 +68,7 @@ function NonFriendPage(props) {
   }
 
   function acceptRequest() {
-    console.log("Accepted Request")
+    console.log("Accepted Request");
   }
 
   function declineRequest() {
@@ -187,15 +186,14 @@ function NonFriendPage(props) {
             </div>
           </div>
         ) : (
-          <div className="user-info-friend-manage-cont">
-            <div className="user-info-confirm-friend"> &#10003; Friends</div>
+          <div className="user-info-add-friend-manage-cont">
             <div
-              className="user-info-unfriend"
+              className="user-info-add-friend"
               onClick={() => {
-                setUnfriendModalOpen(true);
+                // setUnfriendModalOpen(true);
               }}
             >
-              Unfriend
+              + Add Friend
             </div>
           </div>
         )}

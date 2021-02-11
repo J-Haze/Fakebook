@@ -820,3 +820,52 @@
   cursor: pointer;
   background-color: #c2c6ca;
 }
+
+
+
+
+
+
+.user-info-add-friend-manage-cont {
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+  width: 110px;
+  /* border: 1px solid black; */
+  justify-content: center;
+  justify-content: space-between;
+}
+
+.user-info-add-friend {
+  /* border: 1px solid black; */
+  display: flex;
+  width: 100px;
+  justify-content: center;
+
+  background-color: var(--dark-gray);
+  /* background-color: #C2C6CA; */
+  background-color: white;
+
+  font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 19.9995px;
+  /* text-align: start; */
+  /* text-decoration-thickness: auto; */
+  /* text-overflow: ellipsis; */
+  /* white-space: nowrap; */
+  /* word-break: break-word; */
+  /* display: flex; */
+  /* justify-content: center; */
+  align-items: center;
+  border-radius: 6px;
+  color: rgb(5, 5, 5);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.user-info-add-friend:hover {
+  cursor: pointer;
+  background-color: #c2c6ca;
+}
+
+
