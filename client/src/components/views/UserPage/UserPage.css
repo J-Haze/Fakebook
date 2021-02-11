@@ -400,17 +400,33 @@
 
 #friend-icon-cont {
   /* border: 1px solid blue; */
-  width: 452px;
+  width: 370px;
   box-sizing: border-box;
-  width: 100%;
+  /* width: 100%; */
   margin-top: 16px;
+  margin-left: -8px;
   display: flex;
+  /* justify-content: space-between; */
+  /* overflow: wrap; */
+  flex-wrap: wrap;
 }
 
 .friend-icon-box {
   height: 140px;
   width: 102px;
   /* border: 1px solid black; */
+  margin-left: 8px;
+  margin-right: 8px;
+}
+
+.friend-icon-name {
+  color: rgb(5, 5, 5);
+  font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+font-size: 13px;
+font-weight: 600;
+line-height: 16.0004px;
+text-align: start;
+word-break: break-word;
 }
 
 .prof-pic-friendList {

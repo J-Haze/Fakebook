@@ -210,7 +210,7 @@ function FriendPage(props) {
                         src={`http://localhost:5000/uploads/${friend.photo.filename}`}
                       />
                     </Link>
-                    <div>
+                    <div className="friend-icon-name">
                       {friend.firstname} {friend.lastname}
                     </div>
                   </div>
