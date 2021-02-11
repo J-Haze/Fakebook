@@ -5,8 +5,6 @@ var request_controller = require("../controllers/request_controller");
 
 const auth = require("../middleware/auth");
 
-
-
 // GET - Get all requests
 router.get("/all", auth, request_controller.get_requests);
 
@@ -26,10 +24,9 @@ router.post("/", auth, request_controller.send_request);
 router.delete("/:requestid", auth, request_controller.cancel_request);
 
 // Accept a friend request
-// router.post("/:requestid/accept", auth, request_controller.accept_request);
+router.post("/:requestid/accept", auth, request_controller.accept_request);
 
 // Decline a friend request
 // router.post("/:requestid/decline", auth, request_controller.decline_request);
-
 
 module.exports = router;

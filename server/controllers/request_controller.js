@@ -134,3 +134,85 @@ exports.cancel_request = (req, res) => {
     }
   });
 };
+
+// Accept friend request
+exports.accept_request = (req, res) => {
+  jwt.verify(req.token, process.env.JWT_SECRET, (err, authData) => {
+    if (err) {
+      console.log(err);
+      res.sendStatus(403);
+    } else {
+      const { requestid } = req.params;
+      Request.findOne({ _id: requestid }, (err, request) => {
+        if (err) {
+          console.log(err);
+          return res.json(err);
+        }
+
+        //Add sender to reciever's friend list
+
+        User.findOneAndUpdate(
+          { _id: request.reciever._id },
+          {
+            $push: { friendList: request.sender._id },
+          },
+          (err, updatedReciever) => {
+            if (err) {
+              console.log(err);
+              return res.json(err);
+            }
+            User.findOneAndUpdate(
+              { _id: request.sender._id },
+              {
+                $push: { friendList: request.reciever._id },
+              },
+              (err, updatedReciver) => {
+                if (err) {
+                  console.log(err);
+                  return res.json(err);
+                }
+
+
+
+
+
+
+
+                res.json({
+                  message: "Updated friend lists's",
+                  reciever: updatedReciever,
+                  sender: updatedSender
+                });
+              }
+            );
+
+            //Add reciever to sender's friend list
+
+            //Delete request
+          });
+      }
+      )
+    }
+  })
+};
+
+    // await Friend.findOneAndUpdate(
+    //   {
+    //     user: req.params.id,
+    //     self: req.user.id,
+    //   },
+    //   { $set: { status: "accepted" } },
+    //   { upsert: true, new: true }
+    // );
+
+    // await Friend.findOneAndUpdate(
+    //   {
+    //     user: req.user.id,
+    //     self: req.params.id,
+    //   },
+    //   { $set: { status: "accepted" } },
+    //   { upsert: true, new: true }
+    // );
+
+    // res.json("Friend accepted");
+
