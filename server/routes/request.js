@@ -5,8 +5,13 @@ var request_controller = require("../controllers/request_controller");
 
 const auth = require("../middleware/auth");
 
+
+
 // GET - Get all requests
 router.get("/all", auth, request_controller.get_requests);
+
+// Check if there is a request pending
+router.get("/:senderid/:recieverid", auth, request_controller.get_request);
 
 // GET - Get all recieved request
 // router.get("/", auth, request_controller.get_currentUser_requests_recieved);

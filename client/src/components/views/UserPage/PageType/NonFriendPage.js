@@ -15,9 +15,9 @@ function NonFriendPage(props) {
   //  const [editUserModalOpen, setEditUserModalOpen] = useState(true);
   const [unfriendModalOpen, setUnfriendModalOpen] = useState(false);
 
-  const [hasIncomingRequest, setHasIncomingRequest] = useState(false);
-  const [hasSentRequest, setHasSentRequest] = useState(false);
-  
+  const [haveIncomingRequest, setHaveIncomingRequest] = useState(false);
+  const [haveSentRequest, setHaveSentRequest] = useState(false);
+
   const [requestID, setRequestID] = useState();
 
   const history = useHistory();
@@ -66,20 +66,38 @@ function NonFriendPage(props) {
   }, []);
 
   function checkForRequest() {
+    //Have it get any request with the reciever and sender and then determine if it's pending or recieved
 
+    Axios.get(`/request/${props.currentUser._id}/${props.userProfile._id}`, {
+      headers: {
+        Authorization: `Bearer ${JSON.parse(
+          window.localStorage.getItem("token")
+        )}`,
+      },
+    })
+      .then((res) => {
+        console.log("result", res.data);
 
-//     if () {
-// setHasIncomingRequest(true)
-//       // setRequestID()
-//     } else if () {
-// setHasSentRequest(true)
-//       // setRequestID()
-//     } else {
-//       setHasIncomingRequest(false)
-// setHasSentRequest(false)
-//     }
-    
-    
+        if (res.data == false) {
+          setHaveSentRequest(false);
+          setHaveIncomingRequest(false);
+          return;
+        }
+
+        setRequestID(res.data._id);
+
+        if (res.data.sender._id == props.currentUser._id) {
+          // Sent Request Pending
+          setHaveSentRequest(true);
+        } else if (res.data.sender._id == props.userProfile._id) {
+          //Have pending request
+          setHaveIncomingRequest(true);
+        } else {
+          // Something went wrong
+          console.log("Error with pending request");
+        }
+      })
+      .catch((error) => console.log("error", error));
   }
 
   useEffect(() => {
@@ -169,7 +187,7 @@ function NonFriendPage(props) {
           {props.userProfile.firstname} {props.userProfile.lastname}
         </div>
 
-        {hasIncomingRequest ? (
+        {haveIncomingRequest ? (
           <div className="user-info-pending-cont">
             <div
               className="user-info-confirm-pending"
@@ -190,7 +208,7 @@ function NonFriendPage(props) {
               Delete Request
             </div>
           </div>
-        ) : hasSentRequest ? (
+        ) : haveSentRequest ? (
           <div className="user-info-sent-req-cont">
             <div className="user-info-sent-req-pending">
               {" "}

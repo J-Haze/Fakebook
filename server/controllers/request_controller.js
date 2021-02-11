@@ -18,6 +18,60 @@ exports.get_requests = (req, res, next) => {
     .populate("reciever");
 };
 
+exports.get_request = (req, res, next) => {
+  const { senderid, recieverid } = req.params;
+
+  //Checks for request with correct sender and reciever
+  Request.exists(
+    { sender: senderid, reciever: recieverid },
+    (err, doesExist) => {
+      if (err) return res.json(err);
+      console.log("exists?", doesExist);
+
+      if (doesExist) {
+        Request.findOne(
+          { sender: senderid, reciever: recieverid },
+          (err, request) => {
+            if (err) {
+              console.log(err);
+              return res.json(err);
+            }
+            res.json(request);
+          }
+        )
+          .populate("sender")
+          .populate("reciever");
+      } else {
+        //Checks for request with flipped sender and reciever
+        Request.exists(
+          { sender: recieverid, reciever: senderid },
+          (err, doesExist) => {
+            if (err) return res.json(err);
+            console.log("exists?", doesExist);
+
+            if (doesExist) {
+              Request.findOne(
+                { sender: recieverid, reciever: senderid },
+                (err, request) => {
+                  if (err) {
+                    console.log(err);
+                    return res.json(err);
+                  }
+                  res.json(request);
+                }
+              )
+                .populate("sender")
+                .populate("reciever");
+            } else {
+              return res.json(false);
+            }
+          }
+        );
+      }
+    }
+  );
+};
+
 exports.send_request = (req, res) => {
   jwt.verify(req.token, process.env.JWT_SECRET, (err, authData) => {
     if (err) {
