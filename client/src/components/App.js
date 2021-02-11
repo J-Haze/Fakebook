@@ -172,8 +172,31 @@ function App() {
 
   
 
-  const acceptRequest = () => {
-    console.log("Accepted Request");
+  const acceptRequest = (requestid) => {
+    // console.log("Accepted Request");
+     Axios.post(
+       `/request/${requestid}/accept`,
+       {
+        //  reciever: reciever._id,
+       },
+       {
+         headers: {
+           Authorization: `Bearer ${JSON.parse(
+             window.localStorage.getItem("token")
+           )}`,
+         },
+       }
+     )
+       .then((res, err) => {
+         setSendingRequst(!sendingRequest);
+         console.log("Request accepted");
+         console.log(res);
+         //Send notification
+       })
+       .catch((error) => {
+         alert("Failed to accept request");
+         console.log("error", error);
+       });
   };
 
 

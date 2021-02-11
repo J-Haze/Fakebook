@@ -166,17 +166,13 @@ exports.accept_request = (req, res) => {
               {
                 $push: { friendList: request.reciever._id },
               },
-              (err, updatedReciver) => {
+              (err, updatedSender) => {
                 if (err) {
                   console.log(err);
                   return res.json(err);
                 }
 
-
-
-
-
-
+                //Delete request
 
                 res.json({
                   message: "Updated friend lists's",

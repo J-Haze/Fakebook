@@ -195,7 +195,7 @@ function NonFriendPage(props) {
               className="user-info-confirm-pending"
               onClick={() => {
                 // setUnfriendModalOpen(true);
-                props.acceptRequest();
+                props.acceptRequest(requestID);
               }}
             >
               Confirm Request
