@@ -90,15 +90,14 @@ function FriendListPage(props) {
 
   return (
     <div id="user-page">
-      {pageType == "CurrentUserFriendListPage" ? (
+      {(pageType == "CurrentUserFriendListPage") && (
         <CurrentUserFriendListPage
           currentUser={props.currentUser}
-          // fetchPosts={props.fetchPosts}
-          // displayedPosts={props.displayedPosts}
-          // createPostModalOpen={props.createPostModalOpen}
-          // setCreatePostModalOpen={props.setCreatePostModalOpen}
-        />
-      ) : (
+        // fetchPosts={props.fetchPosts}
+        // displayedPosts={props.displayedPosts}
+        // createPostModalOpen={props.createPostModalOpen}
+        // setCreatePostModalOpen={props.setCreatePostModalOpen}
+        />)}
         <div id="friend-list-page">
           <div className="friend-list-cont">
             {/* Something for if there's no friends */}
@@ -139,7 +138,6 @@ function FriendListPage(props) {
             </div>
           </div>
         </div>
-      )}
     </div>
   );
 }
