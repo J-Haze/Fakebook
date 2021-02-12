@@ -15,28 +15,28 @@ function UserPage(props) {
   const [loading, setLoading] = useState(true);
 
   // const [pageType, setPageType] = useState("NonFriendPage");
-const [pageType, setPageType] = useState("");
+// const [pageType, setPageType] = useState("");
 
   useEffect(() => {
     if (props.userProfile._id === props.currentUser._id) {
-      setPageType("CurrentUserPage");
+      props.setPageType("CurrentUserPage");
     } else {
       if (
         props.currentUser.friendList.find(
           (obj) => obj._id == props.userProfile._id
         )
       ) {
-        setPageType("FriendPage");
+        props.setPageType("FriendPage");
       } else {
-        setPageType("NonFriendPage");
+        props.setPageType("NonFriendPage");
       }
     }
-    console.log("PageType:", pageType)
+    // console.log("PageType:", props.pageType)
   }, [
     props.userProfile._id,
     props.currentUser._id,
       props.currentUser.friendList,
-    props.updateUserPage
+    // props.updateUserPage
   ]);
 
   // console.log("user1", props.user)
@@ -83,7 +83,7 @@ const [pageType, setPageType] = useState("");
 
   return (
     <div id="user-page">
-      {pageType == "CurrentUserPage" ? (
+      {props.pageType == "CurrentUserPage" ? (
         <CurrentUserPage
           currentUser={props.currentUser}
           fetchPosts={props.fetchPosts}
@@ -97,7 +97,7 @@ const [pageType, setPageType] = useState("");
           submitUnfriend={props.submitUnfriend}
           sendingRequest={props.sendingRequest}
         />
-      ) : pageType == "FriendPage" ? (
+      ) : props.pageType == "FriendPage" ? (
         <FriendPage
           currentUser={props.currentUser}
           fetchPosts={props.fetchPosts}

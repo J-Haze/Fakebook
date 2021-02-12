@@ -28,6 +28,8 @@ function App() {
   const [sendingRequest, setSendingRequst] = useState(false);
   const [updateUserPage, setUpdateUserPage] = useState(false);
 
+  const [pageType, setPageType] = useState("NonFriendPage");
+
   // const [createPostModalOpen, setCreatePostModalOpen] = useState(true);
   const [createPostModalOpen, setCreatePostModalOpen] = useState(false);
 
@@ -182,10 +184,11 @@ function App() {
       }
     )
       .then((res, err) => {
-        setSendingRequst(!sendingRequest);
+        setPageType("FriendPage")
+        // setSendingRequst(!sendingRequest);
         //Something to re-render page (change state to "friend")
-        setUpdateUserPage(!updateUserPage);
-        history.push(`/user/${userid}`);
+        // setUpdateUserPage(!updateUserPage);
+        // history.push(`/user/${userid}`);
         console.log("Request accepted");
         console.log(res);
         //Send notification
@@ -235,6 +238,7 @@ function App() {
     )
       .then((res) => {
         // setUpdateUserPage(!updateUserPage);
+        setPageType("NonFriendPage");
         history.push(`/user/${userid}`);
       })
       .catch((error) => {
@@ -310,6 +314,8 @@ function App() {
                   sendingRequest={sendingRequest}
                   updateUserPage={updateUserPage}
                   submitUnfriend={submitUnfriend}
+                  pageType={pageType}
+                  setPageType={setPageType}
                   // setIsViewingProfile={setIsViewingProfile}
                 />
               )}
