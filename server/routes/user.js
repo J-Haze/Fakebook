@@ -55,6 +55,6 @@ router.get("/:userid/posts", auth, user_controller.get_user_posts);
 // router.put("/:userid/friend", auth, user_controller.friend_user);
 
 //Unfriend someone
-// router.put("/:userid/unfriend", auth, user_controller.unfriend_user);
+router.put("/:userid/unfriend", auth, user_controller.unfriend_user);
 
 module.exports = router;

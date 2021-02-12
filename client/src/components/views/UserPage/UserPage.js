@@ -14,7 +14,8 @@ function UserPage(props) {
   const [blogCount, setBlogCount] = useState(0);
   const [loading, setLoading] = useState(true);
 
-  const [pageType, setPageType] = useState("NonFriendPage");
+  // const [pageType, setPageType] = useState("NonFriendPage");
+const [pageType, setPageType] = useState("");
 
   useEffect(() => {
     if (props.userProfile._id === props.currentUser._id) {
@@ -108,6 +109,7 @@ function UserPage(props) {
           declineRequest={props.declineRequest}
           submitUnfriend={props.submitUnfriend}
           sendingRequest={props.sendingRequest}
+          submitUnfriend={props.submitUnfriend}
         />
       ) : (
         <NonFriendPage

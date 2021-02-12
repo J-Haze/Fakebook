@@ -62,9 +62,22 @@ function FriendPage(props) {
     calculateFriendCount();
   }, []);
 
-  function submitUnfriend() {
-    console.log("unfriend");
-  }
+  // function submitUnfriend() {
+  //   console.log("unfriend");
+  // }
+
+  // Only 9 friends shown
+
+  // useEffect(() => {
+  //   let friendList = props.userProfile.friendList;
+  //   let shownFriends = friendList.slice(0, 8)
+    
+  //   console.log("here9")
+  //   console.log(shownFriends)
+  //   console.log(friendList)
+  // }, []);
+  
+
 
   return (
     <div id="current-user-page">
@@ -115,7 +128,8 @@ function FriendPage(props) {
               <div
                 className="submit-unfriend unfriend-btn"
                 onClick={() => {
-                  submitUnfriend();
+                  props.submitUnfriend(props.userProfile._id);
+                  setUnfriendModalOpen(false);
                 }}
               >
                 Confirm
@@ -200,7 +214,7 @@ function FriendPage(props) {
           )}
           {props.userProfile.friendList.length > 0 && (
             <div id="friend-icon-cont">
-              {props.userProfile.friendList.map((friend) =>
+              {props.userProfile.friendList.slice(0, 8).map((friend) =>
                 friend.isPublished ? (
                   <div className="friend-icon-box" key={friend._id}>
                     <Link className="link" to={`/user/${friend._id}`}>

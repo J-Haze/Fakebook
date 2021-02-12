@@ -147,7 +147,7 @@ function CurrentUserPage(props) {
               onClick={(event) => {
                 //   event.stopPropagation();
                 //   setDeletePostModalOpen(true);
-                history.push(`/friends/${props.currentUser._id}`)
+                history.push(`/friends/${props.currentUser._id}`);
               }}
             >
               See All Friends
@@ -160,7 +160,7 @@ function CurrentUserPage(props) {
           )}
           {props.currentUser.friendList.length > 0 && (
             <div id="friend-icon-cont">
-              {props.currentUser.friendList.map((friend) =>
+              {props.currentUser.friendList.slice(0, 8).map((friend) =>
                 friend.isPublished ? (
                   <div className="friend-icon-box" key={friend._id}>
                     <Link className="link" to={`/user/${friend._id}`}>

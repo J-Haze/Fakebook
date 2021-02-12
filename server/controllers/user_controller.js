@@ -440,3 +440,60 @@ exports.get_user_posts = (req, res, next) => {
     next();
   }).populate("author");
 };
+
+// Dive.update(
+//   { _id: diveId },
+//   { $pull: { divers: { user: userIdToRemove } } },
+//   { safe: true, multi: true },
+//   function (err, obj) {
+//     //do something smart
+//   }
+// );
+
+// Accept friend request
+exports.unfriend_user = (req, res) => {
+  jwt.verify(req.token, process.env.JWT_SECRET, (err, authData) => {
+    if (err) {
+      console.log(err);
+      res.sendStatus(403);
+    } else {
+      const { userid } = req.params;
+
+      //Remove user from currentUser's list
+      User.findOneAndUpdate(
+        { _id: authData._id },
+        {
+          $pull: { friendList: userid },
+        },
+        { safe: true },
+        (err, newCurrentUser) => {
+          if (err) {
+            console.log(err);
+            return res.json(err);
+          }
+
+          //Remove currentUser from user's list
+          User.findOneAndUpdate(
+            { _id: userid },
+            {
+              $pull: { friendList: authData._id },
+            },
+            { safe: true },
+            (err, newUser) => {
+              if (err) {
+                console.log(err);
+                return res.json(err);
+              }
+
+              res.json({
+                message: "Updated friend lists's",
+                newCurrentUser: newCurrentUser,
+                newUser: newUser,
+              });
+            }
+          );
+        }
+      );
+    }
+  });
+};

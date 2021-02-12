@@ -195,7 +195,7 @@ function NonFriendPage(props) {
               className="user-info-confirm-pending"
               onClick={() => {
                 // setUnfriendModalOpen(true);
-                props.acceptRequest(requestID);
+                props.acceptRequest(requestID, props.userProfile._id);
               }}
             >
               Confirm Request
@@ -204,7 +204,7 @@ function NonFriendPage(props) {
               className="user-info-delete-pending"
               onClick={() => {
                 // setUnfriendModalOpen(true);
-                props.declineRequest();
+                props.declineRequest(requestID);
               }}
             >
               Delete Request

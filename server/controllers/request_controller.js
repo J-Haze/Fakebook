@@ -172,43 +172,44 @@ exports.accept_request = (req, res) => {
                   return res.json(err);
                 }
 
-                //Delete request
+                Request.findOneAndDelete(
+                  { _id: requestid },
+                  (err, deletedRequest) => {
+                    if (err) return res.json(err);
 
-                res.json({
-                  message: "Updated friend lists's",
-                  reciever: updatedReciever,
-                  sender: updatedSender
-                });
+                    res.json({
+                      message: "Updated friend lists's",
+                      reciever: updatedReciever,
+                      sender: updatedSender,
+                      deletedRequest: deletedRequest,
+                    });
+                  }
+                );
               }
-            );
-
-            //Add reciever to sender's friend list
-
-            //Delete request
-          });
-      }
-      )
+            ); 
+          }
+        );
+      });
     }
-  })
+  });
 };
 
-    // await Friend.findOneAndUpdate(
-    //   {
-    //     user: req.params.id,
-    //     self: req.user.id,
-    //   },
-    //   { $set: { status: "accepted" } },
-    //   { upsert: true, new: true }
-    // );
+// await Friend.findOneAndUpdate(
+//   {
+//     user: req.params.id,
+//     self: req.user.id,
+//   },
+//   { $set: { status: "accepted" } },
+//   { upsert: true, new: true }
+// );
 
-    // await Friend.findOneAndUpdate(
-    //   {
-    //     user: req.user.id,
-    //     self: req.params.id,
-    //   },
-    //   { $set: { status: "accepted" } },
-    //   { upsert: true, new: true }
-    // );
+// await Friend.findOneAndUpdate(
+//   {
+//     user: req.user.id,
+//     self: req.params.id,
+//   },
+//   { $set: { status: "accepted" } },
+//   { upsert: true, new: true }
+// );
 
-    // res.json("Friend accepted");
-
+// res.json("Friend accepted");

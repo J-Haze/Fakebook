@@ -166,7 +166,7 @@ function App() {
       });
   };
 
-  const acceptRequest = (requestid) => {
+  const acceptRequest = (requestid, userid) => {
     // console.log("Accepted Request");
     Axios.post(
       `/request/${requestid}/accept`,
@@ -185,6 +185,7 @@ function App() {
         setSendingRequst(!sendingRequest);
         //Something to re-render page (change state to "friend")
         setUpdateUserPage(!updateUserPage);
+        history.push(`/user/${userid}`);
         console.log("Request accepted");
         console.log(res);
         //Send notification
@@ -195,16 +196,50 @@ function App() {
       });
   };
 
-  const declineRequest = () => {
-    console.log("Declined Request");
+  const declineRequest = (requestid) => {
+    Axios.delete(`/request/${requestid}`, {
+      headers: {
+        Authorization: `Bearer ${JSON.parse(
+          window.localStorage.getItem("token")
+        )}`,
+      },
+    })
+      .then((res, err) => {
+        setSendingRequst(!sendingRequest);
+        console.log("Request cancelled");
+        console.log(res);
+        setUpdateUserPage(!updateUserPage);
+        //Remove notification?
+      })
+      .catch((error) => {
+        alert("Failed to cancel request");
+        console.log("error", error);
+      });
 
-    setUpdateUserPage(!updateUserPage);
+    
   };
 
-  const submitUnfriend = () => {
+  const submitUnfriend = (userid) => {
     console.log("unfriend");
 
-    setUpdateUserPage(!updateUserPage);
+    Axios.put(
+      `/user/${userid}/unfriend`,
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${JSON.parse(
+            window.localStorage.getItem("token")
+          )}`,
+        },
+      }
+    )
+      .then((res) => {
+        // setUpdateUserPage(!updateUserPage);
+        history.push(`/user/${userid}`);
+      })
+      .catch((error) => {
+        console.log("error", error);
+      });
   };
 
   if (!isLoggedIn) {
@@ -274,6 +309,7 @@ function App() {
                   submitUnfriend={submitUnfriend}
                   sendingRequest={sendingRequest}
                   updateUserPage={updateUserPage}
+                  submitUnfriend={submitUnfriend}
                   // setIsViewingProfile={setIsViewingProfile}
                 />
               )}
