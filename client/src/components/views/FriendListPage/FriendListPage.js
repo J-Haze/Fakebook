@@ -105,35 +105,38 @@ function FriendListPage(props) {
             <div className="friend-list-header">
               {props.user.firstname} {props.user.lastname}'s friends:
             </div>
-
-            {props.user.friendList.map((friend) =>
-              friend.isPublished ? (
-                <div className="friend-card" key={friend._id}>
-                  <Link className="link" to={`/user/${friend._id}`}>
-                    <img
-                      className="prof-pic-friendList-page"
-                      alt={`profile-pic-user-${friend.firstname}-${friend.lastname}`}
-                      src={`http://localhost:5000/uploads/${friend.photo.filename}`}
-                    />
-                  </Link>
-                  <div className="friend-card-info">
-                    <div
-                      className="friend-card-username"
-                      onClick={() => {
-                        history.push(`/user/${friend._id}`);
-                      }}
-                    >
-                      {friend.firstname} {friend.lastname}
-                    </div>
-                    <div className="friend-card-location">
-                      {friend.location}
+            <div className="friend-list-card-cont">
+              {props.user.friendList.map((friend) =>
+                friend.isPublished ? (
+                  <div className="friend-card" key={friend._id}>
+                    <Link className="link" to={`/user/${friend._id}`}>
+                      <img
+                        className="prof-pic-friendList-page"
+                        alt={`profile-pic-user-${friend.firstname}-${friend.lastname}`}
+                        src={`http://localhost:5000/uploads/${friend.photo.filename}`}
+                      />
+                    </Link>
+                    <div className="friend-card-info">
+                      <div
+                        className="friend-card-username"
+                        onClick={() => {
+                          history.push(`/user/${friend._id}`);
+                        }}
+                      >
+                        {friend.firstname} {friend.lastname}
+                      </div>
+                      <div className="friend-card-location">
+                        {friend.location}
+                      </div>
                     </div>
                   </div>
-                </div>
-              ) : (
-                ""
-              )
-            )}
+                ) : (
+                    <div className="no-friends-to-show">
+                      "No Friends To Show"
+                       </div>
+                      )
+                      )}
+            </div>
           </div>
         </div>
       )}

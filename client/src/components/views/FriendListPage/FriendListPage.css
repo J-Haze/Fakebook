@@ -1,12 +1,14 @@
 #friend-list-page {
-  min-width: 876px;
-  /* ^^ or half of that to go to 1 row? */
+  /* min-width: 876px; */
+  min-width: 450px;
+  
 }
 
 .friend-list-cont {
   background-color: white;
-  /* min-width:  */
+  min-width: 450px;
   max-width: 876px;
+  width: auto;
   padding: 16px;
 
   color: #050505;
@@ -27,6 +29,14 @@
   word-break: break-word;
   color: rgb(5, 5, 5);
   margin-bottom: 16px;
+}
+
+.friend-list-card-cont {
+  /* border: 1px solid red; */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  min-width: 418px;
 }
 
 .friend-card {
@@ -83,3 +93,11 @@
   word-break: break-word;
   color: rgb(101, 103, 107);
 }
+
+
+
+
+
+
+
+
