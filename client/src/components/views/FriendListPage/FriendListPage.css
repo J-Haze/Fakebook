@@ -1,23 +1,41 @@
+#friend-list-page-cont {
+  display: flex;
+  /* justify-content: center; */
+  /* border: 1px solid green; */
+  /* min-width: 820px; */
+}
+
 #friend-list-page {
   /* min-width: 876px; */
   min-width: 450px;
-  
+/* width: auto; */
+width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  /* border: 1px solid red; */
+
+  display: flex;
+  justify-content: center;
 }
 
 .friend-list-cont {
   background-color: white;
   min-width: 450px;
   max-width: 876px;
-  width: auto;
+  width: 100%;
   padding: 16px;
 
   color: #050505;
+
+  /* margin-left: auto;
+  margin-right: auto; */
 
   margin-top: 16px;
   box-sizing: border-box;
   /* padding: 5px 10px; */
   border-radius: 8px;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  /* border: 1px solid blue; */
 }
 
 .friend-list-header {
@@ -29,6 +47,8 @@
   word-break: break-word;
   color: rgb(5, 5, 5);
   margin-bottom: 16px;
+
+  /* border: 1px solid red; */
 }
 
 .friend-list-card-cont {
@@ -37,6 +57,7 @@
   flex-wrap: wrap;
   justify-content: space-between;
   min-width: 418px;
+  /* border: 1px solid red; */
 }
 
 .friend-card {
@@ -46,6 +67,10 @@
   box-sizing: border-box;
   /* border: 1px solid black; */
   display: flex;
+  /* border: 1px solid green; */
+  border: 1px solid var(--light-gray);
+  border-radius: 8px;
+  margin-bottom: 8px;
 }
 
 .prof-pic-friendList-page {
@@ -53,6 +78,7 @@
   height: 80px;
   width: 80px;
   box-shadow: rgba(0, 0, 0, 0.1);
+  
 }
 
 .prof-pic-friendList-page:hover {
@@ -94,9 +120,24 @@
   color: rgb(101, 103, 107);
 }
 
+/* Current User Page */
 
-
-
+#current-user-friend-list-side {
+  /* position: absolute;
+  left: 0;
+  top: 56px; */
+  /* float: left; */
+  width: 360px;
+  min-width: 360px;
+  height: 100vh;
+  background-color: white;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  margin-left: 0;
+  margin-right: auto;
+  /* margin-right: 10px; */
+  /* margin-top: 1px; */
+  z-index: -1;
+}
 
 
 

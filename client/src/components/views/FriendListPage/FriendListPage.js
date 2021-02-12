@@ -89,7 +89,7 @@ function FriendListPage(props) {
   //code that takes displayedPosts and outputs user posts
 
   return (
-    <div id="user-page">
+    <div id="friend-list-page-cont">
       {(pageType == "CurrentUserFriendListPage") && (
         <CurrentUserFriendListPage
           currentUser={props.currentUser}
