@@ -85,10 +85,58 @@ function CurrentUserFriendListPage(props) {
           {props.sentRequestsCount} Requests Pending
         </div>
 
-        {!props.sentRequestsCount ? (
+        {/* {!props.sentRequestsCount ? (
           <div className="no-new-requests">No pending requests</div>
         ) : (
           ""
+        )} */}
+
+        {props.sentRequestsCount == "" ? (
+          <div className="no-new-requests">No pending requests</div>
+        ) : (
+          props.sentRequests.map((request) =>
+            request.reciever.isPublished ? (
+              <div className="friend-request-card" key={request._id}>
+                <Link className="link" to={`/user/${request.reciever._id}`}>
+                  <img
+                    className="prof-pic-friendList-request-page"
+                    alt={`profile-pic-user-${request.reciever.firstname}-${request.reciever.lastname}`}
+                    src={`http://localhost:5000/uploads/${request.reciever.photo.filename}`}
+                  />
+                </Link>
+                <div className="friend-request-card-info">
+                  <div
+                    className="friend-request-card-username"
+                    onClick={() => {
+                      history.push(`/user/${request.reciever._id}`);
+                    }}
+                  >
+                    {request.reciever.firstname} {request.reciever.lastname}
+                  </div>
+                  {/* <div className="friend-request-card-location">
+                    {request.reciever.location}
+                  </div> */}
+                  <div className="friend-request-card-btn-cont">
+                    <div
+                      className="friend-request-card-btn-pending"
+                    >
+                      Request Pending
+                    </div>
+                    <div
+                      className="friend-request-card-btn-cancel"
+                      onClick={() => {
+                        props.cancelRequest(request._id);
+                      }}
+                    >
+                      Cancel
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              ""
+            )
+          )
         )}
 
         {/* <FindFriendsBtn />  */}
