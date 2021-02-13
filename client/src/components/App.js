@@ -33,8 +33,8 @@ function App() {
   const [sentRequests, setSentRequests] = useState("");
   const [receivedRequests, setReceivedRequests] = useState("");
 
-  const [sentRequestsCount, setSentRequestsCount] = useState(0);
-  const [receivedRequestsCount, setReceivedRequestsCount] = useState(0);
+  const [sentRequestsCount, setSentRequestsCount] = useState("");
+  const [receivedRequestsCount, setReceivedRequestsCount] = useState("");
 
   // const [createPostModalOpen, setCreatePostModalOpen] = useState(true);
   const [createPostModalOpen, setCreatePostModalOpen] = useState(false);
@@ -264,7 +264,7 @@ function App() {
       setReceivedRequests(res.data);
 
       if (res.data.length == 0 || res.data.length == undefined) {
-        setReceivedRequestsCount(0);
+        setReceivedRequestsCount("");
         console.log("zero")
         return;
       } else {
@@ -286,7 +286,7 @@ function App() {
     // )
 
     // Something to refresh requests after accepting/declining?
-  }, [isLoggedIn]);
+  }, [currentUser]);
 
   if (!isLoggedIn) {
     return (

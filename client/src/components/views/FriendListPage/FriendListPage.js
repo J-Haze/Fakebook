@@ -108,8 +108,10 @@ function FriendListPage(props) {
             {props.user.firstname} {props.user.lastname}'s friends:
           </div>
           <div className="friend-list-card-cont">
-            {!props.user.friendList && (
-              <div className="no-friends-to-show">"No Friends To Show"</div>
+            {(props.user.friendList.length == 0) && (
+              <div className="no-friends-to-show">No Friends To Show
+              {/* <FindFriendsBtn />  */}
+              </div>
             )}
             {props.user.friendList.map((friend) =>
               friend.isPublished ? (

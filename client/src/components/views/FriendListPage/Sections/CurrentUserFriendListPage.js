@@ -24,35 +24,57 @@ function CurrentUserFriendListPage(props) {
         <div id="current-user-fl-side-subheader">
           {props.receivedRequestsCount} Friend Requests
         </div>
-        {!props.receivedRequests ? (
+        {props.receivedRequests == "" ? (
           <div className="no-new-requests">No new requests</div>
         ) : (
-            props.receivedRequests.map((request) => (
-          request.sender.isPublished ? (
-            <div className="friend-card" key={request._id}>
-              <Link className="link" to={`/user/${request.sender._id}`}>
-                <img
-                  className="prof-pic-friendList-page"
-                  alt={`profile-pic-user-${request.sender.firstname}-${request.sender.lastname}`}
-                  src={`http://localhost:5000/uploads/${request.sender.photo.filename}`}
-                />
-              </Link>
-              <div className="friend-card-info">
-                <div
-                  className="friend-card-username"
-                  onClick={() => {
-                    history.push(`/user/${request.sender._id}`);
-                  }}
-                >
-                  {request.sender.firstname} {request.sender.lastname}
+          props.receivedRequests.map((request) =>
+            request.sender.isPublished ? (
+              <div className="friend-request-card" key={request._id}>
+                <Link className="link" to={`/user/${request.sender._id}`}>
+                  <img
+                    className="prof-pic-friendList-request-page"
+                    alt={`profile-pic-user-${request.sender.firstname}-${request.sender.lastname}`}
+                    src={`http://localhost:5000/uploads/${request.sender.photo.filename}`}
+                  />
+                </Link>
+                <div className="friend-request-card-info">
+                  <div
+                    className="friend-request-card-username"
+                    onClick={() => {
+                      history.push(`/user/${request.sender._id}`);
+                    }}
+                  >
+                    {request.sender.firstname} {request.sender.lastname}
+                  </div>
+                  {/* <div className="friend-request-card-location">
+                    {request.sender.location}
+                  </div> */}
+                  <div className="friend-request-card-btn-cont">
+                    <div
+                      className="friend-request-card-btn-confirm"
+                      onClick={() => {
+                        // setUnfriendModalOpen(true);
+                        props.acceptRequest(request._id, request.sender._id);
+                      }}
+                    >
+                      Confirm
+                    </div>
+                    <div
+                      className="friend-request-card-btn-decline"
+                      onClick={() => {
+                        // setUnfriendModalOpen(true);
+                        props.declineRequest(request._id);
+                      }}
+                    >
+                      Delete
+                    </div>
+                  </div>
                 </div>
-                <div className="friend-card-location">{request.sender.location}</div>
               </div>
-            </div>)
-           : (
-            ""
-                )
-              ))
+            ) : (
+              ""
+            )
+          )
         )}
       </div>
       <div
@@ -63,38 +85,13 @@ function CurrentUserFriendListPage(props) {
           {props.sentRequestsCount} Requests Pending
         </div>
 
-        {/* {props.user.friendList.map((friend) =>
-          friend.isPublished ? (
-            <div className="friend-card" key={friend._id}>
-              <Link className="link" to={`/user/${friend._id}`}>
-                <img
-                  className="prof-pic-friendList-page"
-                  alt={`profile-pic-user-${friend.firstname}-${friend.lastname}`}
-                  src={`http://localhost:5000/uploads/${friend.photo.filename}`}
-                />
-              </Link>
-              <div className="friend-card-info">
-                <div
-                  className="friend-card-username"
-                  onClick={() => {
-                    history.push(`/user/${friend._id}`);
-                  }}
-                >
-                  {friend.firstname} {friend.lastname}
-                </div>
-                <div className="friend-card-location">{friend.location}</div>
-              </div>
-            </div>
-          ) : (
-            <div className="no-friends-to-show">"No Friends To Show"</div>
-          )
-        )} */}
-
         {!props.sentRequestsCount ? (
           <div className="no-new-requests">No pending requests</div>
         ) : (
           ""
         )}
+
+        {/* <FindFriendsBtn />  */}
       </div>
     </div>
 

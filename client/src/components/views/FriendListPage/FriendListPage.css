@@ -186,3 +186,148 @@
   margin-top: 15px;
   margin-bottom: 20px;
 }
+
+.no-friends-to-show {
+  color: rgb(101, 103, 107);
+    font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 16.0004px;
+  text-align: center;
+  word-break: break-word;
+
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 20px;
+}
+
+
+
+
+.friend-request-card {
+  width: 344px;
+  height: 84px;
+  padding: 12px 8px;
+  box-sizing: border-box;
+  /* border: 1px solid black; */
+  display: flex;
+  /* border: 1px solid green; */
+  /* border: 1px solid var(--light-gray); */
+  border-radius: 8px;
+  margin-top: 8px;
+}
+
+.friend-request-card:hover {
+  background-color: var(--light-gray);
+}
+
+.prof-pic-friendList-request-page {
+  /* border-radius: 8px; */
+  border-radius: 50%;
+  height: 60px;
+  width: 60px;
+  box-shadow: rgba(0, 0, 0, 0.1);
+}
+
+.prof-pic-friendList-request-page:hover {
+  cursor: pointer;
+}
+
+.friend-request-card-info {
+  /* border: 1px solid blue; */
+  width: 256px;
+  height: 60px;
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+  /* justify-content: center; */
+  margin-left: 12px;
+  margin-top: 0;
+  padding-top: 0;
+
+  /* border: 1px solid red; */
+}
+
+.friend-request-card-username {
+  font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 20.0005px;
+  text-align: start;
+  word-break: break-word;
+  color: #050505;
+  margin-top: 0;
+  margin-bottom: auto;
+}
+
+.friend-request-card-username:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.friend-request-card-location {
+  font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 16.0004px;
+  text-align: start;
+  word-break: break-word;
+  color: rgb(101, 103, 107);
+}
+
+.friend-request-card-btn-cont {
+  display: flex;
+}
+
+.friend-request-card-btn-confirm {
+  display: flex;
+  height: 36px;
+  width: 120px;
+  justify-content: center;
+  background-color: var(--blue);
+  color: white;
+
+  box-sizing: border-box;
+
+  font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 19.9995px;
+  align-items: center;
+  border-radius: 6px;
+  margin-right: auto;
+}
+
+.friend-request-card-btn-confirm:hover {
+  cursor: pointer;
+  background-color: #1b74e4;
+}
+
+.friend-request-card-btn-decline {
+  display: flex;
+  height: 36px;
+  width: 120px;
+  justify-content: center;
+  background-color: var(--dark-gray);
+  /* background-color: white; */
+
+  box-sizing: border-box;
+
+  font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 19.9995px;
+  align-items: center;
+  border-radius: 6px;
+  color: rgb(5, 5, 5);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  margin-left: auto;
+}
+
+.friend-request-card-btn-decline:hover {
+  cursor: pointer;
+  /* background-color: #c2c6ca; */
+}
+
+
+
