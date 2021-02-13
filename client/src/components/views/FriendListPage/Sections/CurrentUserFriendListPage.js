@@ -81,7 +81,7 @@ function CurrentUserFriendListPage(props) {
         id="current-user-fl-side-pending-cont"
         className="current-user-fl-side-cont"
       >
-        <div id="current-user-fl-side-subheader">
+        <div id="current-user-fl-side-subheader-pending">
           {props.sentRequestsCount} Requests Pending
         </div>
 

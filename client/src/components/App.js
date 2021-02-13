@@ -288,6 +288,45 @@ function App() {
     // Something to refresh requests after accepting/declining?
   }, [currentUser]);
 
+
+    const fetchPendingRequests = () => {
+      Axios.get("/request/sent", {
+        headers: {
+          Authorization: `Bearer ${JSON.parse(
+            window.localStorage.getItem("token")
+          )}`,
+        },
+      }).then((res) => {
+        console.log("res.data request", res.data);
+        console.log("res.data.length request", res.data.length);
+        // let allUsersArray = res.data;
+        setSentRequests(res.data);
+
+        if (res.data.length == 0 || res.data.length == undefined) {
+          setSentRequestsCount("");
+          console.log("zero");
+          return;
+        } else {
+          setSentRequestsCount(res.data.length);
+          console.log("res.data.length request2", res.data.length);
+          console.log("made it here");
+        }
+
+        // setAllUsers(res.data);
+      });
+    };
+
+    useEffect(() => {
+      fetchPendingRequests();
+      // console.log("tada", receivedRequests);
+      // console.log("tada2", receivedRequestsCount);
+      // return (
+      //   setReceivedRequests([])
+      // )
+
+      // Something to refresh requests after accepting/declining?
+    }, [currentUser]);
+
   if (!isLoggedIn) {
     return (
       <LoginPage
@@ -384,6 +423,11 @@ function App() {
                   setReceivedRequests={setReceivedRequests}
                   receivedRequestsCount={receivedRequestsCount}
                   setReceivedRequestsCount={setReceivedRequestsCount}
+
+                 sentRequests={sentRequests}
+                  setSentRequests={setSentRequests}
+                  sentRequestsCount={sentRequestsCount}
+                  setSentRequestsCount={setSentRequestsCount}
 
                   // fetchPosts={fetchPosts}
                   // displayedPosts={displayedPosts}

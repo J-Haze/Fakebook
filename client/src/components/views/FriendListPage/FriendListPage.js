@@ -82,9 +82,9 @@ function FriendListPage(props) {
 
   //code that takes displayedPosts and outputs user posts
 
-    console.log("received requests 2", props.receivedRequests);
+  console.log("received requests 2", props.receivedRequests);
 
-    console.log("received requests count1", props.receivedRequestsCount);
+  console.log("received requests count1", props.receivedRequestsCount);
 
   return (
     <div id="friend-list-page-cont">
@@ -95,6 +95,10 @@ function FriendListPage(props) {
           setReceivedRequests={props.setReceivedRequests}
           receivedRequestsCount={props.receivedRequestsCount}
           setReceivedRequestsCount={props.setReceivedRequestsCount}
+          sentRequests={props.sentRequests}
+          setSentRequests={props.setSentRequests}
+          sentRequestsCount={props.sentRequestsCount}
+          setSentRequestsCount={props.setSentRequestsCount}
           // fetchPosts={props.fetchPosts}
           // displayedPosts={props.displayedPosts}
           // createPostModalOpen={props.createPostModalOpen}
@@ -108,9 +112,10 @@ function FriendListPage(props) {
             {props.user.firstname} {props.user.lastname}'s friends:
           </div>
           <div className="friend-list-card-cont">
-            {(props.user.friendList.length == 0) && (
-              <div className="no-friends-to-show">No Friends To Show
-              {/* <FindFriendsBtn />  */}
+            {props.user.friendList.length == 0 && (
+              <div className="no-friends-to-show">
+                No Friends To Show
+                {/* <FindFriendsBtn />  */}
               </div>
             )}
             {props.user.friendList.map((friend) =>

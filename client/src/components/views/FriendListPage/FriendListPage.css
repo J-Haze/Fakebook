@@ -1,5 +1,6 @@
 #friend-list-page-cont {
   display: flex;
+  height: 0px;
   /* flex-direction: column; */
   /* justify-content: center; */
   /* border: 1px solid green; */
@@ -21,8 +22,6 @@
 
   /* height: auto; */
 }
-
-
 
 .friend-list-cont {
   background-color: white;
@@ -172,6 +171,12 @@
   word-break: break-word;
 }
 
+#current-user-fl-side-subheader-pending {
+  margin-top: 6px;
+  padding-top: 6px;
+  border-top: 1px solid var(--dark-gray);
+}
+
 .no-new-requests {
   color: rgb(101, 103, 107);
   margin-left: auto;
@@ -189,7 +194,7 @@
 
 .no-friends-to-show {
   color: rgb(101, 103, 107);
-    font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+  font-family: "Segoe UI", Helvetica, Arial, sans-serif;
   font-size: 20px;
   font-weight: 400;
   line-height: 16.0004px;
@@ -200,9 +205,6 @@
   margin-right: auto;
   margin-bottom: 20px;
 }
-
-
-
 
 .friend-request-card {
   width: 344px;
@@ -281,7 +283,7 @@
 
 .friend-request-card-btn-confirm {
   display: flex;
-  height: 36px;
+  height: 30px;
   width: 120px;
   justify-content: center;
   background-color: var(--blue);
@@ -305,7 +307,7 @@
 
 .friend-request-card-btn-decline {
   display: flex;
-  height: 36px;
+  height: 30px;
   width: 120px;
   justify-content: center;
   background-color: var(--dark-gray);
@@ -328,6 +330,3 @@
   cursor: pointer;
   /* background-color: #c2c6ca; */
 }
-
-
-

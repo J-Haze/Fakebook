@@ -19,7 +19,7 @@ router.get(
 );
 
 // GET - Get all sent requests
-// router.get("/sent", auth, request_controller.get_currentUser_requests_sent);
+router.get("/sent", auth, request_controller.get_currentUser_requests_sent);
 
 // Send friend request from current user to specified user
 router.post("/", auth, request_controller.send_request);
