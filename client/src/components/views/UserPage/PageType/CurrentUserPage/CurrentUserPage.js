@@ -160,7 +160,7 @@ function CurrentUserPage(props) {
           )}
           {props.currentUser.friendList.length > 0 && (
             <div id="friend-icon-cont">
-              {props.currentUser.friendList.slice(0, 8).map((friend) =>
+              {props.currentUser.friendList.slice(0, 9).map((friend) =>
                 friend.isPublished ? (
                   <div className="friend-icon-box" key={friend._id}>
                     <Link className="link" to={`/user/${friend._id}`}>

@@ -60,7 +60,7 @@ function FriendPage(props) {
 
   useEffect(() => {
     calculateFriendCount();
-  }, []);
+  }, [props.userProfile.friendList.length]);
 
   // function submitUnfriend() {
   //   console.log("unfriend");
@@ -214,7 +214,7 @@ function FriendPage(props) {
           )}
           {props.userProfile.friendList.length > 0 && (
             <div id="friend-icon-cont">
-              {props.userProfile.friendList.slice(0, 8).map((friend) =>
+              {props.userProfile.friendList.slice(0, 9).map((friend) =>
                 friend.isPublished ? (
                   <div className="friend-icon-box" key={friend._id}>
                     <Link className="link" to={`/user/${friend._id}`}>

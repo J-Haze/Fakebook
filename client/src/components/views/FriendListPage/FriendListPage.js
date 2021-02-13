@@ -99,6 +99,12 @@ function FriendListPage(props) {
           setSentRequests={props.setSentRequests}
           sentRequestsCount={props.sentRequestsCount}
           setSentRequestsCount={props.setSentRequestsCount}
+          sendRequest={props.sendRequest}
+          cancelRequest={props.cancelRequest}
+          acceptRequest={props.acceptRequest}
+          declineRequest={props.declineRequest}
+          submitUnfriend={props.submitUnfriend}
+          sendingRequest={props.sendingRequest}
           // fetchPosts={props.fetchPosts}
           // displayedPosts={props.displayedPosts}
           // createPostModalOpen={props.createPostModalOpen}

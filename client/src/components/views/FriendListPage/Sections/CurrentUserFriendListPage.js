@@ -55,6 +55,7 @@ function CurrentUserFriendListPage(props) {
                       onClick={() => {
                         // setUnfriendModalOpen(true);
                         props.acceptRequest(request._id, request.sender._id);
+                        
                       }}
                     >
                       Confirm

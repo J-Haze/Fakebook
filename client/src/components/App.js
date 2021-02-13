@@ -28,6 +28,7 @@ function App() {
 
   const [sendingRequest, setSendingRequst] = useState(false);
   const [updateUserPage, setUpdateUserPage] = useState(false);
+  const [refreshUser, setRefreshUser] = useState(false);
 
   const [pageType, setPageType] = useState("NonFriendPage");
 
@@ -56,7 +57,7 @@ function App() {
         setIsLoggedIn(true);
       })
       .catch((error) => console.log("error", error));
-  }, [tokenRefresh]);
+  }, [tokenRefresh, refreshUser]);
 
   // Move this stuff to other sections (you don't need if for the signup page)
 
@@ -167,6 +168,7 @@ function App() {
         setSendingRequst(!sendingRequest);
         console.log("Request cancelled");
         console.log(res);
+        fetchPendingRequests();
         //Remove notification?
       })
       .catch((error) => {
@@ -198,6 +200,9 @@ function App() {
         // history.push(`/user/${userid}`);
         console.log("Request accepted");
         console.log(res);
+        fetchUsers();
+        fetchIncomingRequests();
+        setRefreshUser(!refreshUser)
         //Send notification
       })
       .catch((error) => {
@@ -216,13 +221,14 @@ function App() {
     })
       .then((res, err) => {
         setSendingRequst(!sendingRequest);
-        console.log("Request cancelled");
+        console.log("Request Declined");
         console.log(res);
         setUpdateUserPage(!updateUserPage);
+        fetchIncomingRequests();
         //Remove notification?
       })
       .catch((error) => {
-        alert("Failed to cancel request");
+        alert("Failed to decline request");
         console.log("error", error);
       });
   };
