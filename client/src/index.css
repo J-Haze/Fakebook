@@ -44,7 +44,11 @@ code {
 }
 
 body {
-  margin: 0;
+    margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
   font-family: -apple-system, BlinkMacSystemFont, SFProDisplay-Regular,
     "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
     "Droid Sans", "Helvetica Neue", sans-serif;
@@ -56,24 +60,47 @@ body {
   line-height: 1.5;
   color: #24292e;
   background-color: var(--light-gray);
-  min-height: 100%;
+  /* min-height: 100%; */
   overflow-y: scroll;
-}
 
-#main {
-  height: 100%;
-  width: 100%;
-  min-height: 100%;
+  
 }
 
 #root {
-  min-height: 100%;
+  /* min-height: 100%; */
+    margin: 0;
+  padding: 0;
   height: 100%;
   width: 100%;
+  box-sizing: border-box;
 }
 
 html {
-  min-height: 100%;
+  /* min-height: 100%; */
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+#main {
+    margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+  
+}
+
+#content {
+    margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+  top: 56px;
+  position: absolute;
 }
 
 .input {

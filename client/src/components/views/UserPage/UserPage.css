@@ -3,6 +3,9 @@
   justify-content: center;
   flex-wrap: wrap;
   /* border: 1px solid green; */
+  box-sizing: border-box;
+  margin:0;
+  padding: 0;
 }
 
 #current-user-page {

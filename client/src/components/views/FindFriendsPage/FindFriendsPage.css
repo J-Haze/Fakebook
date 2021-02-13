@@ -185,7 +185,20 @@ margin-right: auto;
   background-color: #1b74e4;
 }
 
+.no-others-to-show {
+  color: rgb(101, 103, 107);
+  font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 16.0004px;
+  text-align: center;
+  word-break: break-word;
 
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
 
 
 

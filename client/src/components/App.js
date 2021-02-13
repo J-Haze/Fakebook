@@ -345,69 +345,101 @@ function App() {
           // isViewingProfile={isViewingProfile}
           // setIsViewingProfile={setIsViewingProfile}
         />
-        {createPostModalOpen && (
-          <CreatePostModal
-            createPostModalOpen={createPostModalOpen}
-            setCreatePostModalOpen={setCreatePostModalOpen}
-            currentUser={currentUser}
-            fetchPosts={fetchPosts}
-          />
-        )}
-        <Switch>
-          <Route
-            exact
-            path="/"
-            render={() => (
-              <HomePage
-                currentUser={currentUser}
-                isLoggedIn={isLoggedIn}
-                fetchPosts={fetchPosts}
-                displayedPosts={displayedPosts}
-                loading={loading}
-                createPostModalOpen={createPostModalOpen}
-                setCreatePostModalOpen={setCreatePostModalOpen}
-              />
-            )}
-          ></Route>
-
-          {allUsers.map((user) => (
+        <div id="content">
+          {createPostModalOpen && (
+            <CreatePostModal
+              createPostModalOpen={createPostModalOpen}
+              setCreatePostModalOpen={setCreatePostModalOpen}
+              currentUser={currentUser}
+              fetchPosts={fetchPosts}
+            />
+          )}
+          <Switch>
             <Route
               exact
-              key={user._id}
-              path={`/user/${user._id}`}
+              path="/"
               render={() => (
-                <UserPage
-                  userProfile={user}
+                <HomePage
                   currentUser={currentUser}
+                  isLoggedIn={isLoggedIn}
                   fetchPosts={fetchPosts}
                   displayedPosts={displayedPosts}
+                  loading={loading}
                   createPostModalOpen={createPostModalOpen}
                   setCreatePostModalOpen={setCreatePostModalOpen}
-                  sendRequest={sendRequest}
-                  cancelRequest={cancelRequest}
-                  acceptRequest={acceptRequest}
-                  declineRequest={declineRequest}
-                  submitUnfriend={submitUnfriend}
-                  sendingRequest={sendingRequest}
-                  updateUserPage={updateUserPage}
-                  submitUnfriend={submitUnfriend}
-                  pageType={pageType}
-                  setPageType={setPageType}
-
-                  // setIsViewingProfile={setIsViewingProfile}
                 />
               )}
             ></Route>
-          ))}
 
-          {allUsers.map((user) => (
+            {allUsers.map((user) => (
+              <Route
+                exact
+                key={user._id}
+                path={`/user/${user._id}`}
+                render={() => (
+                  <UserPage
+                    userProfile={user}
+                    currentUser={currentUser}
+                    fetchPosts={fetchPosts}
+                    displayedPosts={displayedPosts}
+                    createPostModalOpen={createPostModalOpen}
+                    setCreatePostModalOpen={setCreatePostModalOpen}
+                    sendRequest={sendRequest}
+                    cancelRequest={cancelRequest}
+                    acceptRequest={acceptRequest}
+                    declineRequest={declineRequest}
+                    submitUnfriend={submitUnfriend}
+                    sendingRequest={sendingRequest}
+                    updateUserPage={updateUserPage}
+                    submitUnfriend={submitUnfriend}
+                    pageType={pageType}
+                    setPageType={setPageType}
+
+                    // setIsViewingProfile={setIsViewingProfile}
+                  />
+                )}
+              ></Route>
+            ))}
+
+            {allUsers.map((user) => (
+              <Route
+                exact
+                key={user._id}
+                path={`/friends/${user._id}`}
+                render={() => (
+                  <FriendListPage
+                    user={user}
+                    currentUser={currentUser}
+                    sendRequest={sendRequest}
+                    cancelRequest={cancelRequest}
+                    acceptRequest={acceptRequest}
+                    declineRequest={declineRequest}
+                    submitUnfriend={submitUnfriend}
+                    sendingRequest={sendingRequest}
+                    receivedRequests={receivedRequests}
+                    setReceivedRequests={setReceivedRequests}
+                    receivedRequestsCount={receivedRequestsCount}
+                    setReceivedRequestsCount={setReceivedRequestsCount}
+                    sentRequests={sentRequests}
+                    setSentRequests={setSentRequests}
+                    sentRequestsCount={sentRequestsCount}
+                    setSentRequestsCount={setSentRequestsCount}
+
+                    // fetchPosts={fetchPosts}
+                    // displayedPosts={displayedPosts}
+                    // createPostModalOpen={createPostModalOpen}
+                    // setCreatePostModalOpen={setCreatePostModalOpen}
+                  />
+                )}
+              ></Route>
+            ))}
+
             <Route
               exact
-              key={user._id}
-              path={`/friends/${user._id}`}
+              path="/find-friends"
               render={() => (
-                <FriendListPage
-                  user={user}
+                <FindFriendsPage
+                  allUsers={allUsers}
                   currentUser={currentUser}
                   sendRequest={sendRequest}
                   cancelRequest={cancelRequest}
@@ -423,43 +455,13 @@ function App() {
                   setSentRequests={setSentRequests}
                   sentRequestsCount={sentRequestsCount}
                   setSentRequestsCount={setSentRequestsCount}
-
-                  // fetchPosts={fetchPosts}
-                  // displayedPosts={displayedPosts}
-                  // createPostModalOpen={createPostModalOpen}
-                  // setCreatePostModalOpen={setCreatePostModalOpen}
                 />
               )}
             ></Route>
-          ))}
 
-          <Route
-            exact
-            path="/find-friends"
-            render={() => (
-              <FindFriendsPage
-                allUsers={allUsers}
-                currentUser={currentUser}
-                sendRequest={sendRequest}
-                cancelRequest={cancelRequest}
-                acceptRequest={acceptRequest}
-                declineRequest={declineRequest}
-                submitUnfriend={submitUnfriend}
-                sendingRequest={sendingRequest}
-                receivedRequests={receivedRequests}
-                setReceivedRequests={setReceivedRequests}
-                receivedRequestsCount={receivedRequestsCount}
-                setReceivedRequestsCount={setReceivedRequestsCount}
-                sentRequests={sentRequests}
-                setSentRequests={setSentRequests}
-                sentRequestsCount={sentRequestsCount}
-                setSentRequestsCount={setSentRequestsCount}
-              />
-            )}
-          ></Route>
-
-          <Route render={() => <NotFound />} />
-        </Switch>
+            <Route render={() => <NotFound />} />
+          </Switch>
+        </div>
       </div>
     );
   } else {
