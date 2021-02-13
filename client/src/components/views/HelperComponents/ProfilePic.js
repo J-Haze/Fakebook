@@ -7,7 +7,7 @@ const ProfilePic = (props) => {
   //     src={`http://localhost:5000/uploads/${props.post.image.filename}`}
   //   />
 
-  console.log("props.user.photo", props.user.photo);
+  // console.log("props.user.photo", props.user.photo);
 
   if (props.user.photo) {
     return (

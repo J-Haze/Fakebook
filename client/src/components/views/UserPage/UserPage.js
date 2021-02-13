@@ -81,6 +81,8 @@ function UserPage(props) {
 
   //code that takes displayedPosts and outputs user posts
 
+  console.log("received requests 2", props.receivedRequests);
+
   console.log("received requests count1", props.receivedRequestsCount);
 
   return (
@@ -98,10 +100,7 @@ function UserPage(props) {
           declineRequest={props.declineRequest}
           submitUnfriend={props.submitUnfriend}
           sendingRequest={props.sendingRequest}
-          receivedRequests={props.receivedRequests}
-          setReceivedRequests={props.setReceivedRequests}
-          receivedRequestsCount={props.receivedRequestsCount}
-          setReceivedRequestsCount={props.setReceivedRequestsCount}
+
         />
       ) : props.pageType == "FriendPage" ? (
         <FriendPage

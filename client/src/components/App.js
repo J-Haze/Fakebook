@@ -30,11 +30,11 @@ function App() {
 
   const [pageType, setPageType] = useState("NonFriendPage");
 
-  const [sentRequests, setSentRequests] = useState([]);
-  const [receivedRequests, setReceivedRequests] = useState([]);
+  const [sentRequests, setSentRequests] = useState("");
+  const [receivedRequests, setReceivedRequests] = useState("");
 
-  const [sentRequestsCount, setSentRequestsCount] = useState("");
-  const [receivedRequestsCount, setReceivedRequestsCount] = useState("");
+  const [sentRequestsCount, setSentRequestsCount] = useState(0);
+  const [receivedRequestsCount, setReceivedRequestsCount] = useState(0);
 
   // const [createPostModalOpen, setCreatePostModalOpen] = useState(true);
   const [createPostModalOpen, setCreatePostModalOpen] = useState(false);
@@ -265,6 +265,7 @@ function App() {
 
       if (res.data.length == 0 || res.data.length == undefined) {
         setReceivedRequestsCount(0);
+        console.log("zero")
         return;
       } else {
         setReceivedRequestsCount(res.data.length);
@@ -285,7 +286,7 @@ function App() {
     // )
 
     // Something to refresh requests after accepting/declining?
-  }, [currentUser]);
+  }, [isLoggedIn]);
 
   if (!isLoggedIn) {
     return (
@@ -357,10 +358,7 @@ function App() {
                   submitUnfriend={submitUnfriend}
                   pageType={pageType}
                   setPageType={setPageType}
-                  receivedRequests={receivedRequests}
-                  setReceivedRequests={setReceivedRequests}
-                  receivedRequestsCount={receivedRequestsCount}
-                  setReceivedRequestsCount={setReceivedRequestsCount}
+
                   // setIsViewingProfile={setIsViewingProfile}
                 />
               )}
@@ -382,6 +380,10 @@ function App() {
                   declineRequest={declineRequest}
                   submitUnfriend={submitUnfriend}
                   sendingRequest={sendingRequest}
+                  receivedRequests={receivedRequests}
+                  setReceivedRequests={setReceivedRequests}
+                  receivedRequestsCount={receivedRequestsCount}
+                  setReceivedRequestsCount={setReceivedRequestsCount}
 
                   // fetchPosts={fetchPosts}
                   // displayedPosts={displayedPosts}
