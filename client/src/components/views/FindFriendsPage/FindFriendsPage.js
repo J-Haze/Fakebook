@@ -57,17 +57,35 @@ function FindFriendsPage(props) {
       props.currentUser.friendList == null ||
       props.currentUser.friendList == ""
     ) {
+      console.log(
+        "props.currentUser.friendList error",
+        props.currentUser.friendList
+      );
       setNonFriends(nonFriendsArr);
     } else {
+      console.log("T Non Friend Arr", nonFriendsArr);
+      console.log(
+        "T props.currentUser.friendList",
+        props.currentUser.friendList
+      );
+
       for (let i = nonFriendsArr.length - 1; i >= 0; i--) {
-        for (let j = props.currentUser.friendList; j >= 0; j--) {
+        console.log("xi", nonFriendsArr[i]._id);
+        for (let j = props.currentUser.friendList.length - 1; j >= 0; j--) {
+          console.log("xj", props.currentUser.friendList[j]);
           if (nonFriendsArr[i]._id == props.currentUser.friendList[j]._id) {
             console.log("Splicing2", nonFriendsArr[i]);
             nonFriendsArr.splice(i, 1);
           }
         }
       }
-      // setNonFriends(nonFriendsArr);
+      setNonFriends(nonFriendsArr);
+
+      console.log("T2 Non Friend Arr", nonFriendsArr);
+      console.log(
+        "T2 props.currentUser.friendList",
+        props.currentUser.friendList
+      );
     }
     setNonFriends(nonFriendsArr);
 
@@ -149,6 +167,10 @@ function FindFriendsPage(props) {
                       user={request.sender}
                       request={request}
                       type={"receivedReq"}
+                      sendRequest={props.sendRequest}
+                      cancelRequest={props.cancelRequest}
+                      acceptRequest={props.acceptRequest}
+                      declineRequest={props.declineRequest}
                     />
                   ) : (
                     ""
@@ -164,6 +186,10 @@ function FindFriendsPage(props) {
                       user={request.receiver}
                       request={request}
                       type={"sentReq"}
+                      sendRequest={props.sendRequest}
+                      cancelRequest={props.cancelRequest}
+                      acceptRequest={props.acceptRequest}
+                      declineRequest={props.declineRequest}
                     />
                   ) : (
                     ""
@@ -178,6 +204,10 @@ function FindFriendsPage(props) {
                       key={user._id}
                       user={user}
                       type={"noReq"}
+                      sendRequest={props.sendRequest}
+                      cancelRequest={props.cancelRequest}
+                      acceptRequest={props.acceptRequest}
+                      declineRequest={props.declineRequest}
                     />
                   ) : (
                     ""
@@ -188,10 +218,7 @@ function FindFriendsPage(props) {
             nonFriends == undefined ||
             nonFriends == null ||
             nonFriends == "") && (
-            <div className="no-others-to-show">
-              No Other Users
-              {/* <FindFriendsBtn />  */}
-            </div>
+            <div className="no-others-to-show">No Other Users</div>
           )}
         </div>
       </div>

@@ -71,7 +71,7 @@ function Card(props) {
             <div
               className="find-user-info-add-friend"
               onClick={() => {
-                props.sendRequest(props.userProfile);
+                props.sendRequest(props.user);
               }}
             >
               + Add Friend

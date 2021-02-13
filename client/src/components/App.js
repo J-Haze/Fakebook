@@ -144,6 +144,8 @@ function App() {
     )
       .then((res, err) => {
         setSendingRequst(!sendingRequest);
+        fetchUsers();
+        fetchPendingRequests();
         console.log("Request sent");
         console.log(res);
         //Send notification
@@ -168,6 +170,7 @@ function App() {
         setSendingRequst(!sendingRequest);
         console.log("Request cancelled");
         console.log(res);
+        fetchUsers();
         fetchPendingRequests();
         //Remove notification?
       })
@@ -394,8 +397,6 @@ function App() {
                     submitUnfriend={submitUnfriend}
                     pageType={pageType}
                     setPageType={setPageType}
-
-                    // setIsViewingProfile={setIsViewingProfile}
                   />
                 )}
               ></Route>
@@ -424,11 +425,6 @@ function App() {
                     setSentRequests={setSentRequests}
                     sentRequestsCount={sentRequestsCount}
                     setSentRequestsCount={setSentRequestsCount}
-
-                    // fetchPosts={fetchPosts}
-                    // displayedPosts={displayedPosts}
-                    // createPostModalOpen={createPostModalOpen}
-                    // setCreatePostModalOpen={setCreatePostModalOpen}
                   />
                 )}
               ></Route>
