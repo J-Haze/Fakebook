@@ -8,22 +8,76 @@ import ProfilePic from "../HelperComponents/ProfilePic.js";
 import { useHistory } from "react-router-dom";
 
 function HomePage(props) {
-  const [postCount, setPostCount] = useState(0);
+  const [homePosts, setHomePosts] = useState("");
 
   const history = useHistory();
 
-  let postCountVar;
+  //Move to App.js
+
   useEffect(() => {
-    let postCountVar = 0;
-    if (props.displayedPosts.length > 0) {
-      props.displayedPosts.forEach(function (post) {
-        if (post.isPublished) {
-          postCountVar++;
-        }
-      });
-      setPostCount(postCountVar);
+    let homePostsVar = [];
+    console.log("displayedPosts here", props.displayedPosts)
+
+    if (
+      props.displayedPosts == undefined ||
+      props.displayedPosts.length == 0 ||
+      props.displayedPosts == null ||
+      props.displayedPosts == ""
+    ) {
+      console.log("no displayed Posts")
+      homePostsVar = "";
+      setHomePosts(homePostsVar);
+      return
     }
-  }, [props.displayedPosts]);
+
+    if (
+      props.currentUser.friendList == undefined ||
+      props.currentUser.friendList.length == 0 ||
+      props.currentUser.friendList == null ||
+      props.currentUser.friendList == ""
+    ) {
+      console.log("Only display My Posts");
+        // Only display your posts
+        for (let i = props.displayedPosts.length - 1; i >= 0; i--) {
+          if (props.displayedPosts[i].author._id == props.currentUser._id) {
+            homePostsVar.push(props.displayedPosts[i]);
+            console.log("new homePostsVar", homePostsVar);
+          }
+        }
+      console.log("Only display My Posts", homePostsVar);
+        setHomePosts(homePostsVar.reverse())
+        return;
+      }
+      
+      for (let i = props.displayedPosts.length - 1; i >= 0; i--) {
+        if (props.displayedPosts[i].author._id == props.currentUser._id) {
+          homePostsVar.push(props.displayedPosts[i]);
+          console.log("new homePostsVar", homePostsVar);
+        } else {
+          for (let j = props.currentUser.friendList.length - 1; j >= 0; j--) {
+            if (
+              props.displayedPosts[i].author._id ==
+              props.currentUser.friendList[j]._id
+            ) {
+              homePostsVar.push(props.displayedPosts[i]);
+              console.log("new homePostsVar", homePostsVar);
+            }
+          }
+        }
+
+        let sortedHomePostsVar = homePostsVar;
+
+        sortedHomePostsVar = sortedHomePostsVar.sort(function (a, b) {
+          return a.createdAt - b.createdAt;
+        });
+
+        setHomePosts(sortedHomePostsVar.reverse());
+
+        // console.log("Splicing5", homePostsVar[i]);
+
+        // nonFriendsArr.splice(i, 1);
+      }
+  }, [props.displayedPosts, props.currentUser.friendList, props.currentUser]);
 
   return (
     <>
@@ -63,7 +117,10 @@ function HomePage(props) {
               ></div> */}
           </div>
           {/* <div className="main-subtitle">All Posts:</div> */}
-          {props.displayedPosts.map((post) =>
+
+          
+          {!homePosts ? ("") : (
+            homePosts.map((post) =>
             post.isPublished ? (
               <Card
                 key={post._id}
@@ -73,6 +130,7 @@ function HomePage(props) {
               />
             ) : (
               ""
+                )
             )
           )}
           <div className="no-posts">

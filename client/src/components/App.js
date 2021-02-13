@@ -74,6 +74,9 @@ function App() {
       let reversedArray = allPostsArray.reverse();
       setAllPosts(allPostsArray.reverse());
       setDisplayedPosts(allPostsArray.reverse());
+
+      // setAllPosts(allPostsArray)
+      // setDisplayedPosts(allPostsArray)
       setLoading(false);
     });
   };
