@@ -12,7 +12,7 @@ router.get("/all", auth, request_controller.get_requests);
 router.get("/:senderid/:recieverid", auth, request_controller.get_request);
 
 // GET - Get all recieved request
-// router.get("/", auth, request_controller.get_currentUser_requests_recieved);
+router.get("/recieved", auth, request_controller.get_currentUser_requests_recieved);
 
 // GET - Get all sent requests
 // router.get("/sent", auth, request_controller.get_currentUser_requests_sent);

@@ -30,6 +30,12 @@ function App() {
 
   const [pageType, setPageType] = useState("NonFriendPage");
 
+  const [sentRequests, setSentRequests] = useState([]);
+  const [recievedRequests, setRecievedRequests] = useState([]);
+
+  const [sentRequestsCount, setSentRequestsCount] = useState("");
+  const [recievedRequestsCount, setRecievedRequestsCount] = useState("");
+
   // const [createPostModalOpen, setCreatePostModalOpen] = useState(true);
   const [createPostModalOpen, setCreatePostModalOpen] = useState(false);
 
@@ -184,7 +190,7 @@ function App() {
       }
     )
       .then((res, err) => {
-        setPageType("FriendPage")
+        setPageType("FriendPage");
         // setSendingRequst(!sendingRequest);
         //Something to re-render page (change state to "friend")
         // setUpdateUserPage(!updateUserPage);
@@ -218,8 +224,6 @@ function App() {
         alert("Failed to cancel request");
         console.log("error", error);
       });
-
-    
   };
 
   const submitUnfriend = (userid) => {
@@ -245,6 +249,38 @@ function App() {
         console.log("error", error);
       });
   };
+
+  const fetchIncomingRequests = () => {
+    Axios.get("/requests/recieved", {
+      headers: {
+        Authorization: `Bearer ${JSON.parse(
+          window.localStorage.getItem("token")
+        )}`,
+      },
+    }).then((res) => {
+      console.log("res.data", res.data);
+      // let allUsersArray = res.data;
+      setRecievedRequests(res.data);
+
+      if (res.data.length == 0 || res.data.length == undefined) {
+        setRecievedRequestsCount(0);
+        return;
+      } else {
+        setRecievedRequestsCount(res.data.length);
+      }
+
+      // setAllUsers(res.data);
+    });
+  };
+
+  useEffect(() => {
+    fetchIncomingRequests();
+    // return (
+    //   setRecievedRequests([])
+    // )
+
+    // Something to refresh requests after accepting/declining?
+  }, [currentUser]);
 
   if (!isLoggedIn) {
     return (
@@ -316,6 +352,10 @@ function App() {
                   submitUnfriend={submitUnfriend}
                   pageType={pageType}
                   setPageType={setPageType}
+                  recievedRequests={recievedRequests}
+                  setRecievedRequests={setRecievedRequests}
+                  recievedRequestsCount={recievedRequestsCount}
+                  setRecievedRequestsCount={setRecievedRequestsCount}
                   // setIsViewingProfile={setIsViewingProfile}
                 />
               )}

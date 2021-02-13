@@ -72,6 +72,22 @@ exports.get_request = (req, res, next) => {
   );
 };
 
+exports.get_currentUser_requests_recieved = (req, res, next) => {
+  jwt.verify(req.token, process.env.JWT_SECRET, (err, authData) => {
+    if (err) {
+      console.log(err);
+      res.sendStatus(403);
+    } else {
+      Request.find({ reciever: authdData._id }, (err, recievedRequests) => {
+        if (err) return res.json(err);
+        res.json(recievedRequests);
+      })
+        .populate("sender")
+        .populate("reciever");
+    }
+  });
+};
+
 exports.send_request = (req, res) => {
   jwt.verify(req.token, process.env.JWT_SECRET, (err, authData) => {
     if (err) {
@@ -186,7 +202,7 @@ exports.accept_request = (req, res) => {
                   }
                 );
               }
-            ); 
+            );
           }
         );
       });

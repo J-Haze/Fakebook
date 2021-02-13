@@ -96,6 +96,10 @@ function UserPage(props) {
           declineRequest={props.declineRequest}
           submitUnfriend={props.submitUnfriend}
           sendingRequest={props.sendingRequest}
+          recievedRequests={props.recievedRequests}
+          setRecievedRequests={props.setRecievedRequests}
+          recievedRequestsCount={props.recievedRequestsCount}
+          setRecievedRequestsCount={props.setRecievedRequestsCount}
         />
       ) : props.pageType == "FriendPage" ? (
         <FriendPage

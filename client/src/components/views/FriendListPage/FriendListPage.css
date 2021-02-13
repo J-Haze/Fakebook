@@ -8,8 +8,8 @@
 #friend-list-page {
   /* min-width: 876px; */
   min-width: 450px;
-/* width: auto; */
-width: 100%;
+  /* width: auto; */
+  width: 100%;
   margin-left: auto;
   margin-right: auto;
   /* border: 1px solid red; */
@@ -78,7 +78,6 @@ width: 100%;
   height: 80px;
   width: 80px;
   box-shadow: rgba(0, 0, 0, 0.1);
-  
 }
 
 .prof-pic-friendList-page:hover {
@@ -106,8 +105,8 @@ width: 100%;
 }
 
 .friend-card-username:hover {
-    cursor: pointer;
-    text-decoration: underline;
+  cursor: pointer;
+  text-decoration: underline;
 }
 
 .friend-card-location {
@@ -137,8 +136,41 @@ width: 100%;
   /* margin-right: 10px; */
   /* margin-top: 1px; */
   z-index: -1;
+  padding-left: 16px;
+  padding-right: 16px;
 }
 
+#current-user-fl-side-header {
+  font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 28.0008px;
+  text-align: left;
+  word-break: break-word;
 
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
 
+.current-user-fl-side-cont {
+  font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 20.0005px;
+  word-break: break-word;
+}
 
+.no-new-requests {
+  color: rgb(101, 103, 107);
+  margin-left: auto;
+  margin-right: auto;
+
+  font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 16.0004px;
+  text-align: center;
+  word-break: break-word;
+  margin-top: 15px;
+  margin-bottom: 20px;
+}

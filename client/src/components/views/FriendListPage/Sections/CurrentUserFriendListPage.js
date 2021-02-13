@@ -8,23 +8,38 @@ import { useState, useEffect } from "react";
 import Axios from "axios";
 
 function CurrentUserFriendListPage(props) {
-
   // Have an Add Friends Button if you don't have friends!
+
+
 
   return (
     <div id="current-user-friend-list-side">
-      test
-</div>
-
-
-
-
-
-
-
-
-
-
+      <div id="current-user-fl-side-header">Friends:</div>
+      <div
+        id="current-user-fl-side-requests-cont"
+        className="current-user-fl-side-cont"
+      >
+        <div id="current-user-fl-side-subheader">
+          {props.recievedRequestsCount} Friend Requests
+        </div>
+        {!props.recievedRequestsCount ? (
+          <div className="no-new-requests">No new requests</div>
+        ) : (
+          ""
+        )}
+      </div>
+      <div
+        id="current-user-fl-side-pending-cont"
+        className="current-user-fl-side-cont"
+      >
+        <div id="current-user-fl-side-subheader">{props.sentRequestsCount} Requests Pending</div>
+        {!props.sentRequestsCount ? (
+          <div className="no-new-requests">No pending requests</div>
+        ) : (
+          ""
+        )}
+      </div>
+    </div>
 
     // <div id="current-user-friend-list-page">
     //   Current User Friend List Page
