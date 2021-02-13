@@ -202,7 +202,7 @@ function App() {
         console.log(res);
         fetchUsers();
         fetchIncomingRequests();
-        setRefreshUser(!refreshUser)
+        setRefreshUser(!refreshUser);
         //Send notification
       })
       .catch((error) => {
@@ -272,7 +272,7 @@ function App() {
 
       if (res.data.length == 0 || res.data.length == undefined) {
         setReceivedRequestsCount("");
-        console.log("zero")
+        console.log("zero");
         return;
       } else {
         setReceivedRequestsCount(res.data.length);
@@ -286,7 +286,7 @@ function App() {
 
   useEffect(() => {
     fetchIncomingRequests();
-    console.log("tada", receivedRequests)
+    console.log("tada", receivedRequests);
     console.log("tada2", receivedRequestsCount);
     // return (
     //   setReceivedRequests([])
@@ -295,56 +295,45 @@ function App() {
     // Something to refresh requests after accepting/declining?
   }, [currentUser]);
 
+  const fetchPendingRequests = () => {
+    Axios.get("/request/sent", {
+      headers: {
+        Authorization: `Bearer ${JSON.parse(
+          window.localStorage.getItem("token")
+        )}`,
+      },
+    }).then((res) => {
+      console.log("res.data request", res.data);
+      console.log("res.data.length request", res.data.length);
+      // let allUsersArray = res.data;
+      setSentRequests(res.data);
 
-    const fetchPendingRequests = () => {
-      Axios.get("/request/sent", {
-        headers: {
-          Authorization: `Bearer ${JSON.parse(
-            window.localStorage.getItem("token")
-          )}`,
-        },
-      }).then((res) => {
-        console.log("res.data request", res.data);
-        console.log("res.data.length request", res.data.length);
-        // let allUsersArray = res.data;
-        setSentRequests(res.data);
+      if (res.data.length == 0 || res.data.length == undefined) {
+        setSentRequestsCount("");
+        console.log("zero");
+        return;
+      } else {
+        setSentRequestsCount(res.data.length);
+        console.log("res.data.length request2", res.data.length);
+        console.log("made it here");
+      }
 
-        if (res.data.length == 0 || res.data.length == undefined) {
-          setSentRequestsCount("");
-          console.log("zero");
-          return;
-        } else {
-          setSentRequestsCount(res.data.length);
-          console.log("res.data.length request2", res.data.length);
-          console.log("made it here");
-        }
+      // setAllUsers(res.data);
+    });
+  };
 
-        // setAllUsers(res.data);
-      });
-    };
+  useEffect(() => {
+    fetchPendingRequests();
+    // console.log("tada", receivedRequests);
+    // console.log("tada2", receivedRequestsCount);
+    // return (
+    //   setReceivedRequests([])
+    // )
 
-    useEffect(() => {
-      fetchPendingRequests();
-      // console.log("tada", receivedRequests);
-      // console.log("tada2", receivedRequestsCount);
-      // return (
-      //   setReceivedRequests([])
-      // )
+    // Something to refresh requests after accepting/declining?
+  }, [currentUser]);
 
-      // Something to refresh requests after accepting/declining?
-    }, [currentUser]);
-
-  if (!isLoggedIn) {
-    return (
-      <LoginPage
-        isLoggedIn={isLoggedIn}
-        setIsLoggedIn={setIsLoggedIn}
-        setCurrentUser={setCurrentUser}
-        setTokenRefresh={setTokenRefresh}
-        tokenRefresh={tokenRefresh}
-      />
-    );
-  } else {
+  if (isLoggedIn) {
     return (
       <div>
         <Header
@@ -447,16 +436,22 @@ function App() {
           <Route
             exact
             path="/find-friends"
-            render={() => (
-              <FindFriendsPage
-                
-              />
-            )}
+            render={() => <FindFriendsPage />}
           ></Route>
 
           <Route render={() => <NotFound />} />
         </Switch>
       </div>
+    );
+  } else {
+    return (
+      <LoginPage
+        isLoggedIn={isLoggedIn}
+        setIsLoggedIn={setIsLoggedIn}
+        setCurrentUser={setCurrentUser}
+        setTokenRefresh={setTokenRefresh}
+        tokenRefresh={tokenRefresh}
+      />
     );
   }
 }
