@@ -117,9 +117,7 @@ function CurrentUserFriendListPage(props) {
                     {request.reciever.location}
                   </div> */}
                   <div className="friend-request-card-btn-cont">
-                    <div
-                      className="friend-request-card-btn-pending"
-                    >
+                    <div className="friend-request-card-btn-pending">
                       Request Pending
                     </div>
                     <div
@@ -138,8 +136,16 @@ function CurrentUserFriendListPage(props) {
             )
           )
         )}
-
-        {/* <FindFriendsBtn />  */}
+        <div className="top-border-gray"></div>
+        <div
+          className="no-posts-btn"
+          onClick={() => {
+            history.push("/find-friends")
+          }}
+        >
+          {" "}
+          Find Friends
+        </div>
       </div>
     </div>
 

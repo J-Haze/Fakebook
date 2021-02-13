@@ -12,6 +12,7 @@ import UserPage from "./views/UserPage/UserPage.js";
 import NotFound from "./views/NotFound/NotFound.js";
 import CreatePostModal from "./views/CreatePostModal/CreatePostModal.js";
 import FriendListPage from "./views/FriendListPage/FriendListPage";
+import FindFriendsPage from "./views/FindFriendsPage/FindFriendsPage";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -423,8 +424,7 @@ function App() {
                   setReceivedRequests={setReceivedRequests}
                   receivedRequestsCount={receivedRequestsCount}
                   setReceivedRequestsCount={setReceivedRequestsCount}
-
-                 sentRequests={sentRequests}
+                  sentRequests={sentRequests}
                   setSentRequests={setSentRequests}
                   sentRequestsCount={sentRequestsCount}
                   setSentRequestsCount={setSentRequestsCount}
@@ -437,6 +437,16 @@ function App() {
               )}
             ></Route>
           ))}
+
+          <Route
+            exact
+            path="/find-friends"
+            render={() => (
+              <FindFriendsPage
+                
+              />
+            )}
+          ></Route>
 
           <Route render={() => <NotFound />} />
         </Switch>

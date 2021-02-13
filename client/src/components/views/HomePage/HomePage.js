@@ -5,9 +5,12 @@ import "./HomePage.css";
 import Card from "./Sections/Card.js";
 
 import ProfilePic from "../HelperComponents/ProfilePic.js";
+import { useHistory } from "react-router-dom";
 
 function HomePage(props) {
   const [postCount, setPostCount] = useState(0);
+
+  const history = useHistory();
 
   let postCountVar;
   useEffect(() => {
@@ -77,7 +80,15 @@ function HomePage(props) {
             <div className="no-posts-subheader">
               Add more friends to see more posts in your News Feed
             </div>
-            <div className="no-posts-btn"> Find Friends</div>
+            <div
+              className="no-posts-btn"
+              onClick={() => {
+                history.push("/find-friends");
+              }}
+            >
+              {" "}
+              Find Friends
+            </div>
           </div>
         </div>
         {/* )} */}
