@@ -31,10 +31,10 @@ function App() {
   const [pageType, setPageType] = useState("NonFriendPage");
 
   const [sentRequests, setSentRequests] = useState([]);
-  const [recievedRequests, setRecievedRequests] = useState([]);
+  const [receivedRequests, setReceivedRequests] = useState([]);
 
   const [sentRequestsCount, setSentRequestsCount] = useState("");
-  const [recievedRequestsCount, setRecievedRequestsCount] = useState("");
+  const [receivedRequestsCount, setReceivedRequestsCount] = useState("");
 
   // const [createPostModalOpen, setCreatePostModalOpen] = useState(true);
   const [createPostModalOpen, setCreatePostModalOpen] = useState(false);
@@ -251,22 +251,25 @@ function App() {
   };
 
   const fetchIncomingRequests = () => {
-    Axios.get("/requests/recieved", {
+    Axios.get("/request/received", {
       headers: {
         Authorization: `Bearer ${JSON.parse(
           window.localStorage.getItem("token")
         )}`,
       },
     }).then((res) => {
-      console.log("res.data", res.data);
+      console.log("res.data request", res.data);
+      console.log("res.data.length request", res.data.length);
       // let allUsersArray = res.data;
-      setRecievedRequests(res.data);
+      setReceivedRequests(res.data);
 
       if (res.data.length == 0 || res.data.length == undefined) {
-        setRecievedRequestsCount(0);
+        setReceivedRequestsCount(0);
         return;
       } else {
-        setRecievedRequestsCount(res.data.length);
+        setReceivedRequestsCount(res.data.length);
+        console.log("res.data.length request2", res.data.length);
+        console.log("made it here");
       }
 
       // setAllUsers(res.data);
@@ -275,8 +278,10 @@ function App() {
 
   useEffect(() => {
     fetchIncomingRequests();
+    console.log("tada", receivedRequests)
+    console.log("tada2", receivedRequestsCount);
     // return (
-    //   setRecievedRequests([])
+    //   setReceivedRequests([])
     // )
 
     // Something to refresh requests after accepting/declining?
@@ -352,10 +357,10 @@ function App() {
                   submitUnfriend={submitUnfriend}
                   pageType={pageType}
                   setPageType={setPageType}
-                  recievedRequests={recievedRequests}
-                  setRecievedRequests={setRecievedRequests}
-                  recievedRequestsCount={recievedRequestsCount}
-                  setRecievedRequestsCount={setRecievedRequestsCount}
+                  receivedRequests={receivedRequests}
+                  setReceivedRequests={setReceivedRequests}
+                  receivedRequestsCount={receivedRequestsCount}
+                  setReceivedRequestsCount={setReceivedRequestsCount}
                   // setIsViewingProfile={setIsViewingProfile}
                 />
               )}

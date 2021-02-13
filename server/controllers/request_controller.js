@@ -72,15 +72,15 @@ exports.get_request = (req, res, next) => {
   );
 };
 
-exports.get_currentUser_requests_recieved = (req, res, next) => {
+exports.get_currentUser_requests_received = (req, res, next) => {
   jwt.verify(req.token, process.env.JWT_SECRET, (err, authData) => {
     if (err) {
       console.log(err);
       res.sendStatus(403);
     } else {
-      Request.find({ reciever: authdData._id }, (err, recievedRequests) => {
+      Request.find({ reciever: authData._id }, (err, receivedRequests) => {
         if (err) return res.json(err);
-        res.json(recievedRequests);
+        res.json(receivedRequests);
       })
         .populate("sender")
         .populate("reciever");

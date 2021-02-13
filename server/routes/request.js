@@ -11,8 +11,12 @@ router.get("/all", auth, request_controller.get_requests);
 // Check if there is a request pending
 router.get("/:senderid/:recieverid", auth, request_controller.get_request);
 
-// GET - Get all recieved request
-router.get("/recieved", auth, request_controller.get_currentUser_requests_recieved);
+// GET - Get all received request
+router.get(
+  "/received",
+  auth,
+  request_controller.get_currentUser_requests_received
+);
 
 // GET - Get all sent requests
 // router.get("/sent", auth, request_controller.get_currentUser_requests_sent);

@@ -15,7 +15,7 @@ function UserPage(props) {
   const [loading, setLoading] = useState(true);
 
   // const [pageType, setPageType] = useState("NonFriendPage");
-// const [pageType, setPageType] = useState("");
+  // const [pageType, setPageType] = useState("");
 
   useEffect(() => {
     if (props.userProfile._id === props.currentUser._id) {
@@ -35,7 +35,7 @@ function UserPage(props) {
   }, [
     props.userProfile._id,
     props.currentUser._id,
-      props.currentUser.friendList,
+    props.currentUser.friendList,
     // props.updateUserPage
   ]);
 
@@ -81,6 +81,8 @@ function UserPage(props) {
 
   //code that takes displayedPosts and outputs user posts
 
+  console.log("received requests count1", props.receivedRequestsCount);
+
   return (
     <div id="user-page">
       {props.pageType == "CurrentUserPage" ? (
@@ -96,10 +98,10 @@ function UserPage(props) {
           declineRequest={props.declineRequest}
           submitUnfriend={props.submitUnfriend}
           sendingRequest={props.sendingRequest}
-          recievedRequests={props.recievedRequests}
-          setRecievedRequests={props.setRecievedRequests}
-          recievedRequestsCount={props.recievedRequestsCount}
-          setRecievedRequestsCount={props.setRecievedRequestsCount}
+          receivedRequests={props.receivedRequests}
+          setReceivedRequests={props.setReceivedRequests}
+          receivedRequestsCount={props.receivedRequestsCount}
+          setReceivedRequestsCount={props.setReceivedRequestsCount}
         />
       ) : props.pageType == "FriendPage" ? (
         <FriendPage

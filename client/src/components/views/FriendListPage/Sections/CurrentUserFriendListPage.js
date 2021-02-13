@@ -10,7 +10,7 @@ import Axios from "axios";
 function CurrentUserFriendListPage(props) {
   // Have an Add Friends Button if you don't have friends!
 
-
+  console.log("received requests count", props.receivedRequestsCount);
 
   return (
     <div id="current-user-friend-list-side">
@@ -20,9 +20,9 @@ function CurrentUserFriendListPage(props) {
         className="current-user-fl-side-cont"
       >
         <div id="current-user-fl-side-subheader">
-          {props.recievedRequestsCount} Friend Requests
+          {props.receivedRequestsCount} Friend Requests
         </div>
-        {!props.recievedRequestsCount ? (
+        {!props.receivedRequestsCount ? (
           <div className="no-new-requests">No new requests</div>
         ) : (
           ""
@@ -32,7 +32,9 @@ function CurrentUserFriendListPage(props) {
         id="current-user-fl-side-pending-cont"
         className="current-user-fl-side-cont"
       >
-        <div id="current-user-fl-side-subheader">{props.sentRequestsCount} Requests Pending</div>
+        <div id="current-user-fl-side-subheader">
+          {props.sentRequestsCount} Requests Pending
+        </div>
         {!props.sentRequestsCount ? (
           <div className="no-new-requests">No pending requests</div>
         ) : (
