@@ -9,7 +9,7 @@ const auth = require("../middleware/auth");
 router.get("/all", auth, request_controller.get_requests);
 
 // Check if there is a request pending
-router.get("/:senderid/:recieverid", auth, request_controller.get_request);
+router.get("/:senderid/:receiverid", auth, request_controller.get_request);
 
 // GET - Get all received request
 router.get(

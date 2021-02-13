@@ -6,7 +6,7 @@ const User = require("./User");
 const friendRequestSchema = mongoose.Schema(
   {
     sender: { type: Schema.Types.ObjectId, ref: "User", required: true },
-    reciever: { type: Schema.Types.ObjectId, ref: "User", required: true },
+    receiver: { type: Schema.Types.ObjectId, ref: "User", required: true },
   },
   { timestamps: true }
 );

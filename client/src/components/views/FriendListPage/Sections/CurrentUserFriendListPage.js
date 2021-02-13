@@ -55,7 +55,6 @@ function CurrentUserFriendListPage(props) {
                       onClick={() => {
                         // setUnfriendModalOpen(true);
                         props.acceptRequest(request._id, request.sender._id);
-                        
                       }}
                     >
                       Confirm
@@ -96,26 +95,26 @@ function CurrentUserFriendListPage(props) {
           <div className="no-new-requests">No pending requests</div>
         ) : (
           props.sentRequests.map((request) =>
-            request.reciever.isPublished ? (
+            request.receiver.isPublished ? (
               <div className="friend-request-card" key={request._id}>
-                <Link className="link" to={`/user/${request.reciever._id}`}>
+                <Link className="link" to={`/user/${request.receiver._id}`}>
                   <img
                     className="prof-pic-friendList-request-page"
-                    alt={`profile-pic-user-${request.reciever.firstname}-${request.reciever.lastname}`}
-                    src={`http://localhost:5000/uploads/${request.reciever.photo.filename}`}
+                    alt={`profile-pic-user-${request.receiver.firstname}-${request.receiver.lastname}`}
+                    src={`http://localhost:5000/uploads/${request.receiver.photo.filename}`}
                   />
                 </Link>
                 <div className="friend-request-card-info">
                   <div
                     className="friend-request-card-username"
                     onClick={() => {
-                      history.push(`/user/${request.reciever._id}`);
+                      history.push(`/user/${request.receiver._id}`);
                     }}
                   >
-                    {request.reciever.firstname} {request.reciever.lastname}
+                    {request.receiver.firstname} {request.receiver.lastname}
                   </div>
                   {/* <div className="friend-request-card-location">
-                    {request.reciever.location}
+                    {request.receiver.location}
                   </div> */}
                   <div className="friend-request-card-btn-cont">
                     <div className="friend-request-card-btn-pending">
@@ -141,7 +140,7 @@ function CurrentUserFriendListPage(props) {
         <div
           className="no-posts-btn"
           onClick={() => {
-            history.push("/find-friends")
+            history.push("/find-friends");
           }}
         >
           {" "}

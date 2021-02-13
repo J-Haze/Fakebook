@@ -15,22 +15,22 @@ exports.get_requests = (req, res, next) => {
     res.json(requests);
   })
     .populate("sender")
-    .populate("reciever");
+    .populate("receiver");
 };
 
 exports.get_request = (req, res, next) => {
-  const { senderid, recieverid } = req.params;
+  const { senderid, receiverid } = req.params;
 
-  //Checks for request with correct sender and reciever
+  //Checks for request with correct sender and receiver
   Request.exists(
-    { sender: senderid, reciever: recieverid },
+    { sender: senderid, receiver: receiverid },
     (err, doesExist) => {
       if (err) return res.json(err);
       console.log("exists?", doesExist);
 
       if (doesExist) {
         Request.findOne(
-          { sender: senderid, reciever: recieverid },
+          { sender: senderid, receiver: receiverid },
           (err, request) => {
             if (err) {
               console.log(err);
@@ -40,18 +40,18 @@ exports.get_request = (req, res, next) => {
           }
         )
           .populate("sender")
-          .populate("reciever");
+          .populate("receiver");
       } else {
-        //Checks for request with flipped sender and reciever
+        //Checks for request with flipped sender and receiver
         Request.exists(
-          { sender: recieverid, reciever: senderid },
+          { sender: receiverid, receiver: senderid },
           (err, doesExist) => {
             if (err) return res.json(err);
             console.log("exists?", doesExist);
 
             if (doesExist) {
               Request.findOne(
-                { sender: recieverid, reciever: senderid },
+                { sender: receiverid, receiver: senderid },
                 (err, request) => {
                   if (err) {
                     console.log(err);
@@ -61,7 +61,7 @@ exports.get_request = (req, res, next) => {
                 }
               )
                 .populate("sender")
-                .populate("reciever");
+                .populate("receiver");
             } else {
               return res.json(false);
             }
@@ -78,12 +78,12 @@ exports.get_currentUser_requests_received = (req, res, next) => {
       console.log(err);
       res.sendStatus(403);
     } else {
-      Request.find({ reciever: authData._id }, (err, receivedRequests) => {
+      Request.find({ receiver: authData._id }, (err, receivedRequests) => {
         if (err) return res.json(err);
         res.json(receivedRequests);
       })
         .populate("sender")
-        .populate("reciever");
+        .populate("receiver");
     }
   });
 };
@@ -99,7 +99,7 @@ exports.get_currentUser_requests_sent = (req, res, next) => {
         res.json(sentRequests);
       })
         .populate("sender")
-        .populate("reciever");
+        .populate("receiver");
     }
   });
 };
@@ -111,7 +111,7 @@ exports.send_request = (req, res) => {
       res.sendStatus(403);
     } else {
       Request.exists(
-        { sender: authData._id, reciever: req.body.reciever },
+        { sender: authData._id, receiver: req.body.receiver },
         (err, doesExist) => {
           if (err) return res.json(err);
           // console.log("exists?", doesExist);
@@ -119,17 +119,17 @@ exports.send_request = (req, res) => {
             return res.json("Error, request already exists.");
           } else {
             Request.exists(
-              { sender: req.body.reciever, reciever: authData._id },
+              { sender: req.body.receiver, receiver: authData._id },
               (err, doesExist) => {
                 if (err) return res.json(err);
                 // console.log("exists?", doesExist);
                 if (doesExist) {
                   return res.json("Error, request already exists.");
                 } else {
-                  // const { recieverid } = req.params;
+                  // const { receiverid } = req.params;
                   var request = new Request({
                     sender: authData._id,
-                    reciever: req.body.reciever,
+                    receiver: req.body.receiver,
                   });
 
                   // Data from form is valid. Save book.
@@ -181,14 +181,14 @@ exports.accept_request = (req, res) => {
           return res.json(err);
         }
 
-        //Add sender to reciever's friend list
+        //Add sender to receiver's friend list
 
         User.findOneAndUpdate(
-          { _id: request.reciever._id },
+          { _id: request.receiver._id },
           {
             $push: { friendList: request.sender._id },
           },
-          (err, updatedReciever) => {
+          (err, updatedReceiver) => {
             if (err) {
               console.log(err);
               return res.json(err);
@@ -196,7 +196,7 @@ exports.accept_request = (req, res) => {
             User.findOneAndUpdate(
               { _id: request.sender._id },
               {
-                $push: { friendList: request.reciever._id },
+                $push: { friendList: request.receiver._id },
               },
               (err, updatedSender) => {
                 if (err) {
@@ -211,7 +211,7 @@ exports.accept_request = (req, res) => {
 
                     res.json({
                       message: "Updated friend lists's",
-                      reciever: updatedReciever,
+                      receiver: updatedReceiver,
                       sender: updatedSender,
                       deletedRequest: deletedRequest,
                     });

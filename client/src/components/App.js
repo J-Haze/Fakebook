@@ -124,15 +124,15 @@ function App() {
 
   //^^^
 
-  const sendRequest = (reciever) => {
+  const sendRequest = (receiver) => {
     console.log("Sent Request");
     console.log("Sender", currentUser._id);
-    console.log("Reciever", reciever._id);
+    console.log("Receiver", receiver._id);
 
     Axios.post(
       `/request/`,
       {
-        reciever: reciever._id,
+        receiver: receiver._id,
       },
       {
         headers: {
@@ -182,7 +182,7 @@ function App() {
     Axios.post(
       `/request/${requestid}/accept`,
       {
-        //  reciever: reciever._id,
+        //  receiver: receiver._id,
       },
       {
         headers: {
@@ -438,7 +438,7 @@ function App() {
             path="/find-friends"
             render={() => (
               <FindFriendsPage
-              allUsers={allUsers}
+                allUsers={allUsers}
                 currentUser={currentUser}
                 sendRequest={sendRequest}
                 cancelRequest={cancelRequest}
@@ -471,7 +471,7 @@ function App() {
         setTokenRefresh={setTokenRefresh}
         tokenRefresh={tokenRefresh}
       />
-    ); 
+    );
   }
 }
 

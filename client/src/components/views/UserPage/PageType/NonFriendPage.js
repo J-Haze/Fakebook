@@ -66,7 +66,7 @@ function NonFriendPage(props) {
   }, []);
 
   function checkForRequest() {
-    //Have it get any request with the reciever and sender and then determine if it's pending or received
+    //Have it get any request with the receiver and sender and then determine if it's pending or received
 
     Axios.get(`/request/${props.currentUser._id}/${props.userProfile._id}`, {
       headers: {
