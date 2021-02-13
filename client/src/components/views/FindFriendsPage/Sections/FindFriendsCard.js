@@ -29,9 +29,9 @@ function Card(props) {
 
       <div className="find-friends-btn-cont">
         {props.type == "receivedReq" ? (
-          <div className="friend-request-card-btn-cont">
+          <div className="find-friend-request-card-btn-cont">
             <div
-              className="friend-request-card-btn-confirm"
+              className="find-friend-request-card-btn-confirm"
               onClick={() => {
                 // setUnfriendModalOpen(true);
                 props.acceptRequest(
@@ -40,36 +40,36 @@ function Card(props) {
                 );
               }}
             >
-              Confirm
+              Confirm Request
             </div>
             <div
-              className="friend-request-card-btn-decline"
+              className="find-friend-request-card-btn-decline"
               onClick={() => {
                 // setUnfriendModalOpen(true);
                 props.declineRequest(props.request._id);
               }}
             >
-              Delete
+              Delete Request
             </div>
           </div>
         ) : props.type == "sentReq" ? (
-          <div className="friend-request-card-btn-cont">
-            <div className="friend-request-card-btn-pending">
+          <div className="find-friend-request-card-btn-cont">
+            <div className="find-friend-request-card-btn-pending">
               Request Pending
             </div>
             <div
-              className="friend-request-card-btn-cancel"
+              className="find-friend-request-card-btn-cancel"
               onClick={() => {
                 props.cancelRequest(props.request._id);
               }}
             >
-              Cancel
+              Cancel Request
             </div>
           </div>
         ) : props.type == "noReq" ? (
-          <div className="user-info-add-friend-manage-cont">
+          <div className="find-user-info-add-friend-manage-cont">
             <div
-              className="user-info-add-friend"
+              className="find-user-info-add-friend"
               onClick={() => {
                 props.sendRequest(props.userProfile);
               }}
