@@ -1,6 +1,7 @@
 #friend-list-page-cont {
   display: flex;
-  height: 0px;
+  height: 100%;
+  z-index: -2;
   /* flex-direction: column; */
   /* justify-content: center; */
   /* border: 1px solid green; */
@@ -13,6 +14,7 @@
   min-width: 450px;
   /* width: auto; */
   width: 100%;
+  height: 100%;
   margin-left: auto;
   margin-right: auto;
   /* border: 1px solid red; */
@@ -27,6 +29,7 @@
   background-color: white;
   min-width: 450px;
   max-width: 876px;
+  height: 100%;
   width: 100%;
   padding: 16px;
 
@@ -45,6 +48,7 @@
   /* height: auto; */
   margin-left: auto;
   margin-right: auto;
+  margin-bottom: 20px;
 }
 
 .friend-list-header {
@@ -139,16 +143,24 @@
   /* float: left; */
   width: 360px;
   min-width: 360px;
-  height: 100vh;
+  /* height: 100vh; */
+  /* height: 100%; */
   background-color: white;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
   margin-left: 0;
   margin-right: auto;
   /* margin-right: 10px; */
   /* margin-top: 1px; */
-  z-index: -1;
+
+
+  /* Here */
+  /* z-index: -1; */
   padding-left: 16px;
   padding-right: 16px;
+  /* height: auto; */
+  /* display: flex;
+  flex-direction: column;
+  flex: 0 1 auto; */
 }
 
 #current-user-fl-side-header {
@@ -328,7 +340,7 @@
 
 .friend-request-card-btn-decline:hover {
   cursor: pointer;
-  /* background-color: #c2c6ca; */
+  background-color: #c2c6ca;
 }
 
 .friend-request-card-btn-pending {

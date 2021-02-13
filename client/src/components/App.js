@@ -335,7 +335,7 @@ function App() {
 
   if (isLoggedIn) {
     return (
-      <div>
+      <div id="main">
         <Header
           isLoggedIn={isLoggedIn}
           setIsLoggedIn={setIsLoggedIn}
