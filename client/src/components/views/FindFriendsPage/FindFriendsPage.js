@@ -42,8 +42,25 @@ function FindFriendsPage(props) {
         nonFriendsArr.splice(i, 1);
       }
 
+      if (
+        props.currentUser.friendList.length == 0 ||
+        props.currentUser.friendList == undefined ||
+        props.currentUser.friendList == null ||
+        props.currentUser.friendList == ""
+      ) {
+        setNonFriends(nonFriendsArr);
+        return;
+      }
+
       //Remove friends from list
       for (let j = props.currentUser.friendList; j >= 0; j--) {
+                console.log(
+                  "loop",
+                  i,
+                  nonFriendsArr[i],
+                  j,
+                  props.currentUser.friendList[j]
+                );
         if (nonFriendsArr[i]._id == props.currentUser.friendList[j]._id) {
           nonFriendsArr.splice(i, 1);
         }
