@@ -1,5 +1,13 @@
 .find-friends-btn-cont {
+display: flex;
+align-items: center;
 
+
+/* width: 100%; */
+margin-left: auto;
+margin-right: 0px;
+
+border: 1px solid red;
 }
 
 

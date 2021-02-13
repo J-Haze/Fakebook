@@ -34,7 +34,11 @@ function FindFriendsPage(props) {
 
             {props.receivedRequests.map((request) =>
               request.sender.isPublished ? (
-                <FindFriendsCard user={request.sender} type={"receivedReq"} />
+                <FindFriendsCard
+                  user={request.sender}
+                  request={request}
+                  type={"receivedReq"}
+                />
               ) : (
                 ""
               )
@@ -42,7 +46,11 @@ function FindFriendsPage(props) {
 
             {props.sentRequests.map((request) =>
               request.receiver.isPublished ? (
-                <FindFriendsCard user={request.receiver} type={"sentReq"} />
+                <FindFriendsCard
+                  user={request.receiver}
+                  request={request}
+                  type={"sentReq"}
+                />
               ) : (
                 ""
               )

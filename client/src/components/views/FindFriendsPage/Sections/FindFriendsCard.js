@@ -25,17 +25,64 @@ function Card(props) {
           {props.user.firstname} {props.user.lastname}
         </div>
         <div className="friend-card-location">{props.user.location}</div>
+      </div>
+
+      <div className="find-friends-btn-cont">
+        {props.type == "receivedReq" ? (
+          <div className="friend-request-card-btn-cont">
+            <div
+              className="friend-request-card-btn-confirm"
+              onClick={() => {
+                // setUnfriendModalOpen(true);
+                props.acceptRequest(
+                  props.request._id,
+                  props.request.sender._id
+                );
+              }}
+            >
+              Confirm
+            </div>
+            <div
+              className="friend-request-card-btn-decline"
+              onClick={() => {
+                // setUnfriendModalOpen(true);
+                props.declineRequest(props.request._id);
+              }}
+            >
+              Delete
+            </div>
           </div>
-          
-          <div className="find-friends-btn-cont">
-          {(props.type == "receivedReq") ? (<div></div>):
-
-
-}
-              </div>
-          
+        ) : props.type == "sentReq" ? (
+          <div className="friend-request-card-btn-cont">
+            <div className="friend-request-card-btn-pending">
+              Request Pending
+            </div>
+            <div
+              className="friend-request-card-btn-cancel"
+              onClick={() => {
+                props.cancelRequest(props.request._id);
+              }}
+            >
+              Cancel
+            </div>
+          </div>
+        ) : props.type == "noReq" ? (
+          <div className="user-info-add-friend-manage-cont">
+            <div
+              className="user-info-add-friend"
+              onClick={() => {
+                props.sendRequest(props.userProfile);
+              }}
+            >
+              + Add Friend
+            </div>
+          </div>
+        ) : (
+          ""
+        )}
+      </div>
     </div>
-  )
+  );
 }
 
 export default Card;
