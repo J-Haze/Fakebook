@@ -1,14 +1,16 @@
 #user-page {
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
   /* border: 1px solid green; */
 }
 
 #current-user-page {
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
   /* align-items: center; */
-  width: 100%;
+  /* width: 100%; */
   /* border: 1px solid black; */
 
   box-sizing: border-box;
@@ -17,13 +19,9 @@
   max-width: 100%;
   /* padding-left: 16px;
   padding-right: 16px; */
-  width: 908px;
+  min-width: 454px;
+  max-width: 908px;
   /* width: 892px; */
-}
-
-.test {
-  /* border: 1px solid red;
-  height: auto; */
 }
 
 /* Make width 500px if screen is less than 860 */
