@@ -21,18 +21,25 @@ function FindFriendsPage(props) {
   console.log("props.receivedRequests", props.receivedRequests);
 
   useEffect(() => {
+    console.log("Running")
     let nonFriendsArr = props.allUsers;
+    console.log("nonFriendsArr", nonFriendsArr);
+    console.log("props.allUsers", props.allUsers);
 
     if (
-      props.nonFriendsArr == undefined ||
-      props.nonFriendsArr.length == 0 ||
-      props.nonFriendsArr == null ||
-      props.nonFriendsArr == ""
+      nonFriendsArr == undefined ||
+      nonFriendsArr.length == 0 ||
+      nonFriendsArr == null ||
+      nonFriendsArr == ""
     ) {
       //This shouldn't happen because there will always be you as the user
+      console.log("Error- No user list")
+      console.log("nonFriendsArr2", nonFriendsArr);
       setNonFriends(nonFriendsArr);
       return;
     }
+
+    console.log("nonfriend here")
 
     //Remove currentUser from list
     for (let i = nonFriendsArr.length - 1; i >= 0; i--) {
@@ -74,7 +81,7 @@ function FindFriendsPage(props) {
       setNonFriends(nonFriendsArr);
     } else {
       for (let i = nonFriendsArr.length - 1; i >= 0; i--) {
-        for (let j = props.sentRequests.length; j >= 0; j--) {
+        for (let j = props.sentRequests.length - 1; j >= 0; j--) {
           // console.log(
           //   "loop",
           //   i,
@@ -101,7 +108,7 @@ function FindFriendsPage(props) {
       setNonFriends(nonFriendsArr);
     } else {
       for (let i = nonFriendsArr.length - 1; i >= 0; i--) {
-        for (let j = props.receivedRequests.length; j >= 0; j--) {
+        for (let j = props.receivedRequests.length - 1; j >= 0; j--) {
           // console.log(
           //   "loop",
           //   i,
