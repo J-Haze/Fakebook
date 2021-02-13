@@ -436,7 +436,26 @@ function App() {
           <Route
             exact
             path="/find-friends"
-            render={() => <FindFriendsPage />}
+            render={() => (
+              <FindFriendsPage
+              allUsers={allUsers}
+                currentUser={currentUser}
+                sendRequest={sendRequest}
+                cancelRequest={cancelRequest}
+                acceptRequest={acceptRequest}
+                declineRequest={declineRequest}
+                submitUnfriend={submitUnfriend}
+                sendingRequest={sendingRequest}
+                receivedRequests={receivedRequests}
+                setReceivedRequests={setReceivedRequests}
+                receivedRequestsCount={receivedRequestsCount}
+                setReceivedRequestsCount={setReceivedRequestsCount}
+                sentRequests={sentRequests}
+                setSentRequests={setSentRequests}
+                sentRequestsCount={sentRequestsCount}
+                setSentRequestsCount={setSentRequestsCount}
+              />
+            )}
           ></Route>
 
           <Route render={() => <NotFound />} />
@@ -452,7 +471,7 @@ function App() {
         setTokenRefresh={setTokenRefresh}
         tokenRefresh={tokenRefresh}
       />
-    );
+    ); 
   }
 }
 
