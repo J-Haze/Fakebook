@@ -225,29 +225,32 @@ function Header(props) {
                         alt={`profile-pic-user-${notification.sender.firstname}-${notification.sender.lastname}`}
                         src={`http://localhost:5000/uploads/${notification.sender.photo.filename}`}
                       />
-                      <div className="notification-card-name">
-                        {notification.sender.firstname}{" "}
-                        {notification.sender.lastname}
+                      <div classname="notificatin-text">
+                        <div className="notification-card-name">
+                          {notification.sender.firstname}{" "}
+                          {notification.sender.lastname}
+                        </div>
+                        {notification.action === "like" ? (
+                          <div className="notification-action">
+                            &nbsp;liked your {notification.objectType}.
+                            aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                          </div>
+                        ) : notification.action === "comment" ? (
+                          <div className="notification-action">
+                            &nbsp;commented on your post.
+                          </div>
+                        ) : notification.action === "sentRequest" ? (
+                          <div className="notification-action">
+                            &nbsp;sent you a friend request.
+                          </div>
+                        ) : notification.action === "acceptedRequest" ? (
+                          <div className="notification-action">
+                            &nbsp;accepted your friend request.
+                          </div>
+                        ) : (
+                          ""
+                        )}
                       </div>
-                      {notification.action === "like" ? (
-                        <div className="notification-action">
-                          &nbsp;liked your {notification.objectType}.
-                        </div>
-                      ) : notification.action === "comment" ? (
-                        <div className="notification-action">
-                          &nbsp;commented on your post.
-                        </div>
-                      ) : notification.action === "sentRequest" ? (
-                        <div className="notification-action">
-                          &nbsp;sent you a friend request.
-                        </div>
-                      ) : notification.action === "acceptedRequest" ? (
-                        <div className="notification-action">
-                          &nbsp;accepted your friend request.
-                        </div>
-                      ) : (
-                        ""
-                      )}
                       {!notification.interacted ? (
                         <div className="blue-dot"></div>
                       ) : (
