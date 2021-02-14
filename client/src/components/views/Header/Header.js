@@ -2,15 +2,18 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./Header.css";
 import { useHistory } from "react-router-dom";
+import { useState, useEffect } from "react";
 
 import fLogo from "../../../assets/facebook-logo-header.png";
 import logoutLogo from "../../../assets/logout-alt.png";
 import bellLogo from "../../../assets/bell.png";
 import friendsLogo from "../../../assets/friend.png";
 
-import ProfilePic from "../HelperComponents/ProfilePic.js"
+import ProfilePic from "../HelperComponents/ProfilePic.js";
 
 function Header(props) {
+  // const [searchModalOpen, setSearchModalOpen] = useState(false);
+
   const history = useHistory();
 
   function logOut() {
@@ -20,6 +23,21 @@ function Header(props) {
     history.push("/");
   }
 
+  // Search Logic:
+  // useEffect(() => {
+  //   // search logic
+  //   if (query.length) {
+  //     setSearchDropdown(true);
+  //     setResults(
+  //       users.filter((user) =>
+  //         fullname(user).toLowerCase().includes(query.toLowerCase())
+  //       )
+  //     );
+  //   } else {
+  //     setSearchDropdown(false);
+  //   }
+  // }, [query]);
+
   return (
     <div id="header">
       <div id="header-container">
@@ -28,6 +46,30 @@ function Header(props) {
           <Link id="fb-icon-cont" className="link-header" to={`/`}>
             <img className="fb-icon" src={fLogo} alt="fb logo" />
           </Link>
+          <div
+            id="search-cont"
+            onClick={(event) => {
+              event.stopPropagation();
+            }}
+          >
+            <div
+              id="search-bar"
+              onClick={(event) => {
+                event.stopPropagation();
+
+                props.setSearchModalOpen(true);
+              }}
+            >
+              <input id="search-bar-input" />
+            </div>
+            {props.searchModalOpen ? (
+              <div id="search-modal-cont">
+                Something that map. -> search results Results
+              </div>
+            ) : (
+              ""
+            )}
+          </div>
         </div>
         <div id="header-right-menu">
           <div

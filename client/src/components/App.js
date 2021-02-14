@@ -40,6 +40,7 @@ function App() {
 
   // const [createPostModalOpen, setCreatePostModalOpen] = useState(true);
   const [createPostModalOpen, setCreatePostModalOpen] = useState(false);
+  const [searchModalOpen, setSearchModalOpen] = useState(false);
 
   const history = useHistory();
 
@@ -346,13 +347,21 @@ function App() {
 
   if (isLoggedIn) {
     return (
-      <div id="main">
+      <div
+        id="main"
+        onClick={(event) => {
+          // event.stopPropagation();
+          setSearchModalOpen(false);
+        }}
+      >
         <Header
           isLoggedIn={isLoggedIn}
           setIsLoggedIn={setIsLoggedIn}
           setCurrentUser={setCurrentUser}
           currentUser={currentUser}
           setCreatePostModalOpen={setCreatePostModalOpen}
+          searchModalOpen={searchModalOpen}
+          setSearchModalOpen={setSearchModalOpen}
           // isViewingProfile={isViewingProfile}
           // setIsViewingProfile={setIsViewingProfile}
         />
