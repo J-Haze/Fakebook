@@ -74,13 +74,19 @@ function Header(props) {
     }
   };
 
+  const markAllRead = () => {
+    console.log("mark all read");
+
+    // props.fetchNotifications();
+  };
+
   return (
     <div id="header">
       <div id="header-container">
         {/* <div id="title">Title</div> */}
         <div id="header-left-menu">
           <Link id="fb-icon-cont" className="link-header" to={`/`}>
-            <img className="fb-icon" src={fLogo} alt="fb logo" title="Home"/>
+            <img className="fb-icon" src={fLogo} alt="fb logo" title="Home" />
           </Link>
           <div
             id="search-cont"
@@ -188,6 +194,10 @@ function Header(props) {
                     src={eyeIcon}
                     alt="read-all-icon"
                     title="Mark all as read"
+                    onClick={(event) => {
+                      event.stopPropagation();
+                      markAllRead();
+                    }}
                   />
                 </div>
                 {!props.notifications ? (
@@ -218,6 +228,25 @@ function Header(props) {
                         {notification.sender.firstname}{" "}
                         {notification.sender.lastname}
                       </div>
+                      {notification.action === "like" ? (
+                        <div id="notification-action">
+                          &nbsp;liked your {notification.objectType}.
+                        </div>
+                      ) : notification.action === "comment" ? (
+                        <div id="notification-action">
+                          &nbsp;commented on your post.
+                        </div>
+                      ) : notification.action === "sentRequest" ? (
+                        <div id="notification-action">
+                          &nbsp;sent you a friend request.
+                        </div>
+                      ) : notification.action === "acceptedRequest" ? (
+                        <div id="notification-action">
+                          &nbsp;accepted your friend request.
+                        </div>
+                      ) : (
+                        ""
+                      )}
                     </Link>
                   ))
                 )}
