@@ -380,6 +380,7 @@ function App() {
         onClick={(event) => {
           // event.stopPropagation();
           setSearchModalOpen(false);
+          setNotificationModalOpen(false);
         }}
       >
         <Header

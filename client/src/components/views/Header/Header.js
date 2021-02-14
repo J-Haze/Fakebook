@@ -108,9 +108,6 @@ function Header(props) {
             {props.searchModalOpen ? (
               <div
                 id="search-modal-cont"
-                onClick={(event) => {
-                  props.setSearchModalOpen(false);
-                }}
               >
                 {!searchResults ? (
                   ""
@@ -118,7 +115,13 @@ function Header(props) {
                   <div className="no-search-results"> No results found.</div>
                 ) : (
                   searchResults.slice(0, 6).map((user) => (
-                    <Link className="link search-card" to={`/user/${user._id}`}>
+                    <Link
+                      className="link search-card"
+                      to={`/user/${user._id}`}
+                      onClick={(event) => {
+                        props.setSearchModalOpen(false);
+                      }}
+                    >
                       <img
                         className="prof-pic-search-card"
                         alt={`profile-pic-user-${user.firstname}-${user.lastname}`}
@@ -163,7 +166,8 @@ function Header(props) {
             id="bell-cont"
             className="link hover-gray"
             // to={`/user/notifications`}
-            onClick={() => {
+            onClick={(event) => {
+              event.stopPropagation();
               toggleNotificationModal();
             }}
           >
@@ -174,26 +178,31 @@ function Header(props) {
             />
 
             {props.notificationModalOpen ? (
-              <div
-                id="search-modal-cont"
-                onClick={(event) => {
-                  props.setSearchModalOpen(false);
-                }}
-              >
-                {!searchResults ? (
+              <div id="notification-modal-cont">
+                {!props.notifications ? (
                   ""
-                ) : searchResults.length == 0 ? (
-                  <div className="no-search-results"> No results found.</div>
+                ) : props.notifications.length == 0 ? (
+                  <div className="no-notification-results">
+                    {" "}
+                    You have no notifications.
+                  </div>
                 ) : (
-                  searchResults.slice(0, 6).map((user) => (
-                    <Link className="link search-card" to={`/user/${user._id}`}>
+                  props.notifications.map((notification) => (
+                    <Link
+                      className="link notification-card"
+                      to={`/${notification.objectType}/${notification.objectId}`}
+                      onClick={(event) => {
+                        props.setNotificationModalOpen(false);
+                      }}
+                    >
                       <img
-                        className="prof-pic-search-card"
-                        alt={`profile-pic-user-${user.firstname}-${user.lastname}`}
-                        src={`http://localhost:5000/uploads/${user.photo.filename}`}
+                        className="prof-pic-notification-card"
+                        alt={`profile-pic-user-${notification.sender.firstname}-${notification.sender.lastname}`}
+                        src={`http://localhost:5000/uploads/${notification.sender.photo.filename}`}
                       />
-                      <div className="search-card-name">
-                        {user.firstname} {user.lastname}
+                      <div className="notification-card-name">
+                        {notification.sender.firstname}{" "}
+                        {notification.sender.lastname}
                       </div>
                     </Link>
                   ))
