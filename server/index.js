@@ -61,12 +61,14 @@ var indexRouter = require("./routes/index");
 var userRouter = require("./routes/user");
 var postRouter = require("./routes/post");
 var requestRouter = require("./routes/request");
+var notificationRouter = require("./routes/notification");
 
 //Routes Middleware
 app.use("/", indexRouter);
 app.use("/user", userRouter);
 app.use("/post", postRouter);
 app.use("/request", requestRouter);
+app.use("/notification",notificationRouter);
 
 app.use("/uploads", express.static("uploads"));
 

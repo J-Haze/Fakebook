@@ -45,13 +45,13 @@ function Header(props) {
   // Search Logic:
   useEffect(() => {
     // search logic
-    console.log("searchQuery", searchQuery)
+    console.log("searchQuery", searchQuery);
     if (searchQuery == "") {
       props.setSearchModalOpen(false);
     }
 
     if (searchQuery.length) {
-      if ((searchQuery.length > 0)) {
+      if (searchQuery.length > 0) {
         props.setSearchModalOpen(true);
       } else {
         props.setSearchModalOpen(false);
