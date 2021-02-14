@@ -30,17 +30,46 @@ function Header(props) {
     return  user.firstname + " " + user.lastname;
   };
 
+  // const sortQuery = (query) => {
+  //   query.sort(function (a, b) {
+  //   if (a.firstname < b.firstname) {
+  //     return -1;
+  //   }
+  //   if (a.firstname > b.firstname) {
+  //     return 1;
+  //   }
+  //   return 0;
+  //       });
+  // }
+
   // Search Logic:
   useEffect(() => {
     // search logic
     if (searchQuery.length) {
-      // setSearchDropdown(true);
+      props.setSearchModalOpen(true)
+      let arr = props.allUsers;
+      arr.sort(function (a, b) {
+        if (a.firstname < b.firstname) {
+          return -1;
+        }
+        if (a.firstname > b.firstname) {
+          return 1;
+        }
+        return 0;
+      });
+      console.log("arr", arr)
       setSearchResults(
-        props.allUsers.filter((user) =>
+        arr.filter((user) =>
           fullname(user).toLowerCase().includes(searchQuery.toLowerCase())
           // user.toLowerCase().includes(query.toLowerCase())
         )
-      );
+      )
+
+      //  let queryVar = props.allUsers.filter((user) =>
+      //     fullname(user).toLowerCase().includes(searchQuery.toLowerCase())
+      // )
+      // console.log("queryVar", queryVar)
+      //   setSearchResults(sortQuery(queryVar))
     } else {
       setSearchResults("")
     }
