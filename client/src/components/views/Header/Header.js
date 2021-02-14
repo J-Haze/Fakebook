@@ -45,8 +45,18 @@ function Header(props) {
   // Search Logic:
   useEffect(() => {
     // search logic
+    console.log("searchQuery", searchQuery)
+    if (searchQuery == "") {
+      props.setSearchModalOpen(false);
+    }
+
     if (searchQuery.length) {
-      props.setSearchModalOpen(true);
+      if ((searchQuery.length > 0)) {
+        props.setSearchModalOpen(true);
+      } else {
+        props.setSearchModalOpen(false);
+      }
+
       let arr = props.allUsers;
       arr.sort(function (a, b) {
         if (a.firstname < b.firstname) {
@@ -86,7 +96,7 @@ function Header(props) {
               onClick={(event) => {
                 event.stopPropagation();
 
-                props.setSearchModalOpen(true);
+                // props.setSearchModalOpen(true);
               }}
             >
               {/* <div id="mag-icon"></div> */}
@@ -106,23 +116,24 @@ function Header(props) {
                   props.setSearchModalOpen(false);
                 }}
               >
-                {!searchResults
-                  ? ""
-                  : searchResults.map((user) => (
-                      <Link
-                        className="link search-card"
-                        to={`/user/${user._id}`}
-                      >
-                        <img
-                          className="prof-pic-search-card"
-                          alt={`profile-pic-user-${user.firstname}-${user.lastname}`}
-                          src={`http://localhost:5000/uploads/${user.photo.filename}`}
-                        />
-                        <div className="search-card-name">
-                          {user.firstname} {user.lastname}
-                        </div>
-                      </Link>
-                    ))}
+                {!searchResults ? (
+                  ""
+                ) : searchResults.length == 0 ? (
+                  <div className="no-search-results"> No results found.</div>
+                ) : (
+                  searchResults.slice(0, 6).map((user) => (
+                    <Link className="link search-card" to={`/user/${user._id}`}>
+                      <img
+                        className="prof-pic-search-card"
+                        alt={`profile-pic-user-${user.firstname}-${user.lastname}`}
+                        src={`http://localhost:5000/uploads/${user.photo.filename}`}
+                      />
+                      <div className="search-card-name">
+                        {user.firstname} {user.lastname}
+                      </div>
+                    </Link>
+                  ))
+                )}
               </div>
             ) : (
               ""

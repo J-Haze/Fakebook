@@ -38,9 +38,8 @@ function App() {
   const [sentRequestsCount, setSentRequestsCount] = useState("");
   const [receivedRequestsCount, setReceivedRequestsCount] = useState("");
 
-  // const [createPostModalOpen, setCreatePostModalOpen] = useState(true);
   const [createPostModalOpen, setCreatePostModalOpen] = useState(false);
-  const [searchModalOpen, setSearchModalOpen] = useState(true);
+  const [searchModalOpen, setSearchModalOpen] = useState(false);
 
   const history = useHistory();
 
