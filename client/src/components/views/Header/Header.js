@@ -5,6 +5,7 @@ import { useHistory } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 import fLogo from "../../../assets/facebook-logo-header.png";
+import magIcon from "../../../assets/mag.png";
 import logoutLogo from "../../../assets/logout-alt.png";
 import bellLogo from "../../../assets/bell.png";
 import friendsLogo from "../../../assets/friend.png";
@@ -60,7 +61,11 @@ function Header(props) {
                 props.setSearchModalOpen(true);
               }}
             >
-              <input id="search-bar-input" />
+              {/* <div id="mag-icon"></div> */}
+              <img id="mag-icon" src={magIcon} alt="magnifying-glass-icon" />
+              <input id="search-bar-input" 
+                placeholder="Search Facebook"
+              />
             </div>
             {props.searchModalOpen ? (
               <div id="search-modal-cont">

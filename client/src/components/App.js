@@ -40,7 +40,7 @@ function App() {
 
   // const [createPostModalOpen, setCreatePostModalOpen] = useState(true);
   const [createPostModalOpen, setCreatePostModalOpen] = useState(false);
-  const [searchModalOpen, setSearchModalOpen] = useState(false);
+  const [searchModalOpen, setSearchModalOpen] = useState(true);
 
   const history = useHistory();
 
