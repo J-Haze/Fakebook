@@ -217,6 +217,7 @@ function Header(props) {
                       to={`/${notification.objectType}/${notification.objectId}`}
                       onClick={(event) => {
                         props.setNotificationModalOpen(false);
+                        // Submit interacted with
                       }}
                     >
                       <img
@@ -229,21 +230,26 @@ function Header(props) {
                         {notification.sender.lastname}
                       </div>
                       {notification.action === "like" ? (
-                        <div id="notification-action">
+                        <div className="notification-action">
                           &nbsp;liked your {notification.objectType}.
                         </div>
                       ) : notification.action === "comment" ? (
-                        <div id="notification-action">
+                        <div className="notification-action">
                           &nbsp;commented on your post.
                         </div>
                       ) : notification.action === "sentRequest" ? (
-                        <div id="notification-action">
+                        <div className="notification-action">
                           &nbsp;sent you a friend request.
                         </div>
                       ) : notification.action === "acceptedRequest" ? (
-                        <div id="notification-action">
+                        <div className="notification-action">
                           &nbsp;accepted your friend request.
                         </div>
+                      ) : (
+                        ""
+                      )}
+                      {!notification.interacted ? (
+                        <div className="blue-dot"></div>
                       ) : (
                         ""
                       )}

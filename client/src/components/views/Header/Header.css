@@ -377,7 +377,7 @@
   margin-left: 12px;
 }
 
-#notification-action {
+.notification-action {
   font-family: "Segoe UI", Helvetica, Arial, sans-serif;
   font-size: 15px;
   font-weight: 400;
@@ -385,6 +385,15 @@
   text-align: left;
   word-break: break-word;
   color: rgb(101, 103, 107);
+}
+
+.blue-dot {
+  border-radius: 50%;
+  height: 12px;
+  width: 12px;
+  background-color: rgb(24, 118, 242);
+  margin-left: auto;
+  margin-right: 16px;
 }
 
 #prof-header {
