@@ -27,7 +27,7 @@ function Header(props) {
   }
 
   const fullname = (user) => {
-    return  user.firstname + " " + user.lastname;
+    return user.firstname + " " + user.lastname;
   };
 
   // const sortQuery = (query) => {
@@ -46,7 +46,7 @@ function Header(props) {
   useEffect(() => {
     // search logic
     if (searchQuery.length) {
-      props.setSearchModalOpen(true)
+      props.setSearchModalOpen(true);
       let arr = props.allUsers;
       arr.sort(function (a, b) {
         if (a.firstname < b.firstname) {
@@ -57,25 +57,14 @@ function Header(props) {
         }
         return 0;
       });
-      console.log("arr", arr)
       setSearchResults(
         arr.filter((user) =>
           fullname(user).toLowerCase().includes(searchQuery.toLowerCase())
-          // user.toLowerCase().includes(query.toLowerCase())
         )
-      )
-
-      //  let queryVar = props.allUsers.filter((user) =>
-      //     fullname(user).toLowerCase().includes(searchQuery.toLowerCase())
-      // )
-      // console.log("queryVar", queryVar)
-      //   setSearchResults(sortQuery(queryVar))
+      );
     } else {
-      setSearchResults("")
+      setSearchResults("");
     }
-    // else {
-    //   // setSearchDropdown(false);
-    // }
   }, [searchQuery]);
 
   return (
@@ -111,12 +100,29 @@ function Header(props) {
               />
             </div>
             {props.searchModalOpen ? (
-              <div id="search-modal-cont">
-                { !searchResults ? ("") :
-                  (searchResults.map((user) => (
-                    <div>{user.firstname} {user.lastname}</div>)))
-                }
-                  
+              <div
+                id="search-modal-cont"
+                onClick={(event) => {
+                  props.setSearchModalOpen(false);
+                }}
+              >
+                {!searchResults
+                  ? ""
+                  : searchResults.map((user) => (
+                      <Link
+                        className="link search-card"
+                        to={`/user/${user._id}`}
+                      >
+                        <img
+                          className="prof-pic-search-card"
+                          alt={`profile-pic-user-${user.firstname}-${user.lastname}`}
+                          src={`http://localhost:5000/uploads/${user.photo.filename}`}
+                        />
+                        <div className="search-card-name">
+                          {user.firstname} {user.lastname}
+                        </div>
+                      </Link>
+                    ))}
               </div>
             ) : (
               ""

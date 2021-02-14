@@ -150,6 +150,34 @@ border-bottom-right-radius: 8px;
   z-index: 2;
 }
 
+.search-card{
+
+  border: 1px solid black;
+}
+
+.search-card:hover {
+cursor: pointer;
+background-color: var(--dark-gray);
+}
+
+.prof-pic-search-card {
+  /* border-radius: 8px; */
+  border-radius: 50%;
+  height: 60px;
+  width: 60px;
+  box-shadow: rgba(0, 0, 0, 0.1);
+}
+
+.search-card-name{
+  font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+font-size: 15px;
+font-weight: 600;
+line-height: 19.9995px;
+text-align: left;
+word-break: break-word;
+color: rgb(5, 5, 5);
+}
+
 #add-post-header {
   margin-right: 10px;
   background-color: var(--light-gray);
