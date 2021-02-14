@@ -40,6 +40,11 @@ function App() {
 
   const [createPostModalOpen, setCreatePostModalOpen] = useState(false);
   const [searchModalOpen, setSearchModalOpen] = useState(false);
+  const [notificationModalOpen, setNotificationModalOpen] = useState(false);
+  // const [notificationModalOpen, setNotificationModalOpen] = useState(true);
+
+  const [notifications, setNotifications] = useState([]);
+  const [refreshNotifications, setRefreshNotifications] = useState(false);
 
   const history = useHistory();
 
@@ -344,6 +349,30 @@ function App() {
     // Something to refresh requests after accepting/declining?
   }, [currentUser]);
 
+  const fetchNotifications = () => {
+      Axios.get("/notification/recieved", {
+        headers: {
+          Authorization: `Bearer ${JSON.parse(
+            window.localStorage.getItem("token")
+          )}`,
+        },
+      }).then((res) => {
+        let notificationsVar = res.data;
+        // let reversedArray = allPostsArray.reverse();
+        setNotifications(notificationsVar.reverse());
+        // setDisplayedPosts(allPostsArray.reverse());
+        // filterHomePosts()
+
+        // setAllPosts(allPostsArray)
+        // setDisplayedPosts(allPostsArray)
+        setLoading(false);
+      });
+}
+
+  useEffect(() => {
+    fetchNotifications();
+  }, [currentUser, refreshNotifications]);
+
   if (isLoggedIn) {
     return (
       <div
@@ -362,8 +391,10 @@ function App() {
           searchModalOpen={searchModalOpen}
           setSearchModalOpen={setSearchModalOpen}
           allUsers={allUsers}
-          // isViewingProfile={isViewingProfile}
-          // setIsViewingProfile={setIsViewingProfile}
+          notifications={notifications}
+          notificationModalOpen={notificationModalOpen}
+          setNotificationModalOpen={setNotificationModalOpen}
+          setRefreshNotifications={setRefreshNotifications}
         />
         <div id="content">
           {createPostModalOpen && (

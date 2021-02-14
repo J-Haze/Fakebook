@@ -30,18 +30,6 @@ function Header(props) {
     return user.firstname + " " + user.lastname;
   };
 
-  // const sortQuery = (query) => {
-  //   query.sort(function (a, b) {
-  //   if (a.firstname < b.firstname) {
-  //     return -1;
-  //   }
-  //   if (a.firstname > b.firstname) {
-  //     return 1;
-  //   }
-  //   return 0;
-  //       });
-  // }
-
   // Search Logic:
   useEffect(() => {
     // search logic
@@ -76,6 +64,14 @@ function Header(props) {
       setSearchResults("");
     }
   }, [searchQuery]);
+
+  const toggleNotificationModal = () => {
+    if (props.notificationModalOpen) {
+      props.setNotificationModalOpen(false);
+    } else {
+      props.setNotificationModalOpen(true);
+    }
+  };
 
   return (
     <div id="header">
@@ -163,17 +159,50 @@ function Header(props) {
           </Link>
 
           {/* This should just be an onClick? */}
-          <Link
+          <div
             id="bell-cont"
             className="link hover-gray"
-            to={`/user/notifications`}
+            // to={`/user/notifications`}
+            onClick={() => {
+              toggleNotificationModal();
+            }}
           >
             <img
               className="bell-icon"
               src={bellLogo}
               alt="notifications icon"
             />
-          </Link>
+
+            {props.notificationModalOpen ? (
+              <div
+                id="search-modal-cont"
+                onClick={(event) => {
+                  props.setSearchModalOpen(false);
+                }}
+              >
+                {!searchResults ? (
+                  ""
+                ) : searchResults.length == 0 ? (
+                  <div className="no-search-results"> No results found.</div>
+                ) : (
+                  searchResults.slice(0, 6).map((user) => (
+                    <Link className="link search-card" to={`/user/${user._id}`}>
+                      <img
+                        className="prof-pic-search-card"
+                        alt={`profile-pic-user-${user.firstname}-${user.lastname}`}
+                        src={`http://localhost:5000/uploads/${user.photo.filename}`}
+                      />
+                      <div className="search-card-name">
+                        {user.firstname} {user.lastname}
+                      </div>
+                    </Link>
+                  ))
+                )}
+              </div>
+            ) : (
+              ""
+            )}
+          </div>
 
           <div id="prof-header" className="prof-icon" onClick={() => {}}>
             {/* {props.currentUser.photo ? 
