@@ -40,8 +40,8 @@ function App() {
 
   const [createPostModalOpen, setCreatePostModalOpen] = useState(false);
   const [searchModalOpen, setSearchModalOpen] = useState(false);
-  const [notificationModalOpen, setNotificationModalOpen] = useState(false);
-  // const [notificationModalOpen, setNotificationModalOpen] = useState(true);
+  // const [notificationModalOpen, setNotificationModalOpen] = useState(false);
+  const [notificationModalOpen, setNotificationModalOpen] = useState(true);
 
   const [notifications, setNotifications] = useState([]);
   const [refreshNotifications, setRefreshNotifications] = useState(false);
@@ -350,7 +350,8 @@ function App() {
   }, [currentUser]);
 
   const fetchNotifications = () => {
-      Axios.get("/notification/recieved", {
+    console.log("Fetching notifications")
+      Axios.get("/notification/received", {
         headers: {
           Authorization: `Bearer ${JSON.parse(
             window.localStorage.getItem("token")
@@ -358,6 +359,7 @@ function App() {
         },
       }).then((res) => {
         let notificationsVar = res.data;
+        console.log("notifications:", notificationsVar)
         // let reversedArray = allPostsArray.reverse();
         setNotifications(notificationsVar.reverse());
         // setDisplayedPosts(allPostsArray.reverse());

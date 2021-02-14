@@ -8,6 +8,7 @@ import fLogo from "../../../assets/facebook-logo-header.png";
 import magIcon from "../../../assets/mag.png";
 import logoutLogo from "../../../assets/logout-alt.png";
 import bellLogo from "../../../assets/bell.png";
+import eyeIcon from "../../../assets/eye.png";
 import friendsLogo from "../../../assets/friend.png";
 
 import ProfilePic from "../HelperComponents/ProfilePic.js";
@@ -79,7 +80,7 @@ function Header(props) {
         {/* <div id="title">Title</div> */}
         <div id="header-left-menu">
           <Link id="fb-icon-cont" className="link-header" to={`/`}>
-            <img className="fb-icon" src={fLogo} alt="fb logo" />
+            <img className="fb-icon" src={fLogo} alt="fb logo" title="Home"/>
           </Link>
           <div
             id="search-cont"
@@ -106,9 +107,7 @@ function Header(props) {
               />
             </div>
             {props.searchModalOpen ? (
-              <div
-                id="search-modal-cont"
-              >
+              <div id="search-modal-cont">
                 {!searchResults ? (
                   ""
                 ) : searchResults.length == 0 ? (
@@ -142,6 +141,7 @@ function Header(props) {
         <div id="header-right-menu">
           <div
             id="add-post-header"
+            title="Create Post"
             onClick={() => {
               props.setCreatePostModalOpen(true);
             }}
@@ -152,6 +152,7 @@ function Header(props) {
           <Link
             id="friends-cont"
             className="link hover-gray"
+            title="Friends"
             to={`/friends/${props.currentUser._id}`}
           >
             <img
@@ -165,6 +166,7 @@ function Header(props) {
           <div
             id="bell-cont"
             className="link hover-gray"
+            title="Notifications"
             // to={`/user/notifications`}
             onClick={(event) => {
               event.stopPropagation();
@@ -174,13 +176,25 @@ function Header(props) {
             <img
               className="bell-icon"
               src={bellLogo}
-              alt="notifications icon"
+              alt="notifications-icon"
             />
 
             {props.notificationModalOpen ? (
               <div id="notification-modal-cont">
+                <div id="notification-modal-header-cont">
+                  <div id="notification-modal-header">Notifications</div>
+                  <img
+                    id="notification-eye-icon"
+                    src={eyeIcon}
+                    alt="read-all-icon"
+                    title="Mark all as read"
+                  />
+                </div>
                 {!props.notifications ? (
-                  ""
+                  <div className="no-notification-results">
+                    {" "}
+                    You have no notifications.
+                  </div>
                 ) : props.notifications.length == 0 ? (
                   <div className="no-notification-results">
                     {" "}
@@ -235,7 +249,12 @@ function Header(props) {
               logOut();
             }}
           >
-            <img className="logout-icon" src={logoutLogo} alt="logout icon" />
+            <img
+              className="logout-icon"
+              src={logoutLogo}
+              alt="logout icon"
+              title="Log Out"
+            />
           </div>
         </div>
       </div>
