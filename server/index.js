@@ -68,10 +68,9 @@ app.use("/", indexRouter);
 app.use("/user", userRouter);
 app.use("/post", postRouter);
 app.use("/request", requestRouter);
-app.use("/notification",notificationRouter);
+app.use("/notification", notificationRouter);
 
 app.use("/uploads", express.static("uploads"));
-
 
 // if (process.env.NODE_ENV === "production") {
 //   app.use(express.static("client/build"));

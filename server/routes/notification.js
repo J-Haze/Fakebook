@@ -18,6 +18,9 @@ router.get(
   notification_controller.get_currentUser_notifications_received
 );
 
+// Send a notification to a specified user
+router.post("/", auth, notification_controller.send_notification);
+
 // GET - Get all sent requests
 // router.get("/sent", auth, request_controller.get_currentUser_requests_sent);
 

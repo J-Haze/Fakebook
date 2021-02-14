@@ -79,12 +79,44 @@ exports.get_currentUser_notifications_received = (req, res, next) => {
       console.log(err);
       res.sendStatus(403);
     } else {
-      Request.find({ receiver: authData._id }, (err, receivedRequests) => {
-        if (err) return res.json(err);
-        res.json(receivedRequests);
-      })
+      Notification.find(
+        { receiver: authData._id },
+        (err, receivedNotifications) => {
+          if (err) return res.json(err);
+          res.json(receivedNotifications);
+        }
+      )
         .populate("sender")
         .populate("receiver");
+    }
+  });
+};
+
+exports.send_notification = (req, res) => {
+  jwt.verify(req.token, process.env.JWT_SECRET, (err, authData) => {
+    if (err) {
+      console.log(err);
+      res.sendStatus(403);
+    } else {
+      // const { receiverid } = req.params;
+      var notification = new Notification({
+        sender: authData._id,
+        receiver: req.body.receiver,
+        action: req.body.action,
+        objectType: req.body.objectType,
+        objectId: req.body.objectId,
+        seen: false,
+        interacted: false,
+      });
+
+      // Data from form is valid. Save book.
+      notification.save(function (err) {
+        if (err) {
+          console.log("err", err);
+          return res.json(err);
+        }
+        res.json(notification);
+      });
     }
   });
 };
@@ -101,52 +133,6 @@ exports.get_currentUser_notifications_received = (req, res, next) => {
 //       })
 //         .populate("sender")
 //         .populate("receiver");
-//     }
-//   });
-// };
-
-// exports.send_request = (req, res) => {
-//   jwt.verify(req.token, process.env.JWT_SECRET, (err, authData) => {
-//     if (err) {
-//       console.log(err);
-//       res.sendStatus(403);
-//     } else {
-//       Request.exists(
-//         { sender: authData._id, receiver: req.body.receiver },
-//         (err, doesExist) => {
-//           if (err) return res.json(err);
-//           // console.log("exists?", doesExist);
-//           if (doesExist) {
-//             return res.json("Error, request already exists.");
-//           } else {
-//             Request.exists(
-//               { sender: req.body.receiver, receiver: authData._id },
-//               (err, doesExist) => {
-//                 if (err) return res.json(err);
-//                 // console.log("exists?", doesExist);
-//                 if (doesExist) {
-//                   return res.json("Error, request already exists.");
-//                 } else {
-//                   // const { receiverid } = req.params;
-//                   var request = new Request({
-//                     sender: authData._id,
-//                     receiver: req.body.receiver,
-//                   });
-
-//                   // Data from form is valid. Save book.
-//                   request.save(function (err) {
-//                     if (err) {
-//                       console.log("err", err);
-//                       return res.json(err);
-//                     }
-//                     res.json(request);
-//                   });
-//                 }
-//               }
-//             );
-//           }
-//         }
-//       );
 //     }
 //   });
 // };

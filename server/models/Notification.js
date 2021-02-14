@@ -12,10 +12,9 @@ const notificationSchema = mongoose.Schema(
     receiver: { type: Schema.Types.ObjectId, ref: "User", required: true },
     action: { type: String, required: true },
     objectType: { type: String, required: true },
-    postObject: { type: mongoose.Schema.Types.ObjectId, ref: "Post" },
-    commentObject: { type: mongoose.Schema.Types.ObjectId, ref: "Comment" },
-    requestObject: { type: mongoose.Schema.Types.ObjectId, ref: "Request" },
+    objectId: { type: mongoose.Schema.Types.ObjectId, required: true },
     seen: { type: Boolean, default: false },
+    interacted: { type: Boolean, default: false },
   },
   { timestamps: true }
 );
