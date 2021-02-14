@@ -362,6 +362,7 @@ function App() {
           setCreatePostModalOpen={setCreatePostModalOpen}
           searchModalOpen={searchModalOpen}
           setSearchModalOpen={setSearchModalOpen}
+          allUsers={allUsers}
           // isViewingProfile={isViewingProfile}
           // setIsViewingProfile={setIsViewingProfile}
         />

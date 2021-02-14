@@ -14,6 +14,8 @@ import ProfilePic from "../HelperComponents/ProfilePic.js";
 
 function Header(props) {
   // const [searchModalOpen, setSearchModalOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
 
   const history = useHistory();
 
@@ -24,20 +26,28 @@ function Header(props) {
     history.push("/");
   }
 
+  const fullname = (user) => {
+    return  user.firstname + " " + user.lastname;
+  };
+
   // Search Logic:
-  // useEffect(() => {
-  //   // search logic
-  //   if (query.length) {
-  //     setSearchDropdown(true);
-  //     setResults(
-  //       users.filter((user) =>
-  //         fullname(user).toLowerCase().includes(query.toLowerCase())
-  //       )
-  //     );
-  //   } else {
-  //     setSearchDropdown(false);
-  //   }
-  // }, [query]);
+  useEffect(() => {
+    // search logic
+    if (searchQuery.length) {
+      // setSearchDropdown(true);
+      setSearchResults(
+        props.allUsers.filter((user) =>
+          fullname(user).toLowerCase().includes(searchQuery.toLowerCase())
+          // user.toLowerCase().includes(query.toLowerCase())
+        )
+      );
+    } else {
+      setSearchResults("")
+    }
+    // else {
+    //   // setSearchDropdown(false);
+    // }
+  }, [searchQuery]);
 
   return (
     <div id="header">
@@ -63,13 +73,21 @@ function Header(props) {
             >
               {/* <div id="mag-icon"></div> */}
               <img id="mag-icon" src={magIcon} alt="magnifying-glass-icon" />
-              <input id="search-bar-input" 
+              <input
+                id="search-bar-input"
+                type="text"
                 placeholder="Search Facebook"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
               />
             </div>
             {props.searchModalOpen ? (
               <div id="search-modal-cont">
-                Something that map. -> search results Results
+                { !searchResults ? ("") :
+                  (searchResults.map((user) => (
+                    <div>{user.firstname} {user.lastname}</div>)))
+                }
+                  
               </div>
             ) : (
               ""
