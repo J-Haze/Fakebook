@@ -45,7 +45,13 @@ function HomePage(props) {
           }
         }
       console.log("Only display My Posts", homePostsVar);
-        setHomePosts(homePostsVar.reverse())
+        let sortedHomePostsVar = homePostsVar;
+
+        sortedHomePostsVar.sort(function (a, b) {
+          return new Date(a.createdAt) - new Date(b.createdAt);
+        });
+
+        setHomePosts(sortedHomePostsVar.reverse());
         return;
       }
       
@@ -67,8 +73,8 @@ function HomePage(props) {
 
         let sortedHomePostsVar = homePostsVar;
 
-        sortedHomePostsVar = sortedHomePostsVar.sort(function (a, b) {
-          return a.createdAt - b.createdAt;
+        sortedHomePostsVar.sort(function (a, b) {
+          return new Date(a.createdAt) - new Date(b.createdAt);
         });
 
         setHomePosts(sortedHomePostsVar.reverse());

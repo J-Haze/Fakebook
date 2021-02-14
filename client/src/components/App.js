@@ -74,12 +74,17 @@ function App() {
       let reversedArray = allPostsArray.reverse();
       setAllPosts(allPostsArray.reverse());
       setDisplayedPosts(allPostsArray.reverse());
+      // filterHomePosts()
 
       // setAllPosts(allPostsArray)
       // setDisplayedPosts(allPostsArray)
       setLoading(false);
     });
   };
+
+  // const filterHomePosts = () => {
+
+  // }
 
   useEffect(() => {
     if (isLoggedIn) {
