@@ -5,6 +5,8 @@ import "./HomePage.css";
 import Card from "./Sections/Card.js";
 
 import ProfilePic from "../HelperComponents/ProfilePic.js";
+import UserCard from "../HelperComponents/UserCard.js";
+
 import { useHistory } from "react-router-dom";
 
 function HomePage(props) {
@@ -89,7 +91,13 @@ function HomePage(props) {
     <>
       {/* <div>Home Page</div> */}
       <div id="home-cont">
-        <div id="home-current-user-cont">x</div>
+        <div id="home-current-user-cont">
+          <div id="current-user-card">
+            <UserCard 
+              user={props.currentUser}
+            />
+          </div>
+        </div>
         <div id="home">
           {/* {props.loading ? (
           <div>Loading... </div>
