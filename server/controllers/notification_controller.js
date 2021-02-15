@@ -99,12 +99,12 @@ exports.send_notification = (req, res) => {
       console.log(err);
       res.sendStatus(403);
     } else {
-      // const { receiverid } = req.params;
+      const { receiverid } = req.params;
 
-      // if (req.body.receiver === authData._id) {
-      //   console.log("Sender same as receiver");
-      //   return
-      // }
+      if (req.body.receiver === authData._id) {
+        console.log("Sender same as receiver");
+        return
+      }
 
       if ((req.body.objectType == "comment") && req.body.action == "like") {
         Comment.findOne({ _id: req.body.objectId }, (err, foundComment) => {

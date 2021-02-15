@@ -9,9 +9,9 @@ import "../Header.css";
 function NotificationCard(props) {
 //   const [hideDot, setHideDot] = useState(false);
 
-  // useEffect(() => {
-  //   setHideDot(props.notification.interacted);
-  // }, [props.notification.interacted]);
+//   useEffect(() => {
+//     setHideDot(props.notification.interacted);
+//   }, [props.notification.interacted]);
 
 //   useEffect(() => {
 //       setHideDot(false);
