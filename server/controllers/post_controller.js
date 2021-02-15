@@ -562,6 +562,7 @@ exports.unlike_post = (req, res, next) => {
   });
 };
 
+//Not currently used
 exports.publish_post = (req, res, next) => {
   jwt.verify(req.token, process.env.JWT_SECRET, (err, authData) => {
     if (err) {

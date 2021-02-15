@@ -101,6 +101,11 @@ exports.send_notification = (req, res) => {
     } else {
       // const { receiverid } = req.params;
 
+      // if (req.body.receiver === authData._id) {
+      //   console.log("Sender same as receiver");
+      //   return
+      // }
+
       if ((req.body.objectType == "comment") && req.body.action == "like") {
         Comment.findOne({ _id: req.body.objectId }, (err, foundComment) => {
           if (err) {
@@ -190,6 +195,31 @@ exports.see_all_notifications = (req, res, next) => {
     }
   })
 }
+
+exports.interact_notification = (req, res, next) => {
+  jwt.verify(req.token, process.env.JWT_SECRET, (err, authData) => {
+    if (err) {
+      console.log(err);
+      res.sendStatus(403);
+    } else {
+      // console.log("wow", authData._id);
+
+      interacted = true;
+
+          Notification.findOneAndUpdate(
+            { _id: req.params.notificationid },
+            { interacted },
+            { useFindAndModify: false, new: true },
+            (err, updatedNotification) => {
+              if (err) {
+                console.log(err);
+                return res.json(err);
+              }
+            }
+          );
+    }
+  });
+};
 
 exports.interact_all_notifications = (req, res, next) => {
   jwt.verify(req.token, process.env.JWT_SECRET, (err, authData) => {

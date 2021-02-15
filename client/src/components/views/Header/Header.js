@@ -137,6 +137,7 @@ function Header(props) {
 
   const handleNotificationClick = (notification) => {
     console.log(`/${notification.objectType}/${notification.objectId}`);
+
     if (notification.objectType == "post") {
       history.push(`/post/${notification.objectId}`);
     } else if (notification.objectType == "comment") {
@@ -144,6 +145,26 @@ function Header(props) {
     } else if (notification.objectType == "request") {
       history.push(`/user/${notification.sender._id}`);
     }
+
+    Axios.put(
+      `/notification/interact/${notification._id}`,
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${JSON.parse(
+            window.localStorage.getItem("token")
+          )}`,
+        },
+      }
+    )
+      .then((res) => {
+        // props.fetchNotifications();
+        props.setRefreshNotifications(!props.refreshNotifications)
+        // setHideDots(true);
+      })
+      .catch((error) => {
+        console.log("error", error);
+      });
   };
 
   return (
