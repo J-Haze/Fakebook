@@ -1,6 +1,4 @@
-#not-authorized {
 
-}
 
 #post-page {
     display: flex;
@@ -10,6 +8,17 @@
     /* border: 1px solid red; */
 }
 
-
+#not-authorized {
+font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+margin-top: 20px;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 16.0004px;
+  text-align: left;
+  color: rgb(101, 103, 107);
+  text-decoration-line: none;
+  text-decoration-style: solid;
+  word-break: break-word;
+}
 
 

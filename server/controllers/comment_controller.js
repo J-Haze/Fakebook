@@ -234,7 +234,7 @@ exports.unlike_comment = (req, res, next) => {
           return res.json(err);
         }
 
-        Post.findOne({ _id: commentid }, (err, originalPost) => {
+        Comment.findOne({ _id: commentid }, (err, originalComment) => {
           if (err) {
             console.log(err);
             return res.json(err);

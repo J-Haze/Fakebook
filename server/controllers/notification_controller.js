@@ -103,7 +103,7 @@ exports.send_notification = (req, res) => {
 
       if (req.body.receiver === authData._id) {
         console.log("Sender same as receiver");
-        return
+        return res.json("Sender same as receiver");
       }
 
       if ((req.body.objectType == "comment") && req.body.action == "like") {

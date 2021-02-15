@@ -406,6 +406,13 @@ function App() {
     // if (objectId == "sentRequest") {
     //   Axios.get
     // }
+    console.log("receiverId", receiverId);
+    console.log("currentUser._id", currentUser._id);
+
+    if (receiverId === currentUser._id) {
+      console.log("Sender same as receiver");
+      return
+    }
 
     let parentId = null;
     // let objectId = objectId;

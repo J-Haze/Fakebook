@@ -6,21 +6,27 @@ import Axios from "axios";
 import badWords from "bad-words";
 import { useHistory } from "react-router-dom";
 
+import thumbBlue from "../../../../assets/thumbs-up-solid-light-blue.svg";
+
 const filter = new badWords();
 
 function Comments(props) {
   const [newComment, setNewComment] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
+  const [likeCount, setLikeCount] = useState(0);
+
   const [likedByCurrentUser, setLikedByCurrentUser] = useState(false);
 
   const [deleteCommentModalOpen, setDeleteCommentModalOpen] = useState(false);
-//   const [commentToDelete, setCommentToDelete] = useState("");
+  //   const [commentToDelete, setCommentToDelete] = useState("");
 
   const history = useHistory();
 
-
   function likeComment() {
+    setLikedByCurrentUser(true);
+    let newLikes = likeCount + 1;
+    setLikeCount(newLikes);
     Axios.put(
       `/post/${props.postid}/${props.comment._id}/like`,
       {},
@@ -48,11 +54,16 @@ function Comments(props) {
       })
       .catch((error) => {
         console.log("error", error);
+        setLikedByCurrentUser(false);
         //  alert("Cannot like this post.");
       });
   }
 
   function unlikeComment() {
+    setLikedByCurrentUser(false);
+    let newLikes = likeCount - 1;
+      setLikeCount(newLikes);
+
     Axios.put(
       `/post/${props.postid}/${props.comment._id}/unlike`,
       {},
@@ -74,6 +85,7 @@ function Comments(props) {
       })
       .catch((error) => {
         console.log("error", error);
+        setLikedByCurrentUser(true);
         //  alert("Cannot like this post.");
       });
   }
@@ -89,7 +101,6 @@ function Comments(props) {
       unlikeComment();
     }
   }
-
 
   function checkIfLiked() {
     console.log("here1");
@@ -113,8 +124,6 @@ function Comments(props) {
     checkIfLiked();
   }, []);
 
-
-
   function deleteComment(commentid) {
     Axios.put(
       `/post/${props.postid}/${props.comment._id}/unpublish`,
@@ -132,8 +141,8 @@ function Comments(props) {
         //    alert(res.data.message);
         //    return
         //  }
-          setDeleteCommentModalOpen(false);
-          props.fetchComments();
+        setDeleteCommentModalOpen(false);
+        props.fetchComments();
         // props.fetchPosts();
         //  history.push(`/user/${currentUser._id}`);
         // history.go(0);
@@ -144,9 +153,24 @@ function Comments(props) {
       });
 
     // console.log(commentid);
+  }
+
+  function calculateLikes() {
+    props.fetchComments();
+    if (
+      props.comment.likesList.length == 0 ||
+      props.comment.likesList.length == undefined
+    ) {
+      setLikeCount(0);
+      return;
+    } else {
+      setLikeCount(props.comment.likesList.length);
     }
-    
-    // console.log("comment:", props.comment)
+  }
+
+  useEffect(() => {
+    calculateLikes();
+  }, []);
 
   return (
     <div key={props.comment._id} className="comment">
@@ -174,13 +198,25 @@ function Comments(props) {
             <div
               className="comment-username hover-under"
               onClick={(event) => {
-                history.push(`/user/${props.comment.author._id}`)
+                history.push(`/user/${props.comment.author._id}`);
               }}
             >
               {props.comment.author.firstname} {props.comment.author.lastname}
             </div>
             <div className="comment-text">{props.comment.text}</div>
+            {
+              (likeCount == 0) ? ("") : 
+              (<div className="comment-like-count">
+                <img src={thumbBlue} className="thumb-comment"></img>
+                <div className="comment-like-count-text">
+                  {"   "}
+                  {likeCount}
+                </div>
+                </div>)
+              
+            }
           </div>
+
           {props.comment.author._id === props.currentUser._id ? (
             <span
               className="del-comment-x"
