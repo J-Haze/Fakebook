@@ -88,8 +88,10 @@ function HomePage(props) {
   return (
     <>
       {/* <div>Home Page</div> */}
-      <div id="home">
-        {/* {props.loading ? (
+      <div id="home-cont">
+        <div id="home-current-user-cont">x</div>
+        <div id="home">
+          {/* {props.loading ? (
           <div>Loading... </div>
         ) : postCount === 0 ? (
           <div className="black-text no-blogs">
@@ -97,65 +99,67 @@ function HomePage(props) {
             {props.currentUser}
           </div>
         ) : ( */}
-        <div id="home-blog-cont">
-          <div id="new-post-card">
-            <div id="new-post-card-top" className="new-post-card-row">
-              {/* <Link className="link" to={`/user/${props.currentUser._id}`}>
+          <div id="home-blog-cont">
+            <div id="new-post-card">
+              <div id="new-post-card-top" className="new-post-card-row">
+                {/* <Link className="link" to={`/user/${props.currentUser._id}`}>
                 <img
                   className="prof-pic"
                   alt={`profile-pic-user-${props.currentUser.firstname}-${props.currentUser.lastname}`}
                   src={`http://localhost:5000/uploads/${props.currentUser.photo.filename}`}
                 />
               </Link> */}
-              <ProfilePic user={props.currentUser} />
-              <div
-                id="woym-btn"
-                onClick={() => {
-                  props.setCreatePostModalOpen(true);
-                }}
-              >
-                What's on your mind, {props.currentUser.firstname}?
+                <ProfilePic user={props.currentUser} />
+                <div
+                  id="woym-btn"
+                  onClick={() => {
+                    props.setCreatePostModalOpen(true);
+                  }}
+                >
+                  What's on your mind, {props.currentUser.firstname}?
+                </div>
               </div>
-            </div>
-            {/* <div
+              {/* <div
                 id="new-post-card-bottom"
                 className="new-post-card-row"
               ></div> */}
-          </div>
-          {/* <div className="main-subtitle">All Posts:</div> */}
+            </div>
+            {/* <div className="main-subtitle">All Posts:</div> */}
 
-          {!homePosts
-            ? ""
-            : homePosts.map((post) =>
-                post.isPublished ? (
-                  <Card
-                    key={post._id}
-                    post={post}
-                    currentUser={props.currentUser}
-                    fetchPosts={props.fetchPosts}
-                    sendNotification={props.sendNotification}
-                  />
-                ) : (
-                  ""
-                )
-              )}
-          <div className="no-posts">
-            <div className="no-posts-header">No More Posts</div>
-            <div className="no-posts-subheader">
-              Add more friends to see more posts in your News Feed
-            </div>
-            <div
-              className="no-posts-btn"
-              onClick={() => {
-                history.push("/find-friends");
-              }}
-            >
-              {" "}
-              Find Friends
+            {!homePosts
+              ? ""
+              : homePosts.map((post) =>
+                  post.isPublished ? (
+                    <Card
+                      key={post._id}
+                      post={post}
+                      currentUser={props.currentUser}
+                      fetchPosts={props.fetchPosts}
+                      sendNotification={props.sendNotification}
+                    />
+                  ) : (
+                    ""
+                  )
+                )}
+            <div className="no-posts">
+              <div className="no-posts-header">No More Posts</div>
+              <div className="no-posts-subheader">
+                Add more friends to see more posts in your News Feed
+              </div>
+              <div
+                className="no-posts-btn"
+                onClick={() => {
+                  history.push("/find-friends");
+                }}
+              >
+                {" "}
+                Find Friends
+              </div>
             </div>
           </div>
+          {/* )} */}
         </div>
-        {/* )} */}
+        <div id="home-friend-cont">x</div>
       </div>
     </>
   );
