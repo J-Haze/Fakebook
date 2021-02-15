@@ -50,6 +50,7 @@
     "react-facebook-login": "^4.1.1",
     "react-redux": "^5.0.7",
     "react-scripts": "^4.0.1",
+    "react-scroll-to-component": "^1.0.2",
     "react-tinymce": "^0.7.0",
     "saslprep": "^1.0.3",
     "supports-color": "^7.1.0",

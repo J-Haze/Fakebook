@@ -13,6 +13,8 @@ import friendsLogo from "../../../assets/friend.png";
 
 import ProfilePic from "../HelperComponents/ProfilePic.js";
 
+
+
 function Header(props) {
   // const [searchModalOpen, setSearchModalOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
@@ -80,16 +82,11 @@ function Header(props) {
     // props.fetchNotifications();
   };
 
-  const ref = React.createRef();
+  // const ref = React.createRef();
 
-  const handleClick = (notification) => {
-    // history.push(`/${notification.objectType}/${notification.objectId}`);
-    history.push(`user/${props.currentUser._id}`);
-    ref.current.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-    });
-  };
+  
+
+
 
   return (
     <div id="header">
@@ -231,7 +228,7 @@ function Header(props) {
                       to={`/user/${props.currentUser._id}`}
                       onClick={(event) => {
                         props.setNotificationModalOpen(false);
-                        handleClick(notification);
+                        props.handleNotificationClick(notification);
                         // Submit interacted with
                       }}
                     >

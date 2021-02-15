@@ -14,6 +14,8 @@ import CreatePostModal from "./views/CreatePostModal/CreatePostModal.js";
 import FriendListPage from "./views/FriendListPage/FriendListPage";
 import FindFriendsPage from "./views/FindFriendsPage/FindFriendsPage";
 
+import scrollToComponent from "react-scroll-to-component";
+
 function App() {
   const [loading, setLoading] = useState(true);
   const [currentUser, setCurrentUser] = useState("");
@@ -46,7 +48,11 @@ function App() {
   const [notifications, setNotifications] = useState([]);
   const [refreshNotifications, setRefreshNotifications] = useState(false);
 
+  const [refTarget, setRefTarget] = useState("");
+
   const history = useHistory();
+
+  
 
   //If there is a user logged in, it sets currentUser and isLoggedIn
   useEffect(() => {
@@ -409,6 +415,56 @@ function App() {
       });
   }
 
+
+    const handleNotificationClick = (notification) => {
+    // history.push(`/${notification.objectType}/${notification.objectId}`);
+    
+
+    // console.log(
+    //   `ref-${notification.objectType}-${notification.objectId}`
+    // );
+    // scrollToComponent(
+    //   `ref-${notification.objectType}-${notification.objectId}`
+    // );
+
+      // let reference = `ref-${notification.objectType}-${notification.objectId}`;
+
+      let reference = `${notification.objectId}`
+      console.log("reference", reference);
+      setRefTarget(reference);
+      history.push(`user/${currentUser._id}`);
+      // reference.current.scrollIntoView(
+      //   {
+      //     behavior: "smooth",
+      //     block: "start",
+      //   }
+      // );
+
+      // document
+      //   .getElementById(
+      //     `ref-${notification.objectType}-${notification.objectId}`
+      //   )
+      //   .scrollIntoView({
+      //     behavior: "smooth",
+      //     block: "start",
+      //   });
+
+            // document
+            //   .getElementById(
+            //     `ref-post-${notification.objectId}`
+            //   )
+            //   .scrollIntoView({
+            //     behavior: "smooth",
+            //     block: "start",
+            //   });
+
+
+            // ref.current.scrollIntoView({
+            //   behavior: "smooth",
+            //   block: "start",
+            // });
+  };
+
   if (isLoggedIn) {
     return (
       <div
@@ -432,6 +488,7 @@ function App() {
           notificationModalOpen={notificationModalOpen}
           setNotificationModalOpen={setNotificationModalOpen}
           setRefreshNotifications={setRefreshNotifications}
+          handleNotificationClick={handleNotificationClick}
         />
         <div id="content">
           {createPostModalOpen && (
@@ -484,6 +541,7 @@ function App() {
                     pageType={pageType}
                     setPageType={setPageType}
                     sendNotification={sendNotification}
+                    refTarget={refTarget}
                   />
                 )}
               ></Route>

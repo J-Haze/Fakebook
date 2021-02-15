@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Axios from "axios";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
@@ -16,6 +16,8 @@ function CurrentUserPage(props) {
 
   //  const [editUserModalOpen, setEditUserModalOpen] = useState(true);
   const [editUserModalOpen, setEditUserModalOpen] = useState(false);
+
+  const [refs, setRefs] = useState([]);
 
   const history = useHistory();
 
@@ -61,8 +63,44 @@ function CurrentUserPage(props) {
   }, []);
 
 
+ useEffect(() => {
+   const refsVar = userPosts.reduce((acc, value) => {
+     acc[value._id] = React.createRef();
+     return acc;
+   }, {});
 
-  const ref = React.createRef();
+   setRefs(refs)
+ }, [userPosts]);
+
+  // const ref = React.createRef();
+
+  // const refs = userPosts.reduce((acc, value) => {
+  //   acc[value._id] = React.createRef();
+  //   return acc;
+  // }, {});
+
+  useEffect(() => {
+    // If there is a notification command then scroll to the correct ref
+
+    if (props.refTarget) {
+      console.log("yes ref", props.refTarget);
+      // props.ref.current.scrollIntoView({
+      // document.getElementById(props.refTarget).current.scrollIntoView({
+      //   behavior: "smooth",
+      //   block: "start",
+      // });
+      refs[props.refTarget].current.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }
+  }, [props.refTarget]);
+
+  // const handleClick = (id) =>
+  //   refs[id].current.scrollIntoView({
+  //     behavior: "smooth",
+  //     block: "start",
+  //   });
 
   return (
     <div id="current-user-page">
@@ -220,7 +258,10 @@ function CurrentUserPage(props) {
           post.isPublished ? (
             <Card
               key={post._id}
-              ref={ref}
+              // ref={ref}
+              // ref={useRef(`ref-post-${props.post._id}`)}
+              ref={refs[post._id]}
+              id={`ref-post-${post._id}`}
               post={post}
               currentUser={props.currentUser}
               fetchPosts={props.fetchPosts}

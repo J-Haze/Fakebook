@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import moment from "moment";
 import { Link } from "react-router-dom";
 import Axios from "axios";
@@ -10,6 +10,8 @@ import thumbBlue from "../../../../assets/thumbs-up-solid-light-blue.svg";
 
 import ProfilePic from "../../HelperComponents/ProfilePic.js";
 import Comments from "./Comments";
+
+import scrollToComponent from "react-scroll-to-component";
 // import { like_post } from "../../../../../../server/controllers/post_controller";
 
 // https://fontawesome.com/icons/thumbs-up?style=light
@@ -279,12 +281,24 @@ function Card(props) {
     }
   }
 
+
+  // const myRef = useRef(null);
+
   return (
     <div
       className="card"
       onClick={() => {
         setDeletePostModalOpen(false);
+        // console.log("ref", ref)
       }}
+      // ref={(section) => {
+      //   `ref-post${notification.objectId}` = section;
+      // }}
+
+      // ref={`ref-post${props.post._id}`}
+      // ref={myRef}
+
+      // ref={useRef(`ref-post-${props.post._id}`)}
     >
       <div className="main-card">
         <div className="card-row-one">
