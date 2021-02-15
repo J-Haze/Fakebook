@@ -523,19 +523,17 @@ align-items: center;
   color: rgb(5, 5, 5);
   height: 60px;
   width: 200px;
-  /* float: right; */
-  /* z-index: 1; */
+
   position: absolute;
-  /* position: fixed; */
-  /* position: relative; */
-  /* display: block; */
-  /* display: inline-block; */
-  margin-top: 22px;
-  margin-left: 215px;
-  /* transform: translate(886px, 812px) translate(-100%, 0px); */
-  /* margin-right: 0px; */
-  /* margin-left: 100%; */
-  /* margin-right: -999px; */
+
+  /* margin-top: 22px;
+  margin-left: 215px; */
+
+  margin-top: 60px;
+  margin-left: 200px;
+
+
+
   font-family: "Segoe UI", Helvetica, Arial, sans-serif;
   font-size: 15px;
   font-weight: 500;

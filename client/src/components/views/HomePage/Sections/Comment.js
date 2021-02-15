@@ -19,7 +19,7 @@ function Comments(props) {
   const [likedByCurrentUser, setLikedByCurrentUser] = useState(false);
 
   const [deleteCommentModalOpen, setDeleteCommentModalOpen] = useState(false);
-  //   const [commentToDelete, setCommentToDelete] = useState("");
+  // const [deleteCommentModalOpen, setDeleteCommentModalOpen] = useState(true);
 
   const history = useHistory();
 
@@ -204,17 +204,17 @@ function Comments(props) {
               {props.comment.author.firstname} {props.comment.author.lastname}
             </div>
             <div className="comment-text">{props.comment.text}</div>
-            {
-              (likeCount == 0) ? ("") : 
-              (<div className="comment-like-count">
+            {likeCount == 0 ? (
+              ""
+            ) : (
+              <div className="comment-like-count">
                 <img src={thumbBlue} className="thumb-comment"></img>
                 <div className="comment-like-count-text">
                   {"   "}
                   {likeCount}
                 </div>
-                </div>)
-              
-            }
+              </div>
+            )}
           </div>
 
           {props.comment.author._id === props.currentUser._id ? (
@@ -226,11 +226,45 @@ function Comments(props) {
               }}
             >
               &times;
+              {deleteCommentModalOpen ? (
+                <div
+                  className="del-comment-modal"
+                  onClick={(event) => {
+                    event.stopPropagation();
+                  }}
+                >
+                  <div className="del-comment-modal-text">
+                    Delete this comment?
+                  </div>
+                  <div className="del-post-modal-btn-cont">
+                    <div
+                      className="del-post-modal-confirm del-post-modal-btn"
+                      onClick={(event) => {
+                        event.stopPropagation();
+                        deleteComment(props.comment._id);
+                      }}
+                    >
+                      Delete
+                    </div>
+                    <div
+                      className="del-post-modal-cancel del-post-modal-btn"
+                      onClick={(event) => {
+                        event.stopPropagation();
+                        setDeleteCommentModalOpen(false);
+                      }}
+                    >
+                      Cancel
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                ""
+              )}
             </span>
           ) : (
             ""
           )}
-          {deleteCommentModalOpen ? (
+          {/* {deleteCommentModalOpen ? (
             <div
               className="del-comment-modal"
               onClick={(event) => {
@@ -261,16 +295,8 @@ function Comments(props) {
             </div>
           ) : (
             ""
-          )}
+          )} */}
         </div>
-        {/* <div
-                    className="comment-delete"
-                    onClick={() => {
-                      // props.openDeleteCommentModal(comment._id);
-                    }}
-                  >
-                    Delete
-                  </div> */}
       </div>
       <div className="comment-row-two">
         {likedByCurrentUser ? (
