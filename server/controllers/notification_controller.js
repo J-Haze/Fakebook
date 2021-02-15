@@ -8,6 +8,7 @@ require("dotenv").config();
 var User = require("../models/User");
 // var Post = require("../models/Post");
 // var Request = require("../models/FriendRequest");
+var Comment = require("../models/Comment");
 var Notification = require("../models/Notification");
 
 // exports.get_requests = (req, res, next) => {
@@ -99,24 +100,52 @@ exports.send_notification = (req, res) => {
       res.sendStatus(403);
     } else {
       // const { receiverid } = req.params;
-      var notification = new Notification({
-        sender: authData._id,
-        receiver: req.body.receiver,
-        action: req.body.action,
-        objectType: req.body.objectType,
-        objectId: req.body.objectId,
-        seen: false,
-        interacted: false,
-      });
 
-      // Data from form is valid. Save book.
-      notification.save(function (err) {
-        if (err) {
-          console.log("err", err);
-          return res.json(err);
-        }
-        res.json(notification);
-      });
+      if (req.body.objectType == "comment") {
+        Comment.findOne({ _id: req.body.objectId }, (err, foundComment) => {
+          if (err) {
+            console.log(err);
+            return res.json(err);
+          }
+
+          var notification = new Notification({
+            sender: authData._id,
+            receiver: req.body.receiver,
+            action: req.body.action,
+            objectType: req.body.objectType,
+            objectId: req.body.objectId,
+            parentId: foundComment.parent._id,
+            seen: false,
+            interacted: false,
+          });
+          notification.save(function (err) {
+            if (err) {
+              console.log("err", err);
+              return res.json(err);
+            }
+            res.json(notification);
+          });
+        });
+      } else {
+        var notification = new Notification({
+          sender: authData._id,
+          receiver: req.body.receiver,
+          action: req.body.action,
+          objectType: req.body.objectType,
+          objectId: req.body.objectId,
+          parentId: null,
+          seen: false,
+          interacted: false,
+        });
+
+        notification.save(function (err) {
+          if (err) {
+            console.log("err", err);
+            return res.json(err);
+          }
+          res.json(notification);
+        });
+      }
     }
   });
 };

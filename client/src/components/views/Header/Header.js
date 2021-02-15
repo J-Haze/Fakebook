@@ -13,8 +13,6 @@ import friendsLogo from "../../../assets/friend.png";
 
 import ProfilePic from "../HelperComponents/ProfilePic.js";
 
-
-
 function Header(props) {
   // const [searchModalOpen, setSearchModalOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
@@ -85,11 +83,17 @@ function Header(props) {
   // const ref = React.createRef();
 
   const handleNotificationClick = (notification) => {
-    console.log(`/${notification.objectType}/${notification.objectId}`)
-history.push(`/${notification.objectType}/${notification.objectId}`);
-  }
-
-
+    console.log(`/${notification.objectType}/${notification.objectId}`);
+    if (notification.objectType == "post") {
+      history.push(`/post/${notification.objectId}`);
+    } else if (notification.objectType == "comment") {
+      history.push(`/post/${notification.parentId}`);
+    } else if (
+      notification.objectType == "request"
+    ) {
+      history.push(`/user/${notification.objectId}`);
+    }
+  };
 
   return (
     <div id="header">
@@ -233,7 +237,6 @@ history.push(`/${notification.objectType}/${notification.objectId}`);
                         props.setNotificationModalOpen(false);
                         handleNotificationClick(notification);
                         // Submit interacted with
-                        
                       }}
                     >
                       <img

@@ -11,7 +11,7 @@ import thumbBlue from "../../../../assets/thumbs-up-solid-light-blue.svg";
 import ProfilePic from "../../HelperComponents/ProfilePic.js";
 import Comments from "./Comments";
 
-import scrollToComponent from "react-scroll-to-component";
+// import scrollToComponent from "react-scroll-to-component";
 // import { like_post } from "../../../../../../server/controllers/post_controller";
 
 // https://fontawesome.com/icons/thumbs-up?style=light
@@ -46,6 +46,16 @@ function Card(props) {
   //Code that searches for current user in the liked list and then sets likedByCurrentUser
 
   // props.sendNotification(props.post.author._id, "like", "post", props.post._id);
+
+  useEffect(() => {
+     if (props.fromUserPage) {
+       setCommentsOpen(true);
+     }
+  }, [props.fromUserPage])
+
+ 
+
+
 
   function likePost() {
     // setLikedByCurrentUser(true);

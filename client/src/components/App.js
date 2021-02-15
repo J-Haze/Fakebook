@@ -15,7 +15,7 @@ import CreatePostModal from "./views/CreatePostModal/CreatePostModal.js";
 import FriendListPage from "./views/FriendListPage/FriendListPage";
 import FindFriendsPage from "./views/FindFriendsPage/FindFriendsPage";
 
-import scrollToComponent from "react-scroll-to-component";
+// import scrollToComponent from "react-scroll-to-component";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -70,19 +70,19 @@ function App() {
       .catch((error) => console.log("error", error));
   }, [tokenRefresh, refreshUser]);
 
-  useEffect(() => {
-    let publishedPostsArr = [];
-    if (allPosts) {
-      if (allPosts.length > 0) {
-        for (let i = 0; (i = allPosts.length - 1); i++) {
-          if (allPosts[i].isPublished) {
-            publishedPostsArr.push(allPosts[i]);
-          }
-        }
-      }
-    }
-    setPublishedPosts(publishedPostsArr);
-  }, [allPosts]);
+  // useEffect(() => {
+  //   let publishedPostsArr = [];
+  //   if (allPosts) {
+  //     if (allPosts.length > 0) {
+  //       for (let i = 0; (i = allPosts.length - 1); i++) {
+  //         if (allPosts[i].isPublished) {
+  //           publishedPostsArr.push(allPosts[i]);
+  //         }
+  //       }
+  //     }
+  //   }
+  //   setPublishedPosts(publishedPostsArr);
+  // }, [allPosts]);
 
   // Move this stuff to other sections (you don't need if for the signup page)
 
@@ -179,6 +179,7 @@ function App() {
         setSendingRequst(!sendingRequest);
         fetchUsers();
         fetchPendingRequests();
+        sendNotification(receiver._id, "sentRequest", "request", null);
         console.log("Request sent");
         console.log(res);
         //Send notification
@@ -238,6 +239,7 @@ function App() {
         console.log(res);
         fetchUsers();
         fetchIncomingRequests();
+        sendNotification(userid, "acceptedRequest", "request", requestid);
         setRefreshUser(!refreshUser);
         //Send notification
       })
@@ -400,6 +402,10 @@ function App() {
     //   return
     // }
 
+    // if (objectId == "sentRequest") {
+    //   Axios.get
+    // }
+
     Axios.post(
       `/notification/`,
       {
@@ -427,53 +433,6 @@ function App() {
         console.log("error", error);
       });
   };
-
-  //   const handleNotificationClick = (notification) => {
-  //   // history.push(`/${notification.objectType}/${notification.objectId}`);
-
-  //   // console.log(
-  //   //   `ref-${notification.objectType}-${notification.objectId}`
-  //   // );
-  //   // scrollToComponent(
-  //   //   `ref-${notification.objectType}-${notification.objectId}`
-  //   // );
-
-  //     // let reference = `ref-${notification.objectType}-${notification.objectId}`;
-
-  //     // let reference = `${notification.objectId}`
-  //     // console.log("reference", reference);
-  //     // setRefTarget(reference);
-  //     // history.push(`user/${currentUser._id}`);
-  //     // reference.current.scrollIntoView(
-  //     //   {
-  //     //     behavior: "smooth",
-  //     //     block: "start",
-  //     //   }
-  //     // );
-
-  //     // document
-  //     //   .getElementById(
-  //     //     `ref-${notification.objectType}-${notification.objectId}`
-  //     //   )
-  //     //   .scrollIntoView({
-  //     //     behavior: "smooth",
-  //     //     block: "start",
-  //     //   });
-
-  //           // document
-  //           //   .getElementById(
-  //           //     `ref-post-${notification.objectId}`
-  //           //   )
-  //           //   .scrollIntoView({
-  //           //     behavior: "smooth",
-  //           //     block: "start",
-  //           //   });
-
-  //           // ref.current.scrollIntoView({
-  //           //   behavior: "smooth",
-  //           //   block: "start",
-  //           // });
-  // };
 
   if (isLoggedIn) {
     return (
@@ -586,7 +545,7 @@ function App() {
               ></Route>
             ))}
 
-            {publishedPosts.map((post) => (
+            {allPosts.map((post) => (
               <Route
                 exact
                 key={post._id}
