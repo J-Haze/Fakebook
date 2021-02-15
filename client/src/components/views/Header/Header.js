@@ -18,6 +18,7 @@ function Header(props) {
   // const [searchModalOpen, setSearchModalOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
+  const [hideDots, setHideDots] = useState(false);
 
   const history = useHistory();
 
@@ -67,6 +68,22 @@ function Header(props) {
     }
   }, [searchQuery]);
 
+
+  useEffect(() => {
+   let notificationCountVar = 0;
+   for (let i = 0; i < props.notifications.length; i++) {
+     // console.log(i, notificationsVar[i])
+     if (!props.notifications[i].seen) {
+       notificationCountVar++;
+     }
+   }
+   if (notificationCountVar > 99) {
+     notificationCountVar = 99;
+   }
+   props.setNotificationCount(notificationCountVar);
+
+  }, [props.notifications])
+
   const toggleNotificationModal = () => {
     if (props.notificationModalOpen) {
       props.setNotificationModalOpen(false);
@@ -75,8 +92,28 @@ function Header(props) {
       props.setNotificationCount(0);
       // function to set all notifications to seen
 
+      Axios.put(
+        `/notification/see`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${JSON.parse(
+              window.localStorage.getItem("token")
+            )}`,
+          },
+        }
+      )
+        .then((res) => {})
+        .catch((error) => {
+          console.log("error", error);
+        });
+    }
+  };
+
+  const markAllRead = () => {
+    console.log("mark all read");
     Axios.put(
-      `/notification/see`,
+      `/notification/interact/all`,
       {},
       {
         headers: {
@@ -87,19 +124,13 @@ function Header(props) {
       }
     )
       .then((res) => {
-        
+        // props.fetchNotifications();
+        // props.setRefreshNotifications(!props.refreshNotifications)
+        setHideDots(true);
       })
       .catch((error) => {
         console.log("error", error);
       });
-
-    }
-  };
-
-  const markAllRead = () => {
-    console.log("mark all read");
-
-    // props.fetchNotifications();
   };
 
   // const ref = React.createRef();
@@ -110,9 +141,7 @@ function Header(props) {
       history.push(`/post/${notification.objectId}`);
     } else if (notification.objectType == "comment") {
       history.push(`/post/${notification.parentId}`);
-    } else if (
-      notification.objectType == "request"
-    ) {
+    } else if (notification.objectType == "request") {
       history.push(`/user/${notification.sender._id}`);
     }
   };
@@ -315,10 +344,8 @@ function Header(props) {
                         ""
                       )}
                       {/* </div> */}
-                      {!notification.interacted ? (
+                      {notification.interacted || hideDots ? ("") : (
                         <div className="blue-dot"></div>
-                      ) : (
-                        ""
                       )}
                     </div>
                   ))

@@ -391,18 +391,6 @@ function App() {
       // setAllPosts(allPostsArray)
       // setDisplayedPosts(allPostsArray)
       setLoading(false);
-
-      let notificationCountVar = 0;
-      for (let i = 0; (i < notificationsVar.length); i++) {
-        // console.log(i, notificationsVar[i])
-        if (!notificationsVar[i].seen) {
-          notificationCountVar++;
-        }
-      }
-      if (notificationCountVar > 99) {
-        notificationCountVar = 99;
-      }
-      setNotificationCount(notificationCountVar);
     });
   };
 

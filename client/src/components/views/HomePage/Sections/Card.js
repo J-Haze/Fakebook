@@ -58,7 +58,9 @@ function Card(props) {
 
 
   function likePost() {
-    // setLikedByCurrentUser(true);
+    setLikedByCurrentUser(true);
+    let newLikes = likeCount + 1;
+    setLikeCount(newLikes);
     Axios.put(
       `/post/${props.post._id}/like`,
       {},
@@ -74,8 +76,8 @@ function Card(props) {
         console.log("liked");
         setLikedByCurrentUser(true);
         // setUpdateLikes(!updateLikes);
-        let newLikes = likeCount + 1;
-        setLikeCount(newLikes);
+        // let newLikes = likeCount + 1;
+        // setLikeCount(newLikes);
         // console.log("1", props.post.author._id);
         // console.log("2", "like");
         // console.log("3", "post");
@@ -94,7 +96,9 @@ function Card(props) {
   }
 
   function unlikePost() {
-    // setLikedByCurrentUser(false);
+    setLikedByCurrentUser(false);
+    let newLikes = likeCount - 1;
+    setLikeCount(newLikes);
     Axios.put(
       `/post/${props.post._id}/unlike`,
       {},
@@ -111,8 +115,8 @@ function Card(props) {
         setLikedByCurrentUser(false);
         // setUpdateLikes(!updateLikes);
 
-        let newLikes = likeCount - 1;
-        setLikeCount(newLikes);
+        // let newLikes = likeCount - 1;
+        // setLikeCount(newLikes);
         //  props.fetchPosts();
         //  history.push(`/user/${currentUser._id}`);
         //  history.go(0);
