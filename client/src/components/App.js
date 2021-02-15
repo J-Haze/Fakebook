@@ -9,6 +9,7 @@ import Header from "./views/Header/Header";
 import HomePage from "./views/HomePage/HomePage.js";
 import LoginPage from "./views/LoginPage/LoginPage.js";
 import UserPage from "./views/UserPage/UserPage.js";
+import PostPage from "./views/PostPage/PostPage";
 import NotFound from "./views/NotFound/NotFound.js";
 import CreatePostModal from "./views/CreatePostModal/CreatePostModal.js";
 import FriendListPage from "./views/FriendListPage/FriendListPage";
@@ -27,6 +28,7 @@ function App() {
   const [displayedPosts, setDisplayedPosts] = useState([]);
   const [allUsers, setAllUsers] = useState([]);
   const [allFriends, setFriends] = useState([]);
+  const [publishedPosts, setPublishedPosts] = useState([]);
 
   const [sendingRequest, setSendingRequst] = useState(false);
   const [updateUserPage, setUpdateUserPage] = useState(false);
@@ -48,11 +50,9 @@ function App() {
   const [notifications, setNotifications] = useState([]);
   const [refreshNotifications, setRefreshNotifications] = useState(false);
 
-  const [refTarget, setRefTarget] = useState("");
+  // const [refTarget, setRefTarget] = useState("");
 
   const history = useHistory();
-
-  
 
   //If there is a user logged in, it sets currentUser and isLoggedIn
   useEffect(() => {
@@ -69,6 +69,20 @@ function App() {
       })
       .catch((error) => console.log("error", error));
   }, [tokenRefresh, refreshUser]);
+
+  useEffect(() => {
+    let publishedPostsArr = [];
+    if (allPosts) {
+      if (allPosts.length > 0) {
+        for (let i = 0; (i = allPosts.length - 1); i++) {
+          if (allPosts[i].isPublished) {
+            publishedPostsArr.push(allPosts[i]);
+          }
+        }
+      }
+    }
+    setPublishedPosts(publishedPostsArr);
+  }, [allPosts]);
 
   // Move this stuff to other sections (you don't need if for the signup page)
 
@@ -356,33 +370,32 @@ function App() {
   }, [currentUser]);
 
   const fetchNotifications = () => {
-    console.log("Fetching notifications")
-      Axios.get("/notification/received", {
-        headers: {
-          Authorization: `Bearer ${JSON.parse(
-            window.localStorage.getItem("token")
-          )}`,
-        },
-      }).then((res) => {
-        let notificationsVar = res.data;
-        console.log("notifications:", notificationsVar)
-        // let reversedArray = allPostsArray.reverse();
-        setNotifications(notificationsVar.reverse());
-        // setDisplayedPosts(allPostsArray.reverse());
-        // filterHomePosts()
+    console.log("Fetching notifications");
+    Axios.get("/notification/received", {
+      headers: {
+        Authorization: `Bearer ${JSON.parse(
+          window.localStorage.getItem("token")
+        )}`,
+      },
+    }).then((res) => {
+      let notificationsVar = res.data;
+      console.log("notifications:", notificationsVar);
+      // let reversedArray = allPostsArray.reverse();
+      setNotifications(notificationsVar.reverse());
+      // setDisplayedPosts(allPostsArray.reverse());
+      // filterHomePosts()
 
-        // setAllPosts(allPostsArray)
-        // setDisplayedPosts(allPostsArray)
-        setLoading(false);
-      });
-}
+      // setAllPosts(allPostsArray)
+      // setDisplayedPosts(allPostsArray)
+      setLoading(false);
+    });
+  };
 
   useEffect(() => {
     fetchNotifications();
   }, [currentUser, refreshNotifications]);
 
   const sendNotification = (receiverId, action, objectType, objectId) => {
-
     // if (currentUser._id === receiverId) {
     //   return
     // }
@@ -390,11 +403,11 @@ function App() {
     Axios.post(
       `/notification/`,
       {
-        sender: currentUser._id, 
+        sender: currentUser._id,
         receiver: receiverId,
         action: action,
         objectType: objectType,
-        objectId: objectId
+        objectId: objectId,
       },
       {
         headers: {
@@ -413,12 +426,10 @@ function App() {
         alert("Failed to send notification");
         console.log("error", error);
       });
-  }
-
+  };
 
   //   const handleNotificationClick = (notification) => {
   //   // history.push(`/${notification.objectType}/${notification.objectId}`);
-    
 
   //   // console.log(
   //   //   `ref-${notification.objectType}-${notification.objectId}`
@@ -457,7 +468,6 @@ function App() {
   //           //     behavior: "smooth",
   //           //     block: "start",
   //           //   });
-
 
   //           // ref.current.scrollIntoView({
   //           //   behavior: "smooth",
@@ -541,7 +551,7 @@ function App() {
                     pageType={pageType}
                     setPageType={setPageType}
                     sendNotification={sendNotification}
-                    refTarget={refTarget}
+                    // refTarget={refTarget}
                   />
                 )}
               ></Route>
@@ -571,6 +581,38 @@ function App() {
                     sentRequestsCount={sentRequestsCount}
                     setSentRequestsCount={setSentRequestsCount}
                     sendNotification={sendNotification}
+                  />
+                )}
+              ></Route>
+            ))}
+
+            {publishedPosts.map((post) => (
+              <Route
+                exact
+                key={post._id}
+                path={`/post/${post._id}`}
+                render={() => (
+                  <PostPage
+                    post={post}
+                    currentUser={currentUser}
+                    fetchPosts={fetchPosts}
+                    sendNotification={sendNotification}
+
+                    // sendRequest={sendRequest}
+                    // cancelRequest={cancelRequest}
+                    // acceptRequest={acceptRequest}
+                    // declineRequest={declineRequest}
+                    // submitUnfriend={submitUnfriend}
+                    // sendingRequest={sendingRequest}
+                    // receivedRequests={receivedRequests}
+                    // setReceivedRequests={setReceivedRequests}
+                    // receivedRequestsCount={receivedRequestsCount}
+                    // setReceivedRequestsCount={setReceivedRequestsCount}
+                    // sentRequests={sentRequests}
+                    // setSentRequests={setSentRequests}
+                    // sentRequestsCount={sentRequestsCount}
+                    // setSentRequestsCount={setSentRequestsCount}
+                    // sendNotification={sendNotification}
                   />
                 )}
               ></Route>

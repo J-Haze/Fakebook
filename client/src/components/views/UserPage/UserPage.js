@@ -103,7 +103,7 @@ function UserPage(props) {
           submitUnfriend={props.submitUnfriend}
           sendingRequest={props.sendingRequest}
           sendNotification={props.sendNotification}
-          refTarget={props.refTarget}
+          // refTarget={props.refTarget}
         />
       ) : props.pageType == "FriendPage" ? (
         <FriendPage

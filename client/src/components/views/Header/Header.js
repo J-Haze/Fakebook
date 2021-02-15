@@ -85,8 +85,8 @@ function Header(props) {
   // const ref = React.createRef();
 
   const handleNotificationClick = (notification) => {
-    console.log(notification)
-// history.push(``)
+    console.log(`/${notification.objectType}/${notification.objectId}`)
+history.push(`/${notification.objectType}/${notification.objectId}`);
   }
 
 
