@@ -14,6 +14,8 @@ import friendsLogo from "../../../assets/friend.png";
 
 import ProfilePic from "../HelperComponents/ProfilePic.js";
 
+import NotificationCard from "./Sections/NotificationCard";
+
 function Header(props) {
   // const [searchModalOpen, setSearchModalOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
@@ -147,7 +149,7 @@ function Header(props) {
     }
 
     Axios.put(
-      `/notification/interact/${notification._id}`,
+      `/notification/${notification._id}/interact`,
       {},
       {
         headers: {
@@ -159,7 +161,7 @@ function Header(props) {
     )
       .then((res) => {
         // props.fetchNotifications();
-        props.setRefreshNotifications(!props.refreshNotifications)
+        // props.setRefreshNotifications(!props.refreshNotifications)
         // setHideDots(true);
       })
       .catch((error) => {
@@ -308,67 +310,12 @@ function Header(props) {
                   </div>
                 ) : (
                   props.notifications.map((notification) => (
-                    <div
-                      key={notification._id}
-                      className="link notification-card"
-                      // to={`/${notification.objectType}/${notification.objectId}`}
-                      // to={`/user/${props.currentUser._id}`}
-                      onClick={(event) => {
-                        props.setNotificationModalOpen(false);
-                        handleNotificationClick(notification);
-                        // Submit interacted with
-                      }}
-                    >
-                      <img
-                        className="prof-pic-notification-card"
-                        alt={`profile-pic-user-${notification.sender.firstname}-${notification.sender.lastname}`}
-                        src={`http://localhost:5000/uploads/${notification.sender.photo.filename}`}
-                      />
-                      {/* <div classname="notification-text"> */}
-                      {/* <div className="notification-card-name">
-                          {notification.sender.firstname}{" "}
-                          {notification.sender.lastname}
-                        </div> */}
-                      {notification.action === "like" ? (
-                        <div className="notification-action">
-                          <strong className="strong-blk">
-                            {notification.sender.firstname}{" "}
-                            {notification.sender.lastname}
-                          </strong>{" "}
-                          liked your {notification.objectType}.
-                        </div>
-                      ) : notification.action === "comment" ? (
-                        <div className="notification-action">
-                          <strong className="strong-blk">
-                            {notification.sender.firstname}{" "}
-                            {notification.sender.lastname}
-                          </strong>{" "}
-                          commented on your post.
-                        </div>
-                      ) : notification.action === "sentRequest" ? (
-                        <div className="notification-action">
-                          <strong className="strong-blk">
-                            {notification.sender.firstname}{" "}
-                            {notification.sender.lastname}
-                          </strong>{" "}
-                          sent you a friend request.
-                        </div>
-                      ) : notification.action === "acceptedRequest" ? (
-                        <div className="notification-action">
-                          <strong className="strong-blk">
-                            {notification.sender.firstname}{" "}
-                            {notification.sender.lastname}
-                          </strong>{" "}
-                          accepted your friend request.
-                        </div>
-                      ) : (
-                        ""
-                      )}
-                      {/* </div> */}
-                      {notification.interacted || hideDots ? ("") : (
-                        <div className="blue-dot"></div>
-                      )}
-                    </div>
+                    <NotificationCard 
+                      notification={notification}
+                      handleNotificationClick={handleNotificationClick}
+                      hideDots={hideDots}
+                      setNotificationModalOpen={props.setNotificationModalOpen}
+/>
                   ))
                 )}
               </div>
