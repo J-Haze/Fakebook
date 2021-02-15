@@ -16,7 +16,7 @@ function HomePage(props) {
 
   useEffect(() => {
     let homePostsVar = [];
-    console.log("displayedPosts here", props.displayedPosts)
+    // console.log("displayedPosts here", props.displayedPosts)
 
     if (
       props.displayedPosts == undefined ||
@@ -41,7 +41,7 @@ function HomePage(props) {
         for (let i = props.displayedPosts.length - 1; i >= 0; i--) {
           if (props.displayedPosts[i].author._id == props.currentUser._id) {
             homePostsVar.push(props.displayedPosts[i]);
-            console.log("new homePostsVar", homePostsVar);
+            // console.log("new homePostsVar", homePostsVar);
           }
         }
       console.log("Only display My Posts", homePostsVar);
@@ -58,7 +58,7 @@ function HomePage(props) {
       for (let i = props.displayedPosts.length - 1; i >= 0; i--) {
         if (props.displayedPosts[i].author._id == props.currentUser._id) {
           homePostsVar.push(props.displayedPosts[i]);
-          console.log("new homePostsVar", homePostsVar);
+          // console.log("new homePostsVar", homePostsVar);
         } else {
           for (let j = props.currentUser.friendList.length - 1; j >= 0; j--) {
             if (
@@ -66,7 +66,7 @@ function HomePage(props) {
               props.currentUser.friendList[j]._id
             ) {
               homePostsVar.push(props.displayedPosts[i]);
-              console.log("new homePostsVar", homePostsVar);
+              // console.log("new homePostsVar", homePostsVar);
             }
           }
         }
@@ -124,21 +124,21 @@ function HomePage(props) {
           </div>
           {/* <div className="main-subtitle">All Posts:</div> */}
 
-          
-          {!homePosts ? ("") : (
-            homePosts.map((post) =>
-            post.isPublished ? (
-              <Card
-                key={post._id}
-                post={post}
-                currentUser={props.currentUser}
-                fetchPosts={props.fetchPosts}
-              />
-            ) : (
-              ""
+          {!homePosts
+            ? ""
+            : homePosts.map((post) =>
+                post.isPublished ? (
+                  <Card
+                    key={post._id}
+                    post={post}
+                    currentUser={props.currentUser}
+                    fetchPosts={props.fetchPosts}
+                    sendNotification={props.sendNotification}
+                  />
+                ) : (
+                  ""
                 )
-            )
-          )}
+              )}
           <div className="no-posts">
             <div className="no-posts-header">No More Posts</div>
             <div className="no-posts-subheader">

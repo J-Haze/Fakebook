@@ -171,6 +171,7 @@ function FindFriendsPage(props) {
                       cancelRequest={props.cancelRequest}
                       acceptRequest={props.acceptRequest}
                       declineRequest={props.declineRequest}
+                      sendNotification={props.sendNotification}
                     />
                   ) : (
                     ""
@@ -190,6 +191,7 @@ function FindFriendsPage(props) {
                       cancelRequest={props.cancelRequest}
                       acceptRequest={props.acceptRequest}
                       declineRequest={props.declineRequest}
+                      sendNotification={props.sendNotification}
                     />
                   ) : (
                     ""
@@ -208,6 +210,7 @@ function FindFriendsPage(props) {
                       cancelRequest={props.cancelRequest}
                       acceptRequest={props.acceptRequest}
                       declineRequest={props.declineRequest}
+                      sendNotification={props.sendNotification}
                     />
                   ) : (
                     ""

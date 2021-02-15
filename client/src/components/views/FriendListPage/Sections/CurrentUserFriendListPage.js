@@ -11,7 +11,7 @@ import { useHistory } from "react-router-dom";
 function CurrentUserFriendListPage(props) {
   // Have an Add Friends Button if you don't have friends!
 
-  console.log("received requests count", props.receivedRequestsCount);
+  // console.log("received requests count", props.receivedRequestsCount);
   const history = useHistory();
 
   return (

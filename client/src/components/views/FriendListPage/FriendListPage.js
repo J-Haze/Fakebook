@@ -82,9 +82,9 @@ function FriendListPage(props) {
 
   //code that takes displayedPosts and outputs user posts
 
-  console.log("received requests 2", props.receivedRequests);
+  // console.log("received requests 2", props.receivedRequests);
 
-  console.log("received requests count1", props.receivedRequestsCount);
+  // console.log("received requests count1", props.receivedRequestsCount);
 
   return (
     <div id="friend-list-page-cont">
@@ -105,6 +105,7 @@ function FriendListPage(props) {
           declineRequest={props.declineRequest}
           submitUnfriend={props.submitUnfriend}
           sendingRequest={props.sendingRequest}
+          sendNotification={props.sendNotification}
           // fetchPosts={props.fetchPosts}
           // displayedPosts={props.displayedPosts}
           // createPostModalOpen={props.createPostModalOpen}

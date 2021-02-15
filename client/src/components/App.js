@@ -375,6 +375,40 @@ function App() {
     fetchNotifications();
   }, [currentUser, refreshNotifications]);
 
+  const sendNotification = (receiverId, action, objectType, objectId) => {
+
+    // if (currentUser._id === receiverId) {
+    //   return
+    // }
+
+    Axios.post(
+      `/notification/`,
+      {
+        sender: currentUser._id, 
+        receiver: receiverId,
+        action: action,
+        objectType: objectType,
+        objectId: objectId
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${JSON.parse(
+            window.localStorage.getItem("token")
+          )}`,
+        },
+      }
+    )
+      .then((res, err) => {
+        console.log("Notification Sent");
+        fetchNotifications();
+        // notificationCount?
+      })
+      .catch((error) => {
+        alert("Failed to send notification");
+        console.log("error", error);
+      });
+  }
+
   if (isLoggedIn) {
     return (
       <div
@@ -421,6 +455,7 @@ function App() {
                   loading={loading}
                   createPostModalOpen={createPostModalOpen}
                   setCreatePostModalOpen={setCreatePostModalOpen}
+                  sendNotification={sendNotification}
                 />
               )}
             ></Route>
@@ -448,6 +483,7 @@ function App() {
                     submitUnfriend={submitUnfriend}
                     pageType={pageType}
                     setPageType={setPageType}
+                    sendNotification={sendNotification}
                   />
                 )}
               ></Route>
@@ -476,6 +512,7 @@ function App() {
                     setSentRequests={setSentRequests}
                     sentRequestsCount={sentRequestsCount}
                     setSentRequestsCount={setSentRequestsCount}
+                    sendNotification={sendNotification}
                   />
                 )}
               ></Route>
@@ -502,6 +539,7 @@ function App() {
                   setSentRequests={setSentRequests}
                   sentRequestsCount={sentRequestsCount}
                   setSentRequestsCount={setSentRequestsCount}
+                  sendNotification={sendNotification}
                 />
               )}
             ></Route>

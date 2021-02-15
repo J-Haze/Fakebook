@@ -268,6 +268,7 @@ function FriendPage(props) {
               post={post}
               currentUser={props.currentUser}
               fetchPosts={props.fetchPosts}
+              sendNotification={props.sendNotification}
             />
           ) : (
             ""

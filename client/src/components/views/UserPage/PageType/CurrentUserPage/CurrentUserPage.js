@@ -60,6 +60,10 @@ function CurrentUserPage(props) {
     calculateFriendCount();
   }, []);
 
+
+
+  const ref = React.createRef();
+
   return (
     <div id="current-user-page">
       {editUserModalOpen && (
@@ -216,9 +220,11 @@ function CurrentUserPage(props) {
           post.isPublished ? (
             <Card
               key={post._id}
+              ref={ref}
               post={post}
               currentUser={props.currentUser}
               fetchPosts={props.fetchPosts}
+              sendNotification={props.sendNotification}
             />
           ) : (
             ""

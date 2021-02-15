@@ -35,6 +35,12 @@ function Comments(props) {
       .then((res) => {
         console.log("liked");
         setLikedByCurrentUser(true);
+        props.sendNotification(
+          props.comment.author._id,
+          "like",
+          "comment",
+          props.comment._id
+        );
 
         //  props.fetchPosts();
         //  history.push(`/user/${currentUser._id}`);

@@ -81,9 +81,11 @@ function UserPage(props) {
 
   //code that takes displayedPosts and outputs user posts
 
-  console.log("received requests 2", props.receivedRequests);
+  // console.log("received requests 2", props.receivedRequests);
 
-  console.log("received requests count1", props.receivedRequestsCount);
+  // console.log("received requests count1", props.receivedRequestsCount);
+
+  
 
   return (
     <div id="user-page">
@@ -100,7 +102,7 @@ function UserPage(props) {
           declineRequest={props.declineRequest}
           submitUnfriend={props.submitUnfriend}
           sendingRequest={props.sendingRequest}
-
+          sendNotification={props.sendNotification}
         />
       ) : props.pageType == "FriendPage" ? (
         <FriendPage
@@ -115,6 +117,7 @@ function UserPage(props) {
           submitUnfriend={props.submitUnfriend}
           sendingRequest={props.sendingRequest}
           submitUnfriend={props.submitUnfriend}
+          sendNotification={props.sendNotification}
         />
       ) : (
         <NonFriendPage
@@ -128,6 +131,7 @@ function UserPage(props) {
           declineRequest={props.declineRequest}
           submitUnfriend={props.submitUnfriend}
           sendingRequest={props.sendingRequest}
+          sendNotification={props.sendNotification}
         />
       )}
     </div>

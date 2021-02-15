@@ -43,6 +43,8 @@ function Card(props) {
 
   //Code that searches for current user in the liked list and then sets likedByCurrentUser
 
+  // props.sendNotification(props.post.author._id, "like", "post", props.post._id);
+
   function likePost() {
     // setLikedByCurrentUser(true);
     Axios.put(
@@ -60,8 +62,13 @@ function Card(props) {
         console.log("liked");
         setLikedByCurrentUser(true);
         // setUpdateLikes(!updateLikes);
-        let newLikes = likeCount + 1
-        setLikeCount(newLikes)
+        let newLikes = likeCount + 1;
+        setLikeCount(newLikes);
+        // console.log("1", props.post.author._id);
+        // console.log("2", "like");
+        // console.log("3", "post");
+        // console.log("4", props.post._id);
+        props.sendNotification(props.post.author._id, "like", "post", props.post._id);
 // console.log("liked2", newLikes, likeCount);
         //  props.fetchPosts();
         //  history.push(`/user/${currentUser._id}`);
@@ -75,7 +82,7 @@ function Card(props) {
   }
 
   function unlikePost() {
-    setLikedByCurrentUser(false);
+    // setLikedByCurrentUser(false);
     Axios.put(
       `/post/${props.post._id}/unlike`,
       {},
@@ -209,7 +216,7 @@ function Card(props) {
 
   function calculateLikes() {
     props.fetchPosts();
-    console.log("calculatedLikes:", props.post.likesList.length);
+    // console.log("calculatedLikes:", props.post.likesList.length);
     if (
       props.post.likesList.length == 0 ||
       props.post.likesList.length == undefined
@@ -417,6 +424,7 @@ function Card(props) {
             // isLoggedIn={props.isLoggedIn}
             fetchComments={fetchComments}
             postid={props.post._id}
+            sendNotification={props.sendNotification}
             // openDeleteCommentModal={openDeleteCommentModal}
             // setCommentToDelete={setCommentToDelete}
           />

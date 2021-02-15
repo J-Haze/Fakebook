@@ -279,7 +279,7 @@
 }
 
 #notification-modal-cont {
-  max-height: calc(100vh - 56px - 72px);
+  max-height: calc(100vh - 72px);
   width: 360px;
   margin-left: auto;
   margin-right: 150px;
@@ -303,6 +303,8 @@
   box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 12px 0px,
     rgba(255, 255, 255, 0.5) 0px 0px 0px 0px inset;
   z-index: 2;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 #notification-modal-cont:hover {

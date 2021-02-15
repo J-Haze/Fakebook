@@ -107,6 +107,7 @@ function Comments(props) {
                 currentUser={props.currentUser}
                 fetchComments={props.fetchComments}
                 postid={props.postid}
+                sendNotification={props.sendNotification}
               />
             )
           )}

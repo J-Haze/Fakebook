@@ -80,6 +80,17 @@ function Header(props) {
     // props.fetchNotifications();
   };
 
+  const ref = React.createRef();
+
+  const handleClick = (notification) => {
+    // history.push(`/${notification.objectType}/${notification.objectId}`);
+    history.push(`user/${props.currentUser._id}`);
+    ref.current.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  };
+
   return (
     <div id="header">
       <div id="header-container">
@@ -121,6 +132,7 @@ function Header(props) {
                 ) : (
                   searchResults.slice(0, 6).map((user) => (
                     <Link
+                      key={user._id}
                       className="link search-card"
                       to={`/user/${user._id}`}
                       onClick={(event) => {
@@ -212,11 +224,14 @@ function Header(props) {
                   </div>
                 ) : (
                   props.notifications.map((notification) => (
-                    <Link
+                    <div
+                      key={notification._id}
                       className="link notification-card"
-                      to={`/${notification.objectType}/${notification.objectId}`}
+                      // to={`/${notification.objectType}/${notification.objectId}`}
+                      to={`/user/${props.currentUser._id}`}
                       onClick={(event) => {
                         props.setNotificationModalOpen(false);
+                        handleClick(notification);
                         // Submit interacted with
                       }}
                     >
@@ -271,7 +286,7 @@ function Header(props) {
                       ) : (
                         ""
                       )}
-                    </Link>
+                    </div>
                   ))
                 )}
               </div>

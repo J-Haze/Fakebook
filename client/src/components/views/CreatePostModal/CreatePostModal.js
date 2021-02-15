@@ -205,14 +205,14 @@ function CreatePostModal(props) {
         <form id="create-post-container">
           <div id="create-post-mid-row">
             <div className="card-row-one">
-              <Link className="link" to={`/user/${props.currentUser._id}`}>
+              <div className="link" to={`/user/${props.currentUser._id}`}>
                 {/* <img
                   className="prof-pic"
                   alt={`profile-pic-user-${props.currentUser.firstname}-${props.currentUser.lastname}`}
                   src={`http://localhost:5000/uploads/${props.currentUser.photo.filename}`}
                 /> */}
                 <ProfilePic user={props.currentUser} />
-              </Link>
+              </div>
               {/* <ProfilePic user={props.currentUser} /> */}
               <div className="flex-down card-title">
                 <div className="create-post-username">
