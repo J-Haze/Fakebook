@@ -21,6 +21,18 @@ router.get(
 // Send a notification to a specified user
 router.post("/", auth, notification_controller.send_notification);
 
+//Change all of specific user's notifications to "seen"
+router.put("/see", auth, notification_controller.see_all_notifications);
+
+// //Change all of specific user's notifications to "interacted"
+// router.put("/interact/:notificationid", auth, notification_controller.interact_notification);
+
+// //Change all of specific user's notifications to "interacted"
+// router.put("/interact/all", auth, notification_controller.interact_all_notifications);
+
+
+
+
 // GET - Get all sent requests
 // router.get("/sent", auth, request_controller.get_currentUser_requests_sent);
 

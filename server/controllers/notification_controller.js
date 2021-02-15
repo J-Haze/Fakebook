@@ -169,6 +169,28 @@ exports.send_notification = (req, res) => {
   });
 };
 
+exports.see_all_notifications = (req, res, next) => {
+  jwt.verify(req.token, process.env.JWT_SECRET, (err, authData) => {
+    if (err) {
+      console.log(err);
+      res.sendStatus(403);
+    } else {
+
+      console.log("wow", authData._id)
+
+      Notification.updateMany({ receiver: authData._id }, { seen: true }, (err, updatedNotifications) => {
+        console.log("wow2", updatedNotifications);
+        if (err) {
+          console.log(err);
+          res.sendStatus(403);
+        } else {
+          return res.json({ "Updated Notifications": updatedNotifications })
+        }
+      })
+    }
+  })
+}
+
 // exports.get_currentUser_requests_sent = (req, res, next) => {
 //   jwt.verify(req.token, process.env.JWT_SECRET, (err, authData) => {
 //     if (err) {

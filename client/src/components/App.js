@@ -44,11 +44,12 @@ function App() {
 
   const [createPostModalOpen, setCreatePostModalOpen] = useState(false);
   const [searchModalOpen, setSearchModalOpen] = useState(false);
-  // const [notificationModalOpen, setNotificationModalOpen] = useState(false);
-  const [notificationModalOpen, setNotificationModalOpen] = useState(true);
+  const [notificationModalOpen, setNotificationModalOpen] = useState(false);
+  // const [notificationModalOpen, setNotificationModalOpen] = useState(true);
 
   const [notifications, setNotifications] = useState([]);
   const [refreshNotifications, setRefreshNotifications] = useState(false);
+  const [notificationCount, setNotificationCount] = useState(0);
 
   // const [refTarget, setRefTarget] = useState("");
 
@@ -390,6 +391,18 @@ function App() {
       // setAllPosts(allPostsArray)
       // setDisplayedPosts(allPostsArray)
       setLoading(false);
+
+      let notificationCountVar = 0;
+      for (let i = 0; (i < notificationsVar.length); i++) {
+        // console.log(i, notificationsVar[i])
+        if (!notificationsVar[i].seen) {
+          notificationCountVar++;
+        }
+      }
+      if (notificationCountVar > 99) {
+        notificationCountVar = 99;
+      }
+      setNotificationCount(notificationCountVar);
     });
   };
 
@@ -422,7 +435,7 @@ function App() {
         action: action,
         objectType: objectType,
         objectId: objectId,
-        parentId: parentId
+        parentId: parentId,
       },
       {
         headers: {
@@ -466,6 +479,8 @@ function App() {
           notificationModalOpen={notificationModalOpen}
           setNotificationModalOpen={setNotificationModalOpen}
           setRefreshNotifications={setRefreshNotifications}
+          notificationCount={notificationCount}
+          setNotificationCount={setNotificationCount}
           // handleNotificationClick={handleNotificationClick}
         />
         <div id="content">

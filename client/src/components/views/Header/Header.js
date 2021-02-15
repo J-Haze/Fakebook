@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import "./Header.css";
 import { useHistory } from "react-router-dom";
 import { useState, useEffect } from "react";
+import Axios from "axios";
 
 import fLogo from "../../../assets/facebook-logo-header.png";
 import magIcon from "../../../assets/mag.png";
@@ -71,6 +72,27 @@ function Header(props) {
       props.setNotificationModalOpen(false);
     } else {
       props.setNotificationModalOpen(true);
+      props.setNotificationCount(0);
+      // function to set all notifications to seen
+
+    Axios.put(
+      `/notification/see`,
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${JSON.parse(
+            window.localStorage.getItem("token")
+          )}`,
+        },
+      }
+    )
+      .then((res) => {
+        
+      })
+      .catch((error) => {
+        console.log("error", error);
+      });
+
     }
   };
 
@@ -200,6 +222,14 @@ function Header(props) {
               src={bellLogo}
               alt="notifications-icon"
             />
+
+            {props.notificationCount == 0 ? (
+              ""
+            ) : (
+              <div className="notification-count">
+                {props.notificationCount}
+              </div>
+            )}
 
             {props.notificationModalOpen ? (
               <div id="notification-modal-cont">

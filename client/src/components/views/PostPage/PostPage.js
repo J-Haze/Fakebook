@@ -27,7 +27,7 @@ function PostPage(props) {
   return (
     <div id="post-page">
       {!isFriend || !props.post.isPublished ? (
-        <div id="not-authorized"> Not authorized</div>
+        <div id="not-authorized"> This post has either been deleted, or you do not have permission to view this post.</div>
       ) : (
         <Card
           key={props.post._id}
