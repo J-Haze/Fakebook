@@ -84,7 +84,10 @@ function Header(props) {
 
   // const ref = React.createRef();
 
-  
+  const handleNotificationClick = (notification) => {
+    console.log(notification)
+// history.push(``)
+  }
 
 
 
@@ -225,11 +228,12 @@ function Header(props) {
                       key={notification._id}
                       className="link notification-card"
                       // to={`/${notification.objectType}/${notification.objectId}`}
-                      to={`/user/${props.currentUser._id}`}
+                      // to={`/user/${props.currentUser._id}`}
                       onClick={(event) => {
                         props.setNotificationModalOpen(false);
-                        props.handleNotificationClick(notification);
+                        handleNotificationClick(notification);
                         // Submit interacted with
+                        
                       }}
                     >
                       <img

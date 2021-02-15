@@ -79,22 +79,22 @@ function CurrentUserPage(props) {
   //   return acc;
   // }, {});
 
-  useEffect(() => {
-    // If there is a notification command then scroll to the correct ref
+  // useEffect(() => {
+  //   // If there is a notification command then scroll to the correct ref
 
-    if (refs[props.refTarget]) {
-      console.log("yes ref", props.refTarget);
-      // props.ref.current.scrollIntoView({
-      // document.getElementById(props.refTarget).current.scrollIntoView({
-      //   behavior: "smooth",
-      //   block: "start",
-      // });
-      refs[props.refTarget].current.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
-    }
-  }, [props.refTarget]);
+  //   if (refs[props.refTarget]) {
+  //     console.log("yes ref", props.refTarget);
+  //     // props.ref.current.scrollIntoView({
+  //     // document.getElementById(props.refTarget).current.scrollIntoView({
+  //     //   behavior: "smooth",
+  //     //   block: "start",
+  //     // });
+  //     refs[props.refTarget].current.scrollIntoView({
+  //       behavior: "smooth",
+  //       block: "start",
+  //     });
+  //   }
+  // }, [props.refTarget]);
 
   // const handleClick = (id) =>
   //   refs[id].current.scrollIntoView({
@@ -102,11 +102,11 @@ function CurrentUserPage(props) {
   //     block: "start",
   //   });
 
-  const refs = userPosts.reduce((acc, value) => {
-    acc[value._id] = React.createRef();
-    // acc[value._id] = useRef();
-    return acc;
-  }, {});
+  // const refs = userPosts.reduce((acc, value) => {
+  //   acc[value._id] = React.createRef();
+  //   // acc[value._id] = useRef();
+  //   return acc;
+  // }, {});
 
   return (
     <div id="current-user-page">
@@ -267,9 +267,9 @@ function CurrentUserPage(props) {
               // ref={ref}
               // ref={useRef(`ref-post-${props.post._id}`)}
               // ref={refs[post._id]}
-              ref={refs[post._id]}
+              // ref={refs[post._id]}
               // forwardRef={refs[post._id]}
-              id={`ref-post-${post._id}`}
+              // id={`ref-post-${post._id}`}
               post={post}
               currentUser={props.currentUser}
               fetchPosts={props.fetchPosts}

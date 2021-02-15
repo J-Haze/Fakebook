@@ -416,54 +416,54 @@ function App() {
   }
 
 
-    const handleNotificationClick = (notification) => {
-    // history.push(`/${notification.objectType}/${notification.objectId}`);
+  //   const handleNotificationClick = (notification) => {
+  //   // history.push(`/${notification.objectType}/${notification.objectId}`);
     
 
-    // console.log(
-    //   `ref-${notification.objectType}-${notification.objectId}`
-    // );
-    // scrollToComponent(
-    //   `ref-${notification.objectType}-${notification.objectId}`
-    // );
+  //   // console.log(
+  //   //   `ref-${notification.objectType}-${notification.objectId}`
+  //   // );
+  //   // scrollToComponent(
+  //   //   `ref-${notification.objectType}-${notification.objectId}`
+  //   // );
 
-      // let reference = `ref-${notification.objectType}-${notification.objectId}`;
+  //     // let reference = `ref-${notification.objectType}-${notification.objectId}`;
 
-      let reference = `${notification.objectId}`
-      console.log("reference", reference);
-      setRefTarget(reference);
-      history.push(`user/${currentUser._id}`);
-      // reference.current.scrollIntoView(
-      //   {
-      //     behavior: "smooth",
-      //     block: "start",
-      //   }
-      // );
+  //     // let reference = `${notification.objectId}`
+  //     // console.log("reference", reference);
+  //     // setRefTarget(reference);
+  //     // history.push(`user/${currentUser._id}`);
+  //     // reference.current.scrollIntoView(
+  //     //   {
+  //     //     behavior: "smooth",
+  //     //     block: "start",
+  //     //   }
+  //     // );
 
-      // document
-      //   .getElementById(
-      //     `ref-${notification.objectType}-${notification.objectId}`
-      //   )
-      //   .scrollIntoView({
-      //     behavior: "smooth",
-      //     block: "start",
-      //   });
+  //     // document
+  //     //   .getElementById(
+  //     //     `ref-${notification.objectType}-${notification.objectId}`
+  //     //   )
+  //     //   .scrollIntoView({
+  //     //     behavior: "smooth",
+  //     //     block: "start",
+  //     //   });
 
-            // document
-            //   .getElementById(
-            //     `ref-post-${notification.objectId}`
-            //   )
-            //   .scrollIntoView({
-            //     behavior: "smooth",
-            //     block: "start",
-            //   });
+  //           // document
+  //           //   .getElementById(
+  //           //     `ref-post-${notification.objectId}`
+  //           //   )
+  //           //   .scrollIntoView({
+  //           //     behavior: "smooth",
+  //           //     block: "start",
+  //           //   });
 
 
-            // ref.current.scrollIntoView({
-            //   behavior: "smooth",
-            //   block: "start",
-            // });
-  };
+  //           // ref.current.scrollIntoView({
+  //           //   behavior: "smooth",
+  //           //   block: "start",
+  //           // });
+  // };
 
   if (isLoggedIn) {
     return (
@@ -488,7 +488,7 @@ function App() {
           notificationModalOpen={notificationModalOpen}
           setNotificationModalOpen={setNotificationModalOpen}
           setRefreshNotifications={setRefreshNotifications}
-          handleNotificationClick={handleNotificationClick}
+          // handleNotificationClick={handleNotificationClick}
         />
         <div id="content">
           {createPostModalOpen && (
