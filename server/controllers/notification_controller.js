@@ -203,6 +203,7 @@ exports.interact_notification = (req, res, next) => {
       res.sendStatus(403);
     } else {
       // console.log("wow", authData._id);
+      console.log("made it here")
 
       interacted = true;
 
@@ -214,6 +215,10 @@ exports.interact_notification = (req, res, next) => {
               if (err) {
                 console.log(err);
                 return res.json(err);
+              } else {
+                return res.json({
+                  "Updated Notifications": updatedNotification,
+                });
               }
             }
           );

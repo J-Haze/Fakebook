@@ -70,26 +70,27 @@ function Header(props) {
     }
   }, [searchQuery]);
 
-
   useEffect(() => {
-   let notificationCountVar = 0;
-   for (let i = 0; i < props.notifications.length; i++) {
-     // console.log(i, notificationsVar[i])
-     if (!props.notifications[i].seen) {
-       notificationCountVar++;
-     }
-   }
-   if (notificationCountVar > 99) {
-     notificationCountVar = 99;
-   }
-   props.setNotificationCount(notificationCountVar);
-
-  }, [props.notifications])
+    let notificationCountVar = 0;
+    for (let i = 0; i < props.notifications.length; i++) {
+      // console.log(i, notificationsVar[i])
+      if (!props.notifications[i].seen) {
+        notificationCountVar++;
+      }
+    }
+    if (notificationCountVar > 99) {
+      notificationCountVar = 99;
+    }
+    props.setNotificationCount(notificationCountVar);
+  }, [props.notifications]);
 
   const toggleNotificationModal = () => {
     if (props.notificationModalOpen) {
       props.setNotificationModalOpen(false);
+      // props.setRefreshNotifications(!props.refreshNotifications);
+      props.fetchNotifications();
     } else {
+      props.fetchNotifications();
       props.setNotificationModalOpen(true);
       props.setNotificationCount(0);
       // function to set all notifications to seen
@@ -139,34 +140,49 @@ function Header(props) {
 
   const handleNotificationClick = (notification) => {
     console.log(`/${notification.objectType}/${notification.objectId}`);
+    console.log("here", `/notification/${notification._id}/interact`);
 
-    if (notification.objectType == "post") {
-      history.push(`/post/${notification.objectId}`);
-    } else if (notification.objectType == "comment") {
-      history.push(`/post/${notification.parentId}`);
-    } else if (notification.objectType == "request") {
-      history.push(`/user/${notification.sender._id}`);
-    }
+    if (notification.interacted == false) {
+      Axios.put(
+        `/notification/${notification._id}/interact`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${JSON.parse(
+              window.localStorage.getItem("token")
+            )}`,
+          },
+        }
+      )
+        .then((res) => {
+          props.fetchNotifications();
+          // toggleNotificationModal();
+          
+          if (notification.objectType == "post") {
+            history.push(`/post/${notification.objectId}`);
+          } else if (notification.objectType == "comment") {
+            history.push(`/post/${notification.parentId}`);
+          } else if (notification.objectType == "request") {
+            history.push(`/user/${notification.sender._id}`);
+          }
+          props.setNotificationModalOpen(false);
 
-    Axios.put(
-      `/notification/${notification._id}/interact`,
-      {},
-      {
-        headers: {
-          Authorization: `Bearer ${JSON.parse(
-            window.localStorage.getItem("token")
-          )}`,
-        },
+          // props.setRefreshNotifications(!props.refreshNotifications)
+          // setHideDots(true);
+        })
+        .catch((error) => {
+          console.log("error", error);
+        });
+    } else {
+      toggleNotificationModal();
+      if (notification.objectType == "post") {
+        history.push(`/post/${notification.objectId}`);
+      } else if (notification.objectType == "comment") {
+        history.push(`/post/${notification.parentId}`);
+      } else if (notification.objectType == "request") {
+        history.push(`/user/${notification.sender._id}`);
       }
-    )
-      .then((res) => {
-        // props.fetchNotifications();
-        // props.setRefreshNotifications(!props.refreshNotifications)
-        // setHideDots(true);
-      })
-      .catch((error) => {
-        console.log("error", error);
-      });
+    }
   };
 
   return (
@@ -310,12 +326,13 @@ function Header(props) {
                   </div>
                 ) : (
                   props.notifications.map((notification) => (
-                    <NotificationCard 
+                    <NotificationCard
+                      key={notification._id}
                       notification={notification}
                       handleNotificationClick={handleNotificationClick}
                       hideDots={hideDots}
                       setNotificationModalOpen={props.setNotificationModalOpen}
-/>
+                    />
                   ))
                 )}
               </div>

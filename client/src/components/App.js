@@ -469,6 +469,7 @@ function App() {
           setRefreshNotifications={setRefreshNotifications}
           notificationCount={notificationCount}
           setNotificationCount={setNotificationCount}
+          fetchNotifications={fetchNotifications}
           // handleNotificationClick={handleNotificationClick}
         />
         <div id="content">
