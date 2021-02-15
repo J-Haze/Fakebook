@@ -450,6 +450,7 @@ function Card(props) {
             fetchComments={fetchComments}
             postid={props.post._id}
             sendNotification={props.sendNotification}
+            post={props.post}
             // openDeleteCommentModal={openDeleteCommentModal}
             // setCommentToDelete={setCommentToDelete}
           />

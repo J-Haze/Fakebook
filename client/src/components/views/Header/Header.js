@@ -91,7 +91,7 @@ function Header(props) {
     } else if (
       notification.objectType == "request"
     ) {
-      history.push(`/user/${notification.objectId}`);
+      history.push(`/user/${notification.sender._id}`);
     }
   };
 

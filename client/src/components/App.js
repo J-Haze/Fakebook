@@ -406,6 +406,14 @@ function App() {
     //   Axios.get
     // }
 
+    let parentId = null;
+    // let objectId = objectId;
+
+    if (action == "comment" && objectType == "comment") {
+      parentId = objectId._id;
+      objectId = null;
+    }
+
     Axios.post(
       `/notification/`,
       {
@@ -414,6 +422,7 @@ function App() {
         action: action,
         objectType: objectType,
         objectId: objectId,
+        parentId: parentId
       },
       {
         headers: {

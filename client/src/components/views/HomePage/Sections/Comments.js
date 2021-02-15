@@ -54,6 +54,7 @@ function Comments(props) {
         setErrorMessage("");
         setNewComment("");
         props.fetchComments();
+        props.sendNotification(props.post._id, "comment", "comment", props.post)
         // props.setCommentRefresher(!commentRefresher)
         // history.push(`/post/${props.postid}`);
       })

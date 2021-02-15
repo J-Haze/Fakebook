@@ -101,7 +101,7 @@ exports.send_notification = (req, res) => {
     } else {
       // const { receiverid } = req.params;
 
-      if (req.body.objectType == "comment") {
+      if ((req.body.objectType == "comment") && req.body.action == "like") {
         Comment.findOne({ _id: req.body.objectId }, (err, foundComment) => {
           if (err) {
             console.log(err);
@@ -126,6 +126,25 @@ exports.send_notification = (req, res) => {
             res.json(notification);
           });
         });
+      } else if ((req.body.objectType == "comment") && req.body.action == "comment") {
+        var notification = new Notification({
+          sender: authData._id,
+          receiver: req.body.receiver,
+          action: req.body.action,
+          objectType: req.body.objectType,
+          objectId: req.body.objectId,
+          parentId: req.body.parentId,
+          seen: false,
+          interacted: false,
+        });
+
+        notification.save(function (err) {
+          if (err) {
+            console.log("err", err);
+            return res.json(err);
+          }
+          res.json(notification);
+        });
       } else {
         var notification = new Notification({
           sender: authData._id,
@@ -133,7 +152,7 @@ exports.send_notification = (req, res) => {
           action: req.body.action,
           objectType: req.body.objectType,
           objectId: req.body.objectId,
-          parentId: null,
+          parentId: req.body.parentId,
           seen: false,
           interacted: false,
         });
