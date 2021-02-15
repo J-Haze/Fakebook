@@ -54,7 +54,8 @@ function Comments(props) {
         setErrorMessage("");
         setNewComment("");
         props.fetchComments();
-        props.sendNotification(props.post._id, "comment", "comment", props.post)
+        console.log("whats going on", props.post._id)
+        props.sendNotification(props.post.author._id, "comment", "comment", props.post._id)
         // props.setCommentRefresher(!commentRefresher)
         // history.push(`/post/${props.postid}`);
       })
@@ -91,7 +92,7 @@ function Comments(props) {
   //   console.log(commentid);
   // }
 
-  console.log("Comments", props.comments);
+  // console.log("Comments", props.comments);
 
   return (
     <div className="comment-section">

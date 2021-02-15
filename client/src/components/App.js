@@ -410,7 +410,7 @@ function App() {
     // let objectId = objectId;
 
     if (action == "comment" && objectType == "comment") {
-      parentId = objectId._id;
+      parentId = objectId;
       objectId = null;
     }
 
