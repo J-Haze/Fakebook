@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, forwardRef } from "react";
 import Axios from "axios";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
@@ -17,7 +17,7 @@ function CurrentUserPage(props) {
   //  const [editUserModalOpen, setEditUserModalOpen] = useState(true);
   const [editUserModalOpen, setEditUserModalOpen] = useState(false);
 
-  const [refs, setRefs] = useState([]);
+  // const [refs, setRefs] = useState([]);
 
   const history = useHistory();
 
@@ -63,14 +63,14 @@ function CurrentUserPage(props) {
   }, []);
 
 
- useEffect(() => {
-   const refsVar = userPosts.reduce((acc, value) => {
-     acc[value._id] = React.createRef();
-     return acc;
-   }, {});
+//  useEffect(() => {
+//    const refsVar = userPosts.reduce((acc, value) => {
+//      acc[value._id] = React.createRef();
+//      return acc;
+//    }, {});
 
-   setRefs(refs)
- }, [userPosts]);
+//    setRefs(refs)
+//  }, [userPosts]);
 
   // const ref = React.createRef();
 
@@ -82,7 +82,7 @@ function CurrentUserPage(props) {
   useEffect(() => {
     // If there is a notification command then scroll to the correct ref
 
-    if (props.refTarget) {
+    if (refs[props.refTarget]) {
       console.log("yes ref", props.refTarget);
       // props.ref.current.scrollIntoView({
       // document.getElementById(props.refTarget).current.scrollIntoView({
@@ -101,6 +101,12 @@ function CurrentUserPage(props) {
   //     behavior: "smooth",
   //     block: "start",
   //   });
+
+  const refs = userPosts.reduce((acc, value) => {
+    acc[value._id] = React.createRef();
+    // acc[value._id] = useRef();
+    return acc;
+  }, {});
 
   return (
     <div id="current-user-page">
@@ -260,7 +266,9 @@ function CurrentUserPage(props) {
               key={post._id}
               // ref={ref}
               // ref={useRef(`ref-post-${props.post._id}`)}
+              // ref={refs[post._id]}
               ref={refs[post._id]}
+              // forwardRef={refs[post._id]}
               id={`ref-post-${post._id}`}
               post={post}
               currentUser={props.currentUser}

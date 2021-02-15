@@ -299,6 +299,7 @@ function Card(props) {
       // ref={myRef}
 
       // ref={useRef(`ref-post-${props.post._id}`)}
+      // ref={props.forwardRef}
     >
       <div className="main-card">
         <div className="card-row-one">
