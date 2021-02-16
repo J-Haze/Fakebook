@@ -92,11 +92,9 @@ function HomePage(props) {
       {/* <div>Home Page</div> */}
       <div id="home-cont">
         <div id="home-current-user-cont">
-          <div id="current-user-card">
             <UserCard 
               user={props.currentUser}
             />
-          </div>
         </div>
         <div id="home">
           {/* {props.loading ? (

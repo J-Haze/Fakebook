@@ -28,7 +28,74 @@ justify-content: space-between;
 
   padding: 16px 8px;
 
-  border: 1px solid black;
+  /* border: 1px solid black; */
+}
+
+.home-user-card {
+  width: 344px;
+  height: 44px;
+  padding: 8px;
+  box-sizing: border-box;
+  border: 1px solid red;
+  display: flex;
+  align-items: center;
+  /* border: 1px solid green; */
+  border: 1px solid var(--light-gray);
+  border-radius: 8px;
+  margin-bottom: 8px;
+
+    /* border: 1px solid red; */
+}
+
+.home-user-card:hover {
+  background-color: var(--dark-gray);
+  cursor: pointer
+}
+
+.prof-pic-home-user-page {
+  border-radius: 50%;
+  height: 28px;
+  width: 28px;
+  box-shadow: rgba(0, 0, 0, 0.1);
+}
+
+.prof-pic-home-user-page:hover {
+  cursor: pointer;
+}
+
+.home-user-card-info {
+  /* border: 1px solid blue; */
+  /* height: 100%; */
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+  justify-content: center;
+  margin-left: 8px;
+}
+
+.home-user-card-username {
+  font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 20.0005px;
+  text-align: start;
+  word-break: break-word;
+  color: rgb(5, 5, 5)
+}
+
+.home-user-card-username:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.home-user-card-location {
+  font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 16.0004px;
+  text-align: start;
+  word-break: break-word;
+  color: rgb(101, 103, 107);
 }
 
 #home-friend-cont{
@@ -861,62 +928,5 @@ align-items: center;
 
 
 
-.home-user-card {
-  width: 418px;
-  height: 115px;
-  padding: 16px;
-  box-sizing: border-box;
-  /* border: 1px solid black; */
-  display: flex;
-  /* border: 1px solid green; */
-  border: 1px solid var(--light-gray);
-  border-radius: 8px;
-  margin-bottom: 8px;
-}
 
-.prof-pic-home-user-page {
-  border-radius: 8px;
-  height: 80px;
-  width: 80px;
-  box-shadow: rgba(0, 0, 0, 0.1);
-}
-
-.prof-pic-home-user-page:hover {
-  cursor: pointer;
-}
-
-.home-user-card-info {
-  /* border: 1px solid blue; */
-  /* height: 100%; */
-  display: flex;
-  flex-direction: column;
-  /* align-items: center; */
-  justify-content: center;
-  margin-left: 16px;
-}
-
-.home-user-card-username {
-  font-family: "Segoe UI", Helvetica, Arial, sans-serif;
-  font-size: 17px;
-  font-weight: 600;
-  line-height: 20.0005px;
-  text-align: start;
-  word-break: break-word;
-  color: #050505;
-}
-
-.home-user-card-username:hover {
-  cursor: pointer;
-  text-decoration: underline;
-}
-
-.home-user-card-location {
-  font-family: "Segoe UI", Helvetica, Arial, sans-serif;
-  font-size: 13px;
-  font-weight: 400;
-  line-height: 16.0004px;
-  text-align: start;
-  word-break: break-word;
-  color: rgb(101, 103, 107);
-}
 

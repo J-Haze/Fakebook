@@ -21,9 +21,14 @@ function CurrentUserFriendListPage(props) {
         id="current-user-fl-side-requests-cont"
         className="current-user-fl-side-cont"
       >
-        <div id="current-user-fl-side-subheader">
-          {props.receivedRequestsCount} Friend Requests
-        </div>
+        {props.receivedRequestsCount == 1 ? (
+          <div id="current-user-fl-side-subheader">1 Friend Request</div>
+        ) : (
+          <div id="current-user-fl-side-subheader">
+            {props.receivedRequestsCount} Friend Requests
+          </div>
+        )}
+
         {props.receivedRequests == "" ? (
           <div className="no-new-requests">No new requests</div>
         ) : (
@@ -81,9 +86,15 @@ function CurrentUserFriendListPage(props) {
         id="current-user-fl-side-pending-cont"
         className="current-user-fl-side-cont"
       >
-        <div id="current-user-fl-side-subheader-pending">
-          {props.sentRequestsCount} Requests Pending
-        </div>
+        {props.sentRequestsCount == 1 ? (
+          <div id="current-user-fl-side-subheader-pending">
+            1 Request Pending
+          </div>
+        ) : (
+          <div id="current-user-fl-side-subheader-pending">
+            {props.sentRequestsCount} Requests Pending
+          </div>
+        )}
 
         {/* {!props.sentRequestsCount ? (
           <div className="no-new-requests">No pending requests</div>
