@@ -148,7 +148,7 @@
   border-color: #e2e8f0;
   font-family: inherit;
   margin: 0;
-  margin-top: 10px;
+  margin-top: 12px;
   overflow: visible;
   text-transform: none;
   background-image: none;
@@ -171,6 +171,7 @@
   font-size: 20px;
   line-height: 48px;
   line-height: 40px;
+  line-height: 42px;
   padding: 0 16px;
   /* height: 40px; */
   /* width: 332px; */
@@ -181,10 +182,12 @@
   white-space: nowrap;
 
   font-weight: bold;
+  height: 48px;
 }
 
 #submit-login {
   background-color: var(--blue);
+  margin-top: 24px;
 }
 
 #submit-login:hover {
@@ -208,17 +211,18 @@
 }
 
 #submit-guest-login {
-  background-color: #ffa500;
+  background-color: var(--dark-blue);
 }
 
 #submit-guest-login:hover {
-  background-color: #f7a100;
+  background-color: #3760b1;
 }
 
 .error-message-login {
   color: var(--red);
-  margin-top: -8px;
-  margin-bottom: -7px;
+  margin-top: -2px;
+  margin-bottom: -15px;
+  margin-left: 5px;
 }
 
 /* Signup Modal */

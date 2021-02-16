@@ -3,6 +3,7 @@ import { useState } from "react";
 import Axios from "axios";
 import "./LoginPage.css";
 import { useHistory } from "react-router-dom";
+// require("dotenv").config();
 
 import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
 
@@ -16,6 +17,9 @@ function LoginPage(props) {
 
   // const [signupModalOpen, setSignupModalOpen] = useState(false);
   const [signupModalOpen, setSignupModalOpen] = useState(false);
+
+  const guest_email = process.env.GUEST_EMAIL;
+  const guest_pw = process.env.GUEST_PW;
 
   const history = useHistory();
 
@@ -44,29 +48,52 @@ function LoginPage(props) {
       .catch((error) => console.log("error", error));
   };
 
-  const submitFBLogin = () => {
-    //Action is a get not a post, so I think something else is going on
-
-    Axios.get("/user/auth/facebook")
+  const logInAsGuest = () => {
+    console.log("guest_email", guest_email);
+    Axios.post("/user/log-in", {
+      email: guest_email,
+      password: guest_pw,
+    })
       .then((res) => {
-        console.log("here1");
-        console.log("res", res);
         if (res.data.message) {
           setErrorMessage(res.data.message);
-          console.log(res.data.message);
         } else {
           setErrorMessage("");
           setEmail("");
           setPassword("");
-          console.log(res.data.token);
           window.localStorage.setItem("token", JSON.stringify(res.data.token));
           props.setTokenRefresh(!props.tokenRefresh);
-          // history.go(-1);
           props.setIsLoggedIn(true);
+          history.push(`/`);
         }
       })
       .catch((error) => console.log("error", error));
   };
+  
+
+  // const submitFBLogin = () => {
+  //   //Action is a get not a post, so I think something else is going on
+
+  //   Axios.get("/user/auth/facebook")
+  //     .then((res) => {
+  //       console.log("here1");
+  //       console.log("res", res);
+  //       if (res.data.message) {
+  //         setErrorMessage(res.data.message);
+  //         console.log(res.data.message);
+  //       } else {
+  //         setErrorMessage("");
+  //         setEmail("");
+  //         setPassword("");
+  //         console.log(res.data.token);
+  //         window.localStorage.setItem("token", JSON.stringify(res.data.token));
+  //         props.setTokenRefresh(!props.tokenRefresh);
+  //         // history.go(-1);
+  //         props.setIsLoggedIn(true);
+  //       }
+  //     })
+  //     .catch((error) => console.log("error", error));
+  // };
 
   // const Facebook = ({ handleFBLogin }) => {
   // const componentClicked = () => {};
@@ -161,7 +188,7 @@ function LoginPage(props) {
             </div>)}
         /> */}
 
-        <div
+        {/* <div
           id="submit-fb-login"
           className="login-btn"
           onClick={() => {
@@ -169,7 +196,7 @@ function LoginPage(props) {
           }}
         >
           Log In with Facebook
-        </div>
+        </div> */}
 
         {/* <a
           href={
@@ -182,7 +209,9 @@ function LoginPage(props) {
         >
           Log In with Facebook
         </a> */}
-        <div id="submit-guest-login" className="login-btn" onClick={() => {}}>
+        <div id="submit-guest-login" className="login-btn" onClick={() => {
+          logInAsGuest();
+        }}>
           Test Drive a Guest Account
         </div>
         <div

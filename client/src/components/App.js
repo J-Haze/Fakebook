@@ -3,6 +3,7 @@ import { Route, Switch } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Axios from "axios";
 import { useHistory } from "react-router-dom";
+// require("dotenv").config();
 
 import Header from "./views/Header/Header";
 

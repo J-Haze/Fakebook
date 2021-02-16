@@ -15,11 +15,21 @@ const UserCard = (props) => {
         history.push(`/user/${props.user._id}`);
       }}
     >
-      <img
-        className="prof-pic-home-user-page"
-        alt={`profile-pic-user-${props.user.firstname}-${props.user.lastname}`}
-        src={`http://localhost:5000/uploads/${props.user.photo.filename}`}
-      />
+      {props.user.photo ? (
+        <img
+          className="prof-pic-home-user-page"
+          alt={`profile-pic-user-${props.user.firstname}-${props.user.lastname}`}
+          src={`http://localhost:5000/uploads/${props.user.photo.filename}`}
+        />) : (
+
+          <img
+            className="prof-icon"
+            alt={`Default Profile Picture`}
+            src={`http://localhost:5000/uploads/default-prof-pic.png`}
+          />)
+      }
+
+
       <div className="home-user-card-info">
         <div
           className="home-user-card-username"

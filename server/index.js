@@ -9,6 +9,7 @@ var flash = require("connect-flash");
 const bcrypt = require("bcryptjs");
 var multer = require("multer");
 require("./config/passport");
+require("dotenv").config();
 
 const session = require("express-session");
 const passport = require("passport");
