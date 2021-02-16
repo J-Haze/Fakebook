@@ -29,7 +29,6 @@ const UserCard = (props) => {
           />)
       }
 
-
       <div className="home-user-card-info">
         <div
           className="home-user-card-username"

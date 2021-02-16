@@ -2,12 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const ProfilePic = (props) => {
-  //               <img
-  //     className="card-image"
-  //     src={`http://localhost:5000/uploads/${props.post.image.filename}`}
-  //   />
-
-  // console.log("props.user.photo", props.user.photo);
 
   if (props.user.photo) {
     return (
@@ -20,7 +14,6 @@ const ProfilePic = (props) => {
       </Link>
     );
   } else {
-    //   return <div className="prof-icon"></div>
     return (
       <Link className="link" to={`/user/${props.user._id}`}>
         <img
