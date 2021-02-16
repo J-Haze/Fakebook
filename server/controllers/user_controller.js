@@ -429,6 +429,69 @@ exports.post_guest_login = function (req, res, next) {
   })(req, res);
 };
 
+exports.unpublish_user = (req, res, next) => {
+  jwt.verify(req.token, process.env.JWT_SECRET, (err, authData) => {
+    if (err) {
+      console.log(err);
+      res.sendStatus(403);
+    } else {
+      // const { body, validationResult, check } = require("express-validator");
+      const { userid } = req.params;
+      isPublished = false;
+
+      console.log("userid", userid);
+
+      //Checks if you're an admin
+      User.findOne({ _id: authData._id }, (err, user) => {
+        if (err) {
+          console.log(err);
+          return res.json(err);
+        }
+
+        console.log("authData._id", authData._id);
+
+        User.findOne({ _id: userid }, (err, originalUser) => {
+          if (err) {
+            console.log(err);
+            return res.json(err);
+          }
+
+          
+      Post.updateMany(
+        { receiver: authData._id },
+        { interacted: true },
+        (err, updatedNotifications) => {
+          console.log("wow2", updatedNotifications);
+          if (err) {
+            console.log(err);
+            res.sendStatus(403);
+          } else {
+            return res.json({ "Updated Notifications": updatedNotifications });
+          }
+        }
+      );
+
+          console.log("originalUser", originalUser);
+
+          Post.findOneAndUpdate(
+            { _id: postid },
+            { isPublished },
+            { useFindAndModify: false, new: true },
+            (err, updatedPost) => {
+              if (err) {
+                console.log(err);
+                return res.json(err);
+              } else {
+                res.json(updatedPost);
+              }
+            }
+          );
+        });
+      });
+    }
+  });
+};
+
 // exports.facebook_callback = (req, res, next) => {
 //   passport.authenticate("facebook", { session: false }, function (
 //     err,

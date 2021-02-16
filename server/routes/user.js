@@ -27,6 +27,9 @@ router.post("/log-in", user_controller.post_user_login);
 // //POST Log-In
 router.post("/log-in/guest", user_controller.post_guest_login);
 
+//Delete/Unpublish user
+router.put("/:userid/unpublish", auth, user_controller.unpublish_user);
+
 // Redirect the user to Facebook for authentication.  When complete,
 // Facebook will redirect the user back to the application at
 //     /auth/facebook/callback

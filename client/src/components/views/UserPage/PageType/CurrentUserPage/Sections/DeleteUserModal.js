@@ -70,7 +70,7 @@ function DeleteUserModal(props) {
     <div
       className="delete-user-modal"
       onClick={() => {
-        // props.setEditUserModalOpen(false);
+        props.setDeleteUserModalOpen(false);
       }}
     >
       <div

@@ -48,7 +48,7 @@ function CurrentUserPage(props) {
     }
     // console.log("ownPosts end", ownPosts);
     // console.log("displayedPosts end", props.displayedPosts);
-    setUserPosts(ownPosts);
+    setUserPosts(ownPosts.reverse());
     // setDisplayedComments(res.data);
   }, [props.displayedPosts]);
 

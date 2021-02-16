@@ -42,7 +42,7 @@ function FriendPage(props) {
     }
     // console.log("userPostArray end", userPostArray);
     // console.log("displayedPosts end", props.displayedPosts);
-    setUserPosts(userPostArray);
+    setUserPosts(userPostArray.reverse());
     // setDisplayedComments(res.data);
   }, [props.displayedPosts]);
 
