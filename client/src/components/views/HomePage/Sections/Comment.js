@@ -10,11 +10,8 @@ import thumbBlue from "../../../../assets/thumbs-up-solid-light-blue.svg";
 
 function Comments(props) {
   const [likeCount, setLikeCount] = useState(0);
-
   const [likedByCurrentUser, setLikedByCurrentUser] = useState(false);
-
   const [deleteCommentModalOpen, setDeleteCommentModalOpen] = useState(false);
-  // const [deleteCommentModalOpen, setDeleteCommentModalOpen] = useState(true);
 
   const history = useHistory();
 
@@ -34,7 +31,6 @@ function Comments(props) {
       }
     )
       .then((res) => {
-        console.log("liked");
         setLikedByCurrentUser(true);
         props.sendNotification(
           props.comment.author._id,
@@ -42,15 +38,10 @@ function Comments(props) {
           "comment",
           props.comment._id
         );
-
-        //  props.fetchPosts();
-        //  history.push(`/user/${currentUser._id}`);
-        //  history.go(0);
       })
       .catch((error) => {
         console.log("error", error);
         setLikedByCurrentUser(false);
-        //  alert("Cannot like this post.");
       });
   }
 

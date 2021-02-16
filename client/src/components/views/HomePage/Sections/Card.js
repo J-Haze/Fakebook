@@ -10,51 +10,22 @@ import thumbBlue from "../../../../assets/thumbs-up-solid-light-blue.svg";
 import ProfilePic from "../../HelperComponents/ProfilePic.js";
 import Comments from "./Comments";
 
-// import scrollToComponent from "react-scroll-to-component";
-// import { like_post } from "../../../../../../server/controllers/post_controller";
-
-// https://fontawesome.com/icons/thumbs-up?style=light
-
 function Card(props) {
   const [displayedComments, setDisplayedComments] = useState([]);
 
-  // const [commentRefresher, setCommentRefresher] = useState(true);
-
-  // const [deleteCommentModalOpen, setDeleteCommentModalOpen] = useState(false);
-  // const [commentToDelete, setCommentToDelete] = useState("");
-
   const [likeCount, setLikeCount] = useState(0);
-  // const [commentCount, setCommentCount] = useState(
-  //   Math.floor(Math.random() * 21)
-  // );
   const [commentCount, setCommentCount] = useState(0);
-
   const [likedByCurrentUser, setLikedByCurrentUser] = useState(false);
-  const [updateLikes, setUpdateLikes] = useState(false);
-
   const [deletePostModalOpen, setDeletePostModalOpen] = useState(false);
-
   const [commentsOpen, setCommentsOpen] = useState(false);
 
   const history = useHistory();
-
-  //Code that calculates like Count
-
-  //Code that calculates commentCount
-
-  //Code that searches for current user in the liked list and then sets likedByCurrentUser
-
-  // props.sendNotification(props.post.author._id, "like", "post", props.post._id);
 
   useEffect(() => {
      if (props.fromUserPage) {
        setCommentsOpen(true);
      }
   }, [props.fromUserPage])
-
- 
-
-
 
   function likePost() {
     setLikedByCurrentUser(true);
@@ -72,25 +43,12 @@ function Card(props) {
       }
     )
       .then((res) => {
-        console.log("liked");
         setLikedByCurrentUser(true);
-        // setUpdateLikes(!updateLikes);
-        // let newLikes = likeCount + 1;
-        // setLikeCount(newLikes);
-        // console.log("1", props.post.author._id);
-        // console.log("2", "like");
-        // console.log("3", "post");
-        // console.log("4", props.post._id);
         props.sendNotification(props.post.author._id, "like", "post", props.post._id);
-// console.log("liked2", newLikes, likeCount);
-        //  props.fetchPosts();
-        //  history.push(`/user/${currentUser._id}`);
-        //  history.go(0);
       })
       .catch((error) => {
         console.log("error", error);
         setLikedByCurrentUser(false);
-        //  alert("Cannot like this post.");
       });
   }
 
@@ -110,35 +68,23 @@ function Card(props) {
       }
     )
       .then((res) => {
-        console.log("unliked");
         setLikedByCurrentUser(false);
-        // setUpdateLikes(!updateLikes);
-
-        // let newLikes = likeCount - 1;
-        // setLikeCount(newLikes);
-        //  props.fetchPosts();
-        //  history.push(`/user/${currentUser._id}`);
-        //  history.go(0);
       })
       .catch((error) => {
         console.log("error", error);
         setLikedByCurrentUser(true);
-        //  alert("Cannot like this post.");
       });
   }
 
   function checkIfLiked() {
-    //   console.log("here1");
     if (
       props.post.likesList.length == 0 ||
       props.post.likesList.length == undefined
     ) {
-      console.log("here2");
       setLikedByCurrentUser(false);
       return;
     }
     if (props.post.likesList.indexOf(props.currentUser._id) != -1) {
-      console.log("here3");
       setLikedByCurrentUser(true);
     } else {
       setLikedByCurrentUser(false);
@@ -151,20 +97,11 @@ function Card(props) {
 
   function toggleLike() {
     if (likedByCurrentUser == false) {
-      //Use "like backend"
       likePost();
     } else {
-      console.log("unliked");
-      // setLikedByCurrentUser(false);
-      //Use "unlike" backend!
       unlikePost();
     }
   }
-
-  // function showComments() {
-  //   //Need to add
-  //   console.log("show comments");
-  // }
 
   function deletePost(postid) {
     Axios.put(
@@ -179,13 +116,8 @@ function Card(props) {
       }
     )
       .then((res) => {
-        //  if (res.data.message) {
-        //    alert(res.data.message);
-        //    return
-        //  }
         setDeletePostModalOpen(false);
         props.fetchPosts();
-        //  history.push(`/user/${currentUser._id}`);
         history.go(0);
       })
       .catch((error) => {
@@ -208,16 +140,11 @@ function Card(props) {
           if (publishedComments.length == 0 || publishedComments == undefined) {
             publishedComments = [res.data[i]];
           } else {
-            // console.log(publishedComments)
-            // console.log(res.data[i]);
-            // publishedComments.typeof()
-            // publishedComments = publishedComments.push(res.data[i]);
             publishedComments.push(res.data[i]);
           }
         }
       }
       setDisplayedComments(publishedComments);
-      // setDisplayedComments(res.data);
     });
   };
 
@@ -231,7 +158,6 @@ function Card(props) {
 
   function calculateLikes() {
     props.fetchPosts();
-    // console.log("calculatedLikes:", props.post.likesList.length);
     if (
       props.post.likesList.length == 0 ||
       props.post.likesList.length == undefined
@@ -246,38 +172,6 @@ function Card(props) {
   useEffect(() => {
    calculateLikes();
   }, []);
-
-  // function deleteComment() {
-  //     Axios.put(
-  //       `/post/${props.post._id}/${commentToDelete}/unpublish`,
-  //       {},
-  //       {
-  //         headers: {
-  //           Authorization: `Bearer ${JSON.parse(
-  //             window.localStorage.getItem("token")
-  //           )}`,
-  //         },
-  //       }
-  //     )
-  //       .then((res) => {
-  //         fetchComments();
-  //         hideDeleteCommentModal();
-  //         history.push(`/post/${props.post._id}`);
-  //       })
-  //       .catch((error) => {
-  //         console.log("error", error);
-  //       });
-  //   }
-
-  //   const openDeleteCommentModal = (commentid) => {
-  //     setCommentToDelete(commentid);
-  //     setDeleteCommentModalOpen(true);
-  //   };
-
-  //   const hideDeleteCommentModal = () => {
-  //     setCommentToDelete("");
-  //     setDeleteCommentModalOpen(false);
-  //   };
 
   //Close comments on unmount
   useEffect(() => {
@@ -294,31 +188,16 @@ function Card(props) {
     }
   }
 
-
-  // const myRef = useRef(null);
-
   return (
     <div
       className="card"
       onClick={() => {
         setDeletePostModalOpen(false);
-        // console.log("ref", ref)
       }}
-      // ref={(section) => {
-      //   `ref-post${notification.objectId}` = section;
-      // }}
-
-      // ref={`ref-post${props.post._id}`}
-      // ref={myRef}
-
-      // ref={useRef(`ref-post-${props.post._id}`)}
-      // ref={props.forwardRef}
     >
       <div className="main-card">
         <div className="card-row-one">
-          {/* <div className="prof-icon"></div> */}
           <ProfilePic user={props.post.author} />
-          {/* <UserAvatar user={post.author} /> */}
           <div className="flex-down card-title">
             <Link
               className="link card-username hover-under"
@@ -326,10 +205,6 @@ function Card(props) {
             >
               {props.post.author.firstname} {props.post.author.lastname}
             </Link>
-
-            {/* <div className="card-username hover-under">
-              {props.post.author.firstname} {props.post.author.lastname}
-            </div> */}
 
             <div className="card-date">
               {moment(props.post.createdAt).format("ll")} at{" "}
@@ -437,7 +312,6 @@ function Card(props) {
             className="comment-box"
             onClick={() => {
               setCommentsOpen(true);
-              //Focus on Comment input
             }}
           >
             Comment
@@ -449,13 +323,10 @@ function Card(props) {
           <Comments
             comments={displayedComments}
             currentUser={props.currentUser}
-            // isLoggedIn={props.isLoggedIn}
             fetchComments={fetchComments}
             postid={props.post._id}
             sendNotification={props.sendNotification}
             post={props.post}
-            // openDeleteCommentModal={openDeleteCommentModal}
-            // setCommentToDelete={setCommentToDelete}
           />
         ) : (
           ""
