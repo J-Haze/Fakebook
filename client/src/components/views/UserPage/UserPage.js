@@ -23,7 +23,9 @@ console.log(
   props.userProfile._id,
   props.currentUser._id,
   props.currentUser.friendList
-);
+    );
+    
+    
 
     if (props.userProfile._id === props.currentUser._id) {
       props.setPageType("CurrentUserPage");
@@ -42,9 +44,22 @@ console.log(
   }, [
     props.userProfile._id,
     props.currentUser._id,
-    props.currentUser.friendList,
+      props.currentUser.friendList,
+      props.allUsers
+    // props.allPosts
     // props.updateUserPage
   ]);
+
+    useEffect(() => {
+      // props.fetchUsers();
+      // props.fetchPosts();
+      return function cleanup() {
+        props.fetchUsers();
+        props.fetchPosts();
+      };
+    }, []);
+
+
 
   // console.log("user1", props.user)
   // console.log("user2", props.friendList);

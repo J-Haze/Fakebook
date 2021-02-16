@@ -33,6 +33,9 @@ function FindFriendsPage(props) {
 
     //Remove currentUser from array
     for (let i = nonFriendsArr.length - 1; i >= 0; i--) {
+      if (nonFriendsArr[i] == null || nonFriendsArr[i] == undefined) {
+        continue;
+      }
       if (nonFriendsArr[i]._id == props.currentUser._id) {
         nonFriendsArr.splice(i, 1);
       }
@@ -53,6 +56,9 @@ function FindFriendsPage(props) {
       //Otherwise, subtract all friends from the nonfriendList
       for (let i = nonFriendsArr.length - 1; i >= 0; i--) {
         for (let j = props.currentUser.friendList.length - 1; j >= 0; j--) {
+          if (nonFriendsArr[i] == null || nonFriendsArr[i] == undefined) {
+            continue;
+          }
           if (nonFriendsArr[i]._id == props.currentUser.friendList[j]._id) {
             nonFriendsArr.splice(i, 1);
           }
@@ -73,11 +79,19 @@ function FindFriendsPage(props) {
       setNonFriends(nonFriendsArr);
     } else {
       for (let i = nonFriendsArr.length - 1; i >= 0; i--) {
-        for (let j = props.sentRequests.length - 1; j >= 0; j--) {
-          if (nonFriendsArr[i]._id == props.sentRequests[j].receiver._id) {
-            nonFriendsArr.splice(i, 1);
-          }
+        if (nonFriendsArr[i] == null || nonFriendsArr[i] == undefined) {
+          continue
         }
+          for (let j = props.sentRequests.length - 1; j >= 0; j--) {
+            console.log("i", i, nonFriendsArr[i]);
+            console.log("j", j, props.sentRequests[j].receiver);
+            if (nonFriendsArr[i] == null || nonFriendsArr[i] == undefined) {
+              continue;
+            }
+            if (nonFriendsArr[i]._id == props.sentRequests[j].receiver._id) {
+              nonFriendsArr.splice(i, 1);
+            }
+          }
       }
     }
 
@@ -94,6 +108,9 @@ function FindFriendsPage(props) {
     } else {
       for (let i = nonFriendsArr.length - 1; i >= 0; i--) {
         for (let j = props.receivedRequests.length - 1; j >= 0; j--) {
+          if (nonFriendsArr[i] == null || nonFriendsArr[i] == undefined) {
+            continue;
+          }
           if (nonFriendsArr[i]._id == props.receivedRequests[j].sender._id) {
             nonFriendsArr.splice(i, 1);
           }

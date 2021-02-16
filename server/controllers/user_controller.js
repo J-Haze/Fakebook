@@ -632,7 +632,8 @@ exports.unfriend_user = (req, res) => {
         {
           $pull: { friendList: userid },
         },
-        { safe: true },
+        // { safe: true },
+        { useFindAndModify: false, new: true },
         (err, newCurrentUser) => {
           if (err) {
             console.log(err);
@@ -645,12 +646,19 @@ exports.unfriend_user = (req, res) => {
             {
               $pull: { friendList: authData._id },
             },
-            { safe: true },
+            // { safe: true },
+            { useFindAndModify: false, new: true },
             (err, newUser) => {
               if (err) {
                 console.log(err);
                 return res.json(err);
               }
+
+              console.log(
+                "worked",
+                ("newCurrentUser", newCurrentUser),
+                ("newUser", newUser)
+              );
 
               res.json({
                 message: "Updated friend lists's",

@@ -56,26 +56,26 @@ function App() {
       .catch((error) => console.log("error", error));
   }, [tokenRefresh, refreshUser]);
 
-    const fetchUsers = () => {
-      Axios.get("/user/users", {
-        headers: {
-          Authorization: `Bearer ${JSON.parse(
-            window.localStorage.getItem("token")
-          )}`,
-        },
-      }).then((res) => {
-        let allUsersArray = res.data;
-        console.log("allUsersArray", allUsersArray);
-        setAllUsers(allUsersArray);
-        // setAllUsers(res.data);
-      });
-    };
+  const fetchUsers = () => {
+    Axios.get("/user/users", {
+      headers: {
+        Authorization: `Bearer ${JSON.parse(
+          window.localStorage.getItem("token")
+        )}`,
+      },
+    }).then((res) => {
+      let allUsersArray = res.data;
+      console.log("allUsersArray", allUsersArray);
+      setAllUsers(allUsersArray);
+      // setAllUsers(res.data);
+    });
+  };
 
-    useEffect(() => {
-      if (isLoggedIn) {
-        fetchUsers();
-      }
-    }, [isLoggedIn]);
+  useEffect(() => {
+    if (isLoggedIn) {
+      fetchUsers();
+    }
+  }, [isLoggedIn]);
 
   const fetchPosts = () => {
     setLoading(true);
@@ -98,8 +98,6 @@ function App() {
       fetchPosts();
     }
   }, [isLoggedIn]);
-
-
 
   const sendRequest = (receiver) => {
     Axios.post(
@@ -149,8 +147,7 @@ function App() {
   const acceptRequest = (requestid, userid) => {
     Axios.post(
       `/request/${requestid}/accept`,
-      {
-      },
+      {},
       {
         headers: {
           Authorization: `Bearer ${JSON.parse(
@@ -204,7 +201,11 @@ function App() {
       }
     )
       .then((res) => {
+        // fetchUsers();
+        // fetchPosts();
+
         setPageType("NonFriendPage");
+        // fetchUsers();
         history.push(`/user/${userid}`);
       })
       .catch((error) => {
@@ -278,7 +279,7 @@ function App() {
 
   const sendNotification = (receiverId, action, objectType, objectId) => {
     if (receiverId === currentUser._id) {
-      return
+      return;
     }
 
     let parentId = null;
@@ -359,6 +360,9 @@ function App() {
                   currentUser={currentUser}
                   isLoggedIn={isLoggedIn}
                   fetchPosts={fetchPosts}
+                  fetchUsers={fetchUsers}
+                  allUsers={allUsers}
+                  allPosts={allPosts}
                   displayedPosts={displayedPosts}
                   loading={loading}
                   createPostModalOpen={createPostModalOpen}
@@ -392,6 +396,9 @@ function App() {
                     userProfile={user}
                     currentUser={currentUser}
                     fetchPosts={fetchPosts}
+                    fetchUsers={fetchUsers}
+                    allUsers={allUsers}
+                    allPosts={allPosts}
                     displayedPosts={displayedPosts}
                     createPostModalOpen={createPostModalOpen}
                     setCreatePostModalOpen={setCreatePostModalOpen}
