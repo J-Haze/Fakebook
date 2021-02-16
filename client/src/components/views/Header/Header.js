@@ -36,7 +36,6 @@ function Header(props) {
 
   // Search Logic:
   useEffect(() => {
-    console.log("searchQuery", searchQuery);
     if (searchQuery == "") {
       props.setSearchModalOpen(false);
     }
@@ -109,7 +108,6 @@ function Header(props) {
   };
 
   const markAllRead = () => {
-    console.log("mark all read");
     Axios.put(
       `/notification/interact/all`,
       {},
@@ -130,9 +128,6 @@ function Header(props) {
   };
 
   const handleNotificationClick = (notification) => {
-    console.log(`/${notification.objectType}/${notification.objectId}`);
-    console.log("here", `/notification/${notification._id}/interact`);
-
     if (notification.interacted == false) {
       Axios.put(
         `/notification/${notification._id}/interact`,
