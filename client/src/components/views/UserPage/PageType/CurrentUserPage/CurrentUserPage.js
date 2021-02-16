@@ -234,8 +234,11 @@ function CurrentUserPage(props) {
           )}
         </div>
         <div id="user-info-footer">
-          'Fakebook', created by Justin Hazelton, 2021 <br /> No copyright
-          infringement intended.
+          <div id="user-info-footer-text">
+            'Fakebook', created by Justin Hazelton, 2021 <br /> No copyright
+            infringement intended.
+            <div id="delete-account-btn"> Delete Account</div>
+          </div>
         </div>
       </div>
       {/* </div> */}

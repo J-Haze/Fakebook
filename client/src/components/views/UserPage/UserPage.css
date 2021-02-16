@@ -55,17 +55,25 @@
 }
 
 #user-info-footer {
-  /* height: auto;
-  position: sticky;
-  top: 0; */
-
-  /* position: sticky;
-  bottom: 0;
-  align-self: flex-end; */
-  /* border: 1px solid green; */
-
-  /* padding-left: 12px;; */
   margin-top: 8px;
+  display: flex;
+
+  border: 1px solid black;
+
+  /* font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 16.0004px;
+  text-align: left;
+  color: rgb(101, 103, 107);
+  text-decoration-line: none;
+  text-decoration-style: solid;
+  word-break: break-word; */
+}
+
+#user-info-footer-text {
+
+  /* margin-top: 8px; */
 
   font-family: "Segoe UI", Helvetica, Arial, sans-serif;
   font-size: 13px;
@@ -76,6 +84,10 @@
   text-decoration-line: none;
   text-decoration-style: solid;
   word-break: break-word;
+}
+
+#delete-account-btn {
+  
 }
 
 #user-post-cont {
