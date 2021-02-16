@@ -98,11 +98,12 @@ function Comments(props) {
       setLikedByCurrentUser(false);
       return;
     }
-    if (props.comment.likesList.indexOf(props.currentUser._id) != -1) {
-      console.log("here3");
-      setLikedByCurrentUser(true);
-    } else {
-      setLikedByCurrentUser(false);
+     setLikedByCurrentUser(false);
+
+     for (let i = 0; i < props.comment.likesList.length; i++) {
+       if (props.comment.likesList[i]._id == props.currentUser._id) {
+         setLikedByCurrentUser(true);
+       }
     }
   }
 

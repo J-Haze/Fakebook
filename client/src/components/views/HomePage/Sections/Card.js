@@ -22,10 +22,10 @@ function Card(props) {
   const history = useHistory();
 
   useEffect(() => {
-     if (props.fromUserPage) {
-       setCommentsOpen(true);
-     }
-  }, [props.fromUserPage])
+    if (props.fromUserPage) {
+      setCommentsOpen(true);
+    }
+  }, [props.fromUserPage]);
 
   function likePost() {
     setLikedByCurrentUser(true);
@@ -44,7 +44,12 @@ function Card(props) {
     )
       .then((res) => {
         setLikedByCurrentUser(true);
-        props.sendNotification(props.post.author._id, "like", "post", props.post._id);
+        props.sendNotification(
+          props.post.author._id,
+          "like",
+          "post",
+          props.post._id
+        );
       })
       .catch((error) => {
         console.log("error", error);
@@ -77,6 +82,7 @@ function Card(props) {
   }
 
   function checkIfLiked() {
+    console.log("check if liked", props.post.likesList.length);
     if (
       props.post.likesList.length == 0 ||
       props.post.likesList.length == undefined
@@ -84,10 +90,13 @@ function Card(props) {
       setLikedByCurrentUser(false);
       return;
     }
-    if (props.post.likesList.indexOf(props.currentUser._id) != -1) {
-      setLikedByCurrentUser(true);
-    } else {
-      setLikedByCurrentUser(false);
+
+    setLikedByCurrentUser(false);
+
+    for (let i = 0; i < props.post.likesList.length; i++) {
+      if (props.post.likesList[i]._id == props.currentUser._id) {
+        setLikedByCurrentUser(true);
+      }
     }
   }
 
@@ -158,6 +167,7 @@ function Card(props) {
 
   function calculateLikes() {
     props.fetchPosts();
+    console.log("props.post.likesList", props.post.likesList);
     if (
       props.post.likesList.length == 0 ||
       props.post.likesList.length == undefined
@@ -170,7 +180,7 @@ function Card(props) {
   }
 
   useEffect(() => {
-   calculateLikes();
+    calculateLikes();
   }, []);
 
   //Close comments on unmount

@@ -70,6 +70,8 @@ function CurrentUserPage(props) {
 
   console.log("CurrentUserPage")
 
+  console.log("FriendList", props.currentUser.friendList);
+
 
 //  useEffect(() => {
 //    const refsVar = userPosts.reduce((acc, value) => {

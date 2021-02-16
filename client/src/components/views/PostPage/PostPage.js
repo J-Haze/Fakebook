@@ -10,24 +10,30 @@ function PostPage(props) {
   const [isFriend, setIsFriend] = useState(false);
 
   useEffect(() => {
-    if (props.currentUser.friendList.indexOf(props.post.author._id) != -1) {
-      setIsFriend(true);
-      console.log("one");
-    } else {
-      if (props.currentUser._id === props.post.author._id) {
+    setIsFriend(false);
+
+    //Checks if post author is in friendList
+    for (let i = 0; i < props.currentUser.friendList.length; i++) {
+      if (props.currentUser.friendList[i]._id == props.post.author._id) {
         setIsFriend(true);
-        console.log("two");
-      } else {
-        setIsFriend(false);
-        console.log("three");
       }
+    }
+
+    //Checks if you're the post author
+    if (props.currentUser._id === props.post.author._id) {
+      setIsFriend(true);
+      console.log("two");
     }
   }, [props.currentUser, props.currentUser.friendList]);
 
   return (
     <div id="post-page">
       {!isFriend || !props.post.isPublished ? (
-        <div id="not-authorized"> This post has either been deleted, or you do not have permission to view this post.</div>
+        <div id="not-authorized">
+          {" "}
+          This post has either been deleted, or you do not have permission to
+          view this post.
+        </div>
       ) : (
         <Card
           key={props.post._id}

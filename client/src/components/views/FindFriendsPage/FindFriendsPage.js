@@ -104,12 +104,16 @@ function FindFriendsPage(props) {
     setNonFriends(nonFriendsArr);
 
     // return(props.fetchUsers)
+
+    console.log("nonFriends", nonFriends);
   }, [
     props.currentUser,
     props.allUsers,
     props.receivedRequests,
     props.sentRequests,
   ]);
+
+  console.log("nonFriends", nonFriends);
 
   return (
     <div id="friend-list-page-cont">

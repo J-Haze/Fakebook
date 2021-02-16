@@ -13,10 +13,12 @@ var Post = require("../models/Post");
 var Comment = require("../models/Comment");
 
 exports.get_posts = (req, res, next) => {
-  Post.find((err, posts) => {
+  Post.find({ isPublished: true }, (err, posts) => {
     if (err) return res.json(err);
     res.json(posts);
-  }).populate("author");
+  })
+    .populate("author")
+    .populate({ path: "likesList", match: { isPublished: true } });
 };
 
 // SET STORAGE
@@ -346,8 +348,12 @@ exports.get_post = (req, res, next) => {
       }
       let postWithComments = [post, postComments];
       res.json(postWithComments);
-    }).populate("author");
-  }).populate("author");
+    })
+      .populate("author")
+      .populate({ path: "likesList", match: { isPublished: true } });
+  })
+    .populate("author")
+    .populate({ path: "likesList", match: { isPublished: true } });
 };
 
 //Not used
@@ -445,6 +451,7 @@ exports.like_post = (req, res, next) => {
           console.log("orignialLikes1", orignialLikes);
 
           // if current user ID is in likesList array then return
+          //Taken care of in Front End
           if (orignialLikes) {
             if (orignialLikes.indexOf(authData._id) != -1) {
               return res.json("You've already liked this post");
@@ -459,15 +466,22 @@ exports.like_post = (req, res, next) => {
             newLikes = [authData._id];
           } else {
             // newLikes = originalLikes.push(authData._id);
-           newLikes.push(authData._id);
+            newLikes.push(authData._id);
           }
 
           console.log("orignialLikes3", orignialLikes);
 
           Post.findOneAndUpdate(
-            { _id: postid },
-            { likesList: newLikes },
-            { useFindAndModify: false, new: true },
+            {
+              _id: postid,
+            },
+            {
+              likesList: newLikes,
+            },
+            {
+              useFindAndModify: false,
+              new: true,
+            },
             (err, updatedPost) => {
               if (err) {
                 console.log(err);
@@ -522,16 +536,15 @@ exports.unlike_post = (req, res, next) => {
           let newLikes = orignialLikes;
 
           // if current user ID is in likesList array then return
+          //Taken care of in Front End
           if (newLikes.indexOf(authData._id) != -1) {
-              console.log("match")
-              newLikes.splice(
-                newLikes.indexOf(authData._id)
-              );
-            } else {
-              return res.json("You haven't liked this post");
-            }
+            console.log("match");
+            newLikes.splice(newLikes.indexOf(authData._id));
+          } else {
+            return res.json("You haven't liked this post");
+          }
 
-            console.log("newLikes3", newLikes);
+          console.log("newLikes3", newLikes);
           console.log("orignialLikes3", orignialLikes);
 
           Post.findOneAndUpdate(
@@ -738,5 +751,7 @@ exports.get_comments = (req, res, next) => {
       return res.json(err);
     }
     res.json(postComments);
-  }).populate("author");
+  })
+    .populate("author")
+    .populate({ path: "likesList", match: { isPublished: true } });
 };

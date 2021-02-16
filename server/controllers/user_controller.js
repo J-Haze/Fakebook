@@ -31,7 +31,8 @@ exports.get_current_user = (req, res, next) => {
         console.log(user); //Delete at end
         res.json(user);
         next();
-      }).populate("friendList");
+        // }).populate("friendList");
+      }).populate({ path: "friendList", match: { isPublished: true } });
     }
   });
 };
@@ -52,13 +53,14 @@ exports.get_users = (req, res, next) => {
       console.log(err);
       res.sendStatus(403);
     } else {
-      User.find((err, users) => {
+      User.find({ isPublished: true }, (err, users) => {
         if (err) {
           console.log(err);
           return res.json(err);
         }
         res.json(users);
-      }).populate("friendList");
+      // }).populate("friendList");
+      }).populate({ path: 'friendList', match: { isPublished: true }})
     }
   });
 };

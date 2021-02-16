@@ -179,6 +179,8 @@ exports.like_comment = (req, res, next) => {
           console.log("orignialLikes1", orignialLikes);
 
           // if current user ID is in likesList array then return
+
+          //Taken care of in Front End
           if (orignialLikes) {
             if (orignialLikes.indexOf(authData._id) != -1) {
               return res.json("You've already liked this comment");
@@ -256,6 +258,7 @@ exports.unlike_comment = (req, res, next) => {
           let newLikes = orignialLikes;
 
           // if current user ID is in likesList array then return
+          //Taken care of in Front End
           if (newLikes.indexOf(authData._id) != -1) {
             console.log("match");
             newLikes.splice(newLikes.indexOf(authData._id));
