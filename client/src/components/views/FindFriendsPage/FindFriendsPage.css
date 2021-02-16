@@ -1,23 +1,16 @@
 .find-friends-btn-cont {
-display: flex;
-align-items: center;
-
-
-/* width: 100%; */
-margin-left: auto;
-margin-right: 0px;
-
-/* border: 1px solid red; */
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  margin-right: 0px;
 }
 
 /* Received Request */
-
 .find-friend-request-card-btn-cont {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  /* border: 1px solid green; */
   height: 70px;
   width: 140px;
 }
@@ -29,9 +22,7 @@ margin-right: 0px;
   justify-content: center;
   background-color: var(--blue);
   color: white;
-
   box-sizing: border-box;
-
   font-family: "Segoe UI", Helvetica, Arial, sans-serif;
   font-size: 15px;
   font-weight: 600;
@@ -53,10 +44,7 @@ margin-right: 0px;
   width: 140px;
   justify-content: center;
   background-color: var(--dark-gray);
-  /* background-color: white; */
-
   box-sizing: border-box;
-
   font-family: "Segoe UI", Helvetica, Arial, sans-serif;
   font-size: 15px;
   font-weight: 600;
@@ -75,7 +63,6 @@ margin-right: 0px;
 }
 
 /* Pending Requests */
-
 .find-friend-request-card-btn-pending {
   display: flex;
   height: 30px;
@@ -83,9 +70,7 @@ margin-right: 0px;
   justify-content: center;
   background-color: gray;
   color: white;
-
   box-sizing: border-box;
-
   font-family: "Segoe UI", Helvetica, Arial, sans-serif;
   font-size: 15px;
   font-weight: 600;
@@ -105,10 +90,7 @@ margin-right: 0px;
   width: 140px;
   justify-content: center;
   background-color: var(--dark-gray);
-  /* background-color: white; */
-
   box-sizing: border-box;
-
   font-family: "Segoe UI", Helvetica, Arial, sans-serif;
   font-size: 15px;
   font-weight: 600;
@@ -131,47 +113,30 @@ margin-right: 0px;
   margin-left: auto;
   margin-right: auto;
   width: 140px;
-  /* border: 1px solid black; */
   justify-content: center;
   justify-content: space-between;
 }
 
 .find-user-info-add-friend {
-  /* border: 1px solid black; */
   display: flex;
   width: 110px;
   height: 30px;
   justify-content: center;
-
   background-color: var(--dark-gray);
-  /* background-color: #C2C6CA; */
   background-color: white;
-
   font-family: "Segoe UI", Helvetica, Arial, sans-serif;
   font-size: 15px;
   font-weight: 600;
   line-height: 19.9995px;
-  /* text-align: start; */
-  /* text-decoration-thickness: auto; */
-  /* text-overflow: ellipsis; */
-  /* white-space: nowrap; */
-  /* word-break: break-word; */
-  /* display: flex; */
-  /* justify-content: center; */
   align-items: center;
   border-radius: 6px;
   color: rgb(5, 5, 5);
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-  /* margin-left: 3px; */
-
-margin-left: auto;
-margin-right: auto;
-
-    background-color: var(--blue);
+  margin-left: auto;
+  margin-right: auto;
+  background-color: var(--blue);
   color: white;
-
   box-sizing: border-box;
-
   font-family: "Segoe UI", Helvetica, Arial, sans-serif;
   font-size: 15px;
   font-weight: 600;
@@ -193,16 +158,8 @@ margin-right: auto;
   line-height: 16.0004px;
   text-align: center;
   word-break: break-word;
-
   margin-left: auto;
   margin-right: auto;
   margin-top: 20px;
   margin-bottom: 20px;
 }
-
-
-
-
-
-
-
