@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import Axios from "axios";
 import { useHistory } from "react-router-dom";
 
 function Card(props) {
@@ -33,7 +32,6 @@ function Card(props) {
             <div
               className="find-friend-request-card-btn-confirm"
               onClick={() => {
-                // setUnfriendModalOpen(true);
                 props.acceptRequest(
                   props.request._id,
                   props.request.sender._id
@@ -45,7 +43,6 @@ function Card(props) {
             <div
               className="find-friend-request-card-btn-decline"
               onClick={() => {
-                // setUnfriendModalOpen(true);
                 props.declineRequest(props.request._id);
               }}
             >

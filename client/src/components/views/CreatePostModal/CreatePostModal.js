@@ -25,11 +25,6 @@ function CreatePostModal(props) {
     return str.replace(/^\s+|\s+$/g, "").length == 0;
   }
 
-  const handleCancel = () => {
-    setImgUpload(null);
-    setImgPreview("");
-  };
-
   const submitCreatePost = () => {
     if (!text && !imgUpload) {
       setErrorMessage("Post must not be blank");
@@ -143,6 +138,7 @@ function CreatePostModal(props) {
               value={text}
               onChange={(e) => setText(e.target.value)}
             />
+            {/* Not used */}
             {imgPreview ? (
               <img
                 id="scroll-img"
