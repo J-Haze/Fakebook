@@ -56,6 +56,27 @@ function App() {
       .catch((error) => console.log("error", error));
   }, [tokenRefresh, refreshUser]);
 
+    const fetchUsers = () => {
+      Axios.get("/user/users", {
+        headers: {
+          Authorization: `Bearer ${JSON.parse(
+            window.localStorage.getItem("token")
+          )}`,
+        },
+      }).then((res) => {
+        let allUsersArray = res.data;
+        console.log("allUsersArray", allUsersArray);
+        setAllUsers(allUsersArray);
+        // setAllUsers(res.data);
+      });
+    };
+
+    useEffect(() => {
+      if (isLoggedIn) {
+        fetchUsers();
+      }
+    }, [isLoggedIn]);
+
   const fetchPosts = () => {
     setLoading(true);
     Axios.get("/post/", {
@@ -78,25 +99,7 @@ function App() {
     }
   }, [isLoggedIn]);
 
-  const fetchUsers = () => {
-    Axios.get("/user/users", {
-      headers: {
-        Authorization: `Bearer ${JSON.parse(
-          window.localStorage.getItem("token")
-        )}`,
-      },
-    }).then((res) => {
-      let allUsersArray = res.data;
-      setAllUsers(allUsersArray);
-      setAllUsers(res.data);
-    });
-  };
 
-  useEffect(() => {
-    if (isLoggedIn) {
-      fetchUsers();
-    }
-  }, [isLoggedIn]);
 
   const sendRequest = (receiver) => {
     Axios.post(
@@ -459,6 +462,7 @@ function App() {
               render={() => (
                 <FindFriendsPage
                   allUsers={allUsers}
+                  fetchUsers={fetchUsers}
                   currentUser={currentUser}
                   sendRequest={sendRequest}
                   cancelRequest={cancelRequest}

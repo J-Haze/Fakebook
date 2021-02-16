@@ -164,6 +164,7 @@ exports.post_create_user = [
     }
   },
 ];
+
 // SET STORAGE
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {

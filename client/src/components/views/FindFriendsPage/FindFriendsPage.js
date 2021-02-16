@@ -1,30 +1,22 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import Axios from "axios";
-
-// import Card from "../HomePage/Sections/Card.js";
-import { Link } from "react-router-dom";
-
 import "./FindFriendsPage.css";
 
-// import "./FriendListPage.css";
-
 import FindFriendsCard from "./Sections/FindFriendsCard.js";
-
-import { useHistory } from "react-router-dom";
 
 function FindFriendsPage(props) {
   const [nonFriends, setNonFriends] = useState([]);
 
-  const history = useHistory();
-
-  console.log("props.receivedRequests", props.receivedRequests);
+  console.log("outside", props.allUsers);
 
   useEffect(() => {
-    console.log("Running")
+    console.log(
+      "initial allUsers",
+      props.allUsers
+    );
     let nonFriendsArr = props.allUsers;
-    console.log("nonFriendsArr", nonFriendsArr);
-    console.log("props.allUsers", props.allUsers);
+
+    console.log("initial nonFriendsArr", nonFriendsArr);
 
     if (
       nonFriendsArr == undefined ||
@@ -36,6 +28,16 @@ function FindFriendsPage(props) {
       console.log("Error- No user list")
       console.log("nonFriendsArr2", nonFriendsArr);
       setNonFriends(nonFriendsArr);
+      return;
+    }
+
+    if (
+      nonFriendsArr.length == 1
+    ) {
+      //You are the only user
+      console.log("You are the only user");
+      console.log("nonFriendsArr You", nonFriendsArr);
+      setNonFriends("");
       return;
     }
 
@@ -61,6 +63,7 @@ function FindFriendsPage(props) {
         "props.currentUser.friendList error",
         props.currentUser.friendList
       );
+      console.log("here nonFriendsArr", nonFriendsArr);
       setNonFriends(nonFriendsArr);
     } else {
       console.log("T Non Friend Arr", nonFriendsArr);
@@ -100,13 +103,6 @@ function FindFriendsPage(props) {
     } else {
       for (let i = nonFriendsArr.length - 1; i >= 0; i--) {
         for (let j = props.sentRequests.length - 1; j >= 0; j--) {
-          // console.log(
-          //   "loop",
-          //   i,
-          //   nonFriendsArr[i],
-          //   j,
-          //   props.sentRequests[j]
-          // );
           if (nonFriendsArr[i]._id == props.sentRequests[j].receiver._id) {
             console.log("Splicing3", nonFriendsArr[i]);
             nonFriendsArr.splice(i, 1);
@@ -127,13 +123,6 @@ function FindFriendsPage(props) {
     } else {
       for (let i = nonFriendsArr.length - 1; i >= 0; i--) {
         for (let j = props.receivedRequests.length - 1; j >= 0; j--) {
-          // console.log(
-          //   "loop",
-          //   i,
-          //   nonFriendsArr[i],
-          //   j,
-          //   props.sentRequests[j]
-          // );
           if (nonFriendsArr[i]._id == props.receivedRequests[j].sender._id) {
             console.log("Splicing4", nonFriendsArr[i]);
             nonFriendsArr.splice(i, 1);
@@ -143,7 +132,10 @@ function FindFriendsPage(props) {
     }
 
     console.log("Final NonFriendArray", nonFriendsArr);
+    console.log("Final AllUsers", props.allUsers)
     setNonFriends(nonFriendsArr);
+
+    // return(props.fetchUsers)
   }, [
     props.currentUser,
     props.allUsers,
@@ -158,64 +150,79 @@ function FindFriendsPage(props) {
           {/* Something for if there's no friends */}
           <div className="friend-list-header">Find friends:</div>
           <div className="friend-list-card-cont">
-            {!props.receivedRequests
-              ? ""
-              : props.receivedRequests.map((request) =>
-                  request.sender.isPublished ? (
-                    <FindFriendsCard
-                      key={request.sender._id}
-                      user={request.sender}
-                      request={request}
-                      type={"receivedReq"}
-                      sendRequest={props.sendRequest}
-                      cancelRequest={props.cancelRequest}
-                      acceptRequest={props.acceptRequest}
-                      declineRequest={props.declineRequest}
-                      sendNotification={props.sendNotification}
-                    />
-                  ) : (
-                    ""
-                  )
-                )}
+            {props.receivedRequests.length == 0 ||
+            props.receivedRequests == undefined ||
+            props.receivedRequests == null ||
+            props.receivedRequests == "" ? (
+              ""
+            ) : (
+              props.receivedRequests.map((request) =>
+                request.sender.isPublished ? (
+                  <FindFriendsCard
+                    key={request.sender._id}
+                    user={request.sender}
+                    request={request}
+                    type={"receivedReq"}
+                    sendRequest={props.sendRequest}
+                    cancelRequest={props.cancelRequest}
+                    acceptRequest={props.acceptRequest}
+                    declineRequest={props.declineRequest}
+                    sendNotification={props.sendNotification}
+                  />
+                ) : (
+                  ""
+                )
+              )
+            )}
 
-            {!props.sentRequests
-              ? ""
-              : props.sentRequests.map((request) =>
-                  request.receiver.isPublished ? (
-                    <FindFriendsCard
-                      key={request.receiver._id}
-                      user={request.receiver}
-                      request={request}
-                      type={"sentReq"}
-                      sendRequest={props.sendRequest}
-                      cancelRequest={props.cancelRequest}
-                      acceptRequest={props.acceptRequest}
-                      declineRequest={props.declineRequest}
-                      sendNotification={props.sendNotification}
-                    />
-                  ) : (
-                    ""
-                  )
-                )}
+            {props.sentRequests.length == 0 ||
+            props.sentRequests == undefined ||
+            props.sentRequests == null ||
+            props.sentRequests == "" ? (
+              ""
+            ) : (
+              props.sentRequests.map((request) =>
+                request.receiver.isPublished ? (
+                  <FindFriendsCard
+                    key={request.receiver._id}
+                    user={request.receiver}
+                    request={request}
+                    type={"sentReq"}
+                    sendRequest={props.sendRequest}
+                    cancelRequest={props.cancelRequest}
+                    acceptRequest={props.acceptRequest}
+                    declineRequest={props.declineRequest}
+                    sendNotification={props.sendNotification}
+                  />
+                ) : (
+                  ""
+                )
+              )
+            )}
 
-            {!nonFriends
-              ? ""
-              : nonFriends.map((user) =>
-                  user.isPublished ? (
-                    <FindFriendsCard
-                      key={user._id}
-                      user={user}
-                      type={"noReq"}
-                      sendRequest={props.sendRequest}
-                      cancelRequest={props.cancelRequest}
-                      acceptRequest={props.acceptRequest}
-                      declineRequest={props.declineRequest}
-                      sendNotification={props.sendNotification}
-                    />
-                  ) : (
-                    ""
-                  )
-                )}
+            {nonFriends.length == 0 ||
+            nonFriends == undefined ||
+            nonFriends == null ||
+            nonFriends == "" ? (
+              ""
+            ) : (
+              nonFriends.map((user) =>
+                user.isPublished ? (
+                  <FindFriendsCard
+                    key={user._id}
+                    user={user}
+                    type={"noReq"}
+                    sendRequest={props.sendRequest}
+                    cancelRequest={props.cancelRequest}
+                    acceptRequest={props.acceptRequest}
+                    declineRequest={props.declineRequest}
+                    sendNotification={props.sendNotification}
+                  />
+                ) : (
+                  ""
+                )
+              )
+            )}
           </div>
           {(nonFriends.length == 0 ||
             nonFriends == undefined ||

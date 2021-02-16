@@ -18,6 +18,13 @@ function UserPage(props) {
   // const [pageType, setPageType] = useState("");
 
   useEffect(() => {
+console.log(
+  "sanity check",
+  props.userProfile._id,
+  props.currentUser._id,
+  props.currentUser.friendList
+);
+
     if (props.userProfile._id === props.currentUser._id) {
       props.setPageType("CurrentUserPage");
     } else {
@@ -85,7 +92,7 @@ function UserPage(props) {
 
   // console.log("received requests count1", props.receivedRequestsCount);
 
-  
+  // console.log("allUsers userPage", props.allUsers)
 
   return (
     <div id="user-page">

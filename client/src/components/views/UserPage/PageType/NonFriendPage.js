@@ -68,6 +68,9 @@ function NonFriendPage(props) {
   function checkForRequest() {
     //Have it get any request with the receiver and sender and then determine if it's pending or received
 
+    if (props.currentUser._id == props.userProfile._id) {
+      return
+    }
     Axios.get(`/request/${props.currentUser._id}/${props.userProfile._id}`, {
       headers: {
         Authorization: `Bearer ${JSON.parse(

@@ -21,6 +21,8 @@ function CurrentUserPage(props) {
 
   const history = useHistory();
 
+  // console.log("props.allUsers currentUserPage", props.allUsers)
+
   useEffect(() => {
     let userPostArray = [];
 
@@ -61,6 +63,8 @@ function CurrentUserPage(props) {
   useEffect(() => {
     calculateFriendCount();
   }, []);
+
+  console.log("CurrentUserPage")
 
 
 //  useEffect(() => {
