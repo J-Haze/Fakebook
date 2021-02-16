@@ -83,8 +83,6 @@ function FindFriendsPage(props) {
           continue
         }
           for (let j = props.sentRequests.length - 1; j >= 0; j--) {
-            console.log("i", i, nonFriendsArr[i]);
-            console.log("j", j, props.sentRequests[j].receiver);
             if (nonFriendsArr[i] == null || nonFriendsArr[i] == undefined) {
               continue;
             }
@@ -119,18 +117,12 @@ function FindFriendsPage(props) {
     }
 
     setNonFriends(nonFriendsArr);
-
-    // return(props.fetchUsers)
-
-    console.log("nonFriends", nonFriends);
   }, [
     props.currentUser,
     props.allUsers,
     props.receivedRequests,
     props.sentRequests,
   ]);
-
-  console.log("nonFriends", nonFriends);
 
   return (
     <div id="friend-list-page-cont">
