@@ -501,6 +501,21 @@ function App() {
                   loading={loading}
                   createPostModalOpen={createPostModalOpen}
                   setCreatePostModalOpen={setCreatePostModalOpen}
+                  sendRequest={sendRequest}
+                  cancelRequest={cancelRequest}
+                  acceptRequest={acceptRequest}
+                  declineRequest={declineRequest}
+                  submitUnfriend={submitUnfriend}
+                  sendingRequest={sendingRequest}
+                  // sendNotification={sendNotification}
+                  receivedRequests={receivedRequests}
+                  setReceivedRequests={setReceivedRequests}
+                  receivedRequestsCount={receivedRequestsCount}
+                  setReceivedRequestsCount={setReceivedRequestsCount}
+                  sentRequests={sentRequests}
+                  setSentRequests={setSentRequests}
+                  sentRequestsCount={sentRequestsCount}
+                  setSentRequestsCount={setSentRequestsCount}
                   sendNotification={sendNotification}
                 />
               )}
