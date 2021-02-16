@@ -17,7 +17,6 @@ import ProfilePic from "../HelperComponents/ProfilePic.js";
 import NotificationCard from "./Sections/NotificationCard";
 
 function Header(props) {
-  // const [searchModalOpen, setSearchModalOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [hideDots, setHideDots] = useState(false);
@@ -37,7 +36,6 @@ function Header(props) {
 
   // Search Logic:
   useEffect(() => {
-    // search logic
     console.log("searchQuery", searchQuery);
     if (searchQuery == "") {
       props.setSearchModalOpen(false);
@@ -73,7 +71,6 @@ function Header(props) {
   useEffect(() => {
     let notificationCountVar = 0;
     for (let i = 0; i < props.notifications.length; i++) {
-      // console.log(i, notificationsVar[i])
       if (!props.notifications[i].seen) {
         notificationCountVar++;
       }
@@ -87,13 +84,11 @@ function Header(props) {
   const toggleNotificationModal = () => {
     if (props.notificationModalOpen) {
       props.setNotificationModalOpen(false);
-      // props.setRefreshNotifications(!props.refreshNotifications);
       props.fetchNotifications();
     } else {
       props.fetchNotifications();
       props.setNotificationModalOpen(true);
       props.setNotificationCount(0);
-      // function to set all notifications to seen
 
       Axios.put(
         `/notification/see`,
@@ -127,16 +122,12 @@ function Header(props) {
       }
     )
       .then((res) => {
-        // props.fetchNotifications();
-        // props.setRefreshNotifications(!props.refreshNotifications)
         setHideDots(true);
       })
       .catch((error) => {
         console.log("error", error);
       });
   };
-
-  // const ref = React.createRef();
 
   const handleNotificationClick = (notification) => {
     console.log(`/${notification.objectType}/${notification.objectId}`);
@@ -156,7 +147,6 @@ function Header(props) {
       )
         .then((res) => {
           props.fetchNotifications();
-          // toggleNotificationModal();
           
           if (notification.objectType == "post") {
             history.push(`/post/${notification.objectId}`);
@@ -166,9 +156,6 @@ function Header(props) {
             history.push(`/user/${notification.sender._id}`);
           }
           props.setNotificationModalOpen(false);
-
-          // props.setRefreshNotifications(!props.refreshNotifications)
-          // setHideDots(true);
         })
         .catch((error) => {
           console.log("error", error);
@@ -188,7 +175,6 @@ function Header(props) {
   return (
     <div id="header">
       <div id="header-container">
-        {/* <div id="title">Title</div> */}
         <div id="header-left-menu">
           <Link id="fb-icon-cont" className="link-header" to={`/`}>
             <img className="fb-icon" src={fLogo} alt="fb logo" title="Home" />
@@ -203,11 +189,8 @@ function Header(props) {
               id="search-bar"
               onClick={(event) => {
                 event.stopPropagation();
-
-                // props.setSearchModalOpen(true);
               }}
             >
-              {/* <div id="mag-icon"></div> */}
               <img id="mag-icon" src={magIcon} alt="magnifying-glass-icon" />
               <input
                 id="search-bar-input"
@@ -273,13 +256,10 @@ function Header(props) {
               alt="friends icon"
             />
           </Link>
-
-          {/* This should just be an onClick? */}
           <div
             id="bell-cont"
             className="link hover-gray"
             title="Notifications"
-            // to={`/user/notifications`}
             onClick={(event) => {
               event.stopPropagation();
               toggleNotificationModal();
@@ -342,17 +322,6 @@ function Header(props) {
           </div>
 
           <div id="prof-header" className="prof-icon" onClick={() => {}}>
-            {/* {props.currentUser.photo ? 
-            <Link className="link" to={`/user/${props.currentUser._id}`}>
-              <img
-                className="prof-pic"
-                alt={`profile-pic-user-${props.currentUser.firstname}-${props.currentUser.lastname}`}
-                // src={`http://localhost:5000/uploads/${props.currentUser.photo.filename}`}
-              />
-              </Link>
-              :
-              <
-              } */}
             <ProfilePic user={props.currentUser} />
           </div>
 

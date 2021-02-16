@@ -3,14 +3,8 @@
   min-width: 600px;
   width: 100%;
   position: fixed;
-  /* position: sticky; */
-  /* display: flex; */
-  /* justify-content: center; */
-  /* align-items: center; */
   color: black;
   background-color: white;
-  /* min-width: 800px; */
-  /* box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1), 0 1px 4px rgba(0, 0, 0, 0.1); */
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
   z-index: 2;
 }
@@ -22,24 +16,20 @@
   margin-left: auto;
   margin-right: auto;
   height: 100%;
-  /* min-width: 800px; */
   width: 100%;
   z-index: 2;
 }
 
 #header-left-menu {
-  /* border: 1px solid black; */
   display: flex;
   justify-content: center;
   align-items: center;
   margin-left: 0px;
   margin-right: auto;
   height: 100%;
-  /* border: 1px solid black; */
 }
 
 #header-right-menu {
-  /* border: 1px solid black; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -54,7 +44,6 @@
 }
 
 #fb-icon-cont {
-  /* border: 1px solid black; */
   height: 100%;
   display: flex;
   justify-content: center;
@@ -65,13 +54,9 @@
 .fb-icon {
   height: 40px;
   width: auto;
-  /* width: 40px; */
-  /* border: 1px solid black; */
 }
 
 #search-cont {
-  /* border: 1px solid black; */
-
   position: absolute;
   top: 7px;
   left: 67px;
@@ -81,13 +66,10 @@
 
 #search-bar {
   border: none;
-  /* border-radius: 25%; */
   border-radius: 20px;
   background-color: var(--light-gray);
   width: 240px;
   height: 40px;
-  /* margin-left: 12px; */
-
   display: flex;
 }
 
@@ -104,9 +86,7 @@
   border: none;
   margin-left: 5px;
   height: 36px;
-  /* border:1px solid black;a */
   width: 180px;
-
   font-family: "Segoe UI", Helvetica, Arial, sans-serif;
   font-size: 15px;
   font-stretch: 100%;
@@ -115,11 +95,9 @@
   letter-spacing: normal;
   line-height: normal;
   text-align: left;
-  /* text-indent: 20px; */
   text-shadow: none;
   text-transform: none;
   word-spacing: 0px;
-
   color: rgb(5, 5, 5);
 }
 
@@ -128,33 +106,21 @@
 }
 
 #search-modal-cont {
-  /* height: 476px; */
   width: 205px;
   margin-left: auto;
   margin-right: auto;
-  /* padding: 0 8px 8px 8px; */
   padding: 8px;
   box-sizing: border-box;
-  /* box-shadow-top: none; */
-  /* border-bottom-left-radius: 8px;
-  border-bottom-right-radius: 8px; */
   border-radius: 8px;
-
   color: black;
   background-color: white;
-  /* min-width: 800px; */
-  /* box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1), 0 1px 4px rgba(0, 0, 0, 0.1); */
-  /* box-shadow: 0, 0 1px 2px rgba(0, 0, 0, 0.2), 0 1px 2px rgba(0, 0, 0, 0.2), 0 1px 2px rgba(0, 0, 0, 0.2); */
-  /* box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);  */
   box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 12px 0px,
     rgba(255, 255, 255, 0.5) 0px 0px 0px 0px inset;
   z-index: 2;
 }
 
 .search-card {
-  /* border: 1px solid black; */
   display: flex;
-  /* justify-content: center; */
   align-items: center;
   height: 52px;
   border-radius: 8px;
@@ -170,7 +136,6 @@
 }
 
 .prof-pic-search-card {
-  /* border-radius: 8px; */
   border-radius: 50%;
   height: 36px;
   width: 36px;
@@ -190,7 +155,6 @@
 }
 
 #add-post-header {
-  /* margin-right: 10px; */
   background-color: var(--light-gray);
   border-radius: 50%;
   height: 40px;
@@ -198,13 +162,8 @@
   box-sizing: border-box;
   text-align: center;
   font-size: 30px;
-  /* padding-top: -px; */
   line-height: 35px;
-  /* font-weight: 700; */
-  /* vertical-align: 5px; */
-  /* font-style: italic; */
   font-family: "Segoe UI Historic", "Segoe UI", Helvetica, Arial, sans-serif;
-
   position: absolute;
   top: 8px;
   right: 210px;
@@ -216,7 +175,6 @@
 }
 
 #friends-cont {
-  /* border: 1px solid black; */
   height: 40px;
   width: 40px;
   display: flex;
@@ -224,8 +182,6 @@
   align-items: center;
   background-color: var(--light-gray);
   border-radius: 50%;
-  /* margin-right: 10px; */
-
   position: absolute;
   top: 8px;
   right: 160px;
@@ -242,24 +198,16 @@
 }
 
 #bell-cont {
-  /* border: 1px solid black; */
   height: 40px;
   width: 40px;
   display: flex;
-  /* justify-content: center;
-  align-items: center; */
   background-color: var(--light-gray);
   border-radius: 50%;
-
   position: absolute;
   top: 8px;
   right: 110px;
   display: flex;
   flex-direction: column;
-  /* justify-content: center; */
-  /* align-items: center; */
-
-  /* margin-right: 10px; */
 }
 
 #bell-cont:hover {
@@ -269,8 +217,6 @@
 
 .bell-icon {
   height: 26px;
-  /* margin-bottom: 2px; */
-  /* margin-top: -2px; */
   width: 26px;
   margin-left: auto;
   margin-right: auto;
@@ -290,13 +236,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-
   font-family: "Segoe UI", Helvetica, Arial, sans-serif;
-font-size: 13px;
-font-weight: 500;
-line-height: 13px;
-box-sizing: border-box;
-padding-bottom: 2px;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 13px;
+  box-sizing: border-box;
+  padding-bottom: 2px;
 }
 
 #notification-modal-cont {
@@ -305,23 +250,15 @@ padding-bottom: 2px;
   width: 360px;
   margin-left: auto;
   margin-right: 150px;
-  /* padding: 0 8px 8px 8px; */
   position: absolute;
   top: 47px;
   right: -255px;
-  /* left: 40px; */
   padding: 8px;
   box-sizing: border-box;
-  /* box-shadow-top: none; */
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
-
   color: black;
   background-color: white;
-  /* min-width: 800px; */
-  /* box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1), 0 1px 4px rgba(0, 0, 0, 0.1); */
-  /* box-shadow: 0, 0 1px 2px rgba(0, 0, 0, 0.2), 0 1px 2px rgba(0, 0, 0, 0.2), 0 1px 2px rgba(0, 0, 0, 0.2); */
-  /* box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);  */
   box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 12px 0px,
     rgba(255, 255, 255, 0.5) 0px 0px 0px 0px inset;
   z-index: 2;
@@ -340,7 +277,6 @@ padding-bottom: 2px;
   justify-content: space-between;
   width: 328px;
   height: 24px;
-  /* border: 1px solid black; */
 }
 
 #notification-modal-header {
@@ -364,9 +300,7 @@ padding-bottom: 2px;
 }
 
 .notification-card {
-  /* border: 1px solid black; */
   display: flex;
-  /* justify-content: center; */
   align-items: center;
   height: 52px;
   border-radius: 8px;
@@ -384,7 +318,6 @@ padding-bottom: 2px;
 }
 
 .prof-pic-notification-card {
-  /* border-radius: 8px; */
   border-radius: 50%;
   height: 36px;
   width: 36px;
@@ -416,7 +349,6 @@ padding-bottom: 2px;
   text-align: left;
   word-break: break-word;
   color: rgb(101, 103, 107);
-
   margin-left: 12px;
 }
 
@@ -443,10 +375,7 @@ padding-bottom: 2px;
   margin-right: 10px;
 }
 
-/* Also uses .prof-icon in index */
-
 #logout-cont {
-  /* border: 1px solid black; */
   height: 40px;
   width: 40px;
   display: flex;
@@ -464,7 +393,6 @@ padding-bottom: 2px;
 
 .logout-icon {
   height: 26px;
-  /* margin-bottom: 2px; */
   margin-left: 4px;
   width: auto;
 }
