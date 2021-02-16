@@ -1,29 +1,18 @@
-import React, { useRef } from "react";
+import React from "react";
 import { useState, useEffect } from "react";
 import Axios from "axios";
 import "./CreatePostModal.css";
 
-import badWords from "bad-words";
-import { useHistory } from "react-router-dom";
-
-import { Link } from "react-router-dom";
 import FileUploader from "./Sections/FileUploader";
 import ProfilePic from "../HelperComponents/ProfilePic"
 
-// import Editor from "../../HelperComponents/Editor";
-
-// import ImageUpload from "./Sections/ImageUpload.js"
-
-const filter = new badWords();
 var path = require("path");
 
 function CreatePostModal(props) {
-  //   const [title, setTitle] = useState(props.initialTitle);
   const [text, setText] = useState("");
   const [imgUpload, setImgUpload] = useState(null);
   const [imgPreview, setImgPreview] = useState("");
   const [addImageOpen, setAddImageOpen] = useState(false);
-
   const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
@@ -32,35 +21,9 @@ function CreatePostModal(props) {
     };
   }, []);
 
-  const history = useHistory();
-
-  //   const submitCreatePost = () => {
-  //     console.log("submitted");
-  //   };
-
   function isEmpty(str) {
     return str.replace(/^\s+|\s+$/g, "").length == 0;
   }
-
-  const handleChange = (e) => {
-    // console.log("e.target:", e.target);
-    // setImgUpload(e.target.value);
-    setImgUpload(e.target.files[0]);
-
-    //   setImgUpload(
-    //   e.target.files
-    // )
-
-    //   console.log("e.target:", e.target);
-    //   setImgUpload(e.target);
-    //   setImgPreview(URL.createObjectURL(e.target.value));
-  };
-
-  //   const resetImgForm = () => {
-  //     if (addImageOpen) {
-  //       document.getElementById("create-post-form-img-upload").reset();
-  //     }
-  //   };
 
   const handleCancel = () => {
     setImgUpload(null);
@@ -68,11 +31,6 @@ function CreatePostModal(props) {
   };
 
   const submitCreatePost = () => {
-    // if (filter.isProfane(text)) {
-    //   alert("Post contains a word that is not allowed.");
-    //   return;
-    // }
-
     if (!text && !imgUpload) {
       setErrorMessage("Post must not be blank");
       alert("Post must not be blank");
@@ -92,8 +50,6 @@ function CreatePostModal(props) {
       alert("Post must less than 1000 characters");
       return;
     }
-
-    // console.log("imgUpload", imgUpload)
 
     if (imgUpload) {
       let ext = path.extname(imgUpload.name);
@@ -118,10 +74,6 @@ function CreatePostModal(props) {
 
     Axios.post(
       `/post/new`,
-      // {
-      //   text: text,
-      //   image: formData,
-      // },
       formData,
       {
         headers: {
@@ -135,46 +87,15 @@ function CreatePostModal(props) {
       .then((res, err) => {
         console.log("imgUpload2", imgUpload);
         setErrorMessage("");
-        // if success then set image preview
         props.fetchPosts();
         setText("");
-        //   props.whitePencil();
         props.setCreatePostModalOpen(false);
-        //   history.push(`/post/${props.postid}`);
       })
       .catch((error) => {
         alert("Failed to submit");
         console.log("error", error);
       });
   };
-
-  // let handleEditorChange = (content, editor) => {
-  //   setMainText(content);
-  // };
-
-  // let goBack = () => {
-  //   props.whitePencil();
-  //   props.hideEditModal();
-  // };
-
-  //     const FileUploader = ({onFileSelect}) => {
-  //     const fileInput = useRef(null)
-
-  //     const handleFileInput = (e) => {
-  //   // handle validations
-  //   const file = e.target.files[0];
-  //   if (file.size > 1024)
-  //     onFileSelectError({ error: "File size cannot exceed more than 1MB" });
-  //   else onFileSelectSuccess(file);
-  // };
-
-  //     return (
-  //         <div className="file-uploader">
-  //             <input type="file" onChange={handleFileInput}/>
-  //             <button onClick={e => fileInput.current && fileInput.current.click()} className="btn btn-primary"></button>
-  //         </div>
-  //     )
-  // }
 
   return (
     <div
@@ -206,33 +127,14 @@ function CreatePostModal(props) {
           <div id="create-post-mid-row">
             <div className="card-row-one">
               <div className="link" to={`/user/${props.currentUser._id}`}>
-                {/* <img
-                  className="prof-pic"
-                  alt={`profile-pic-user-${props.currentUser.firstname}-${props.currentUser.lastname}`}
-                  src={`http://localhost:5000/uploads/${props.currentUser.photo.filename}`}
-                /> */}
                 <ProfilePic user={props.currentUser} />
               </div>
-              {/* <ProfilePic user={props.currentUser} /> */}
               <div className="flex-down card-title">
                 <div className="create-post-username">
                   {props.currentUser.firstname} {props.currentUser.lastname}
                 </div>
-                {/* <div className="card-date">
-                  {moment(props.post.createdAt).format("ll")} at{" "}
-                  {moment(props.post.createdAt).format("LT")}
-                  Placeholder
-                </div> */}
               </div>
             </div>
-            {/* <input
-                          id="woym-input"
-                          type="textarea"
-              className="input-create-post"
-              placeholder={`What's on your mind, ${props.currentUser.firstname}?`}
-              value={text}
-              onChange={(e) => setText(e.target.value)}
-            /> */}
             <textarea
               id="woym-input"
               type="textarea"
@@ -241,17 +143,14 @@ function CreatePostModal(props) {
               value={text}
               onChange={(e) => setText(e.target.value)}
             />
-            {/* {imgPreview ? <img src={imgPreview} width="100%" /> : ""} */}
             {imgPreview ? (
               <img
                 id="scroll-img"
                 src={`http://localhost:5000/${imgPreview}`}
-                // alt={`productImg-${index}`}
               />
             ) : (
               ""
             )}
-            {/* <div className="error-message-create-post">{errorMessage}</div> */}
           </div>
           <div id="create-post-img-row">
             {addImageOpen ? (
@@ -260,7 +159,6 @@ function CreatePostModal(props) {
                   id="create-post-form-img-upload"
                   onFileSelectSuccess={(file) => setImgUpload(file)}
                   onFileSelectError={({ error }) => alert(error)}
-                  //   resetImgForm={resetImgForm}
                   setImgUpload={setImgUpload}
                 />
               </div>
