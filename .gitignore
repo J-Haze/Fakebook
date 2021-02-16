@@ -16,12 +16,24 @@ dev.js
 
 keys.js
 
+# misc
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
 
 .DS_Store
 
 npm-debug.log*
 yarn-debug.kog*
 yarn-error.log*
+
+/history
+
+/node_modules
+/.pnp
+.pnp.js
 
 # misc
 .DS_Store
@@ -35,11 +47,21 @@ yarn-error.log*
  nodemon.json
  
  /uploads/*
+  \uploads\*
 
  /uploads
+  /uploads/
 
  \uploads
+  \uploads\
 
- 
+ client\.env
+  client/.env
+
+  server\.env
+  server/.env
+
+  server/config/keys.js
+  server\config\keys.js
 
  ../uploads
