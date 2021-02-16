@@ -9,6 +9,8 @@ var path = require("path");
 const multer = require("multer");
 require("dotenv").config();
 
+// const keys = require("../config/keys");
+
 var User = require("../models/User");
 var Post = require("../models/Post");
 
@@ -368,7 +370,11 @@ exports.post_user_login = function (req, res, next) {
 };
 
 exports.post_guest_login = function (req, res, next) {
-  passport.authenticate("local", { session: false }, function (
+  // console.log(process.env.GUEST_PW)
+  // console.log(keys.guest_email);
+  req.body.email = keys.guest_email;
+  req.body.password = keys.guest_pw;
+    passport.authenticate("local", { session: false }, function (
     err,
     user,
     info
@@ -386,7 +392,11 @@ exports.post_guest_login = function (req, res, next) {
     }
     if (err) res.send(err);
     jwt.sign(
+      //Production:
+      // { _id: user._id, email: process.env.GUEST_EMAIL },
+      //Local
       { _id: user._id, email: user.email },
+
       //Production:
       // process.env.JWT_SECRET,
       //Local
