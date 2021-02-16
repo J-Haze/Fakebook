@@ -1,17 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
-// import CurrentUserPage from "./PageType/CurrentUserPage/CurrentUserPage.js";
-// import FriendPage from "./PageType/FriendPage.js";
-// import NonFriendPage from "./PageType/NonFriendPage.js";
-
-import Axios from "axios";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 
 function CurrentUserFriendListPage(props) {
-  // Have an Add Friends Button if you don't have friends!
-
-  // console.log("received requests count", props.receivedRequestsCount);
   const history = useHistory();
 
   return (
@@ -51,14 +43,10 @@ function CurrentUserFriendListPage(props) {
                   >
                     {request.sender.firstname} {request.sender.lastname}
                   </div>
-                  {/* <div className="friend-request-card-location">
-                    {request.sender.location}
-                  </div> */}
                   <div className="friend-request-card-btn-cont">
                     <div
                       className="friend-request-card-btn-confirm"
                       onClick={() => {
-                        // setUnfriendModalOpen(true);
                         props.acceptRequest(request._id, request.sender._id);
                       }}
                     >
@@ -67,7 +55,6 @@ function CurrentUserFriendListPage(props) {
                     <div
                       className="friend-request-card-btn-decline"
                       onClick={() => {
-                        // setUnfriendModalOpen(true);
                         props.declineRequest(request._id);
                       }}
                     >
@@ -95,13 +82,6 @@ function CurrentUserFriendListPage(props) {
             {props.sentRequestsCount} Requests Pending
           </div>
         )}
-
-        {/* {!props.sentRequestsCount ? (
-          <div className="no-new-requests">No pending requests</div>
-        ) : (
-          ""
-        )} */}
-
         {props.sentRequestsCount == "" ? (
           <div className="no-new-requests">No pending requests</div>
         ) : (
@@ -124,9 +104,6 @@ function CurrentUserFriendListPage(props) {
                   >
                     {request.receiver.firstname} {request.receiver.lastname}
                   </div>
-                  {/* <div className="friend-request-card-location">
-                    {request.receiver.location}
-                  </div> */}
                   <div className="friend-request-card-btn-cont">
                     <div className="friend-request-card-btn-pending">
                       Request Pending
@@ -159,28 +136,6 @@ function CurrentUserFriendListPage(props) {
         </div>
       </div>
     </div>
-
-    // <div id="current-user-friend-list-page">
-    //   Current User Friend List Page
-    //   {props.currentUser.friendList.map((friend) =>
-    //     friend.isPublished ? (
-    //       <div className="friend-card-cont" key={friend._id}>
-    //         {/* <Link className="link" to={`/user/${friend._id}`}>
-    //           <img
-    //             className="prof-pic-friendList"
-    //             alt={`profile-pic-user-${friend.firstname}-${friend.lastname}`}
-    //             src={`http://localhost:5000/uploads/${friend.photo.filename}`}
-    //           />
-    //         </Link> */}
-    //         <div>
-    //           {friend.firstname} {friend.lastname}
-    //         </div>
-    //       </div>
-    //     ) : (
-    //       ""
-    //     )
-    //   )}
-    // </div>
   );
 }
 
