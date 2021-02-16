@@ -18,8 +18,8 @@ function LoginPage(props) {
   // const [signupModalOpen, setSignupModalOpen] = useState(false);
   const [signupModalOpen, setSignupModalOpen] = useState(false);
 
-  const guest_email = process.env.GUEST_EMAIL;
-  const guest_pw = process.env.GUEST_PW;
+  const guest_email = process.env.REACT_APP_GUEST_EMAIL;
+  const guest_pw = process.env.REACT_APP_GUEST_PW;
 
   const history = useHistory();
 
@@ -49,10 +49,7 @@ function LoginPage(props) {
   };
 
   const logInAsGuest = () => {
-    console.log("guest_email", guest_email);
-    Axios.post("/user/log-in", {
-      email: guest_email,
-      password: guest_pw,
+    Axios.post("/user/log-in/guest", {
     })
       .then((res) => {
         if (res.data.message) {

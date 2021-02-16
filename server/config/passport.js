@@ -63,68 +63,68 @@ passport.use(
 
 //Make sure you go to https://developers.facebook.com/ and update the redirect url after it is deployed
 
-passport.use(
-  new FacebookStrategy(
-    {
-      clientID: keys.fbAppId,
-      clientSecret: keys.fbAppSecret,
-      callbackURL:
-        process.env.NODE_ENV === "development"
-          ? "http://localhost:3000/user/auth/facebook/callback"
-          : "",
-      // callbackURL: '/api/facebook/callback',
-      profileFields: ["displayName", "photos", "email"],
-      // profileFields: ["id", "displayName", "picture.type(large)"],
-    },
-    function (accessToken, refreshToken, profile, done) {
-      console.log("did it work")
-      // User.findOne({ facebookId: profile.id }, function (err, user) {
-      User.findOne({ facebookId: profile.id }, function (err, user) {
-        if (err) {
-          console.log(err);
-          return res.json(err);
-        }
+// passport.use(
+//   new FacebookStrategy(
+//     {
+//       clientID: keys.fbAppId,
+//       clientSecret: keys.fbAppSecret,
+//       callbackURL:
+//         process.env.NODE_ENV === "development"
+//           ? "http://localhost:3000/user/auth/facebook/callback"
+//           : "",
+//       // callbackURL: '/api/facebook/callback',
+//       profileFields: ["displayName", "photos", "email"],
+//       // profileFields: ["id", "displayName", "picture.type(large)"],
+//     },
+//     function (accessToken, refreshToken, profile, done) {
+//       console.log("did it work")
+//       // User.findOne({ facebookId: profile.id }, function (err, user) {
+//       User.findOne({ facebookId: profile.id }, function (err, user) {
+//         if (err) {
+//           console.log(err);
+//           return res.json(err);
+//         }
 
-        //If user exists on Fakebook, return no error and the user
-        if (user) {
-          done(null, user);
-        }
+//         //If user exists on Fakebook, return no error and the user
+//         if (user) {
+//           done(null, user);
+//         }
 
-        let name = profile.displayName.split(" ");
+//         let name = profile.displayName.split(" ");
 
-        if (name.length !== 2) {
-          // failed to get a first and last name
-          name = [profile.displayName, ""];
-        }
+//         if (name.length !== 2) {
+//           // failed to get a first and last name
+//           name = [profile.displayName, ""];
+//         }
 
-        //If no fakebook user with this facebook account then create new user
-        var newUser = new User({
-          firstname: name[0],
-          lastname: name[1],
-          email: profile.emails[0].value,
-          password: keys.fbPassword,
-          birthDate: new Date(),
-          gender: "other",
-          friendList: [],
-          photo: profile.photos ? profile.photos[0].value : "",
-          realFacebookID: profile.id,
-          isPublished: true,
-        });
+//         //If no fakebook user with this facebook account then create new user
+//         var newUser = new User({
+//           firstname: name[0],
+//           lastname: name[1],
+//           email: profile.emails[0].value,
+//           password: keys.fbPassword,
+//           birthDate: new Date(),
+//           gender: "other",
+//           friendList: [],
+//           photo: profile.photos ? profile.photos[0].value : "",
+//           realFacebookID: profile.id,
+//           isPublished: true,
+//         });
 
-        newUser.save(function (err, createdUser) {
-          if (err) {
-            console.log("Saving error");
-            console.log(err);
-            return done(err);
-          } else {
-            res.json("Submitted");
-            return done(err, createdUser);
-          }
-        });
-      });
-    }
-  )
-);
+//         newUser.save(function (err, createdUser) {
+//           if (err) {
+//             console.log("Saving error");
+//             console.log(err);
+//             return done(err);
+//           } else {
+//             res.json("Submitted");
+//             return done(err, createdUser);
+//           }
+//         });
+//       });
+//     }
+//   )
+// );
 
 passport.serializeUser(function (user, done) {
   done(null, user.id);
