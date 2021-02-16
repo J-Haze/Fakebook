@@ -2,11 +2,14 @@ import React from "react";
 import { useState, useEffect } from "react";
 import Axios from "axios";
 import "./CreatePostModal.css";
+import badWords from "bad-words";
 
 import FileUploader from "./Sections/FileUploader";
 import ProfilePic from "../HelperComponents/ProfilePic"
 
 var path = require("path");
+
+const filter = new badWords();
 
 function CreatePostModal(props) {
   const [text, setText] = useState("");
@@ -26,6 +29,12 @@ function CreatePostModal(props) {
   }
 
   const submitCreatePost = () => {
+if (filter.isProfane(text)) {
+  alert("Text contains a word that is not allowed.");
+  return;
+}
+
+
     if (!text && !imgUpload) {
       setErrorMessage("Post must not be blank");
       alert("Post must not be blank");

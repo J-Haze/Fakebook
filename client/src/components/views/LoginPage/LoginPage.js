@@ -3,7 +3,6 @@ import { useState } from "react";
 import Axios from "axios";
 import "./LoginPage.css";
 import { useHistory } from "react-router-dom";
-// require("dotenv").config();
 
 import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
 
@@ -18,8 +17,6 @@ function LoginPage(props) {
   // const [signupModalOpen, setSignupModalOpen] = useState(false);
   const [signupModalOpen, setSignupModalOpen] = useState(false);
 
-  const guest_email = process.env.REACT_APP_GUEST_EMAIL;
-  const guest_pw = process.env.REACT_APP_GUEST_PW;
 
   const history = useHistory();
 

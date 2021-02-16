@@ -52,6 +52,7 @@ body {
   width: 100%;
   box-sizing: border-box;
   overflow-y: scroll;
+  overflow-x: hidden;
 
   font-family: -apple-system, BlinkMacSystemFont, SFProDisplay-Regular,
     "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",

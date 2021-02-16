@@ -35,14 +35,12 @@ function SignupModal(props) {
 
   const submitSignUp = () => {
     if (filter.isProfane(firstname)) {
-      alert("Firstname contains a word that is not allowed.");
-      setFirstname("");
+      alert("First name contains a word that is not allowed.");
       return;
     }
 
     if (filter.isProfane(lastname)) {
-      alert("Lastname contains a word that is not allowed.");
-      setFirstname("");
+      alert("Last name contains a word that is not allowed.");
       return;
     }
 
@@ -65,8 +63,8 @@ function SignupModal(props) {
       return;
     }
 
-    if (password.length < 8 || password.length > 15) {
-      setErrorMessage("Please enter a Password between 8 and 15 characters.");
+    if (password.length < 8 || password.length > 20) {
+      setErrorMessage("Please enter a Password between 8 and 20 characters.");
       return;
     }
 

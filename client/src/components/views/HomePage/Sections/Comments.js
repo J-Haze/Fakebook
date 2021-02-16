@@ -23,7 +23,6 @@ function Comments(props) {
   const submitComment = () => {
     if (filter.isProfane(newComment)) {
       alert("Comment contains a word that is not allowed.");
-      setNewComment("");
       return;
     }
 
