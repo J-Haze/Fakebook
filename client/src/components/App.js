@@ -3,7 +3,6 @@ import { Route, Switch } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Axios from "axios";
 import { useHistory } from "react-router-dom";
-// require("dotenv").config();
 
 import Header from "./views/Header/Header";
 
@@ -16,43 +15,28 @@ import CreatePostModal from "./views/CreatePostModal/CreatePostModal.js";
 import FriendListPage from "./views/FriendListPage/FriendListPage";
 import FindFriendsPage from "./views/FindFriendsPage/FindFriendsPage";
 
-// import scrollToComponent from "react-scroll-to-component";
-
 function App() {
   const [loading, setLoading] = useState(true);
   const [currentUser, setCurrentUser] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  // const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [tokenRefresh, setTokenRefresh] = useState(true);
   const [allPosts, setAllPosts] = useState([]);
-  // const [displayedPosts, setDisplayedPosts] = useState("");
   const [displayedPosts, setDisplayedPosts] = useState([]);
   const [allUsers, setAllUsers] = useState([]);
-  const [allFriends, setFriends] = useState([]);
-  const [publishedPosts, setPublishedPosts] = useState([]);
-
   const [sendingRequest, setSendingRequst] = useState(false);
   const [updateUserPage, setUpdateUserPage] = useState(false);
   const [refreshUser, setRefreshUser] = useState(false);
-
   const [pageType, setPageType] = useState("NonFriendPage");
-
   const [sentRequests, setSentRequests] = useState("");
   const [receivedRequests, setReceivedRequests] = useState("");
-
   const [sentRequestsCount, setSentRequestsCount] = useState("");
   const [receivedRequestsCount, setReceivedRequestsCount] = useState("");
-
   const [createPostModalOpen, setCreatePostModalOpen] = useState(false);
   const [searchModalOpen, setSearchModalOpen] = useState(false);
   const [notificationModalOpen, setNotificationModalOpen] = useState(false);
-  // const [notificationModalOpen, setNotificationModalOpen] = useState(true);
-
   const [notifications, setNotifications] = useState([]);
   const [refreshNotifications, setRefreshNotifications] = useState(false);
   const [notificationCount, setNotificationCount] = useState(0);
-
-  // const [refTarget, setRefTarget] = useState("");
 
   const history = useHistory();
 
@@ -72,22 +56,6 @@ function App() {
       .catch((error) => console.log("error", error));
   }, [tokenRefresh, refreshUser]);
 
-  // useEffect(() => {
-  //   let publishedPostsArr = [];
-  //   if (allPosts) {
-  //     if (allPosts.length > 0) {
-  //       for (let i = 0; (i = allPosts.length - 1); i++) {
-  //         if (allPosts[i].isPublished) {
-  //           publishedPostsArr.push(allPosts[i]);
-  //         }
-  //       }
-  //     }
-  //   }
-  //   setPublishedPosts(publishedPostsArr);
-  // }, [allPosts]);
-
-  // Move this stuff to other sections (you don't need if for the signup page)
-
   const fetchPosts = () => {
     setLoading(true);
     Axios.get("/post/", {
@@ -98,42 +66,17 @@ function App() {
       },
     }).then((res) => {
       let allPostsArray = res.data;
-      let reversedArray = allPostsArray.reverse();
       setAllPosts(allPostsArray.reverse());
       setDisplayedPosts(allPostsArray.reverse());
-      // filterHomePosts()
-
-      // setAllPosts(allPostsArray)
-      // setDisplayedPosts(allPostsArray)
       setLoading(false);
     });
   };
-
-  // const filterHomePosts = () => {
-
-  // }
 
   useEffect(() => {
     if (isLoggedIn) {
       fetchPosts();
     }
   }, [isLoggedIn]);
-
-  // const fetchUsers = () => {
-  //   Axios.get("/user/users", {
-  //     headers: {
-  //       Authorization: `Bearer ${JSON.parse(
-  //         window.localStorage.getItem("token")
-  //       )}`,
-  //     },
-  //   }).then((res) => {
-  //     setAllUsers(res.data);
-  //   });
-  // };
-
-  // useEffect(() => {
-  //   fetchUsers();
-  // }, []);
 
   const fetchUsers = () => {
     Axios.get("/user/users", {
@@ -143,7 +86,6 @@ function App() {
         )}`,
       },
     }).then((res) => {
-      console.log("res.data", res.data);
       let allUsersArray = res.data;
       setAllUsers(allUsersArray);
       setAllUsers(res.data);
@@ -153,17 +95,10 @@ function App() {
   useEffect(() => {
     if (isLoggedIn) {
       fetchUsers();
-      console.log("All Users:", allUsers);
     }
   }, [isLoggedIn]);
 
-  //^^^
-
   const sendRequest = (receiver) => {
-    console.log("Sent Request");
-    console.log("Sender", currentUser._id);
-    console.log("Receiver", receiver._id);
-
     Axios.post(
       `/request/`,
       {
@@ -182,9 +117,6 @@ function App() {
         fetchUsers();
         fetchPendingRequests();
         sendNotification(receiver._id, "sentRequest", "request", null);
-        console.log("Request sent");
-        console.log(res);
-        //Send notification
       })
       .catch((error) => {
         alert("Failed to send request");
@@ -193,8 +125,6 @@ function App() {
   };
 
   const cancelRequest = (requestid) => {
-    console.log("Cancel Request");
-
     Axios.delete(`/request/${requestid}`, {
       headers: {
         Authorization: `Bearer ${JSON.parse(
@@ -204,11 +134,8 @@ function App() {
     })
       .then((res, err) => {
         setSendingRequst(!sendingRequest);
-        console.log("Request cancelled");
-        console.log(res);
         fetchUsers();
         fetchPendingRequests();
-        //Remove notification?
       })
       .catch((error) => {
         alert("Failed to cancel request");
@@ -217,11 +144,9 @@ function App() {
   };
 
   const acceptRequest = (requestid, userid) => {
-    // console.log("Accepted Request");
     Axios.post(
       `/request/${requestid}/accept`,
       {
-        //  receiver: receiver._id,
       },
       {
         headers: {
@@ -233,17 +158,10 @@ function App() {
     )
       .then((res, err) => {
         setPageType("FriendPage");
-        // setSendingRequst(!sendingRequest);
-        //Something to re-render page (change state to "friend")
-        // setUpdateUserPage(!updateUserPage);
-        // history.push(`/user/${userid}`);
-        console.log("Request accepted");
-        console.log(res);
         fetchUsers();
         fetchIncomingRequests();
         sendNotification(userid, "acceptedRequest", "request", requestid);
         setRefreshUser(!refreshUser);
-        //Send notification
       })
       .catch((error) => {
         alert("Failed to accept request");
@@ -261,11 +179,8 @@ function App() {
     })
       .then((res, err) => {
         setSendingRequst(!sendingRequest);
-        console.log("Request Declined");
-        console.log(res);
         setUpdateUserPage(!updateUserPage);
         fetchIncomingRequests();
-        //Remove notification?
       })
       .catch((error) => {
         alert("Failed to decline request");
@@ -274,8 +189,6 @@ function App() {
   };
 
   const submitUnfriend = (userid) => {
-    console.log("unfriend");
-
     Axios.put(
       `/user/${userid}/unfriend`,
       {},
@@ -288,7 +201,6 @@ function App() {
       }
     )
       .then((res) => {
-        // setUpdateUserPage(!updateUserPage);
         setPageType("NonFriendPage");
         history.push(`/user/${userid}`);
       })
@@ -305,34 +217,19 @@ function App() {
         )}`,
       },
     }).then((res) => {
-      console.log("res.data request", res.data);
-      console.log("res.data.length request", res.data.length);
-      // let allUsersArray = res.data;
       setReceivedRequests(res.data);
 
       if (res.data.length == 0 || res.data.length == undefined) {
         setReceivedRequestsCount("");
-        console.log("zero");
         return;
       } else {
         setReceivedRequestsCount(res.data.length);
-        console.log("res.data.length request2", res.data.length);
-        console.log("made it here");
       }
-
-      // setAllUsers(res.data);
     });
   };
 
   useEffect(() => {
     fetchIncomingRequests();
-    console.log("tada", receivedRequests);
-    console.log("tada2", receivedRequestsCount);
-    // return (
-    //   setReceivedRequests([])
-    // )
-
-    // Something to refresh requests after accepting/declining?
   }, [currentUser]);
 
   const fetchPendingRequests = () => {
@@ -343,38 +240,22 @@ function App() {
         )}`,
       },
     }).then((res) => {
-      console.log("res.data request", res.data);
-      console.log("res.data.length request", res.data.length);
-      // let allUsersArray = res.data;
       setSentRequests(res.data);
 
       if (res.data.length == 0 || res.data.length == undefined) {
         setSentRequestsCount("");
-        console.log("zero");
         return;
       } else {
         setSentRequestsCount(res.data.length);
-        console.log("res.data.length request2", res.data.length);
-        console.log("made it here");
       }
-
-      // setAllUsers(res.data);
     });
   };
 
   useEffect(() => {
     fetchPendingRequests();
-    // console.log("tada", receivedRequests);
-    // console.log("tada2", receivedRequestsCount);
-    // return (
-    //   setReceivedRequests([])
-    // )
-
-    // Something to refresh requests after accepting/declining?
   }, [currentUser]);
 
   const fetchNotifications = () => {
-    console.log("Fetching notifications");
     Axios.get("/notification/received", {
       headers: {
         Authorization: `Bearer ${JSON.parse(
@@ -383,14 +264,7 @@ function App() {
       },
     }).then((res) => {
       let notificationsVar = res.data;
-      console.log("notifications:", notificationsVar);
-      // let reversedArray = allPostsArray.reverse();
       setNotifications(notificationsVar.reverse());
-      // setDisplayedPosts(allPostsArray.reverse());
-      // filterHomePosts()
-
-      // setAllPosts(allPostsArray)
-      // setDisplayedPosts(allPostsArray)
       setLoading(false);
     });
   };
@@ -400,23 +274,11 @@ function App() {
   }, [currentUser, refreshNotifications]);
 
   const sendNotification = (receiverId, action, objectType, objectId) => {
-    // if (currentUser._id === receiverId) {
-    //   return
-    // }
-
-    // if (objectId == "sentRequest") {
-    //   Axios.get
-    // }
-    console.log("receiverId", receiverId);
-    console.log("currentUser._id", currentUser._id);
-
     if (receiverId === currentUser._id) {
-      console.log("Sender same as receiver");
       return
     }
 
     let parentId = null;
-    // let objectId = objectId;
 
     if (action == "comment" && objectType == "comment") {
       parentId = objectId;
@@ -442,9 +304,7 @@ function App() {
       }
     )
       .then((res, err) => {
-        console.log("Notification Sent");
         fetchNotifications();
-        // notificationCount?
       })
       .catch((error) => {
         alert("Failed to send notification");
@@ -457,7 +317,6 @@ function App() {
       <div
         id="main"
         onClick={(event) => {
-          // event.stopPropagation();
           setSearchModalOpen(false);
           setNotificationModalOpen(false);
         }}
@@ -478,7 +337,6 @@ function App() {
           notificationCount={notificationCount}
           setNotificationCount={setNotificationCount}
           fetchNotifications={fetchNotifications}
-          // handleNotificationClick={handleNotificationClick}
         />
         <div id="content">
           {createPostModalOpen && (
@@ -508,7 +366,6 @@ function App() {
                   declineRequest={declineRequest}
                   submitUnfriend={submitUnfriend}
                   sendingRequest={sendingRequest}
-                  // sendNotification={sendNotification}
                   receivedRequests={receivedRequests}
                   setReceivedRequests={setReceivedRequests}
                   receivedRequestsCount={receivedRequestsCount}
@@ -546,7 +403,6 @@ function App() {
                     pageType={pageType}
                     setPageType={setPageType}
                     sendNotification={sendNotification}
-                    // refTarget={refTarget}
                   />
                 )}
               ></Route>
@@ -592,22 +448,6 @@ function App() {
                     currentUser={currentUser}
                     fetchPosts={fetchPosts}
                     sendNotification={sendNotification}
-
-                    // sendRequest={sendRequest}
-                    // cancelRequest={cancelRequest}
-                    // acceptRequest={acceptRequest}
-                    // declineRequest={declineRequest}
-                    // submitUnfriend={submitUnfriend}
-                    // sendingRequest={sendingRequest}
-                    // receivedRequests={receivedRequests}
-                    // setReceivedRequests={setReceivedRequests}
-                    // receivedRequestsCount={receivedRequestsCount}
-                    // setReceivedRequestsCount={setReceivedRequestsCount}
-                    // sentRequests={sentRequests}
-                    // setSentRequests={setSentRequests}
-                    // sentRequestsCount={sentRequestsCount}
-                    // setSentRequestsCount={setSentRequestsCount}
-                    // sendNotification={sendNotification}
                   />
                 )}
               ></Route>

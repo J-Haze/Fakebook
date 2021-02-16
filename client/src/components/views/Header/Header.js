@@ -7,7 +7,7 @@ import Axios from "axios";
 
 import fLogo from "../../../assets/facebook-logo-header.png";
 import magIcon from "../../../assets/mag.png";
-import logoutLogo from "../../../assets/logout-alt.png";
+import logoutLogo from "../../../assets/logout.png";
 import bellLogo from "../../../assets/bell.png";
 import eyeIcon from "../../../assets/eye.png";
 import friendsLogo from "../../../assets/friend.png";

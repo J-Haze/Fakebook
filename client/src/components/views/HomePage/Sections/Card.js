@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import Axios from "axios";
 import { useHistory } from "react-router-dom";
 
-// import thumbBlack from "../../../../assets/thumbs-up-solid.svg";
 import thumbBlack from "../../../../assets/thumbs-up-regular-gray.svg";
 import thumbBlue from "../../../../assets/thumbs-up-solid-light-blue.svg";
 

@@ -8,12 +8,7 @@ import { useHistory } from "react-router-dom";
 
 import thumbBlue from "../../../../assets/thumbs-up-solid-light-blue.svg";
 
-const filter = new badWords();
-
 function Comments(props) {
-  const [newComment, setNewComment] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
-
   const [likeCount, setLikeCount] = useState(0);
 
   const [likedByCurrentUser, setLikedByCurrentUser] = useState(false);
