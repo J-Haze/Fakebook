@@ -480,7 +480,9 @@ exports.unpublish_user = (req, res, next) => {
                 }
 
                 Notification.updateMany(
-                  { author: userid },
+                  {
+                    $or: [{ sender: userid }, { receiver: userid }],
+                  },
                   { isPublished: false },
                   (err, unpublishedNotifications) => {
                     if (err) {

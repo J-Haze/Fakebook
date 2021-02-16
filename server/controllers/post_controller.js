@@ -334,12 +334,12 @@ exports.get_post = (req, res, next) => {
 
   const { postid } = req.params;
 
-  Post.findOne({ _id: postid }, (err, post) => {
+  Post.findOne({ _id: postid, isPublished: true }, (err, post) => {
     if (err) {
       console.log(err);
       return res.json(err);
     }
-    Comment.find({ parent: postid }, (err, postComments) => {
+    Comment.find({ parent: postid, isPublished: true }, (err, postComments) => {
       if (err) {
         console.log(err);
         return res.json(err);

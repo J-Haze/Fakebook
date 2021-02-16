@@ -18,8 +18,8 @@ function CurrentUserPage(props) {
   //  const [editUserModalOpen, setEditUserModalOpen] = useState(true);
   const [editUserModalOpen, setEditUserModalOpen] = useState(false);
 
-  // const [deleteUserModalOpen, setDeleteUserModalOpen] = useState(false);
-  const [deleteUserModalOpen, setDeleteUserModalOpen] = useState(true);
+  const [deleteUserModalOpen, setDeleteUserModalOpen] = useState(false);
+  // const [deleteUserModalOpen, setDeleteUserModalOpen] = useState(true);
 
   // const [refs, setRefs] = useState([]);
 
