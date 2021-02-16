@@ -8,7 +8,7 @@ function FindFriendsPage(props) {
   const [nonFriends, setNonFriends] = useState([]);
 
   useEffect(() => {
-    let nonFriendsArr = props.allUsers;
+    let nonFriendsArr = [...props.allUsers];
 
     if (
       nonFriendsArr == undefined ||
@@ -29,6 +29,8 @@ function FindFriendsPage(props) {
       return;
     }
 
+    //User list is greater than 1
+
     //Remove currentUser from array
     for (let i = nonFriendsArr.length - 1; i >= 0; i--) {
       if (nonFriendsArr[i]._id == props.currentUser._id) {
@@ -38,6 +40,7 @@ function FindFriendsPage(props) {
 
     setNonFriends(nonFriendsArr);
 
+    //If the currentUser has 0 friends, then the nonFriendList is allUsers minus currentUser
     if (
       props.currentUser.friendList == undefined ||
       props.currentUser.friendList.length == 0 ||
@@ -47,6 +50,7 @@ function FindFriendsPage(props) {
       setNonFriends(nonFriendsArr);
     } else {
 
+      //Otherwise, subtract all friends from the nonfriendList
       for (let i = nonFriendsArr.length - 1; i >= 0; i--) {
         for (let j = props.currentUser.friendList.length - 1; j >= 0; j--) {
           if (nonFriendsArr[i]._id == props.currentUser.friendList[j]._id) {

@@ -6,6 +6,7 @@ import { useHistory } from "react-router-dom";
 
 import Card from "../../../HomePage/Sections/Card.js";
 import EditUserModal from "./Sections/EditUserModal.js";
+import DeleteUserModal from "./Sections/DeleteUserModal.js";
 
 import "../../UserPage.css";
 
@@ -16,6 +17,9 @@ function CurrentUserPage(props) {
 
   //  const [editUserModalOpen, setEditUserModalOpen] = useState(true);
   const [editUserModalOpen, setEditUserModalOpen] = useState(false);
+
+  // const [deleteUserModalOpen, setDeleteUserModalOpen] = useState(false);
+  const [deleteUserModalOpen, setDeleteUserModalOpen] = useState(true);
 
   // const [refs, setRefs] = useState([]);
 
@@ -119,6 +123,17 @@ function CurrentUserPage(props) {
           // createPostModalOpen={createPostModalOpen}
           setEditUserModalOpen={setEditUserModalOpen}
           currentUser={props.currentUser}
+          // fetchPosts={fetchPosts}
+        />
+      )}
+
+      {deleteUserModalOpen && (
+        <DeleteUserModal
+          // createPostModalOpen={createPostModalOpen}
+          setDeleteUserModalOpen={setDeleteUserModalOpen}
+          currentUser={props.currentUser}
+          setCurrentUser={props.setCurrentUser}
+          isLoggedIn={props.isLoggedIn}
           // fetchPosts={fetchPosts}
         />
       )}
@@ -237,8 +252,20 @@ function CurrentUserPage(props) {
           <div id="user-info-footer-text">
             'Fakebook', created by Justin Hazelton, 2021 <br /> No copyright
             infringement intended.
-            <div id="delete-account-btn"> Delete Account</div>
           </div>
+          {props.currentUser.email == "guest@gmail.com" ? (
+            ""
+          ) : (
+            <div
+              id="delete-account-btn"
+              onClick={() => {
+                setDeleteUserModalOpen(true);
+              }}
+            >
+              {" "}
+              Delete Account
+            </div>
+          )}
         </div>
       </div>
       {/* </div> */}

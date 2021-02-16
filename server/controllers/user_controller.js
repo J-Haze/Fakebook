@@ -350,6 +350,19 @@ exports.post_user_login = function (req, res, next) {
       });
     }
     if (err) res.send(err);
+
+    User.findOne({ _id: user._id }, (err, user) => {
+      if (err) {
+        console.log(err);
+        return res.json(err);
+      }
+      if (!user.isPublished) {
+        return res.json({
+          message: "This account is no longer available.",
+        });
+      }
+    });
+
     jwt.sign(
       { _id: user._id, email: user.email },
       //Production:
@@ -375,7 +388,7 @@ exports.post_guest_login = function (req, res, next) {
   // console.log(keys.guest_email);
   req.body.email = keys.guest_email;
   req.body.password = keys.guest_pw;
-    passport.authenticate("local", { session: false }, function (
+  passport.authenticate("local", { session: false }, function (
     err,
     user,
     info

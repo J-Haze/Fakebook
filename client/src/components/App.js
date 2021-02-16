@@ -406,6 +406,8 @@ function App() {
                     pageType={pageType}
                     setPageType={setPageType}
                     sendNotification={sendNotification}
+                    setCurrentUser={setCurrentUser}
+                    isLoggedIn={isLoggedIn}
                   />
                 )}
               ></Route>

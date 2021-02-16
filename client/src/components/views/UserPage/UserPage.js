@@ -110,6 +110,8 @@ console.log(
           submitUnfriend={props.submitUnfriend}
           sendingRequest={props.sendingRequest}
           sendNotification={props.sendNotification}
+          setCurrentUser={props.setCurrentUser}
+          isLoggedIn={props.isLoggedIn}
           // refTarget={props.refTarget}
         />
       ) : props.pageType == "FriendPage" ? (

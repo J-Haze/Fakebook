@@ -58,7 +58,7 @@
   margin-top: 8px;
   display: flex;
 
-  border: 1px solid black;
+  /* border: 1px solid black; */
 
   /* font-family: "Segoe UI", Helvetica, Arial, sans-serif;
   font-size: 13px;
@@ -74,6 +74,7 @@
 #user-info-footer-text {
 
   /* margin-top: 8px; */
+  margin-left: 4px;
 
   font-family: "Segoe UI", Helvetica, Arial, sans-serif;
   font-size: 13px;
@@ -84,10 +85,41 @@
   text-decoration-line: none;
   text-decoration-style: solid;
   word-break: break-word;
+  /* border: 1px solid red; */
+
 }
 
 #delete-account-btn {
-  
+  /* border: 1px solid black; */
+  width: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  border-radius: 8px;
+  margin-right: 4px;
+  margin-left: auto;
+  height: 30px;
+
+    font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 16.0004px;
+  text-align: left;
+  color: rgb(101, 103, 107);
+  text-decoration-line: none;
+  text-decoration-style: solid;
+  word-break: break-word;
+
+  /* border: 1px solid var(--dark-gray); */
+  border: 1px solid rgb(176, 177, 179);
+
+}
+
+#delete-account-btn:hover {
+  cursor: pointer;
+  color: var(--red)
 }
 
 #user-post-cont {
@@ -506,7 +538,7 @@ word-break: break-word;
 
 .unfriend-modal-content {
   position: relative;
-  top: 43%;
+  top: 50%;
   transform: translateY(-47%);
   display: flex;
   flex-direction: column;
