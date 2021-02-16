@@ -81,7 +81,7 @@ exports.get_currentUser_notifications_received = (req, res, next) => {
       res.sendStatus(403);
     } else {
       Notification.find(
-        { receiver: authData._id },
+        { receiver: authData._id, isPublished: true },
         (err, receivedNotifications) => {
           if (err) return res.json(err);
           res.json(receivedNotifications);
@@ -122,6 +122,7 @@ exports.send_notification = (req, res) => {
             parentId: foundComment.parent._id,
             seen: false,
             interacted: false,
+            isPublished: true,
           });
           notification.save(function (err) {
             if (err) {
@@ -141,6 +142,7 @@ exports.send_notification = (req, res) => {
           parentId: req.body.parentId,
           seen: false,
           interacted: false,
+          isPublished: true,
         });
 
         notification.save(function (err) {
@@ -160,6 +162,7 @@ exports.send_notification = (req, res) => {
           parentId: req.body.parentId,
           seen: false,
           interacted: false,
+          isPublished: true,
         });
 
         notification.save(function (err) {

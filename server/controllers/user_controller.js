@@ -13,6 +13,9 @@ require("dotenv").config();
 
 var User = require("../models/User");
 var Post = require("../models/Post");
+var Comment = require("../models/Comment");
+var Request = require("../models/FriendRequest");
+var Notification = require("../models/Notification");
 
 exports.get_current_user = (req, res, next) => {
   jwt.verify(req.token, process.env.JWT_SECRET, (err, authData) => {
@@ -333,55 +336,61 @@ exports.edit_current_user = [
 ];
 
 exports.post_user_login = function (req, res, next) {
-  passport.authenticate("local", { session: false }, function (
-    err,
-    user,
-    info
-  ) {
-    console.log("h1");
-    console.log(err);
-    if (err || !user) {
-      console.log("error or no user");
-      console.log("err", err);
-      console.log("user", user);
-      console.log("info", info);
-      return res.json({
-        message: "Incorrect Email or Password.",
-      });
-    }
-    if (err) res.send(err);
-
-    User.findOne({ _id: user._id }, (err, user) => {
-      if (err) {
+      passport.authenticate("local", { session: false }, function (
+        err,
+        user,
+        info
+      ) {
+        console.log("h1");
         console.log(err);
-        return res.json(err);
-      }
-      if (!user.isPublished) {
-        return res.json({
-          message: "This account is no longer available.",
-        });
-      }
-    });
-
-    jwt.sign(
-      { _id: user._id, email: user.email },
-      //Production:
-      // process.env.JWT_SECRET,
-      //Local
-      keys.secretOrKey,
-      { expiresIn: 36000 },
-      (err, token) => {
-        if (err) {
-          return res.status(400).json(err);
+        if (err || !user) {
+          console.log("error or no user");
+          console.log("err", err);
+          console.log("user", user);
+          console.log("info", info);
+          return res.json({
+            message: "Incorrect Email or Password.",
+          });
         }
-        res.json({
-          token: token,
-          user: { _id: user._id, email: user.email },
-        });
-      }
-    );
-  })(req, res);
-};
+        if (err) res.send(err);
+
+        // User.findOne({ _id: user._id }, (err, user) => {
+        //   if (err) {
+        //     console.log(err);
+        //     return res.json(err);
+        //   }
+        //   if (!user.isPublished) {
+        //     return res.json({
+        //       message: "This account is no longer available.",
+        //     });
+        //   }
+        // });
+
+        if (!user.isPublished) {
+          return res.json({
+            message: "This account is no longer available.",
+          });
+        }
+
+        jwt.sign(
+          { _id: user._id, email: user.email },
+          //Production:
+          // process.env.JWT_SECRET,
+          //Local
+          keys.secretOrKey,
+          { expiresIn: 36000 },
+          (err, token) => {
+            if (err) {
+              return res.status(400).json(err);
+            }
+            res.json({
+              token: token,
+              user: { _id: user._id, email: user.email },
+            });
+          }
+        );
+      })(req, res);
+    }
 
 exports.post_guest_login = function (req, res, next) {
   // console.log(process.env.GUEST_PW)
@@ -437,56 +446,85 @@ exports.unpublish_user = (req, res, next) => {
     } else {
       // const { body, validationResult, check } = require("express-validator");
       const { userid } = req.params;
-      isPublished = false;
+      // isPublished = false;
 
       console.log("userid", userid);
 
-      //Checks if you're an admin
-      User.findOne({ _id: authData._id }, (err, user) => {
+      User.findOne({ _id: userid }, (err, originalUser) => {
         if (err) {
           console.log(err);
           return res.json(err);
         }
 
-        console.log("authData._id", authData._id);
+        console.log("originalUser", originalUser);
 
-        User.findOne({ _id: userid }, (err, originalUser) => {
-          if (err) {
-            console.log(err);
-            return res.json(err);
-          }
-
-          
-      Post.updateMany(
-        { receiver: authData._id },
-        { interacted: true },
-        (err, updatedNotifications) => {
-          console.log("wow2", updatedNotifications);
-          if (err) {
-            console.log(err);
-            res.sendStatus(403);
-          } else {
-            return res.json({ "Updated Notifications": updatedNotifications });
-          }
-        }
-      );
-
-          console.log("originalUser", originalUser);
-
-          Post.findOneAndUpdate(
-            { _id: postid },
-            { isPublished },
-            { useFindAndModify: false, new: true },
-            (err, updatedPost) => {
-              if (err) {
-                console.log(err);
-                return res.json(err);
-              } else {
-                res.json(updatedPost);
-              }
+        Post.updateMany(
+          { author: userid },
+          { isPublished: false },
+          (err, unpublishedPosts) => {
+            if (err) {
+              console.log(err);
+              res.sendStatus(403);
             }
-          );
-        });
+            // else {
+            //   return res.json({ "Unpublished Posts": unpublishedPosts });
+            // }
+
+            Comment.updateMany(
+              { author: userid },
+              { isPublished: false },
+              (err, unpublishedComments) => {
+                if (err) {
+                  console.log(err);
+                  res.sendStatus(403);
+                }
+
+                Notification.updateMany(
+                  { author: userid },
+                  { isPublished: false },
+                  (err, unpublishedNotifications) => {
+                    if (err) {
+                      console.log(err);
+                      res.sendStatus(403);
+                    }
+
+                    Request.deleteMany(
+                      {
+                        $or: [{ sender: userid }, { receiver: userid }],
+                      },
+                      (err, deletedRequests) => {
+                        if (err) {
+                          console.log(err);
+                          res.sendStatus(403);
+                        }
+
+                        User.findOneAndUpdate(
+                          { _id: userid },
+                          { isPublished: false },
+                          { useFindAndModify: false, new: true },
+                          (err, unpublishedUser) => {
+                            if (err) {
+                              console.log(err);
+                              return res.json(err);
+                            } else {
+                              res.json({
+                                "Unpublished Posts": unpublishedPosts,
+                                "Unpublished Comments": unpublishedComments,
+                                "Unpublished Notifications": unpublishedNotifications,
+                                "Deleted Requests": deletedRequests,
+                                "Unpublished User": unpublishedUser,
+                              });
+                            }
+                          }
+                        );
+                      }
+                    );
+                  }
+                );
+              }
+            );
+          }
+        );
       });
     }
   });

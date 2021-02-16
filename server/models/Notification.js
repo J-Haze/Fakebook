@@ -13,9 +13,10 @@ const notificationSchema = mongoose.Schema(
     action: { type: String, required: true },
     objectType: { type: String, required: true },
     objectId: { type: mongoose.Schema.Types.ObjectId, required: false },
-    parentId: {type: Schema.Types.ObjectId, ref: "Post", required: false},
+    parentId: { type: Schema.Types.ObjectId, ref: "Post", required: false },
     seen: { type: Boolean, default: false },
     interacted: { type: Boolean, default: false },
+    isPublished: { type: Boolean, default: true },
   },
   { timestamps: true }
 );

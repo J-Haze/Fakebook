@@ -62,7 +62,7 @@ function DeleteUserModal(props) {
       })
       .catch((error) => {
         console.log("error", error);
-        alert("Cannot delete this post.");
+        alert("Cannot delete this user.");
       });
   }
 
