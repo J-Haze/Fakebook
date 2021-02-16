@@ -57,7 +57,7 @@ function Comments(props) {
   function unlikeComment() {
     setLikedByCurrentUser(false);
     let newLikes = likeCount - 1;
-    setLikeCount(newLikes);
+      setLikeCount(newLikes);
 
     Axios.put(
       `/post/${props.postid}/${props.comment._id}/unlike`,
@@ -86,7 +86,7 @@ function Comments(props) {
   }
 
   function toggleLike() {
-    if (likedByCurrentUser === false) {
+    if (likedByCurrentUser == false) {
       //Use "like backend"
       likeComment();
     } else {
@@ -100,8 +100,8 @@ function Comments(props) {
   function checkIfLiked() {
     console.log("here1");
     if (
-      props.comment.likesList.length === 0 ||
-      props.comment.likesList.length === undefined
+      props.comment.likesList.length == 0 ||
+      props.comment.likesList.length == undefined
     ) {
       console.log("here2");
       setLikedByCurrentUser(false);
@@ -153,8 +153,8 @@ function Comments(props) {
   function calculateLikes() {
     props.fetchComments();
     if (
-      props.comment.likesList.length === 0 ||
-      props.comment.likesList.length === undefined
+      props.comment.likesList.length == 0 ||
+      props.comment.likesList.length == undefined
     ) {
       setLikeCount(0);
       return;
@@ -199,7 +199,7 @@ function Comments(props) {
               {props.comment.author.firstname} {props.comment.author.lastname}
             </div>
             <div className="comment-text">{props.comment.text}</div>
-            {likeCount === 0 ? (
+            {likeCount == 0 ? (
               ""
             ) : (
               <div className="comment-like-count">

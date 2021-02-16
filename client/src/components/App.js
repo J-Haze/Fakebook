@@ -146,7 +146,8 @@ function App() {
   const acceptRequest = (requestid, userid) => {
     Axios.post(
       `/request/${requestid}/accept`,
-      {},
+      {
+      },
       {
         headers: {
           Authorization: `Bearer ${JSON.parse(
@@ -218,7 +219,7 @@ function App() {
     }).then((res) => {
       setReceivedRequests(res.data);
 
-      if (res.data.length === 0 || res.data.length === undefined) {
+      if (res.data.length == 0 || res.data.length == undefined) {
         setReceivedRequestsCount("");
         return;
       } else {
@@ -241,7 +242,7 @@ function App() {
     }).then((res) => {
       setSentRequests(res.data);
 
-      if (res.data.length === 0 || res.data.length === undefined) {
+      if (res.data.length == 0 || res.data.length == undefined) {
         setSentRequestsCount("");
         return;
       } else {
@@ -274,12 +275,12 @@ function App() {
 
   const sendNotification = (receiverId, action, objectType, objectId) => {
     if (receiverId === currentUser._id) {
-      return;
+      return
     }
 
     let parentId = null;
 
-    if (action === "comment" && objectType === "comment") {
+    if (action == "comment" && objectType == "comment") {
       parentId = objectId;
       objectId = null;
     }

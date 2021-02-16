@@ -28,7 +28,7 @@ function Card(props) {
       </div>
 
       <div className="find-friends-btn-cont">
-        {props.type === "receivedReq" ? (
+        {props.type == "receivedReq" ? (
           <div className="find-friend-request-card-btn-cont">
             <div
               className="find-friend-request-card-btn-confirm"
@@ -52,7 +52,7 @@ function Card(props) {
               Delete Request
             </div>
           </div>
-        ) : props.type === "sentReq" ? (
+        ) : props.type == "sentReq" ? (
           <div className="find-friend-request-card-btn-cont">
             <div className="find-friend-request-card-btn-pending">
               Request Pending
@@ -66,7 +66,7 @@ function Card(props) {
               Cancel Request
             </div>
           </div>
-        ) : props.type === "noReq" ? (
+        ) : props.type == "noReq" ? (
           <div className="find-user-info-add-friend-manage-cont">
             <div
               className="find-user-info-add-friend"

@@ -15,6 +15,9 @@ const FileUploader = (props) => {
       }
       else props.onFileSelectSuccess(file);
     } else {
+      // document.getElementsByClassName("file-uploader")
+      // document.getElementById("create-post-form-img-upload").reset();
+      // document.getElementByClassName("file-uploader").reset();
       props.setImgUpload(null)
     }
   };

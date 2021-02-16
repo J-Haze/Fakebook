@@ -29,11 +29,11 @@ function CurrentUserPage(props) {
       //   console.log(i, props.displayedPosts[i]);
       //   console.log(props.displayedPosts.author);
       //   console.log(props.currentUser);
-      if (props.displayedPosts[i].author._id === props.currentUser._id) {
+      if (props.displayedPosts[i].author._id == props.currentUser._id) {
         // console.log("match");
         // console.log(props.displayedPosts[i].author._id);
         // console.log(props.currentUser._id);
-        if (ownPosts.length === 0 || ownPosts === undefined) {
+        if (ownPosts.length == 0 || ownPosts == undefined) {
           ownPosts = [props.displayedPosts[i]];
         } else {
           ownPosts.push(props.displayedPosts[i]);
@@ -48,8 +48,8 @@ function CurrentUserPage(props) {
 
   function calculateFriendCount() {
     if (
-      props.currentUser.friendList.length === 0 ||
-      props.currentUser.friendList.length === undefined
+      props.currentUser.friendList.length == 0 ||
+      props.currentUser.friendList.length == undefined
     ) {
       setFriendCount(0);
       return;
@@ -62,14 +62,15 @@ function CurrentUserPage(props) {
     calculateFriendCount();
   }, []);
 
-  //  useEffect(() => {
-  //    const refsVar = userPosts.reduce((acc, value) => {
-  //      acc[value._id] = React.createRef();
-  //      return acc;
-  //    }, {});
 
-  //    setRefs(refs)
-  //  }, [userPosts]);
+//  useEffect(() => {
+//    const refsVar = userPosts.reduce((acc, value) => {
+//      acc[value._id] = React.createRef();
+//      return acc;
+//    }, {});
+
+//    setRefs(refs)
+//  }, [userPosts]);
 
   // const ref = React.createRef();
 
@@ -200,7 +201,7 @@ function CurrentUserPage(props) {
               See All Friends
             </span>
           </div>
-          {friendCount === 1 ? (
+          {friendCount == 1 ? (
             <div id="friend-text">1 friend</div>
           ) : (
             <div id="friend-text">{friendCount} friends</div>

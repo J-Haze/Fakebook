@@ -23,7 +23,7 @@ function UserPage(props) {
     } else {
       if (
         props.currentUser.friendList.find(
-          (obj) => obj._id === props.userProfile._id
+          (obj) => obj._id == props.userProfile._id
         )
       ) {
         props.setPageType("FriendPage");
@@ -85,9 +85,11 @@ function UserPage(props) {
 
   // console.log("received requests count1", props.receivedRequestsCount);
 
+  
+
   return (
     <div id="user-page">
-      {props.pageType === "CurrentUserPage" ? (
+      {props.pageType == "CurrentUserPage" ? (
         <CurrentUserPage
           currentUser={props.currentUser}
           fetchPosts={props.fetchPosts}
@@ -103,7 +105,7 @@ function UserPage(props) {
           sendNotification={props.sendNotification}
           // refTarget={props.refTarget}
         />
-      ) : props.pageType === "FriendPage" ? (
+      ) : props.pageType == "FriendPage" ? (
         <FriendPage
           currentUser={props.currentUser}
           fetchPosts={props.fetchPosts}

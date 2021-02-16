@@ -455,11 +455,11 @@ exports.like_post = (req, res, next) => {
 
           let newLikes = orignialLikes;
 
-          if (orignialLikes.length === 0 || orignialLikes === undefined) {
+          if (orignialLikes.length == 0 || orignialLikes == undefined) {
             newLikes = [authData._id];
           } else {
             // newLikes = originalLikes.push(authData._id);
-            newLikes.push(authData._id);
+           newLikes.push(authData._id);
           }
 
           console.log("orignialLikes3", orignialLikes);
@@ -512,7 +512,7 @@ exports.unlike_post = (req, res, next) => {
 
           console.log("orignialLikes1", orignialLikes);
 
-          if (orignialLikes.length === 0 || orignialLikes === undefined) {
+          if (orignialLikes.length == 0 || orignialLikes == undefined) {
             return res.json("You haven't liked this post");
           }
 
@@ -523,13 +523,15 @@ exports.unlike_post = (req, res, next) => {
 
           // if current user ID is in likesList array then return
           if (newLikes.indexOf(authData._id) != -1) {
-            console.log("match");
-            newLikes.splice(newLikes.indexOf(authData._id));
-          } else {
-            return res.json("You haven't liked this post");
-          }
+              console.log("match")
+              newLikes.splice(
+                newLikes.indexOf(authData._id)
+              );
+            } else {
+              return res.json("You haven't liked this post");
+            }
 
-          console.log("newLikes3", newLikes);
+            console.log("newLikes3", newLikes);
           console.log("orignialLikes3", orignialLikes);
 
           Post.findOneAndUpdate(

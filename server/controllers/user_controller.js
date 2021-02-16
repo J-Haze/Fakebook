@@ -218,15 +218,15 @@ exports.edit_current_user = [
         occupation = req.body.occupation;
         photo = null;
 
-        if (bio === undefined) {
+        if (bio == undefined) {
           bio = "";
         }
 
-        if (location === undefined) {
+        if (location == undefined) {
           location = "";
         }
 
-        if (occupation === undefined) {
+        if (occupation == undefined) {
           occupation = "";
         }
 
@@ -293,7 +293,7 @@ exports.edit_current_user = [
         //       );
         //   }
         // }
-        if (photo === null) {
+        if (photo == null) {
           User.findOneAndUpdate(
             { _id: authData._id },
             { bio, location, occupation },
@@ -374,7 +374,7 @@ exports.post_guest_login = function (req, res, next) {
   // console.log(keys.guest_email);
   req.body.email = keys.guest_email;
   req.body.password = keys.guest_pw;
-  passport.authenticate("local", { session: false }, function (
+    passport.authenticate("local", { session: false }, function (
     err,
     user,
     info
