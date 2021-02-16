@@ -14,11 +14,8 @@ function HomePage(props) {
 
   const history = useHistory();
 
-  //Move to App.js
-
   useEffect(() => {
     let homePostsVar = [];
-    // console.log("displayedPosts here", props.displayedPosts)
 
     if (
       props.displayedPosts == undefined ||
@@ -26,7 +23,6 @@ function HomePage(props) {
       props.displayedPosts == null ||
       props.displayedPosts == ""
     ) {
-      console.log("no displayed Posts");
       homePostsVar = "";
       setHomePosts(homePostsVar);
       return;
@@ -38,15 +34,12 @@ function HomePage(props) {
       props.currentUser.friendList == null ||
       props.currentUser.friendList == ""
     ) {
-      console.log("Only display My Posts");
       // Only display your posts
       for (let i = props.displayedPosts.length - 1; i >= 0; i--) {
         if (props.displayedPosts[i].author._id == props.currentUser._id) {
           homePostsVar.push(props.displayedPosts[i]);
-          // console.log("new homePostsVar", homePostsVar);
         }
       }
-      console.log("Only display My Posts", homePostsVar);
       let sortedHomePostsVar = homePostsVar;
 
       sortedHomePostsVar.sort(function (a, b) {
@@ -60,7 +53,6 @@ function HomePage(props) {
     for (let i = props.displayedPosts.length - 1; i >= 0; i--) {
       if (props.displayedPosts[i].author._id == props.currentUser._id) {
         homePostsVar.push(props.displayedPosts[i]);
-        // console.log("new homePostsVar", homePostsVar);
       } else {
         for (let j = props.currentUser.friendList.length - 1; j >= 0; j--) {
           if (
@@ -68,7 +60,6 @@ function HomePage(props) {
             props.currentUser.friendList[j]._id
           ) {
             homePostsVar.push(props.displayedPosts[i]);
-            // console.log("new homePostsVar", homePostsVar);
           }
         }
       }
@@ -80,10 +71,6 @@ function HomePage(props) {
       });
 
       setHomePosts(sortedHomePostsVar.reverse());
-
-      // console.log("Splicing5", homePostsVar[i]);
-
-      // nonFriendsArr.splice(i, 1);
     }
   }, [
     props.displayedPosts,
@@ -95,8 +82,7 @@ function HomePage(props) {
   ]);
 
   useEffect(() => {
-    // props.fetchUsers();
-    // props.fetchPosts();
+
     return function cleanup() {
       props.fetchUsers();
       props.fetchPosts();
@@ -105,30 +91,14 @@ function HomePage(props) {
 
   return (
     <>
-      {/* <div>Home Page</div> */}
       <div id="home-cont">
         <div id="home-current-user-cont">
           <UserCard user={props.currentUser} />
         </div>
         <div id="home">
-          {/* {props.loading ? (
-          <div>Loading... </div>
-        ) : postCount === 0 ? (
-          <div className="black-text no-blogs">
-            No posts have been posted yet.
-            {props.currentUser}
-          </div>
-        ) : ( */}
           <div id="home-blog-cont">
             <div id="new-post-card">
               <div id="new-post-card-top" className="new-post-card-row">
-                {/* <Link className="link" to={`/user/${props.currentUser._id}`}>
-                <img
-                  className="prof-pic"
-                  alt={`profile-pic-user-${props.currentUser.firstname}-${props.currentUser.lastname}`}
-                  src={`http://localhost:5000/uploads/${props.currentUser.photo.filename}`}
-                />
-              </Link> */}
                 <ProfilePic user={props.currentUser} />
                 <div
                   id="woym-btn"
@@ -139,13 +109,7 @@ function HomePage(props) {
                   What's on your mind, {props.currentUser.firstname}?
                 </div>
               </div>
-              {/* <div
-                id="new-post-card-bottom"
-                className="new-post-card-row"
-              ></div> */}
             </div>
-            {/* <div className="main-subtitle">All Posts:</div> */}
-
             {!homePosts
               ? ""
               : homePosts.map((post) =>
@@ -177,11 +141,9 @@ function HomePage(props) {
               </div>
             </div>
           </div>
-          {/* )} */}
         </div>
         <div id="home-friend-cont">
           <div id="home-current-user-friend-list-side">
-            {/* <div id="current-user-fl-side-header">Friends:</div> */}
             <div
               id="current-user-fl-side-requests-cont"
               className="current-user-fl-side-cont"
@@ -218,14 +180,10 @@ function HomePage(props) {
                         >
                           {request.sender.firstname} {request.sender.lastname}
                         </div>
-                        {/* <div className="friend-request-card-location">
-                    {request.sender.location}
-                  </div> */}
                         <div className="friend-request-card-btn-cont">
                           <div
                             className="friend-request-card-btn-confirm"
                             onClick={() => {
-                              // setUnfriendModalOpen(true);
                               props.acceptRequest(
                                 request._id,
                                 request.sender._id
@@ -237,7 +195,6 @@ function HomePage(props) {
                           <div
                             className="friend-request-card-btn-decline"
                             onClick={() => {
-                              // setUnfriendModalOpen(true);
                               props.declineRequest(request._id);
                             }}
                           >
@@ -265,13 +222,6 @@ function HomePage(props) {
                   &nbsp;&nbsp;{props.sentRequestsCount} Requests Pending
                 </div>
               )}
-
-              {/* {!props.sentRequestsCount ? (
-          <div className="no-new-requests">No pending requests</div>
-        ) : (
-          ""
-        )} */}
-
               {props.sentRequestsCount == "" ? (
                 <div className="no-new-requests">No pending requests</div>
               ) : (
@@ -298,9 +248,6 @@ function HomePage(props) {
                           {request.receiver.firstname}{" "}
                           {request.receiver.lastname}
                         </div>
-                        {/* <div className="friend-request-card-location">
-                    {request.receiver.location}
-                  </div> */}
                         <div className="friend-request-card-btn-cont">
                           <div className="friend-request-card-btn-pending">
                             Request Pending
@@ -322,15 +269,6 @@ function HomePage(props) {
                 )
               )}
               <div className="top-border-gray"></div>
-              {/* <div
-                className="no-posts-btn"
-                onClick={() => {
-                  history.push("/find-friends");
-                }}
-              >
-                {" "}
-                Find Friends
-              </div> */}
             </div>
           </div>
         </div>
