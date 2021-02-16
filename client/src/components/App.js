@@ -408,6 +408,7 @@ function App() {
                     sendNotification={sendNotification}
                     setCurrentUser={setCurrentUser}
                     isLoggedIn={isLoggedIn}
+                    setIsLoggedIn={setIsLoggedIn}
                   />
                 )}
               ></Route>

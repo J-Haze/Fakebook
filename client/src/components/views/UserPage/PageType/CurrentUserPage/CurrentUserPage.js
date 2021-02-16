@@ -134,6 +134,7 @@ function CurrentUserPage(props) {
           currentUser={props.currentUser}
           setCurrentUser={props.setCurrentUser}
           isLoggedIn={props.isLoggedIn}
+          setIsLoggedIn={props.setIsLoggedIn}
           // fetchPosts={fetchPosts}
         />
       )}

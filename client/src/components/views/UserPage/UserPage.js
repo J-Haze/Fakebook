@@ -114,6 +114,7 @@ console.log(
           sendNotification={props.sendNotification}
           setCurrentUser={props.setCurrentUser}
           isLoggedIn={props.isLoggedIn}
+          setIsLoggedIn={props.setIsLoggedIn}
           // refTarget={props.refTarget}
         />
       ) : props.pageType == "FriendPage" ? (
