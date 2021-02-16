@@ -29,11 +29,11 @@ function FriendPage(props) {
       //   console.log(i, props.displayedPosts[i]);
       //   console.log(props.displayedPosts.author);
       //   console.log(props.currentUser);
-      if (props.displayedPosts[i].author._id == props.userProfile._id) {
+      if (props.displayedPosts[i].author._id === props.userProfile._id) {
         // console.log("match");
         // console.log(props.displayedPosts[i].author._id);
         // console.log(props.currentUser._id);
-        if (userPostArray.length == 0 || userPostArray == undefined) {
+        if (userPostArray.length === 0 || userPostArray === undefined) {
           userPostArray = [props.displayedPosts[i]];
         } else {
           userPostArray.push(props.displayedPosts[i]);
@@ -48,8 +48,8 @@ function FriendPage(props) {
 
   function calculateFriendCount() {
     if (
-      props.userProfile.friendList.length == 0 ||
-      props.userProfile.friendList.length == undefined
+      props.userProfile.friendList.length === 0 ||
+      props.userProfile.friendList.length === undefined
     ) {
       setFriendCount(0);
       return;
@@ -71,13 +71,11 @@ function FriendPage(props) {
   // useEffect(() => {
   //   let friendList = props.userProfile.friendList;
   //   let shownFriends = friendList.slice(0, 8)
-    
+
   //   console.log("here9")
   //   console.log(shownFriends)
   //   console.log(friendList)
   // }, []);
-  
-
 
   return (
     <div id="current-user-page">
@@ -207,7 +205,7 @@ function FriendPage(props) {
               See All Friends
             </span>
           </div>
-          {friendCount == 1 ? (
+          {friendCount === 1 ? (
             <div id="friend-text">1 friend</div>
           ) : (
             <div id="friend-text">{friendCount} friends</div>

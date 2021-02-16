@@ -32,11 +32,11 @@ function NonFriendPage(props) {
       //   console.log(i, props.displayedPosts[i]);
       //   console.log(props.displayedPosts.author);
       //   console.log(props.currentUser);
-      if (props.displayedPosts[i].author._id == props.userProfile._id) {
+      if (props.displayedPosts[i].author._id === props.userProfile._id) {
         // console.log("match");
         // console.log(props.displayedPosts[i].author._id);
         // console.log(props.currentUser._id);
-        if (userPostArray.length == 0 || userPostArray == undefined) {
+        if (userPostArray.length === 0 || userPostArray === undefined) {
           userPostArray = [props.displayedPosts[i]];
         } else {
           userPostArray.push(props.displayedPosts[i]);
@@ -51,8 +51,8 @@ function NonFriendPage(props) {
 
   function calculateFriendCount() {
     if (
-      props.userProfile.friendList.length == 0 ||
-      props.userProfile.friendList.length == undefined
+      props.userProfile.friendList.length === 0 ||
+      props.userProfile.friendList.length === undefined
     ) {
       setFriendCount(0);
       return;
@@ -78,7 +78,7 @@ function NonFriendPage(props) {
       .then((res) => {
         console.log("result", res.data);
 
-        if (res.data == false) {
+        if (res.data === false) {
           setHaveSentRequest(false);
           setHaveIncomingRequest(false);
           return;
@@ -86,10 +86,10 @@ function NonFriendPage(props) {
 
         setRequestID(res.data._id);
 
-        if (res.data.sender._id == props.currentUser._id) {
+        if (res.data.sender._id === props.currentUser._id) {
           // Sent Request Pending
           setHaveSentRequest(true);
-        } else if (res.data.sender._id == props.userProfile._id) {
+        } else if (res.data.sender._id === props.userProfile._id) {
           //Have pending request
           setHaveIncomingRequest(true);
         } else {
@@ -278,7 +278,7 @@ function NonFriendPage(props) {
               See All Friends
             </span>
           </div>
-          {friendCount == 1 ? (
+          {friendCount === 1 ? (
             <div id="friend-text">1 friend</div>
           ) : (
             <div id="friend-text">{friendCount} friends</div>

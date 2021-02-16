@@ -8,7 +8,7 @@ import { useHistory } from "react-router-dom";
 
 import { Link } from "react-router-dom";
 import FileUploader from "./Sections/FileUploader";
-import ProfilePic from "../HelperComponents/ProfilePic"
+import ProfilePic from "../HelperComponents/ProfilePic";
 
 // import Editor from "../../HelperComponents/Editor";
 
@@ -39,7 +39,7 @@ function CreatePostModal(props) {
   //   };
 
   function isEmpty(str) {
-    return str.replace(/^\s+|\s+$/g, "").length == 0;
+    return str.replace(/^\s+|\s+$/g, "").length === 0;
   }
 
   const handleChange = (e) => {
@@ -276,7 +276,7 @@ function CreatePostModal(props) {
             )}
           </div>
           <div id="create-post-bottom-row">
-            {text.length == 0 && !imgUpload ? (
+            {text.length === 0 && !imgUpload ? (
               <div id="submit-create-post-empty" className="submit-create-post">
                 Post
               </div>

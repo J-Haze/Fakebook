@@ -47,14 +47,10 @@ function Card(props) {
   // props.sendNotification(props.post.author._id, "like", "post", props.post._id);
 
   useEffect(() => {
-     if (props.fromUserPage) {
-       setCommentsOpen(true);
-     }
-  }, [props.fromUserPage])
-
- 
-
-
+    if (props.fromUserPage) {
+      setCommentsOpen(true);
+    }
+  }, [props.fromUserPage]);
 
   function likePost() {
     setLikedByCurrentUser(true);
@@ -81,8 +77,13 @@ function Card(props) {
         // console.log("2", "like");
         // console.log("3", "post");
         // console.log("4", props.post._id);
-        props.sendNotification(props.post.author._id, "like", "post", props.post._id);
-// console.log("liked2", newLikes, likeCount);
+        props.sendNotification(
+          props.post.author._id,
+          "like",
+          "post",
+          props.post._id
+        );
+        // console.log("liked2", newLikes, likeCount);
         //  props.fetchPosts();
         //  history.push(`/user/${currentUser._id}`);
         //  history.go(0);
@@ -130,8 +131,8 @@ function Card(props) {
   function checkIfLiked() {
     //   console.log("here1");
     if (
-      props.post.likesList.length == 0 ||
-      props.post.likesList.length == undefined
+      props.post.likesList.length === 0 ||
+      props.post.likesList.length === undefined
     ) {
       console.log("here2");
       setLikedByCurrentUser(false);
@@ -150,7 +151,7 @@ function Card(props) {
   }, []);
 
   function toggleLike() {
-    if (likedByCurrentUser == false) {
+    if (likedByCurrentUser === false) {
       //Use "like backend"
       likePost();
     } else {
@@ -205,7 +206,10 @@ function Card(props) {
       let publishedComments = [];
       for (let i = 0; i < res.data.length; i++) {
         if (res.data[i].isPublished) {
-          if (publishedComments.length == 0 || publishedComments == undefined) {
+          if (
+            publishedComments.length === 0 ||
+            publishedComments === undefined
+          ) {
             publishedComments = [res.data[i]];
           } else {
             // console.log(publishedComments)
@@ -233,8 +237,8 @@ function Card(props) {
     props.fetchPosts();
     // console.log("calculatedLikes:", props.post.likesList.length);
     if (
-      props.post.likesList.length == 0 ||
-      props.post.likesList.length == undefined
+      props.post.likesList.length === 0 ||
+      props.post.likesList.length === undefined
     ) {
       setLikeCount(0);
       return;
@@ -244,7 +248,7 @@ function Card(props) {
   }
 
   useEffect(() => {
-   calculateLikes();
+    calculateLikes();
   }, []);
 
   // function deleteComment() {
@@ -287,13 +291,12 @@ function Card(props) {
   }, []);
 
   function toggleCommentsOpen() {
-    if (commentsOpen == true) {
+    if (commentsOpen === true) {
       setCommentsOpen(false);
     } else {
       setCommentsOpen(true);
     }
   }
-
 
   // const myRef = useRef(null);
 
@@ -336,7 +339,7 @@ function Card(props) {
               {moment(props.post.createdAt).format("LT")}
             </div>
           </div>
-          {props.post.author._id == props.currentUser._id ? (
+          {props.post.author._id === props.currentUser._id ? (
             <span
               className="del-post-x"
               onClick={(event) => {
@@ -400,7 +403,7 @@ function Card(props) {
           ""
         )}
         <div className="card-row-three">
-          {likeCount == 1 ? (
+          {likeCount === 1 ? (
             <div className="like-count">{likeCount} Like</div>
           ) : (
             <div className="like-count">{likeCount} Likes</div>

@@ -189,7 +189,7 @@ exports.like_comment = (req, res, next) => {
 
           let newLikes = orignialLikes;
 
-          if (orignialLikes.length == 0 || orignialLikes == undefined) {
+          if (orignialLikes.length === 0 || orignialLikes === undefined) {
             newLikes = [authData._id];
           } else {
             // newLikes = originalLikes.push(authData._id);
@@ -246,7 +246,7 @@ exports.unlike_comment = (req, res, next) => {
 
           console.log("orignialLikes1", orignialLikes);
 
-          if (orignialLikes.length == 0 || orignialLikes == undefined) {
+          if (orignialLikes.length === 0 || orignialLikes === undefined) {
             return res.json("You haven't liked this comment");
           }
 

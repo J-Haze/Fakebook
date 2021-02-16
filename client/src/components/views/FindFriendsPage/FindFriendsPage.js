@@ -21,29 +21,29 @@ function FindFriendsPage(props) {
   console.log("props.receivedRequests", props.receivedRequests);
 
   useEffect(() => {
-    console.log("Running")
+    console.log("Running");
     let nonFriendsArr = props.allUsers;
     console.log("nonFriendsArr", nonFriendsArr);
     console.log("props.allUsers", props.allUsers);
 
     if (
-      nonFriendsArr == undefined ||
-      nonFriendsArr.length == 0 ||
-      nonFriendsArr == null ||
-      nonFriendsArr == ""
+      nonFriendsArr === undefined ||
+      nonFriendsArr.length === 0 ||
+      nonFriendsArr === null ||
+      nonFriendsArr === ""
     ) {
       //This shouldn't happen because there will always be you as the user
-      console.log("Error- No user list")
+      console.log("Error- No user list");
       console.log("nonFriendsArr2", nonFriendsArr);
       setNonFriends(nonFriendsArr);
       return;
     }
 
-    console.log("nonfriend here")
+    console.log("nonfriend here");
 
     //Remove currentUser from list
     for (let i = nonFriendsArr.length - 1; i >= 0; i--) {
-      if (nonFriendsArr[i]._id == props.currentUser._id) {
+      if (nonFriendsArr[i]._id === props.currentUser._id) {
         console.log("Splicing1", nonFriendsArr[i]);
         nonFriendsArr.splice(i, 1);
       }
@@ -52,10 +52,10 @@ function FindFriendsPage(props) {
     setNonFriends(nonFriendsArr);
 
     if (
-      props.currentUser.friendList == undefined ||
-      props.currentUser.friendList.length == 0 ||
-      props.currentUser.friendList == null ||
-      props.currentUser.friendList == ""
+      props.currentUser.friendList === undefined ||
+      props.currentUser.friendList.length === 0 ||
+      props.currentUser.friendList === null ||
+      props.currentUser.friendList === ""
     ) {
       console.log(
         "props.currentUser.friendList error",
@@ -73,7 +73,7 @@ function FindFriendsPage(props) {
         console.log("xi", nonFriendsArr[i]._id);
         for (let j = props.currentUser.friendList.length - 1; j >= 0; j--) {
           console.log("xj", props.currentUser.friendList[j]);
-          if (nonFriendsArr[i]._id == props.currentUser.friendList[j]._id) {
+          if (nonFriendsArr[i]._id === props.currentUser.friendList[j]._id) {
             console.log("Splicing2", nonFriendsArr[i]);
             nonFriendsArr.splice(i, 1);
           }
@@ -91,10 +91,10 @@ function FindFriendsPage(props) {
 
     //Remove sent requests from list
     if (
-      props.sentRequests == undefined ||
-      props.sentRequests.length == 0 ||
-      props.sentRequests == null ||
-      props.sentRequests == ""
+      props.sentRequests === undefined ||
+      props.sentRequests.length === 0 ||
+      props.sentRequests === null ||
+      props.sentRequests === ""
     ) {
       setNonFriends(nonFriendsArr);
     } else {
@@ -107,7 +107,7 @@ function FindFriendsPage(props) {
           //   j,
           //   props.sentRequests[j]
           // );
-          if (nonFriendsArr[i]._id == props.sentRequests[j].receiver._id) {
+          if (nonFriendsArr[i]._id === props.sentRequests[j].receiver._id) {
             console.log("Splicing3", nonFriendsArr[i]);
             nonFriendsArr.splice(i, 1);
           }
@@ -118,10 +118,10 @@ function FindFriendsPage(props) {
 
     //Remove received requests from list
     if (
-      props.receivedRequests == undefined ||
-      props.receivedRequests.length == 0 ||
-      props.receivedRequests == null ||
-      props.receivedRequests == ""
+      props.receivedRequests === undefined ||
+      props.receivedRequests.length === 0 ||
+      props.receivedRequests === null ||
+      props.receivedRequests === ""
     ) {
       setNonFriends(nonFriendsArr);
     } else {
@@ -134,7 +134,7 @@ function FindFriendsPage(props) {
           //   j,
           //   props.sentRequests[j]
           // );
-          if (nonFriendsArr[i]._id == props.receivedRequests[j].sender._id) {
+          if (nonFriendsArr[i]._id === props.receivedRequests[j].sender._id) {
             console.log("Splicing4", nonFriendsArr[i]);
             nonFriendsArr.splice(i, 1);
           }
@@ -217,10 +217,10 @@ function FindFriendsPage(props) {
                   )
                 )}
           </div>
-          {(nonFriends.length == 0 ||
-            nonFriends == undefined ||
-            nonFriends == null ||
-            nonFriends == "") && (
+          {(nonFriends.length === 0 ||
+            nonFriends === undefined ||
+            nonFriends === null ||
+            nonFriends === "") && (
             <div className="no-others-to-show">No Other Users</div>
           )}
         </div>

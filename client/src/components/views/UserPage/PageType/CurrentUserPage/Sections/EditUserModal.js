@@ -205,8 +205,7 @@ function EditUserModal(props) {
   //     )
   // }
   // console.log("bioText.length", bioText.length);
-  console.log("imgUpload", imgUpload);
-  // bioText.length == 0 && !{ imgUpload };
+
 
   return (
     <div
@@ -327,22 +326,6 @@ function EditUserModal(props) {
             )}
           </div>
           <div id="edit-user-bottom-row">
-            {/* {bioText.length == 0 && !imgUpload ? (
-              <div id="submit-edit-user-empty" className="submit-edit-user">
-                Save
-              </div>
-            ) : (
-              <div
-                id="submit-edit-user-full"
-                className="submit-edit-user"
-                onClick={() => {
-                  submitCreatePost();
-                }}
-              >
-                Save
-              </div>
-            )} */}
-
             <div
               id="submit-edit-user-full"
               className="submit-edit-user"

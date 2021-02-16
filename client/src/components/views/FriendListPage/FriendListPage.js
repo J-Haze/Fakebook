@@ -33,7 +33,7 @@ function FriendListPage(props) {
       setPageType("CurrentUserFriendListPage");
     } else {
       if (
-        props.currentUser.friendList.find((obj) => obj._id == props.user._id)
+        props.currentUser.friendList.find((obj) => obj._id === props.user._id)
       ) {
         setPageType("FriendListPage");
       }
@@ -88,7 +88,7 @@ function FriendListPage(props) {
 
   return (
     <div id="friend-list-page-cont">
-      {pageType == "CurrentUserFriendListPage" && (
+      {pageType === "CurrentUserFriendListPage" && (
         <CurrentUserFriendListPage
           currentUser={props.currentUser}
           receivedRequests={props.receivedRequests}
@@ -119,7 +119,7 @@ function FriendListPage(props) {
             {props.user.firstname} {props.user.lastname}'s friends:
           </div>
           <div className="friend-list-card-cont">
-            {props.user.friendList.length == 0 && (
+            {props.user.friendList.length === 0 && (
               <div className="no-friends-to-show">
                 No Friends To Show
                 {/* <FindFriendsBtn />  */}

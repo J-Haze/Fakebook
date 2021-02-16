@@ -39,7 +39,7 @@ function Header(props) {
   useEffect(() => {
     // search logic
     console.log("searchQuery", searchQuery);
-    if (searchQuery == "") {
+    if (searchQuery === "") {
       props.setSearchModalOpen(false);
     }
 
@@ -142,7 +142,7 @@ function Header(props) {
     console.log(`/${notification.objectType}/${notification.objectId}`);
     console.log("here", `/notification/${notification._id}/interact`);
 
-    if (notification.interacted == false) {
+    if (notification.interacted === false) {
       Axios.put(
         `/notification/${notification._id}/interact`,
         {},
@@ -157,12 +157,12 @@ function Header(props) {
         .then((res) => {
           props.fetchNotifications();
           // toggleNotificationModal();
-          
-          if (notification.objectType == "post") {
+
+          if (notification.objectType === "post") {
             history.push(`/post/${notification.objectId}`);
-          } else if (notification.objectType == "comment") {
+          } else if (notification.objectType === "comment") {
             history.push(`/post/${notification.parentId}`);
-          } else if (notification.objectType == "request") {
+          } else if (notification.objectType === "request") {
             history.push(`/user/${notification.sender._id}`);
           }
           props.setNotificationModalOpen(false);
@@ -175,11 +175,11 @@ function Header(props) {
         });
     } else {
       toggleNotificationModal();
-      if (notification.objectType == "post") {
+      if (notification.objectType === "post") {
         history.push(`/post/${notification.objectId}`);
-      } else if (notification.objectType == "comment") {
+      } else if (notification.objectType === "comment") {
         history.push(`/post/${notification.parentId}`);
-      } else if (notification.objectType == "request") {
+      } else if (notification.objectType === "request") {
         history.push(`/user/${notification.sender._id}`);
       }
     }
@@ -221,7 +221,7 @@ function Header(props) {
               <div id="search-modal-cont">
                 {!searchResults ? (
                   ""
-                ) : searchResults.length == 0 ? (
+                ) : searchResults.length === 0 ? (
                   <div className="no-search-results"> No results found.</div>
                 ) : (
                   searchResults.slice(0, 6).map((user) => (
@@ -291,7 +291,7 @@ function Header(props) {
               alt="notifications-icon"
             />
 
-            {props.notificationCount == 0 ? (
+            {props.notificationCount === 0 ? (
               ""
             ) : (
               <div className="notification-count">
@@ -319,7 +319,7 @@ function Header(props) {
                     {" "}
                     You have no notifications.
                   </div>
-                ) : props.notifications.length == 0 ? (
+                ) : props.notifications.length === 0 ? (
                   <div className="no-notification-results">
                     {" "}
                     You have no notifications.

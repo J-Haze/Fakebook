@@ -106,7 +106,7 @@ exports.send_notification = (req, res) => {
         return res.json("Sender same as receiver");
       }
 
-      if ((req.body.objectType == "comment") && req.body.action == "like") {
+      if (req.body.objectType === "comment" && req.body.action === "like") {
         Comment.findOne({ _id: req.body.objectId }, (err, foundComment) => {
           if (err) {
             console.log(err);
@@ -131,7 +131,10 @@ exports.send_notification = (req, res) => {
             res.json(notification);
           });
         });
-      } else if ((req.body.objectType == "comment") && req.body.action == "comment") {
+      } else if (
+        req.body.objectType === "comment" &&
+        req.body.action === "comment"
+      ) {
         var notification = new Notification({
           sender: authData._id,
           receiver: req.body.receiver,
@@ -180,21 +183,24 @@ exports.see_all_notifications = (req, res, next) => {
       console.log(err);
       res.sendStatus(403);
     } else {
+      console.log("wow", authData._id);
 
-      console.log("wow", authData._id)
-
-      Notification.updateMany({ receiver: authData._id }, { seen: true }, (err, updatedNotifications) => {
-        console.log("wow2", updatedNotifications);
-        if (err) {
-          console.log(err);
-          res.sendStatus(403);
-        } else {
-          return res.json({ "Updated Notifications": updatedNotifications })
+      Notification.updateMany(
+        { receiver: authData._id },
+        { seen: true },
+        (err, updatedNotifications) => {
+          console.log("wow2", updatedNotifications);
+          if (err) {
+            console.log(err);
+            res.sendStatus(403);
+          } else {
+            return res.json({ "Updated Notifications": updatedNotifications });
+          }
         }
-      })
+      );
     }
-  })
-}
+  });
+};
 
 exports.interact_notification = (req, res, next) => {
   jwt.verify(req.token, process.env.JWT_SECRET, (err, authData) => {
@@ -203,25 +209,25 @@ exports.interact_notification = (req, res, next) => {
       res.sendStatus(403);
     } else {
       // console.log("wow", authData._id);
-      console.log("made it here")
+      console.log("made it here");
 
       interacted = true;
 
-          Notification.findOneAndUpdate(
-            { _id: req.params.notificationid },
-            { interacted },
-            { useFindAndModify: false, new: true },
-            (err, updatedNotification) => {
-              if (err) {
-                console.log(err);
-                return res.json(err);
-              } else {
-                return res.json({
-                  "Updated Notifications": updatedNotification,
-                });
-              }
-            }
-          );
+      Notification.findOneAndUpdate(
+        { _id: req.params.notificationid },
+        { interacted },
+        { useFindAndModify: false, new: true },
+        (err, updatedNotification) => {
+          if (err) {
+            console.log(err);
+            return res.json(err);
+          } else {
+            return res.json({
+              "Updated Notifications": updatedNotification,
+            });
+          }
+        }
+      );
     }
   });
 };

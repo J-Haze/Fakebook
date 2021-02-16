@@ -21,70 +21,70 @@ function HomePage(props) {
     // console.log("displayedPosts here", props.displayedPosts)
 
     if (
-      props.displayedPosts == undefined ||
-      props.displayedPosts.length == 0 ||
-      props.displayedPosts == null ||
-      props.displayedPosts == ""
+      props.displayedPosts === undefined ||
+      props.displayedPosts.length === 0 ||
+      props.displayedPosts === null ||
+      props.displayedPosts === ""
     ) {
-      console.log("no displayed Posts")
+      console.log("no displayed Posts");
       homePostsVar = "";
       setHomePosts(homePostsVar);
-      return
+      return;
     }
 
     if (
-      props.currentUser.friendList == undefined ||
-      props.currentUser.friendList.length == 0 ||
-      props.currentUser.friendList == null ||
-      props.currentUser.friendList == ""
+      props.currentUser.friendList === undefined ||
+      props.currentUser.friendList.length === 0 ||
+      props.currentUser.friendList === null ||
+      props.currentUser.friendList === ""
     ) {
       console.log("Only display My Posts");
-        // Only display your posts
-        for (let i = props.displayedPosts.length - 1; i >= 0; i--) {
-          if (props.displayedPosts[i].author._id == props.currentUser._id) {
+      // Only display your posts
+      for (let i = props.displayedPosts.length - 1; i >= 0; i--) {
+        if (props.displayedPosts[i].author._id === props.currentUser._id) {
+          homePostsVar.push(props.displayedPosts[i]);
+          // console.log("new homePostsVar", homePostsVar);
+        }
+      }
+      console.log("Only display My Posts", homePostsVar);
+      let sortedHomePostsVar = homePostsVar;
+
+      sortedHomePostsVar.sort(function (a, b) {
+        return new Date(a.createdAt) - new Date(b.createdAt);
+      });
+
+      setHomePosts(sortedHomePostsVar.reverse());
+      return;
+    }
+
+    for (let i = props.displayedPosts.length - 1; i >= 0; i--) {
+      if (props.displayedPosts[i].author._id === props.currentUser._id) {
+        homePostsVar.push(props.displayedPosts[i]);
+        // console.log("new homePostsVar", homePostsVar);
+      } else {
+        for (let j = props.currentUser.friendList.length - 1; j >= 0; j--) {
+          if (
+            props.displayedPosts[i].author._id ==
+            props.currentUser.friendList[j]._id
+          ) {
             homePostsVar.push(props.displayedPosts[i]);
             // console.log("new homePostsVar", homePostsVar);
           }
         }
-      console.log("Only display My Posts", homePostsVar);
-        let sortedHomePostsVar = homePostsVar;
-
-        sortedHomePostsVar.sort(function (a, b) {
-          return new Date(a.createdAt) - new Date(b.createdAt);
-        });
-
-        setHomePosts(sortedHomePostsVar.reverse());
-        return;
       }
-      
-      for (let i = props.displayedPosts.length - 1; i >= 0; i--) {
-        if (props.displayedPosts[i].author._id == props.currentUser._id) {
-          homePostsVar.push(props.displayedPosts[i]);
-          // console.log("new homePostsVar", homePostsVar);
-        } else {
-          for (let j = props.currentUser.friendList.length - 1; j >= 0; j--) {
-            if (
-              props.displayedPosts[i].author._id ==
-              props.currentUser.friendList[j]._id
-            ) {
-              homePostsVar.push(props.displayedPosts[i]);
-              // console.log("new homePostsVar", homePostsVar);
-            }
-          }
-        }
 
-        let sortedHomePostsVar = homePostsVar;
+      let sortedHomePostsVar = homePostsVar;
 
-        sortedHomePostsVar.sort(function (a, b) {
-          return new Date(a.createdAt) - new Date(b.createdAt);
-        });
+      sortedHomePostsVar.sort(function (a, b) {
+        return new Date(a.createdAt) - new Date(b.createdAt);
+      });
 
-        setHomePosts(sortedHomePostsVar.reverse());
+      setHomePosts(sortedHomePostsVar.reverse());
 
-        // console.log("Splicing5", homePostsVar[i]);
+      // console.log("Splicing5", homePostsVar[i]);
 
-        // nonFriendsArr.splice(i, 1);
-      }
+      // nonFriendsArr.splice(i, 1);
+    }
   }, [props.displayedPosts, props.currentUser.friendList, props.currentUser]);
 
   return (
@@ -170,7 +170,7 @@ function HomePage(props) {
               id="current-user-fl-side-requests-cont"
               className="current-user-fl-side-cont"
             >
-              {props.receivedRequestsCount == 1 ? (
+              {props.receivedRequestsCount === 1 ? (
                 <div id="current-user-fl-side-subheader">
                   &nbsp;&nbsp;1 Friend Request
                 </div>
@@ -180,7 +180,7 @@ function HomePage(props) {
                 </div>
               )}
 
-              {props.receivedRequests == "" ? (
+              {props.receivedRequests === "" ? (
                 <div className="no-new-requests">No new requests</div>
               ) : (
                 props.receivedRequests.map((request) =>
@@ -240,7 +240,7 @@ function HomePage(props) {
               id="current-user-fl-side-pending-cont"
               className="current-user-fl-side-cont"
             >
-              {props.sentRequestsCount == 1 ? (
+              {props.sentRequestsCount === 1 ? (
                 <div id="current-user-fl-side-subheader-pending">
                   &nbsp;&nbsp;1 Request Pending
                 </div>
@@ -256,7 +256,7 @@ function HomePage(props) {
           ""
         )} */}
 
-              {props.sentRequestsCount == "" ? (
+              {props.sentRequestsCount === "" ? (
                 <div className="no-new-requests">No pending requests</div>
               ) : (
                 props.sentRequests.map((request) =>
