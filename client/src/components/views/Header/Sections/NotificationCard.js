@@ -1,34 +1,15 @@
-import React, { useState, useEffect, useRef } from "react";
-import moment from "moment";
-import { Link } from "react-router-dom";
-import Axios from "axios";
-import { useHistory } from "react-router-dom";
+import React from "react";
 
 import "../Header.css";
 
 function NotificationCard(props) {
-//   const [hideDot, setHideDot] = useState(false);
-
-//   useEffect(() => {
-//     setHideDot(props.notification.interacted);
-//   }, [props.notification.interacted]);
-
-//   useEffect(() => {
-//       setHideDot(false);
-      
-//       return( setHideDot(true) )
-//   }, []);
 
   return (
     <div
       key={props.notification._id}
       className="link notification-card"
-      // to={`/${notification.objectType}/${notification.objectId}`}
-      // to={`/user/${props.currentUser._id}`}
       onClick={(event) => {
-        // props.setNotificationModalOpen(false);
         props.handleNotificationClick(props.notification);
-        // setHideDot(true);
       }}
     >
       <img
@@ -36,11 +17,6 @@ function NotificationCard(props) {
         alt={`profile-pic-user-${props.notification.sender.firstname}-${props.notification.sender.lastname}`}
         src={`http://localhost:5000/uploads/${props.notification.sender.photo.filename}`}
       />
-      {/* <div classname="notification-text"> */}
-      {/* <div className="notification-card-name">
-                          {notification.sender.firstname}{" "}
-                          {notification.sender.lastname}
-                        </div> */}
       {props.notification.action === "like" ? (
         <div className="notification-action">
           <strong className="strong-blk">
@@ -76,7 +52,6 @@ function NotificationCard(props) {
       ) : (
         ""
       )}
-      {/* {props.hideDots || hideDot ?  */}
       {props.notification.interacted || props.hideDots ? (
         ""
       ) : (
