@@ -7,16 +7,8 @@ import FindFriendsCard from "./Sections/FindFriendsCard.js";
 function FindFriendsPage(props) {
   const [nonFriends, setNonFriends] = useState([]);
 
-  console.log("outside", props.allUsers);
-
   useEffect(() => {
-    console.log(
-      "initial allUsers",
-      props.allUsers
-    );
     let nonFriendsArr = props.allUsers;
-
-    console.log("initial nonFriendsArr", nonFriendsArr);
 
     if (
       nonFriendsArr == undefined ||
@@ -25,9 +17,7 @@ function FindFriendsPage(props) {
       nonFriendsArr == ""
     ) {
       //This shouldn't happen because there will always be you as the user
-      console.log("Error- No user list")
-      console.log("nonFriendsArr2", nonFriendsArr);
-      setNonFriends(nonFriendsArr);
+      setNonFriends("");
       return;
     }
 
@@ -35,18 +25,13 @@ function FindFriendsPage(props) {
       nonFriendsArr.length == 1
     ) {
       //You are the only user
-      console.log("You are the only user");
-      console.log("nonFriendsArr You", nonFriendsArr);
       setNonFriends("");
       return;
     }
 
-    console.log("nonfriend here")
-
-    //Remove currentUser from list
+    //Remove currentUser from array
     for (let i = nonFriendsArr.length - 1; i >= 0; i--) {
       if (nonFriendsArr[i]._id == props.currentUser._id) {
-        console.log("Splicing1", nonFriendsArr[i]);
         nonFriendsArr.splice(i, 1);
       }
     }
@@ -59,40 +44,22 @@ function FindFriendsPage(props) {
       props.currentUser.friendList == null ||
       props.currentUser.friendList == ""
     ) {
-      console.log(
-        "props.currentUser.friendList error",
-        props.currentUser.friendList
-      );
-      console.log("here nonFriendsArr", nonFriendsArr);
       setNonFriends(nonFriendsArr);
     } else {
-      console.log("T Non Friend Arr", nonFriendsArr);
-      console.log(
-        "T props.currentUser.friendList",
-        props.currentUser.friendList
-      );
 
       for (let i = nonFriendsArr.length - 1; i >= 0; i--) {
-        console.log("xi", nonFriendsArr[i]._id);
         for (let j = props.currentUser.friendList.length - 1; j >= 0; j--) {
-          console.log("xj", props.currentUser.friendList[j]);
           if (nonFriendsArr[i]._id == props.currentUser.friendList[j]._id) {
-            console.log("Splicing2", nonFriendsArr[i]);
             nonFriendsArr.splice(i, 1);
           }
         }
       }
-      setNonFriends(nonFriendsArr);
 
-      console.log("T2 Non Friend Arr", nonFriendsArr);
-      console.log(
-        "T2 props.currentUser.friendList",
-        props.currentUser.friendList
-      );
+      setNonFriends(nonFriendsArr);
     }
     setNonFriends(nonFriendsArr);
 
-    //Remove sent requests from list
+    //Remove sent requests from array
     if (
       props.sentRequests == undefined ||
       props.sentRequests.length == 0 ||
@@ -104,12 +71,12 @@ function FindFriendsPage(props) {
       for (let i = nonFriendsArr.length - 1; i >= 0; i--) {
         for (let j = props.sentRequests.length - 1; j >= 0; j--) {
           if (nonFriendsArr[i]._id == props.sentRequests[j].receiver._id) {
-            console.log("Splicing3", nonFriendsArr[i]);
             nonFriendsArr.splice(i, 1);
           }
         }
       }
     }
+
     setNonFriends(nonFriendsArr);
 
     //Remove received requests from list
@@ -124,15 +91,12 @@ function FindFriendsPage(props) {
       for (let i = nonFriendsArr.length - 1; i >= 0; i--) {
         for (let j = props.receivedRequests.length - 1; j >= 0; j--) {
           if (nonFriendsArr[i]._id == props.receivedRequests[j].sender._id) {
-            console.log("Splicing4", nonFriendsArr[i]);
             nonFriendsArr.splice(i, 1);
           }
         }
       }
     }
 
-    console.log("Final NonFriendArray", nonFriendsArr);
-    console.log("Final AllUsers", props.allUsers)
     setNonFriends(nonFriendsArr);
 
     // return(props.fetchUsers)
@@ -147,7 +111,6 @@ function FindFriendsPage(props) {
     <div id="friend-list-page-cont">
       <div id="friend-list-page">
         <div className="friend-list-cont">
-          {/* Something for if there's no friends */}
           <div className="friend-list-header">Find friends:</div>
           <div className="friend-list-card-cont">
             {props.receivedRequests.length == 0 ||
