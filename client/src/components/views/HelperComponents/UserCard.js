@@ -19,15 +19,15 @@ const UserCard = (props) => {
         <img
           className="prof-pic-home-user-page"
           alt={`profile-pic-user-${props.user.firstname}-${props.user.lastname}`}
-          src={`http://localhost:5000/uploads/${props.user.photo.filename}`}
-        />) : (
-
-          <img
-            className="prof-icon"
-            alt={`Default Profile Picture`}
-            src={`http://localhost:5000/uploads/default-prof-pic.png`}
-          />)
-      }
+          src={`https://justins-fakebook-api.herokuapp.com/uploads/${props.user.photo.filename}`}
+        />
+      ) : (
+        <img
+          className="prof-icon"
+          alt={`Default Profile Picture`}
+          src={`https://justins-fakebook-api.herokuapp.com/uploads/default-prof-pic.png`}
+        />
+      )}
 
       <div className="home-user-card-info">
         <div

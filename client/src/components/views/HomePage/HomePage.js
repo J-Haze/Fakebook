@@ -168,7 +168,7 @@ function HomePage(props) {
                         <img
                           className="prof-pic-friendList-request-page"
                           alt={`profile-pic-user-${request.sender.firstname}-${request.sender.lastname}`}
-                          src={`http://localhost:5000/uploads/${request.sender.photo.filename}`}
+                          src={`https://justins-fakebook-api.herokuapp.com/uploads/${request.sender.photo.filename}`}
                         />
                       </Link>
                       <div className="friend-request-card-info">
@@ -235,7 +235,7 @@ function HomePage(props) {
                         <img
                           className="prof-pic-friendList-request-page"
                           alt={`profile-pic-user-${request.receiver.firstname}-${request.receiver.lastname}`}
-                          src={`http://localhost:5000/uploads/${request.receiver.photo.filename}`}
+                          src={`https://justins-fakebook-api.herokuapp.com/uploads/${request.receiver.photo.filename}`}
                         />
                       </Link>
                       <div className="friend-request-card-info">

@@ -55,9 +55,7 @@ function FriendListPage(props) {
           </div>
           <div className="friend-list-card-cont">
             {props.user.friendList.length == 0 && (
-              <div className="no-friends-to-show">
-                No Friends To Show
-              </div>
+              <div className="no-friends-to-show">No Friends To Show</div>
             )}
             {props.user.friendList.map((friend) =>
               friend.isPublished ? (
@@ -66,7 +64,7 @@ function FriendListPage(props) {
                     <img
                       className="prof-pic-friendList-page"
                       alt={`profile-pic-user-${friend.firstname}-${friend.lastname}`}
-                      src={`http://localhost:5000/uploads/${friend.photo.filename}`}
+                      src={`https://justins-fakebook-api.herokuapp.com/uploads/${friend.photo.filename}`}
                     />
                   </Link>
                   <div className="friend-card-info">

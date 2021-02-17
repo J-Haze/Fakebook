@@ -70,7 +70,7 @@ function CurrentUserPage(props) {
           <img
             className="prof-pic-big"
             alt={`profile-pic-user-${props.currentUser.firstname}-${props.currentUser.lastname}`}
-            src={`http://localhost:5000/uploads/${props.currentUser.photo.filename}`}
+            src={`https://justins-fakebook-api.herokuapp.com/uploads/${props.currentUser.photo.filename}`}
           />
         ) : (
           <div className="prof-icon-big"></div>
@@ -143,7 +143,7 @@ function CurrentUserPage(props) {
                       <img
                         className="prof-pic-friendList"
                         alt={`profile-pic-user-${friend.firstname}-${friend.lastname}`}
-                        src={`http://localhost:5000/uploads/${friend.photo.filename}`}
+                        src={`https://justins-fakebook-api.herokuapp.com/uploads/${friend.photo.filename}`}
                       />
                     </Link>
                     <div className="friend-icon-name">
@@ -184,7 +184,7 @@ function CurrentUserPage(props) {
               <img
                 className="prof-pic"
                 alt={`profile-pic-user-${props.currentUser.firstname}-${props.currentUser.lastname}`}
-                src={`http://localhost:5000/uploads/${props.currentUser.photo.filename}`}
+                src={`https://justins-fakebook-api.herokuapp.com/uploads/${props.currentUser.photo.filename}`}
               />
             </Link>
             <div

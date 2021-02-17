@@ -146,7 +146,7 @@ function CreatePostModal(props) {
             {imgPreview ? (
               <img
                 id="scroll-img"
-                src={`http://localhost:5000/${imgPreview}`}
+                src={`https://justins-fakebook-api.herokuapp.com/uploads/${imgPreview}`}
               />
             ) : (
               ""

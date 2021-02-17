@@ -46,14 +46,16 @@ yarn-error.log*
 
  nodemon.json
  
- /uploads/*
-  \uploads\*
+#  /uploads/*
+#   \uploads\*
 
- /uploads
-  /uploads/
+#  /uploads
+#   /uploads/
 
- \uploads
-  \uploads\
+#  \uploads
+#   \uploads\
+
+#  ../uploads
 
  client\.env
   client/.env
@@ -63,7 +65,5 @@ yarn-error.log*
 
   server/config/keys.js
   server\config\keys.js
-
- ../uploads
 
  nodemon.json

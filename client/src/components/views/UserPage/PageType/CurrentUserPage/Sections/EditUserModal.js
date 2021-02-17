@@ -194,7 +194,7 @@ function EditUserModal(props) {
             {imgPreview ? (
               <img
                 id="scroll-img"
-                src={`http://localhost:5000/${imgPreview}`}
+                src={`https://justins-fakebook-api.herokuapp.com/${imgPreview}`}
               />
             ) : (
               ""

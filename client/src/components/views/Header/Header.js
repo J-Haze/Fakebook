@@ -214,7 +214,7 @@ function Header(props) {
                       <img
                         className="prof-pic-search-card"
                         alt={`profile-pic-user-${user.firstname}-${user.lastname}`}
-                        src={`http://localhost:5000/uploads/${user.photo.filename}`}
+                        src={`https://justins-fakebook-api.herokuapp.com/uploads/${user.photo.filename}`}
                       />
                       <div className="search-card-name">
                         {user.firstname} {user.lastname}

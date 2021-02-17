@@ -145,7 +145,7 @@ function Comments(props) {
             <img
               className="prof-icon-small"
               alt={`profile-pic-user-${props.comment.author.firstname}-${props.comment.author.lastname}`}
-              src={`http://localhost:5000/uploads/${props.comment.author.photo.filename}`}
+              src={`https://justins-fakebook-api.herokuapp.com/uploads/${props.comment.author.photo.filename}`}
             />
           </Link>
         ) : (
@@ -153,7 +153,7 @@ function Comments(props) {
             <img
               className="prof-icon-small"
               alt={`Default Profile Picture`}
-              src={`http://localhost:5000/uploads/default-prof-pic.png`}
+              src={`https://justins-fakebook-api.herokuapp.com/uploads/default-prof-pic.png`}
             />
           </Link>
         )}

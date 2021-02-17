@@ -9,7 +9,7 @@ const ProfilePic = (props) => {
         <img
           className="prof-pic"
           alt={`profile-pic-user-${props.user.firstname}-${props.user.lastname}`}
-          src={`http://localhost:5000/uploads/${props.user.photo.filename}`}
+          src={`https://justins-fakebook-api.herokuapp.com/uploads/${props.user.photo.filename}`}
         />
       </Link>
     );
@@ -19,7 +19,7 @@ const ProfilePic = (props) => {
         <img
           className="prof-icon"
           alt={`Default Profile Picture`}
-          src={`http://localhost:5000/uploads/default-prof-pic.png`}
+          src={`https://justins-fakebook-api.herokuapp.com/uploads/default-prof-pic.png`}
         />
       </Link>
     );
