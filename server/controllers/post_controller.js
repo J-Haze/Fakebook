@@ -1,7 +1,4 @@
-const passport = require("../config/passport");
 const { body, validationResult, check } = require("express-validator");
-const bcrypt = require("bcryptjs");
-const async = require("async");
 const jwt = require("jsonwebtoken");
 var fs = require("fs");
 var path = require("path");
@@ -24,22 +21,12 @@ exports.get_posts = (req, res, next) => {
 // SET STORAGE
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    // destination: function (req, form, cb) {
-    // console.log("internal request", req)
-    // console.log("form", form)
-    // form
-    // console.log("here file0", file);
     cb(null, "uploads/");
-    // cb(null, "../../uploads");
-    // cb(null, "uploads");
   },
   filename: function (req, file, cb) {
-    // console.log("here file1", file)
-    // cb(null, Date.now() + "-" + file.fieldname);
     cb(null, `${Date.now()}_${file.originalname}`);
   },
   fileFilter: (req, file, cb) => {
-    // console.log("here file", file)
     const ext = path.extname(file.originalname);
     ext = ext.toLowerCase();
     //must be jpg or png to upload
@@ -60,67 +47,20 @@ var storage = multer.diskStorage({
 
 var upload = multer({ storage: storage, limits: { fileSize: 5000000 } });
 
-// var storage = multer.diskStorage({
-//   destination: (req, file, cb) => {
-//     cb(null, "uploads/");
-//   },
-//   filename: (req, file, cb) => {
-//     cb(null, `${Date.now()}_${file.originalname}`);
-//   },
-//   fileFilter: (req, file, cb) => {
-//     const ext = path.extname(file.originalname);
-//     //must be jpg or png to upload
-//     if (ext !== ".jpg" || ext !== ".png") {
-//       return cb(res.status(400).end("only jpg, png are allowed"), false);
-//     }
-//     cb(null, true);
-//   },
-// });
-
-// var upload = multer({ storage: storage }).single("file");
-
 exports.post_create_post = [
-  // Validate and sanitize fields.
-  // body("text", "Can't submit a blank post").not().isEmpty().trim(),
-  // Add image thing later
-  // body("timestamp").escape(),
-
-  // upload.single("file"),
   upload.any("file"),
   (req, res) => {
-    // console.log("blah", req);
-    // console.log("try", req.body);
-    // console.log("token", req.token);
-    // console.log("file", req.body.file);
-    // console.log("file2", req.body[0]);
-
-    // console.log("files[0]", req.files[0]);
-    // console.log({req.body})
-    // if (req.files) {
-    //   console.log("req.files", req.files[0]);
-    // }
-
     jwt.verify(req.token, process.env.JWT_SECRET, (err, authData) => {
       if (err) {
         console.log(err);
         res.sendStatus(403);
       } else {
-        // console.log("req", req)
-        // upload(req, res, (err) => {
-        // console.log("request:", req);
-        console.log("request body:", req.body);
-        // console.log("req.body.text", req.body.text);
-        // console.log("req.body.image", req.body.image);
-        console.log("authdata", authData);
-
         User.findOne({ _id: authData._id }, function (err, user) {
           if (err) {
             console.log("Could not find author");
             return res.json(err);
           }
           let postAuthor = user;
-          console.log("postAuthor", postAuthor);
-          // })
 
           let finalText = "";
           if (req.body.text) {
@@ -128,11 +68,6 @@ exports.post_create_post = [
           }
 
           if (req.files.length > 0) {
-            console.log("yes file");
-            // console.log("req.file2", req.files[0]);
-
-            // console.log("req.files.path", req.files[0].path);
-
             var img = fs.readFileSync(req.files[0].path);
             var encode_img = img.toString("base64");
             var final_img = {
@@ -143,25 +78,8 @@ exports.post_create_post = [
             const splitName = req.files[0].originalname.split(".");
             const format = splitName[splitName.length - 1];
 
-            console.log("format", format);
-
             var post = new Post({
               text: finalText,
-              // image: {
-              //   data: fs.readFileSync(
-              //     // path.join(__dirname + "/uploads/" + req.file.filename)
-              //     path.join(__dirname + "/uploads/" + format)
-              //   ),
-              //   contentType: "image/png",
-              // },
-              // image: {
-              //   data: fs.readFileSync(
-              //     // path.join(__dirname + "/uploads/" + req.file.filename)
-              //     path.join(__dirname + "/uploads/" + req.body.image)
-              //   ),
-              //   contentType: "image/png",
-              // },
-              // image: final_img,
               image: {
                 fieldname: req.files[0].fieldname,
                 originalname: req.files[0].originalname,
@@ -169,32 +87,21 @@ exports.post_create_post = [
                 mimetype: req.files[0].mimetype,
                 destination: req.files[0].destination,
                 filename: req.files[0].filename,
-                // path: 'uploads\\1611900591809-file',
-                // path: fs.readFileSync(
-                //   path.join(__dirname + "/uploads/" + req.file.filename)
-                // ),
                 path: fs.readFileSync(
-                  // path.join("http://localhost:3000/uploads/" + req.file.filename)
-                  // path.join(__dirname + "/uploads/" + req.file.filename)
                   path.join(
                     __dirname,
                     "../..",
                     "/uploads/" + req.files[0].filename
                   )
-                  // path.join("/uploads/" + req.file.filename)
                 ),
                 encoded: final_img,
                 contentType: `image/${format}`,
-                // contentType: "image/png",
               },
               likesList: [],
               author: authData._id,
-              // author: postAuthor,
               isPublished: true,
             });
           } else {
-            console.log("no image");
-            // console.log("author:", authData);
             var post = new Post({
               text: finalText,
               image: {
@@ -210,19 +117,9 @@ exports.post_create_post = [
               },
               likesList: [],
               author: authData._id,
-              // author: postAuthor,
               isPublished: true,
             });
           }
-
-          // User.findOne({ _id: authData._id }, function (err, user) {
-          //   if (err) {
-          //     console.log("Could not find author");
-          //     return res.json(err);
-          //   }
-          //   let postAuthor = user;
-          //   console.log("postAuthor", postAuthor);
-          // });
 
           post.save(function (err) {
             if (err) {
@@ -236,104 +133,19 @@ exports.post_create_post = [
 
             post.author = postAuthor;
 
-            console.log("New Post:", post);
-            console.log("Post author", postAuthor);
             return res.json({
               message: "Post created",
               success: true,
               post: post,
-              // postAuthor: postAuthor
             });
-
-            // post
-            //   .populate("author")
-            //   .execPopulate()
-            //   .then(
-            //     // console.log("New Post:", post)
-            //     res.json({
-            //       message: "Post created",
-            //       success: true,
-            //       post: post,
-            //     })
-            //   )
-
-            // (post) => res.json(post))
-            // .catch((err) => res.json(err));
           });
-
-          // console.log("post1", post);
-
-          // post
-          //   .populate("author")
-          //   .then(
-          //     // console.log("New Post:", post)
-          //     res.json({
-          //       message: "Post created",
-          //       success: true,
-          //       post: post,
-          //     })
-          //   )
-          //   .catch((err) => res.json(err));
-
-          // console.log("authData._id", authData._id);
-
-          // Post.find({ author: authData._id })
-          //   .populate("author")
-          //   // .execPopulate()
-          //   // .exec()
-          //   .exec(function (err, newPost) {
-          //     if (err) return handleError(err);
-          //     console.log("New Post", newPost);
-          //     // console.log("newPost.author.firstname", newPost.author.firstname);
-          //     // prints "The author is Bob Smith"
-          //   })
-          //   //   .then(
-          //   //     // console.log("New Post:", post)
-          //   //     res.json({
-          //   //       message: "Post created",
-          //   //       success: true,
-          //   //       post: post,
-          //   //     })
-          //   // ).then(
-          //   //     console.log("new post", post)
-          //   //   )
-          //   // .catch((err) => res.json(err));
-
-          // Post.find({ author: authData._id })
-          //   .populate("author")
-          //   // .execPopulate()
-          //   // .exec()
-          //   // .exec(function (err, newPost) {
-          //   //   if (err) return handleError(err);
-          //   //   console.log("New Post", newPost);
-          //   //   // console.log("newPost.author.firstname", newPost.author.firstname);
-          //   //   // prints "The author is Bob Smith"
-          //   // })
-          //   .then(
-          //     (newPost) => {
-          //       res.json({
-          //         message: "Post created",
-          //         success: true,
-          //         post: post,
-          //         newPost: newPost,
-          //       });
-          //     }
-          //     // console.log("New Post:", post)
-          //   )
-          //   .then(console.log("new post", newPost))
-          //   .catch((err) => res.json(err));
         });
       }
     });
   },
-
-  //   });
-  // },
 ];
 
 exports.get_post = (req, res, next) => {
-  const { body, validationResult, check } = require("express-validator");
-
   const { postid } = req.params;
 
   Post.findOne({ _id: postid, isPublished: true }, (err, post) => {
@@ -428,7 +240,6 @@ exports.like_post = (req, res, next) => {
       console.log(err);
       res.sendStatus(403);
     } else {
-      const { body, validationResult, check } = require("express-validator");
       const { postid } = req.params;
 
       //Checks if you're an admin
@@ -444,11 +255,7 @@ exports.like_post = (req, res, next) => {
             return res.json(err);
           }
 
-          console.log("originalPost.likesList", originalPost.likesList);
-
           let orignialLikes = originalPost.likesList;
-
-          console.log("orignialLikes1", orignialLikes);
 
           // if current user ID is in likesList array then return
           //Taken care of in Front End
@@ -458,18 +265,13 @@ exports.like_post = (req, res, next) => {
             }
           }
 
-          console.log("orignialLikes2", orignialLikes);
-
           let newLikes = orignialLikes;
 
           if (orignialLikes.length == 0 || orignialLikes == undefined) {
             newLikes = [authData._id];
           } else {
-            // newLikes = originalLikes.push(authData._id);
             newLikes.push(authData._id);
           }
-
-          console.log("orignialLikes3", orignialLikes);
 
           Post.findOneAndUpdate(
             {
@@ -505,7 +307,6 @@ exports.unlike_post = (req, res, next) => {
       console.log(err);
       res.sendStatus(403);
     } else {
-      const { body, validationResult, check } = require("express-validator");
       const { postid } = req.params;
 
       User.findOne({ _id: authData._id }, (err, user) => {
@@ -520,32 +321,21 @@ exports.unlike_post = (req, res, next) => {
             return res.json(err);
           }
 
-          console.log("originalPost.likesList", originalPost.likesList);
-
           let orignialLikes = originalPost.likesList;
-
-          console.log("orignialLikes1", orignialLikes);
 
           if (orignialLikes.length == 0 || orignialLikes == undefined) {
             return res.json("You haven't liked this post");
           }
-
-          console.log("orignialLikes2", orignialLikes);
-          console.log("authData._id", authData._id);
 
           let newLikes = orignialLikes;
 
           // if current user ID is in likesList array then return
           //Taken care of in Front End
           if (newLikes.indexOf(authData._id) != -1) {
-            console.log("match");
             newLikes.splice(newLikes.indexOf(authData._id));
           } else {
             return res.json("You haven't liked this post");
           }
-
-          console.log("newLikes3", newLikes);
-          console.log("orignialLikes3", orignialLikes);
 
           Post.findOneAndUpdate(
             {
@@ -582,7 +372,6 @@ exports.publish_post = (req, res, next) => {
       console.log(err);
       res.sendStatus(403);
     } else {
-      const { body, validationResult, check } = require("express-validator");
       const { postid } = req.params;
       isPublished = true;
 
@@ -637,11 +426,8 @@ exports.unpublish_post = (req, res, next) => {
       console.log(err);
       res.sendStatus(403);
     } else {
-      const { body, validationResult, check } = require("express-validator");
       const { postid } = req.params;
       isPublished = false;
-
-      console.log("postid", postid);
 
       //Checks if you're an admin
       User.findOne({ _id: authData._id }, (err, user) => {
@@ -650,15 +436,11 @@ exports.unpublish_post = (req, res, next) => {
           return res.json(err);
         }
 
-        console.log("authData._id", authData._id);
-
         Post.findOne({ _id: postid }, (err, originalPost) => {
           if (err) {
             console.log(err);
             return res.json(err);
           }
-
-          console.log("originalPost", originalPost);
 
           if (!user.isAdmin) {
             //If user isn't an admin, then check if they are the original author_id
@@ -699,7 +481,6 @@ exports.delete_post = (req, res, next) => {
       console.log(err);
       res.sendStatus(403);
     } else {
-      const { body, validationResult, check } = require("express-validator");
       const { postid } = req.params;
 
       //Checks if you're an admin
@@ -742,7 +523,6 @@ exports.delete_post = (req, res, next) => {
 };
 
 exports.get_comments = (req, res, next) => {
-  const { body, validationResult, check } = require("express-validator");
   const { postid } = req.params;
 
   Comment.find({ parent: postid }, (err, postComments) => {
