@@ -8,15 +8,10 @@ import { useHistory } from "react-router-dom";
 import FileUploaderUser from "./FileUploaderUser";
 import "./EditUserModal.css";
 
-// import Editor from "../../HelperComponents/Editor";
-
-// import ImageUpload from "./Sections/ImageUpload.js"
-
 const filter = new badWords();
 var path = require("path");
 
 function EditUserModal(props) {
-  //   const [title, setTitle] = useState(props.initialTitle);
   const [bioText, setBioText] = useState(props.currentUser.bio);
   const [locationText, setLocationText] = useState(props.currentUser.location);
   const [occupationText, setOccupationText] = useState(
@@ -37,53 +32,37 @@ function EditUserModal(props) {
 
   const history = useHistory();
 
-  //   const submitCreatePost = () => {
-  //     console.log("submitted");
-  //   };
-
+  //Not currently used
   function isEmpty(str) {
     return str.replace(/^\s+|\s+$/g, "").length == 0;
   }
 
+  //Not currently used- for implementing image preview
   const handleChange = (e) => {
-    // console.log("e.target:", e.target);
-    // setImgUpload(e.target.value);
     setImgUpload(e.target.files[0]);
-
-    //   setImgUpload(
-    //   e.target.files
-    // )
-
-    //   console.log("e.target:", e.target);
-    //   setImgUpload(e.target);
-    //   setImgPreview(URL.createObjectURL(e.target.value));
   };
 
-  //   const resetImgForm = () => {
-  //     if (addImageOpen) {
-  //       document.getElementById("edit-user-form-img-upload").reset();
-  //     }
-  //   };
-
+  //Not currently used- for implementing image preview
   const handleCancel = () => {
     setImgUpload(null);
     setImgPreview("");
   };
 
   const submitEditUser = () => {
-    // if (!text && !imgUpload) {
-    //   setErrorMessage("Post must not be blank");
-    //   alert("Post must not be blank");
-    //   return;
-    // }
+    if (filter.isProfane(bioText)) {
+      alert("Bio contains a word that is not allowed.");
+      return;
+    }
 
-    // if (text) {
-    //   if (isEmpty(text) && !imgUpload) {
-    //     setErrorMessage("Post must not be blank");
-    //     alert("Post must not be blank");
-    //     return;
-    //   }
-    // }
+    if (filter.isProfane(locationText)) {
+      alert("Location contains a word that is not allowed.");
+      return;
+    }
+
+    if (filter.isProfane(occupationText)) {
+      alert("Occupation contains a word that is not allowed.");
+      return;
+    }
 
     if (bioText) {
       if (bioText.length > 140) {
@@ -115,8 +94,6 @@ function EditUserModal(props) {
       }
     }
 
-    // console.log("imgUpload", imgUpload)
-
     if (imgUpload) {
       let ext = path.extname(imgUpload.name);
       ext = ext.toLowerCase();
@@ -140,34 +117,19 @@ function EditUserModal(props) {
     formData.append("occupation", occupationText);
     formData.append("file", imgUpload);
 
-    Axios.put(
-      `/user/`,
-      // {
-      //   bio: bioText,
-      //   location: locationText,
-      //   occupation: occupationText,
-      //   image: formData,
-      // },
-      formData,
-      {
-        headers: {
-          Authorization: `Bearer ${JSON.parse(
-            window.localStorage.getItem("token")
-          )}`,
-          "Content-Type": "multipart/form-data",
-        },
-      }
-    )
+    Axios.put(`/user/`, formData, {
+      headers: {
+        Authorization: `Bearer ${JSON.parse(
+          window.localStorage.getItem("token")
+        )}`,
+        "Content-Type": "multipart/form-data",
+      },
+    })
       .then((res, err) => {
-        console.log("imgUpload2", imgUpload);
         setErrorMessage("");
-        // if success then set image preview
-        // props.fetchPosts();
         setBioText("");
         setLocationText("");
         setOccupationText("");
-        //   props.whitePencil();
-        // history.push(`/user/${props.currentUser._id}`);
         props.setEditUserModalOpen(false);
         history.go(0);
       })
@@ -177,44 +139,8 @@ function EditUserModal(props) {
       });
   };
 
-  // let handleEditorChange = (content, editor) => {
-  //   setMainText(content);
-  // };
-
-  // let goBack = () => {
-  //   props.whitePencil();
-  //   props.hideEditModal();
-  // };
-
-  //     const FileUploader = ({onFileSelect}) => {
-  //     const fileInput = useRef(null)
-
-  //     const handleFileInput = (e) => {
-  //   // handle validations
-  //   const file = e.target.files[0];
-  //   if (file.size > 1024)
-  //     onFileSelectError({ error: "File size cannot exceed more than 1MB" });
-  //   else onFileSelectSuccess(file);
-  // };
-
-  //     return (
-  //         <div className="file-uploader">
-  //             <input type="file" onChange={handleFileInput}/>
-  //             <button onClick={e => fileInput.current && fileInput.current.click()} className="btn btn-primary"></button>
-  //         </div>
-  //     )
-  // }
-  // console.log("bioText.length", bioText.length);
-  console.log("imgUpload", imgUpload);
-  // bioText.length == 0 && !{ imgUpload };
-
   return (
-    <div
-      className="edit-user-modal"
-      onClick={() => {
-        // props.setEditUserModalOpen(false);
-      }}
-    >
+    <div className="edit-user-modal" onClick={() => {}}>
       <div
         className="edit-user-modal-content"
         onClick={(event) => {
@@ -241,9 +167,6 @@ function EditUserModal(props) {
             </div>
             <input
               className="edit-bio-input edit-input"
-              // type="text"
-              // className="input-edit-user"
-              // placeholder={`bioText`}
               value={bioText}
               onChange={(e) => setBioText(e.target.value)}
             />
@@ -268,41 +191,14 @@ function EditUserModal(props) {
           </div>
 
           <div id="edit-user-mid-row">
-            {/* <div className="card-row-one">
-              <div className="prof-icon"></div>
-              <div className="flex-down card-title">
-                <div className="edit-user-username">
-                  {props.currentUser.firstname} {props.currentUser.lastname}
-                </div>
-              </div>
-            </div> */}
-            {/* <input
-                          id="woym-input"
-                          type="textarea"
-              className="input-edit-user"
-              placeholder={`What's on your mind, ${props.currentUser.firstname}?`}
-              value={text}
-              onChange={(e) => setText(e.target.value)}
-            /> */}
-            {/* <textarea
-              id="woym-input"
-              type="textarea"
-              className="input-edit-user"
-              placeholder={`What's on your mind, ${props.currentUser.firstname}?`}
-              value={text}
-              onChange={(e) => setText(e.target.value)}
-            /> */}
-            {/* {imgPreview ? <img src={imgPreview} width="100%" /> : ""} */}
             {imgPreview ? (
               <img
                 id="scroll-img"
                 src={`http://localhost:5000/${imgPreview}`}
-                // alt={`productImg-${index}`}
               />
             ) : (
               ""
             )}
-            {/* <div className="error-message-edit-user">{errorMessage}</div> */}
           </div>
           <div id="edit-user-img-row">
             {addImageOpen ? (
@@ -311,7 +207,6 @@ function EditUserModal(props) {
                   id="edit-user-form-img-upload"
                   onFileSelectSuccess={(file) => setImgUpload(file)}
                   onFileSelectError={({ error }) => alert(error)}
-                  //   resetImgForm={resetImgForm}
                   setImgUpload={setImgUpload}
                 />
               </div>
@@ -327,22 +222,6 @@ function EditUserModal(props) {
             )}
           </div>
           <div id="edit-user-bottom-row">
-            {/* {bioText.length == 0 && !imgUpload ? (
-              <div id="submit-edit-user-empty" className="submit-edit-user">
-                Save
-              </div>
-            ) : (
-              <div
-                id="submit-edit-user-full"
-                className="submit-edit-user"
-                onClick={() => {
-                  submitCreatePost();
-                }}
-              >
-                Save
-              </div>
-            )} */}
-
             <div
               id="submit-edit-user-full"
               className="submit-edit-user"

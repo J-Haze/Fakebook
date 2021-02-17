@@ -5,7 +5,7 @@ import "./CreatePostModal.css";
 import badWords from "bad-words";
 
 import FileUploader from "./Sections/FileUploader";
-import ProfilePic from "../HelperComponents/ProfilePic"
+import ProfilePic from "../HelperComponents/ProfilePic";
 
 var path = require("path");
 
@@ -29,11 +29,10 @@ function CreatePostModal(props) {
   }
 
   const submitCreatePost = () => {
-if (filter.isProfane(text)) {
-  alert("Text contains a word that is not allowed.");
-  return;
-}
-
+    if (filter.isProfane(text)) {
+      alert("Text contains a word that is not allowed.");
+      return;
+    }
 
     if (!text && !imgUpload) {
       setErrorMessage("Post must not be blank");
@@ -76,18 +75,14 @@ if (filter.isProfane(text)) {
     formData.append("text", text);
     formData.append("file", imgUpload);
 
-    Axios.post(
-      `/post/new`,
-      formData,
-      {
-        headers: {
-          Authorization: `Bearer ${JSON.parse(
-            window.localStorage.getItem("token")
-          )}`,
-          "Content-Type": "multipart/form-data",
-        },
-      }
-    )
+    Axios.post(`/post/new`, formData, {
+      headers: {
+        Authorization: `Bearer ${JSON.parse(
+          window.localStorage.getItem("token")
+        )}`,
+        "Content-Type": "multipart/form-data",
+      },
+    })
       .then((res, err) => {
         console.log("imgUpload2", imgUpload);
         setErrorMessage("");
