@@ -2,9 +2,8 @@
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  /* border: 1px solid green; */
   box-sizing: border-box;
-  margin:0;
+  margin: 0;
   padding: 0;
 }
 
@@ -12,70 +11,32 @@
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  /* align-items: center; */
-  /* width: 100%; */
-  /* border: 1px solid black; */
-
   box-sizing: border-box;
   height: 100%;
   margin-top: 16px;
   max-width: 100%;
-  /* padding-left: 16px;
-  padding-right: 16px; */
   min-width: 454px;
   max-width: 908px;
-  /* width: 892px; */
 }
 
-/* Make width 500px if screen is less than 860 */
 #user-info-cont {
   width: 392px;
   box-sizing: border-box;
-
   padding: 0px 8px;
-  /* box-sizing: border-box; */
-  /* border: 1px solid red; */
   margin-right: 8px;
-
-  /* position: -webkit-sticky; Safari */
   height: auto;
-  /* position: fixed; */
-  /* top: 0; */
-  /* border: 1px solid blue; */
-
   flex-basis: 360px;
   display: flex;
   flex-direction: column;
-
-  /* position: fixed; */
-  /* top: 50%; */
-  /* -webkit-transform: translateY(-50%); */
-  /* -ms-transform: translateY(-50%); */
-  /* transform: translateY(-50%); */
 }
 
 #user-info-footer {
   margin-top: 8px;
   display: flex;
-
-  /* border: 1px solid black; */
-
-  /* font-family: "Segoe UI", Helvetica, Arial, sans-serif;
-  font-size: 13px;
-  font-weight: 400;
-  line-height: 16.0004px;
-  text-align: left;
-  color: rgb(101, 103, 107);
-  text-decoration-line: none;
-  text-decoration-style: solid;
-  word-break: break-word; */
 }
 
 #user-info-footer-text {
-
-  /* margin-top: 8px; */
   margin-left: 4px;
-
   font-family: "Segoe UI", Helvetica, Arial, sans-serif;
   font-size: 13px;
   font-weight: 400;
@@ -85,24 +46,19 @@
   text-decoration-line: none;
   text-decoration-style: solid;
   word-break: break-word;
-  /* border: 1px solid red; */
-
 }
 
 #delete-account-btn {
-  /* border: 1px solid black; */
   width: 100px;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
-
   border-radius: 8px;
   margin-right: 4px;
   margin-left: auto;
   height: 30px;
-
-    font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+  font-family: "Segoe UI", Helvetica, Arial, sans-serif;
   font-size: 13px;
   font-weight: 400;
   line-height: 16.0004px;
@@ -111,31 +67,24 @@
   text-decoration-line: none;
   text-decoration-style: solid;
   word-break: break-word;
-
-  /* border: 1px solid var(--dark-gray); */
   border: 1px solid rgb(176, 177, 179);
-
 }
 
 #delete-account-btn:hover {
   cursor: pointer;
-  color: var(--red)
+  color: var(--red);
 }
 
 #user-post-cont {
-  /* overflow-y: hidden; */
 }
 
 .prof-pic-big {
   border-radius: 50%;
   height: 175px;
   width: 175px;
-
   margin-top: 12px;
-
   margin-left: auto;
   margin-right: auto;
-  /* margin-left: 50px; */
 }
 
 /* .prof-pic-big:hover {
@@ -147,9 +96,7 @@
   border-radius: 50%;
   height: 175px;
   width: 175px;
-
   margin-top: 12px;
-
   margin-left: auto;
   margin-right: auto;
 }
@@ -177,54 +124,26 @@
 } */
 
 .edit-user-prof {
-  /* height: 35px;
-  width: 35px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: var(--light-gray);
-  border-radius: 50%;
-
-  color: #aaa;
-  float: right;
-  margin-left: auto;
-  margin-right: -4px;
-  font-size: 32px;
-  font-weight: bold;
-  text-align: center;
-  padding-bottom: 7px;
-  box-sizing: border-box; */
-
   font-weight: 400px;
   margin-right: 0px;
   margin-left: auto;
-  /* border: 1px solid red; */
   color: rgb(106, 106, 106);
 }
 
 .edit-user-prof:hover,
 .edit-user-prof:focus {
-  /* background-color: var(--dark-gray);
-  text-decoration: none;
-  cursor: pointer; */
-
   text-decoration: underline;
   cursor: pointer;
 }
 
 .user-info-header {
-  /* font-weight: bold; */
-
   font-family: "Segoe UI", Helvetica, Arial, sans-serif;
   font-size: 15px;
   font-weight: 600;
   line-height: 19.9995px;
   text-align: start;
-  /* text-decoration-thickness: auto; */
   word-break: break-word;
   margin-bottom: 5px;
-
-  /* border: 1px solid black; */
 }
 
 .user-info-text {
@@ -233,7 +152,6 @@
   font-weight: 400;
   line-height: 19.9995px;
   text-align: start;
-  /* text-decoration-thickness: auto; */
   word-break: break-word;
 }
 
@@ -242,41 +160,21 @@
   margin-left: auto;
   margin-right: auto;
   width: 180px;
-  /* border: 1px solid black; */
   justify-content: center;
   justify-content: space-between;
 }
 
 .user-info-confirm-friend {
-  /* border: 1px solid blue; */
-
-  /* margin-left: auto; */
   display: flex;
   height: 22px;
   width: 80px;
   justify-content: center;
-
-  /* padding: 0px 12px; */
-  /* height: 36px; */
-  /* width: 106.6px; */
-  /* margin-left: auto; */
-  /* margin-right: auto; */
-  /* margin-bottom: 0px; */
-  /* margin-top: 24px; */
   background-color: var(--blue);
   color: white;
-
   font-family: "Segoe UI", Helvetica, Arial, sans-serif;
   font-size: 15px;
   font-weight: 600;
   line-height: 19.9995px;
-  /* text-align: start; */
-  /* text-decoration-thickness: auto; */
-  /* text-overflow: ellipsis; */
-  /* white-space: nowrap; */
-  /* word-break: break-word; */
-  /* display: flex; */
-  /* justify-content: center; */
   align-items: center;
   border-radius: 6px;
 }
@@ -286,26 +184,15 @@
 }
 
 .user-info-unfriend {
-  /* border: 1px solid black; */
   display: flex;
   width: 80px;
   justify-content: center;
-
   background-color: var(--dark-gray);
-  /* background-color: #C2C6CA; */
   background-color: white;
-
   font-family: "Segoe UI", Helvetica, Arial, sans-serif;
   font-size: 15px;
   font-weight: 600;
   line-height: 19.9995px;
-  /* text-align: start; */
-  /* text-decoration-thickness: auto; */
-  /* text-overflow: ellipsis; */
-  /* white-space: nowrap; */
-  /* word-break: break-word; */
-  /* display: flex; */
-  /* justify-content: center; */
   align-items: center;
   border-radius: 6px;
   color: rgb(5, 5, 5);
@@ -333,19 +220,14 @@
 }
 
 #bio-cont {
-  /* border: 1px solid black; */
-  /* display: flex; */
   margin-bottom: 15px;
 }
 
 #location-cont {
-  /* display: flex; */
   margin-bottom: 15px;
 }
 
 #occupation-cont {
-  /* display: flex; */
-  /* margin-bottom: 15px; */
 }
 
 /* #user-info-box {
@@ -359,29 +241,21 @@
   margin-top: 32px;
   padding: 13px;
   box-sizing: border-box;
-
-    display: flex;
+  display: flex;
   flex-direction: column;
   /* justify-content: space-between; */
 
 #user-friends-box {
   width: 500px;
   box-sizing: border-box;
-  /* padding: 8px 16px; */
-
   margin-top: 16px;
-
-  /* padding: 0px 8px; */
   background-color: white;
-  /* border: 1px solid blue; */
-
   width: 376px;
   background-color: white;
   color: #050505;
   border-radius: 8px;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
   box-sizing: border-box;
-  /* height: 160px; */
   margin-top: 16px;
   padding: 13px;
   padding: 20px 16px;
@@ -397,38 +271,15 @@
 }
 
 .see-all-friends {
-  /* height: 35px;
-  width: 35px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: var(--light-gray);
-  border-radius: 50%;
-
-  color: #aaa;
-  float: right;
-  margin-left: auto;
-  margin-right: -4px;
-  font-size: 32px;
-  font-weight: bold;
-  text-align: center;
-  padding-bottom: 7px;
-  box-sizing: border-box; */
-
   font-weight: 400px;
   font-size: 17px;
   margin-right: 0px;
   margin-left: auto;
-  /* border: 1px solid red; */
   color: #1876f2;
 }
 
 .see-all-friends:hover,
 .see-all-friends:focus {
-  /* background-color: var(--dark-gray);
-  text-decoration: none;
-  cursor: pointer; */
-
   text-decoration: underline;
   cursor: pointer;
 }
@@ -444,22 +295,17 @@
 }
 
 #friend-icon-cont {
-  /* border: 1px solid blue; */
   width: 370px;
   box-sizing: border-box;
-  /* width: 100%; */
   margin-top: 16px;
   margin-left: -8px;
   display: flex;
-  /* justify-content: space-between; */
-  /* overflow: wrap; */
   flex-wrap: wrap;
 }
 
 .friend-icon-box {
   height: 140px;
   width: 102px;
-  /* border: 1px solid black; */
   margin-left: 8px;
   margin-right: 8px;
 }
@@ -467,11 +313,11 @@
 .friend-icon-name {
   color: rgb(5, 5, 5);
   font-family: "Segoe UI", Helvetica, Arial, sans-serif;
-font-size: 13px;
-font-weight: 600;
-line-height: 16.0004px;
-text-align: start;
-word-break: break-word;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 16.0004px;
+  text-align: start;
+  word-break: break-word;
 }
 
 .prof-pic-friendList {
@@ -499,11 +345,8 @@ word-break: break-word;
   background-color: white;
   color: rgb(101, 103, 107);
   box-sizing: border-box;
-  /* margin-top: 20px; */
   margin: 20px 0px 20px 0px;
-  /* font-size: 1.2em; */
   padding: 24px;
-  /* height: 80px; */
   width: 500px;
   border-radius: 8px;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
@@ -531,8 +374,6 @@ word-break: break-word;
   top: 0;
   width: 100%;
   height: 100vh;
-  /* background-color: rgb(0, 0, 0); */
-  /* background-color: rgba(0, 0, 0, 0.4); */
   background-color: rgba(235, 235, 235, 0.8);
 }
 
@@ -544,15 +385,10 @@ word-break: break-word;
   flex-direction: column;
   margin-left: auto;
   margin-right: auto;
-
-  /* min-height: 428px; */
   height: 162px;
   width: 548px;
   padding: 0px 16px;
-
   color: black;
-
-  /* padding: 1rem; */
   border-radius: 6px;
   background: white;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.1);
@@ -561,13 +397,8 @@ word-break: break-word;
 #unfriend-header {
   display: flex;
   flex-direction: column;
-  /* padding: 1rem; */
-  /* height: 132pxpx; */
   box-sizing: border-box;
-  /* border: 1px solid black; */
-  /* width: 200px; */
   padding: 10px 16px;
-  /* margin */
 }
 
 #unfriend-header-top {
@@ -575,7 +406,6 @@ word-break: break-word;
   height: 100%;
   align-items: center;
   justify-content: center;
-  /* border: 1px solid black; */
 }
 
 #unfriend-header-title {
@@ -584,7 +414,6 @@ word-break: break-word;
   font-size: 20px;
   font-weight: 700;
   line-height: 24px;
-  /* margin-bottom: 0; */
   margin-left: -17px;
   margin-right: auto;
 }
@@ -597,18 +426,12 @@ word-break: break-word;
   align-items: center;
   background-color: var(--light-gray);
   border-radius: 50%;
-  /* margin-right: 10px; */
-
   color: #aaa;
   float: right;
-  /* margin-left: 100%; */
   margin-left: auto;
   margin-right: -12px;
-  /* margin-top: -17px; */
   font-size: 32px;
-  /* height: 10px; */
   font-weight: bold;
-  /* border: 1px solid red; */
   text-align: center;
   padding-bottom: 7px;
   box-sizing: border-box;
@@ -616,19 +439,16 @@ word-break: break-word;
 
 .close-unfriend:hover,
 .close-unfriend:focus {
-  /* color: black; */
   background-color: var(--dark-gray);
   text-decoration: none;
   cursor: pointer;
 }
 
 #unfriend-mid-row {
-  /* border: 1px solid red; */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   height: 5px;
-  /* height: 100%; */
   border-top: 1px solid rgb(204, 208, 213);
   box-sizing: border-box;
   padding-top: 12px;
@@ -646,9 +466,6 @@ word-break: break-word;
 
 #unfriend-bottom-row {
   height: auto;
-  /* border: 1px solid red; */
-  /* margin-bottom: -5px; */
-  /* height: 100px; */
   height: 72px;
   display: flex;
   justify-content: center;
@@ -682,7 +499,6 @@ word-break: break-word;
 
 .cancel-unfriend:hover {
   cursor: pointer;
-  /* background-color: rgb(81, 101, 255); */
   background-color: var(--light-gray);
 }
 
@@ -690,27 +506,11 @@ word-break: break-word;
   display: flex;
   justify-content: center;
   align-items: center;
-  /* margin-left: auto;
-  margin-right: auto; */
-  /* margin-top: auto; */
-  /* margin-bottom: 0px; */
-  /* color: white; */
-  /* width: 194px; */
-  /* width: 100%; */
-  /* background-color: rgb(0, 164, 0); */
-  /* font-family: Helvetica, Arial, sans-serif; */
   font-size: 15px;
   height: 36px;
   line-height: 16.08px;
   border-radius: 6px;
   font-family: "Segoe UI Historic", "Segoe UI", Helvetica, Arial, sans-serif;
-  /* font-size: 18px; */
-  /* font-stretch: 100%;
-  font-style: normal;
-  font-variant-caps: normal;
-  font-variant-east-asian: normal;
-  font-variant-ligatures: normal;
-  font-variant-numeric: normal; */
   font-weight: 600;
   background-color: var(--blue);
   color: white;
@@ -718,7 +518,6 @@ word-break: break-word;
 
 .submit-unfriend:hover {
   cursor: pointer;
-  /* background-color: rgb(81, 101, 255); */
   background-color: #1b74e4;
 }
 
@@ -729,73 +528,40 @@ word-break: break-word;
   margin-left: auto;
   margin-right: auto;
   width: 280px;
-  /* border: 1px solid black; */
   justify-content: center;
   justify-content: space-between;
-  /* border: 1px solid black; */
 }
 
 .user-info-confirm-pending {
-  /* border: 1px solid blue; */
-
-  /* margin-left: auto; */
   display: flex;
   height: 22px;
   width: 130px;
   justify-content: center;
-
-  /* padding: 0px 12px; */
-  /* height: 36px; */
-  /* width: 106.6px; */
-  /* margin-left: auto; */
-  /* margin-right: auto; */
-  /* margin-bottom: 0px; */
-  /* margin-top: 24px; */
   background-color: var(--blue);
   color: white;
-
   font-family: "Segoe UI", Helvetica, Arial, sans-serif;
   font-size: 15px;
   font-weight: 600;
   line-height: 19.9995px;
-  /* text-align: start; */
-  /* text-decoration-thickness: auto; */
-  /* text-overflow: ellipsis; */
-  /* white-space: nowrap; */
-  /* word-break: break-word; */
-  /* display: flex; */
-  /* justify-content: center; */
   align-items: center;
   border-radius: 6px;
 }
 
 .user-info-confirm-pending:hover {
   cursor: pointer;
-  /* background-color: rgb(24, 119, 242); */
   background-color: #1b74e4;
 }
 
 .user-info-delete-pending {
-  /* border: 1px solid black; */
   display: flex;
   width: 130px;
   justify-content: center;
-
   background-color: var(--dark-gray);
-  /* background-color: #C2C6CA; */
   background-color: white;
-
   font-family: "Segoe UI", Helvetica, Arial, sans-serif;
   font-size: 15px;
   font-weight: 600;
   line-height: 19.9995px;
-  /* text-align: start; */
-  /* text-decoration-thickness: auto; */
-  /* text-overflow: ellipsis; */
-  /* white-space: nowrap; */
-  /* word-break: break-word; */
-  /* display: flex; */
-  /* justify-content: center; */
   align-items: center;
   border-radius: 6px;
   color: rgb(5, 5, 5);
@@ -812,36 +578,21 @@ word-break: break-word;
   margin-left: auto;
   margin-right: auto;
   width: 320px;
-  /* border: 1px solid black; */
   justify-content: center;
   justify-content: space-between;
-  /* border: 1px solid black; */
 }
 
 .user-info-sent-req-pending {
-  /* border: 1px solid blue; */
-
-  /* margin-left: auto; */
   display: flex;
   height: 22px;
   width: 180px;
   justify-content: center;
-
-  /* background-color: var(--blue); */
   background-color: gray;
   color: white;
-
   font-family: "Segoe UI", Helvetica, Arial, sans-serif;
   font-size: 15px;
   font-weight: 600;
   line-height: 19.9995px;
-  /* text-align: start; */
-  /* text-decoration-thickness: auto; */
-  /* text-overflow: ellipsis; */
-  /* white-space: nowrap; */
-  /* word-break: break-word; */
-  /* display: flex; */
-  /* justify-content: center; */
   align-items: center;
   border-radius: 6px;
 }
@@ -851,31 +602,19 @@ word-break: break-word;
 }
 
 .user-info-sent-req {
-  /* border: 1px solid black; */
   display: flex;
   width: 120px;
   justify-content: center;
-
   background-color: var(--dark-gray);
-  /* background-color: #C2C6CA; */
   background-color: white;
-
   font-family: "Segoe UI", Helvetica, Arial, sans-serif;
   font-size: 15px;
   font-weight: 600;
   line-height: 19.9995px;
-  /* text-align: start; */
-  /* text-decoration-thickness: auto; */
-  /* text-overflow: ellipsis; */
-  /* white-space: nowrap; */
-  /* word-break: break-word; */
-  /* display: flex; */
-  /* justify-content: center; */
   align-items: center;
   border-radius: 6px;
   color: rgb(5, 5, 5);
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-  /* margin-right: 25px; */
 }
 
 .user-info-sent-req:hover {
@@ -888,32 +627,20 @@ word-break: break-word;
   margin-left: auto;
   margin-right: auto;
   width: 110px;
-  /* border: 1px solid black; */
   justify-content: center;
   justify-content: space-between;
 }
 
 .user-info-add-friend {
-  /* border: 1px solid black; */
   display: flex;
   width: 110px;
   justify-content: center;
-
   background-color: var(--dark-gray);
-  /* background-color: #C2C6CA; */
   background-color: white;
-
   font-family: "Segoe UI", Helvetica, Arial, sans-serif;
   font-size: 15px;
   font-weight: 600;
   line-height: 19.9995px;
-  /* text-align: start; */
-  /* text-decoration-thickness: auto; */
-  /* text-overflow: ellipsis; */
-  /* white-space: nowrap; */
-  /* word-break: break-word; */
-  /* display: flex; */
-  /* justify-content: center; */
   align-items: center;
   border-radius: 6px;
   color: rgb(5, 5, 5);
