@@ -13,36 +13,15 @@ const userSchema = mongoose.Schema(
     password: { type: String, required: true },
     birthDate: { type: Date, required: true },
     gender: { type: String, required: true },
-    // friendList: { type: Array, required: true },
     friendList: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
-    // photo: { type: String, default: "" },
     realFacebookID: { type: String },
     isPublished: { type: Boolean, default: true },
     photo: { type: Object },
     bio: { type: String, required: false },
     location: { type: String, required: false },
     occupation: { type: String, required: false },
-    // isGuest: { type: Boolean },
   },
   { timestamps: true }
 );
-
-//Write a function that unpublishes all posts and comments of this user!
-
-// UserSchema.pre("remove", function () {
-//   // delete all posts of this user
-//   Post.deleteMany({ user: this._id }, (err, docs) => {
-//     if (err) return next(err);
-//   });
-//   // delete all comments of this user
-//   Comment.deleteMany({ user: this._id }, (err, docs) => {
-//     if (err) return next(err);
-//   });
-//   // delete this user form all their friends' list
-//   this.friends.forEach((friend) => {
-//     friend.update({ $pull: { friends: this._id } }).exec();
-//   });
-//   return next();
-// });
 
 module.exports = mongoose.model("User", userSchema);
