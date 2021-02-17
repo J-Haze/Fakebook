@@ -9,8 +9,6 @@ var path = require("path");
 const multer = require("multer");
 require("dotenv").config();
 
-// const keys = require("../config/keys");
-
 var User = require("../models/User");
 var Post = require("../models/Post");
 var Comment = require("../models/Comment");
@@ -28,24 +26,12 @@ exports.get_current_user = (req, res, next) => {
           console.log(err);
           return res.json(err);
         }
-        console.log(user); //Delete at end
         res.json(user);
         next();
-        // }).populate("friendList");
       }).populate({ path: "friendList", match: { isPublished: true } });
     }
   });
 };
-
-// exports.get_users = (req, res, next) => {
-//   User.find((err, users) => {
-//     if (err) {
-//       console.log(err);
-//       return res.json(err);
-//     }
-//     res.json(users);
-//   });
-// };
 
 exports.get_users = (req, res, next) => {
   jwt.verify(req.token, process.env.JWT_SECRET, (err, authData) => {
@@ -59,8 +45,7 @@ exports.get_users = (req, res, next) => {
           return res.json(err);
         }
         res.json(users);
-      // }).populate("friendList");
-      }).populate({ path: 'friendList', match: { isPublished: true }})
+      }).populate({ path: "friendList", match: { isPublished: true } });
     }
   });
 };
@@ -69,12 +54,6 @@ exports.post_create_user = [
   //Validate and sanitize fields.
   body("firstname", "Please enter a first name").not().isEmpty().trim(),
   body("lastname", "Please enter a last name").not().isEmpty().trim(),
-  // body("email", "Please enter an email")
-  //   .isEmail()
-  //   .normalizeEmail()
-  //   .not()
-  //   .isEmpty()
-  //   .trim(),
   body("email", "Please enter an email").isEmail().not().isEmpty().trim(),
   body("password", "Please enter a password").not().isEmpty().trim(),
   body("birthDate", "Please enter a birth date").not().isEmpty().trim(),
@@ -84,9 +63,6 @@ exports.post_create_user = [
   async (req, res, next) => {
     // Extract the validation errors from a request.
     const errors = validationResult(req);
-
-    // let emailLower = req.body.email.toLowerCase();
-    // console.log("emailLower", emailLower)
 
     // Create a User object with escaped and trimmed data.
     var user = new User({
@@ -142,7 +118,6 @@ exports.post_create_user = [
               encoding: "7bit",
               mimetype: "image/png",
               destination: "uploads/",
-              // filename: "1612909792160_default-prof-pic.png",
               filename: "default-prof-pic.png",
               path: "",
               encoded: {
@@ -173,22 +148,12 @@ exports.post_create_user = [
 // SET STORAGE
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    // destination: function (req, form, cb) {
-    // console.log("internal request", req)
-    // console.log("form", form)
-    // form
-    // console.log("here file0", file);
     cb(null, "uploads/");
-    // cb(null, "../../uploads");
-    // cb(null, "uploads");
   },
   filename: function (req, file, cb) {
-    // console.log("here file1", file)
-    // cb(null, Date.now() + "-" + file.fieldname);
     cb(null, `${Date.now()}_${file.originalname}`);
   },
   fileFilter: (req, file, cb) => {
-    // console.log("here file", file)
     const ext = path.extname(file.originalname);
     ext = ext.toLowerCase();
     //must be jpg or png to upload
@@ -237,11 +202,6 @@ exports.edit_current_user = [
         }
 
         if (req.files.length > 0) {
-          console.log("yes file");
-          // console.log("req.file2", req.files[0]);
-
-          // console.log("req.files.path", req.files[0].path);
-
           var img = fs.readFileSync(req.files[0].path);
           var encode_img = img.toString("base64");
           var final_img = {
@@ -251,8 +211,6 @@ exports.edit_current_user = [
 
           const splitName = req.files[0].originalname.split(".");
           const format = splitName[splitName.length - 1];
-
-          console.log("format", format);
 
           photo = {
             fieldname: req.files[0].fieldname,
@@ -269,36 +227,6 @@ exports.edit_current_user = [
           };
         }
 
-        // const { userid } = req.params;
-        // const { title, text } = req.body;
-
-        //Checks if you're an admin
-        // User.findOne({ _id: authData._id }, (err, user) => {
-        //   if (err) {
-        //     console.log(err);
-        //     return res.json(err);
-        //   }
-
-        // User.findOne({ _id: authData._id }, (err, originalUser) => {
-        //   if (err) {
-        //     console.log(err);
-        //     return res.json(err);
-        //   }
-
-        // if (!user.isAdmin) {
-        //   //If user isn't an admin, then check if they are the original author
-        //   //Verify that edittor is the post author
-        //   if (authData._id != originalUser.author_id) {
-        //     console.log(
-        //       "Cannot edit this post because you are not the post's author or an admin"
-        //     );
-        //     return res
-        //       .status(400)
-        //       .json(
-        //         "Cannotedit this post because you are not the post's author or an admin"
-        //       );
-        //   }
-        // }
         if (photo == null) {
           User.findOneAndUpdate(
             { _id: authData._id },
@@ -338,65 +266,48 @@ exports.edit_current_user = [
 ];
 
 exports.post_user_login = function (req, res, next) {
-      passport.authenticate("local", { session: false }, function (
-        err,
-        user,
-        info
-      ) {
-        console.log("h1");
-        console.log(err);
-        if (err || !user) {
-          console.log("error or no user");
-          console.log("err", err);
-          console.log("user", user);
-          console.log("info", info);
-          return res.json({
-            message: "Incorrect Email or Password.",
-          });
-        }
-        if (err) res.send(err);
+  passport.authenticate("local", { session: false }, function (
+    err,
+    user,
+    info
+  ) {
+    if (err || !user) {
+      console.log("err", err);
+      console.log("user", user);
+      console.log("info", info);
+      return res.json({
+        message: "Incorrect Email or Password.",
+      });
+    }
+    if (err) res.send(err);
 
-        // User.findOne({ _id: user._id }, (err, user) => {
-        //   if (err) {
-        //     console.log(err);
-        //     return res.json(err);
-        //   }
-        //   if (!user.isPublished) {
-        //     return res.json({
-        //       message: "This account is no longer available.",
-        //     });
-        //   }
-        // });
-
-        if (!user.isPublished) {
-          return res.json({
-            message: "This account is no longer available.",
-          });
-        }
-
-        jwt.sign(
-          { _id: user._id, email: user.email },
-          //Production:
-          // process.env.JWT_SECRET,
-          //Local
-          keys.secretOrKey,
-          { expiresIn: 36000 },
-          (err, token) => {
-            if (err) {
-              return res.status(400).json(err);
-            }
-            res.json({
-              token: token,
-              user: { _id: user._id, email: user.email },
-            });
-          }
-        );
-      })(req, res);
+    if (!user.isPublished) {
+      return res.json({
+        message: "This account is no longer available.",
+      });
     }
 
+    jwt.sign(
+      { _id: user._id, email: user.email },
+      //Production:
+      // process.env.JWT_SECRET,
+      //Local
+      keys.secretOrKey,
+      { expiresIn: 36000 },
+      (err, token) => {
+        if (err) {
+          return res.status(400).json(err);
+        }
+        res.json({
+          token: token,
+          user: { _id: user._id, email: user.email },
+        });
+      }
+    );
+  })(req, res);
+};
+
 exports.post_guest_login = function (req, res, next) {
-  // console.log(process.env.GUEST_PW)
-  // console.log(keys.guest_email);
   req.body.email = keys.guest_email;
   req.body.password = keys.guest_pw;
   passport.authenticate("local", { session: false }, function (
@@ -404,10 +315,7 @@ exports.post_guest_login = function (req, res, next) {
     user,
     info
   ) {
-    console.log("h1");
-    console.log(err);
     if (err || !user) {
-      console.log("error or no user");
       console.log("err", err);
       console.log("user", user);
       console.log("info", info);
@@ -446,19 +354,13 @@ exports.unpublish_user = (req, res, next) => {
       console.log(err);
       res.sendStatus(403);
     } else {
-      // const { body, validationResult, check } = require("express-validator");
       const { userid } = req.params;
-      // isPublished = false;
-
-      console.log("userid", userid);
 
       User.findOne({ _id: userid }, (err, originalUser) => {
         if (err) {
           console.log(err);
           return res.json(err);
         }
-
-        console.log("originalUser", originalUser);
 
         Post.updateMany(
           { author: userid },
@@ -468,9 +370,6 @@ exports.unpublish_user = (req, res, next) => {
               console.log(err);
               res.sendStatus(403);
             }
-            // else {
-            //   return res.json({ "Unpublished Posts": unpublishedPosts });
-            // }
 
             Comment.updateMany(
               { author: userid },
@@ -534,50 +433,7 @@ exports.unpublish_user = (req, res, next) => {
   });
 };
 
-// exports.facebook_callback = (req, res, next) => {
-//   passport.authenticate("facebook", { session: false }, function (
-//     err,
-//     user,
-//     info
-//   ) {
-//     console.log("made it here");
-//     if (err || !user) {
-//       console.log("error or no user");
-//       console.log("err", err);
-//       console.log("user", user);
-//       console.log("info", info);
-//       return res.json({
-//         message: "Could not verify Facebook account",
-//       });
-//     }
-//     // if (err) res.send(err);
-//     jwt.sign(
-//       { _id: user._id, email: user.email },
-//       //Production:
-//       // process.env.JWT_SECRET,
-//       //Local
-//       keys.secretOrKey,
-//       { expiresIn: 36000 },
-//       (err, token) => {
-//         if (err) {
-//           return res.status(400).json(err);
-//         }
-//         res.json({
-//           token: token,
-//           user: { _id: user._id, email: user.email },
-//         });
-//       }
-//     );
-//   })(req, res);
-// };
-
-// exports.user_logout_get = function (req, res) {
-//   req.logOut();
-// };
-
 exports.get_currentUser_posts = (req, res, next) => {
-  const { body, validationResult, check } = require("express-validator");
-
   jwt.verify(req.token, process.env.JWT_SECRET, (err, authData) => {
     if (err) {
       console.log(err);
@@ -596,7 +452,6 @@ exports.get_currentUser_posts = (req, res, next) => {
 };
 
 exports.get_user_posts = (req, res, next) => {
-  const { body, validationResult, check } = require("express-validator");
   const { userid } = req.params;
   Post.find({ author_id: userid }, (err, posts) => {
     if (err) {
@@ -607,15 +462,6 @@ exports.get_user_posts = (req, res, next) => {
     next();
   }).populate("author");
 };
-
-// Dive.update(
-//   { _id: diveId },
-//   { $pull: { divers: { user: userIdToRemove } } },
-//   { safe: true, multi: true },
-//   function (err, obj) {
-//     //do something smart
-//   }
-// );
 
 // Accept friend request
 exports.unfriend_user = (req, res) => {
