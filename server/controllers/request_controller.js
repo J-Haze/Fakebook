@@ -1,12 +1,7 @@
-const passport = require("../config/passport");
-const { body, validationResult, check } = require("express-validator");
-const bcrypt = require("bcryptjs");
-const async = require("async");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
 var User = require("../models/User");
-// var Post = require("../models/Post");
 var Request = require("../models/FriendRequest");
 
 exports.get_requests = (req, res, next) => {
@@ -26,7 +21,6 @@ exports.get_request = (req, res, next) => {
     { sender: senderid, receiver: receiverid },
     (err, doesExist) => {
       if (err) return res.json(err);
-      console.log("exists?", doesExist);
 
       if (doesExist) {
         Request.findOne(
@@ -47,7 +41,6 @@ exports.get_request = (req, res, next) => {
           { sender: receiverid, receiver: senderid },
           (err, doesExist) => {
             if (err) return res.json(err);
-            console.log("exists?", doesExist);
 
             if (doesExist) {
               Request.findOne(
@@ -114,7 +107,6 @@ exports.send_request = (req, res) => {
         { sender: authData._id, receiver: req.body.receiver },
         (err, doesExist) => {
           if (err) return res.json(err);
-          // console.log("exists?", doesExist);
           if (doesExist) {
             return res.json("Error, request already exists.");
           } else {
@@ -122,17 +114,15 @@ exports.send_request = (req, res) => {
               { sender: req.body.receiver, receiver: authData._id },
               (err, doesExist) => {
                 if (err) return res.json(err);
-                // console.log("exists?", doesExist);
                 if (doesExist) {
                   return res.json("Error, request already exists.");
                 } else {
-                  // const { receiverid } = req.params;
                   var request = new Request({
                     sender: authData._id,
                     receiver: req.body.receiver,
                   });
 
-                  // Data from form is valid. Save book.
+                  // Data from form is valid. Save request.
                   request.save(function (err) {
                     if (err) {
                       console.log("err", err);
@@ -161,7 +151,6 @@ exports.cancel_request = (req, res) => {
       Request.findOneAndDelete({ _id: requestid }, (err, deletedRequest) => {
         if (err) return res.json(err);
         res.json(deletedRequest);
-        // next();
       });
     }
   });
@@ -182,7 +171,6 @@ exports.accept_request = (req, res) => {
         }
 
         //Add sender to receiver's friend list
-
         User.findOneAndUpdate(
           { _id: request.receiver._id },
           {
@@ -193,10 +181,14 @@ exports.accept_request = (req, res) => {
               console.log(err);
               return res.json(err);
             }
+
+            //Add receiver to sender's friend list
             User.findOneAndUpdate(
               { _id: request.sender._id },
               {
-                $push: { friendList: request.receiver._id },
+                $push: {
+                  friendList: request.receiver._id,
+                },
               },
               (err, updatedSender) => {
                 if (err) {
@@ -225,23 +217,3 @@ exports.accept_request = (req, res) => {
     }
   });
 };
-
-// await Friend.findOneAndUpdate(
-//   {
-//     user: req.params.id,
-//     self: req.user.id,
-//   },
-//   { $set: { status: "accepted" } },
-//   { upsert: true, new: true }
-// );
-
-// await Friend.findOneAndUpdate(
-//   {
-//     user: req.user.id,
-//     self: req.params.id,
-//   },
-//   { $set: { status: "accepted" } },
-//   { upsert: true, new: true }
-// );
-
-// res.json("Friend accepted");
