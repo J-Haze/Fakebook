@@ -82,7 +82,6 @@ function Card(props) {
   }
 
   function checkIfLiked() {
-    console.log("check if liked", props.post.likesList.length);
     if (
       props.post.likesList.length == 0 ||
       props.post.likesList.length == undefined
@@ -167,7 +166,6 @@ function Card(props) {
 
   function calculateLikes() {
     props.fetchPosts();
-    console.log("props.post.likesList", props.post.likesList);
     if (
       props.post.likesList.length == 0 ||
       props.post.likesList.length == undefined
