@@ -5,30 +5,9 @@ import Axios from "axios";
 import badWords from "bad-words";
 import { useHistory } from "react-router-dom";
 
-import FileUploaderUser from "./FileUploaderUser";
 import "./DeleteUserModal.css";
 
-// import Editor from "../../HelperComponents/Editor";
-
-// import ImageUpload from "./Sections/ImageUpload.js"
-
-const filter = new badWords();
-var path = require("path");
-
 function DeleteUserModal(props) {
-  //   const [title, setTitle] = useState(props.initialTitle);
-  const [bioText, setBioText] = useState(props.currentUser.bio);
-  const [locationText, setLocationText] = useState(props.currentUser.location);
-  const [occupationText, setOccupationText] = useState(
-    props.currentUser.occupation
-  );
-
-  const [imgUpload, setImgUpload] = useState(null);
-  const [imgPreview, setImgPreview] = useState("");
-  const [addImageOpen, setAddImageOpen] = useState(false);
-
-  const [errorMessage, setErrorMessage] = useState("");
-
   useEffect(() => {
     return function cleanup() {
       props.setDeleteUserModalOpen(false);
@@ -56,9 +35,9 @@ function DeleteUserModal(props) {
         },
       }
     )
-        .then((res) => {
-            props.setDeleteUserModalOpen(false);
-            logOut();
+      .then((res) => {
+        props.setDeleteUserModalOpen(false);
+        logOut();
       })
       .catch((error) => {
         console.log("error", error);
