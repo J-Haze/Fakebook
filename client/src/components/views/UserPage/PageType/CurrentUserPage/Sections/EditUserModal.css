@@ -7,8 +7,6 @@
   top: 0;
   width: 100%;
   height: 100vh;
-  /* background-color: rgb(0, 0, 0); */
-  /* background-color: rgba(0, 0, 0, 0.4); */
   background-color: rgba(235, 235, 235, 0.8);
 }
 
@@ -20,15 +18,10 @@
   flex-direction: column;
   margin-left: auto;
   margin-right: auto;
-
-  /* min-height: 428px; */
   min-height: 450px;
   width: 500px;
   padding: 0px 16px;
-
   color: black;
-
-  /* padding: 1rem; */
   border-radius: 6px;
   background: white;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.1);
@@ -37,13 +30,8 @@
 #edit-user-header {
   display: flex;
   flex-direction: column;
-  /* padding: 1rem; */
-  /* height: 132pxpx; */
   box-sizing: border-box;
-  /* border: 1px solid black; */
-  /* width: 200px; */
   padding: 10px 16px;
-  /* margin */
 }
 
 #edit-user-header-top {
@@ -51,7 +39,6 @@
   height: 100%;
   align-items: center;
   justify-content: center;
-  /* border: 1px solid black; */
 }
 
 #edit-user-header-title {
@@ -60,7 +47,6 @@
   font-size: 20px;
   font-weight: 700;
   line-height: 24px;
-  /* margin-bottom: 0; */
   margin-left: 180px;
   margin-right: auto;
 }
@@ -80,18 +66,12 @@
   align-items: center;
   background-color: var(--light-gray);
   border-radius: 50%;
-  /* margin-right: 10px; */
-
   color: #aaa;
   float: right;
-  /* margin-left: 100%; */
   margin-left: auto;
   margin-right: -12px;
-  /* margin-top: -17px; */
   font-size: 32px;
-  /* height: 10px; */
   font-weight: bold;
-  /* border: 1px solid red; */
   text-align: center;
   padding-bottom: 7px;
   box-sizing: border-box;
@@ -99,7 +79,6 @@
 
 .close-edit-user:hover,
 .close-edit-user:focus {
-  /* color: black; */
   background-color: var(--dark-gray);
   text-decoration: none;
   cursor: pointer;
@@ -109,20 +88,14 @@
   display: flex;
   flex-direction: column;
   height: 100%;
-  /* width: 100%; */
   padding: 1rem;
-  /* border: 1px solid rgb(204, 208, 213); */
-  /* border-top: 1px solid rgb(204, 208, 213); */
-  /* border: rgb(204, 208, 213) */
 }
 
 #edit-user-mid-row {
-  /* border: 1px solid red; */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   min-height: 5px;
-  /* height: 100%; */
 }
 
 .edit-user-username {
@@ -130,7 +103,6 @@
   font-size: 15px;
   font-weight: 600;
   line-height: 20px;
-  /* border: 1px solid black; */
   margin-top: 10px;
   margin-left: 6px;
 }
@@ -143,25 +115,19 @@
   display: inline-block;
   text-align: start;
   padding-top: -100px;
-  /* padding-bottom: 50px; */
   min-height: 153.5px;
   line-height: 28px;
   font-weight: 400;
   resize: none;
   border: white;
-
-  /* border: 1px solid black; */
 }
 
 .input-edit-user:focus {
-  /* border: white;
-    border: none; */
   outline: none !important;
 }
 
 #edit-user-img-row {
   height: 58.5px;
-  /* border: 1px solid black; */
   margin-top: 30px;
   margin-bottom: 10px;
 }
@@ -186,14 +152,10 @@
 
 #edit-user-bottom-row {
   height: auto;
-  /* border: 1px solid red; */
-  /* margin-bottom: -5px; */
-  /* height: 100px; */
   height: 72px;
   display: flex;
   justify-content: center;
   align-items: center;
-  /* margin-top: 30px; */
 }
 
 .submit-edit-user {
@@ -202,25 +164,12 @@
   align-items: center;
   margin-left: auto;
   margin-right: auto;
-  /* margin-top: auto; */
-  /* margin-bottom: 0px; */
-  /* color: white; */
-  /* width: 194px; */
   width: 100%;
-  /* background-color: rgb(0, 164, 0); */
-  /* font-family: Helvetica, Arial, sans-serif; */
   font-size: 15px;
   height: 36px;
   line-height: 16.08px;
   border-radius: 6px;
   font-family: "Segoe UI Historic", "Segoe UI", Helvetica, Arial, sans-serif;
-  /* font-size: 18px; */
-  /* font-stretch: 100%;
-  font-style: normal;
-  font-variant-caps: normal;
-  font-variant-east-asian: normal;
-  font-variant-ligatures: normal;
-  font-variant-numeric: normal; */
   font-weight: 600;
 }
 
@@ -237,7 +186,6 @@
 
 #submit-edit-user-full:hover {
   cursor: pointer;
-  /* background-color: rgb(81, 101, 255); */
   background-color: #1b74e4;
 }
 
@@ -261,7 +209,6 @@
 }
 
 .edit-cont {
-  /* border: 1px solid blue; */
 }
 
 .edit-bio-cont {
@@ -274,7 +221,6 @@
   border: 1px solid rgb(198, 198, 198);
   background-color: rgb(245, 245, 245);
   color: rgb(67, 67, 67);
-
   font-size: 16px;
   font-weight: 400px;
   line-height: 20.8px;
@@ -285,7 +231,5 @@
 }
 
 .edit-input:focus {
-  /* border: white;
-    border: none; */
   outline: none !important;
 }
