@@ -1,13 +1,9 @@
 const express = require("express");
 const router = express.Router();
 
-router.get("/", auth, post_controller.get_posts);
-
-var post_controller = require("../controllers/post_controller");
-
-const auth = require("../middleware/auth");
+var user_controller = require("../controllers/user_controller");
 
 // GET - Get all posts
-router.get("/", auth, post_controller.get_posts);
+router.get("/", user_controller.index);
 
 module.exports = router;

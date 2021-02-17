@@ -15,6 +15,10 @@ var Comment = require("../models/Comment");
 var Request = require("../models/FriendRequest");
 var Notification = require("../models/Notification");
 
+exports.index = (req, res, next) => {
+  res.json("Index");
+};
+
 exports.get_current_user = (req, res, next) => {
   jwt.verify(req.token, process.env.JWT_SECRET, (err, authData) => {
     if (err) {
