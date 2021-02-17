@@ -4,15 +4,8 @@ import Axios from "axios";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 
-import Card from "../..//HomePage/Sections/Card.js";
-// import EditUserModal from "../Current/Sections/EditUserModal.js";
-
 function NonFriendPage(props) {
-  const [userPosts, setUserPosts] = useState([]);
-
   const [friendCount, setFriendCount] = useState(0);
-
-  //  const [editUserModalOpen, setEditUserModalOpen] = useState(true);
   const [unfriendModalOpen, setUnfriendModalOpen] = useState(false);
 
   const [haveIncomingRequest, setHaveIncomingRequest] = useState(false);
@@ -21,33 +14,6 @@ function NonFriendPage(props) {
   const [requestID, setRequestID] = useState();
 
   const history = useHistory();
-
-  console.log("user3", props.userProfile);
-  // console.log("user4", props.friendList);
-
-  useEffect(() => {
-    let userPostArray = [];
-
-    for (let i = 0; i < props.displayedPosts.length; i++) {
-      //   console.log(i, props.displayedPosts[i]);
-      //   console.log(props.displayedPosts.author);
-      //   console.log(props.currentUser);
-      if (props.displayedPosts[i].author._id == props.userProfile._id) {
-        // console.log("match");
-        // console.log(props.displayedPosts[i].author._id);
-        // console.log(props.currentUser._id);
-        if (userPostArray.length == 0 || userPostArray == undefined) {
-          userPostArray = [props.displayedPosts[i]];
-        } else {
-          userPostArray.push(props.displayedPosts[i]);
-        }
-      }
-    }
-    // console.log("userPostArray end", userPostArray);
-    // console.log("displayedPosts end", props.displayedPosts);
-    setUserPosts(userPostArray);
-    // setDisplayedComments(res.data);
-  }, [props.displayedPosts]);
 
   function calculateFriendCount() {
     if (
@@ -66,10 +32,8 @@ function NonFriendPage(props) {
   }, []);
 
   function checkForRequest() {
-    //Have it get any request with the receiver and sender and then determine if it's pending or received
-
     if (props.currentUser._id == props.userProfile._id) {
-      return
+      return;
     }
     Axios.get(`/request/${props.currentUser._id}/${props.userProfile._id}`, {
       headers: {
@@ -79,8 +43,6 @@ function NonFriendPage(props) {
       },
     })
       .then((res) => {
-        console.log("result", res.data);
-
         if (res.data == false) {
           setHaveSentRequest(false);
           setHaveIncomingRequest(false);
@@ -104,19 +66,9 @@ function NonFriendPage(props) {
   }
 
   useEffect(() => {
-    // check for requests
     checkForRequest();
   }, [props.sendingRequest]);
 
-  // function acceptRequest() {
-  //   console.log("Accepted Request");
-  // }
-
-  // function declineRequest() {
-  //   console.log("Declined Request");
-  // }
-
-  // return <div id="non-friend-page">Non Friend Page</div>;
   return (
     <div id="current-user-page">
       {unfriendModalOpen && (
@@ -195,7 +147,6 @@ function NonFriendPage(props) {
             <div
               className="user-info-confirm-pending"
               onClick={() => {
-                // setUnfriendModalOpen(true);
                 props.acceptRequest(requestID, props.userProfile._id);
               }}
             >
@@ -204,7 +155,6 @@ function NonFriendPage(props) {
             <div
               className="user-info-delete-pending"
               onClick={() => {
-                // setUnfriendModalOpen(true);
                 props.declineRequest(requestID);
               }}
             >
