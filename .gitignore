@@ -12,7 +12,7 @@ dev.js
 
 .history
 
-.env
+# .env
 
 keys.js
 
@@ -44,7 +44,7 @@ yarn-error.log*
 
 .vscode
 
- nodemon.json
+#  nodemon.json
  
 #  /uploads/*
 #   \uploads\*
@@ -57,13 +57,13 @@ yarn-error.log*
 
 #  ../uploads
 
- client\.env
-  client/.env
+#  client\.env
+#   client/.env
 
-  server\.env
-  server/.env
+#   server\.env
+#   server/.env
 
-  server/config/keys.js
-  server\config\keys.js
+#   server/config/keys.js
+#   server\config\keys.js
 
- nodemon.json
+#  nodemon.json
