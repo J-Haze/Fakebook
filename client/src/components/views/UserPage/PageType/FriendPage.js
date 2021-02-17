@@ -1,38 +1,24 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import Axios from "axios";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 
 import Card from "../..//HomePage/Sections/Card.js";
-// import EditUserModal from "../Current/Sections/EditUserModal.js";
 
 import "../UserPage.css";
 
 function FriendPage(props) {
   const [userPosts, setUserPosts] = useState([]);
-
   const [friendCount, setFriendCount] = useState(0);
-
-  //  const [editUserModalOpen, setEditUserModalOpen] = useState(true);
   const [unfriendModalOpen, setUnfriendModalOpen] = useState(false);
 
   const history = useHistory();
-
-  console.log("user3", props.userProfile);
-  // console.log("user4", props.friendList);
 
   useEffect(() => {
     let userPostArray = [];
 
     for (let i = 0; i < props.displayedPosts.length; i++) {
-      //   console.log(i, props.displayedPosts[i]);
-      //   console.log(props.displayedPosts.author);
-      //   console.log(props.currentUser);
       if (props.displayedPosts[i].author._id == props.userProfile._id) {
-        // console.log("match");
-        // console.log(props.displayedPosts[i].author._id);
-        // console.log(props.currentUser._id);
         if (userPostArray.length == 0 || userPostArray == undefined) {
           userPostArray = [props.displayedPosts[i]];
         } else {
@@ -40,10 +26,7 @@ function FriendPage(props) {
         }
       }
     }
-    // console.log("userPostArray end", userPostArray);
-    // console.log("displayedPosts end", props.displayedPosts);
     setUserPosts(userPostArray.reverse());
-    // setDisplayedComments(res.data);
   }, [props.displayedPosts]);
 
   function calculateFriendCount() {
@@ -61,23 +44,6 @@ function FriendPage(props) {
   useEffect(() => {
     calculateFriendCount();
   }, [props.userProfile.friendList.length]);
-
-  // function submitUnfriend() {
-  //   console.log("unfriend");
-  // }
-
-  // Only 9 friends shown
-
-  // useEffect(() => {
-  //   let friendList = props.userProfile.friendList;
-  //   let shownFriends = friendList.slice(0, 8)
-    
-  //   console.log("here9")
-  //   console.log(shownFriends)
-  //   console.log(friendList)
-  // }, []);
-  
-
 
   return (
     <div id="current-user-page">
@@ -200,7 +166,7 @@ function FriendPage(props) {
             <div id="friend-header">Friends</div>
             <span
               className="see-all-friends"
-              onClick={(event) => {
+              onClick={() => {
                 history.push(`/friends/${props.userProfile._id}`);
               }}
             >
@@ -240,27 +206,7 @@ function FriendPage(props) {
           infringement intended.
         </div>
       </div>
-      {/* </div> */}
       <div id="user-post-cont">
-        {/* <div id="new-post-card">
-          <div id="new-post-card-top" className="new-post-card-row">
-            <Link className="link" to={`/user/${props.userProfile._id}`}>
-              <img
-                className="prof-pic"
-                alt={`profile-pic-user-${props.userProfile.firstname}-${props.userProfile.lastname}`}
-                src={`http://localhost:5000/uploads/${props.userProfile.photo.filename}`}
-              />
-            </Link>
-            <div
-              id="woym-btn"
-              onClick={() => {
-                props.setCreatePostModalOpen(true);
-              }}
-            >
-              What's on your mind, {props.userProfile.firstname}?
-            </div>
-          </div>
-        </div> */}
         {userPosts.map((post) =>
           post.isPublished ? (
             <Card
