@@ -65,9 +65,7 @@ function App() {
       },
     }).then((res) => {
       let allUsersArray = res.data;
-      console.log("allUsersArray", allUsersArray);
       setAllUsers(allUsersArray);
-      // setAllUsers(res.data);
     });
   };
 
@@ -201,11 +199,7 @@ function App() {
       }
     )
       .then((res) => {
-        // fetchUsers();
-        // fetchPosts();
-
         setPageType("NonFriendPage");
-        // fetchUsers();
         history.push(`/user/${userid}`);
       })
       .catch((error) => {
