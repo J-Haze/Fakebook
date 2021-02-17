@@ -5,28 +5,10 @@ import CurrentUserPage from "./PageType/CurrentUserPage/CurrentUserPage.js";
 import FriendPage from "./PageType/FriendPage.js";
 import NonFriendPage from "./PageType/NonFriendPage.js";
 
-import { useState, useEffect } from "react";
-import Axios from "axios";
+import { useEffect } from "react";
 
 function UserPage(props) {
-  const [userBlogs, setUserBlogs] = useState([]);
-  const [isUserPage, setIsUserPage] = useState(false);
-  const [blogCount, setBlogCount] = useState(0);
-  const [loading, setLoading] = useState(true);
-
-  // const [pageType, setPageType] = useState("NonFriendPage");
-  // const [pageType, setPageType] = useState("");
-
   useEffect(() => {
-console.log(
-  "sanity check",
-  props.userProfile._id,
-  props.currentUser._id,
-  props.currentUser.friendList
-    );
-    
-    
-
     if (props.userProfile._id === props.currentUser._id) {
       props.setPageType("CurrentUserPage");
     } else {
@@ -40,76 +22,19 @@ console.log(
         props.setPageType("NonFriendPage");
       }
     }
-    // console.log("PageType:", props.pageType)
   }, [
     props.userProfile._id,
     props.currentUser._id,
-      props.currentUser.friendList,
-      props.allUsers
-    // props.allPosts
-    // props.updateUserPage
+    props.currentUser.friendList,
+    props.allUsers,
   ]);
 
-    useEffect(() => {
-      // props.fetchUsers();
-      // props.fetchPosts();
-      return function cleanup() {
-        props.fetchUsers();
-        props.fetchPosts();
-      };
-    }, []);
-
-
-
-  // console.log("user1", props.user)
-  // console.log("user2", props.friendList);
-
-  //   const fetchUserBlogs = () => {
-  //     Axios.get(`/user/${props._id}/posts`).then((res) => {
-  //       let userBlogsArray = res.data;
-  //       let reversedArray = userBlogsArray.reverse();
-  //       setUserBlogs(reversedArray);
-
-  //       let blogCountVar = 0;
-  //       if (reversedArray.length > 0) {
-  //         reversedArray.forEach(function (blog) {
-  //           if (blog.isPublished) {
-  //             blogCountVar++;
-  //           }
-  //         });
-  //       }
-  //       setBlogCount(blogCountVar);
-  //       setLoading(false);
-  //     });
-  //   };
-
-  //   useEffect(() => {
-  //     fetchUserBlogs();
-  //   }, []);
-
-  //   useEffect(() => {
-  //     if (props.currentUser) {
-  //       if (props.currentUser.username === props.username) {
-  //         setIsUserPage(true);
-  //         props.setIsViewingProfile(true);
-  //       } else {
-  //         setIsUserPage(false);
-  //       }
-  //     }
-  //     return function cleanup() {
-  //       props.setIsViewingProfile(false);
-  //     };
-  //   }, [props.currentUser, props.username]);
-
-  //code that takes displayedPosts and outputs user posts
-
-  // console.log("received requests 2", props.receivedRequests);
-
-  // console.log("received requests count1", props.receivedRequestsCount);
-
-  // console.log("allUsers userPage", props.allUsers)
-
-  
+  useEffect(() => {
+    return function cleanup() {
+      props.fetchUsers();
+      props.fetchPosts();
+    };
+  }, []);
 
   return (
     <div id="user-page">
@@ -130,7 +55,6 @@ console.log(
           setCurrentUser={props.setCurrentUser}
           isLoggedIn={props.isLoggedIn}
           setIsLoggedIn={props.setIsLoggedIn}
-          // refTarget={props.refTarget}
         />
       ) : props.pageType == "FriendPage" ? (
         <FriendPage
