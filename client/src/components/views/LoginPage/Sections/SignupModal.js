@@ -69,7 +69,6 @@ function SignupModal(props) {
     }
 
     let birthDate = `${birthMonth}-${birthDay}-${birthYear}`;
-    console.log("birthDate:", birthDate);
 
     if (
       (birthMonth == 2 && birthDay > 29) ||
@@ -97,7 +96,6 @@ function SignupModal(props) {
     })
       .then((res) => {
         if (res.data.message) {
-          console.log("Error: request");
           setErrorMessage(res.data.message);
         } else {
           setErrorMessage("");
@@ -111,7 +109,6 @@ function SignupModal(props) {
           setPassword("");
           props.setCurrentUser(res.data);
 
-          //Should I use a log in???
           Axios.post("/user/log-in", {
             email: email.toLowerCase(),
             password: password,
@@ -127,8 +124,6 @@ function SignupModal(props) {
               props.setSignupModalOpen(false);
               props.setIsLoggedIn(true);
               history.push(`/`);
-              //   props.fetchUsers();
-              //   history.go(-1);
             }
           });
         }
@@ -137,8 +132,6 @@ function SignupModal(props) {
   };
 
   const yearOptions = [];
-
-  console.log("cy", currentYear);
 
   for (let i = currentYear - 1; i > 1910; i--) {
     yearOptions.push(i);
