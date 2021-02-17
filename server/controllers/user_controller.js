@@ -290,9 +290,9 @@ exports.post_user_login = function (req, res, next) {
     jwt.sign(
       { _id: user._id, email: user.email },
       //Production:
-      // process.env.JWT_SECRET,
+      process.env.JWT_SECRET,
       //Local
-      keys.secretOrKey,
+      // keys.secretOrKey,
       { expiresIn: 36000 },
       (err, token) => {
         if (err) {
@@ -308,8 +308,10 @@ exports.post_user_login = function (req, res, next) {
 };
 
 exports.post_guest_login = function (req, res, next) {
-  req.body.email = keys.guest_email;
-  req.body.password = keys.guest_pw;
+  // req.body.email = keys.guest_email;
+  // req.body.password = keys.guest_pw;
+  req.body.email = process.env.GUEST_EMAIL;
+  req.body.password = process.env.GUEST_PW;
   passport.authenticate("local", { session: false }, function (
     err,
     user,
@@ -326,15 +328,15 @@ exports.post_guest_login = function (req, res, next) {
     if (err) res.send(err);
     jwt.sign(
       //Production:
-      // { _id: user._id, email: process.env.GUEST_EMAIL },
+      { _id: user._id, email: process.env.GUEST_EMAIL },
       //Local
-      { _id: user._id, email: user.email },
+      // { _id: user._id, email: user.email },
 
       //Production:
-      // process.env.JWT_SECRET,
+      process.env.JWT_SECRET,
       //Local
-      keys.secretOrKey,
-      { expiresIn: 36000 },
+      // keys.secretOrKey,
+      { expiresIn: 360000 },
       (err, token) => {
         if (err) {
           return res.status(400).json(err);

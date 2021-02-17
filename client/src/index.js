@@ -12,9 +12,9 @@ import { BrowserRouter } from "react-router-dom";
 import axios from "axios";
 
 //prod
-// axios.defaults.baseURL = "https://justins-forum-api.herokuapp.com";
+axios.defaults.baseURL = "https://justins-fakebook-api.herokuapp.com";
 //dev
-axios.defaults.baseURL = 'http://localhost:5000';
+// axios.defaults.baseURL = 'http://localhost:5000';
 
 ReactDOM.render(
   <BrowserRouter>
