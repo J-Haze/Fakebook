@@ -65,3 +65,5 @@ yarn-error.log*
   server\config\keys.js
 
  ../uploads
+
+ nodemon.json
