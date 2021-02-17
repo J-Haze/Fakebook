@@ -24,13 +24,10 @@ router.get("/sent", auth, request_controller.get_currentUser_requests_sent);
 // Send friend request from current user to specified user
 router.post("/", auth, request_controller.send_request);
 
-// Cancel/Delete a sent friend request
+// Cancel/Delete/Decline a sent friend request
 router.delete("/:requestid", auth, request_controller.cancel_request);
 
 // Accept a friend request
 router.post("/:requestid/accept", auth, request_controller.accept_request);
-
-// Decline a friend request
-// router.post("/:requestid/decline", auth, request_controller.decline_request);
 
 module.exports = router;
