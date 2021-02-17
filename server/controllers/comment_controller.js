@@ -1,15 +1,9 @@
-const passport = require("../config/passport");
 const { body, validationResult, check } = require("express-validator");
-const bcrypt = require("bcryptjs");
-const async = require("async");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
 var User = require("../models/User");
 var Comment = require("../models/Comment");
-var Post = require("../models/Post");
-
-const { post } = require("../routes/post");
 
 exports.post_create_comment = [
   // Validate and sanitize fields.
@@ -30,7 +24,7 @@ exports.post_create_comment = [
           isPublished: true,
         });
 
-        // Data from form is valid. Save book.
+        // Data from form is valid. Save comment.
         comment.save(function (err) {
           if (err) {
             console.log("err", err);
@@ -172,13 +166,7 @@ exports.like_comment = (req, res, next) => {
             return res.json(err);
           }
 
-          console.log("originalComment.likesList", originalComment.likesList);
-
           let orignialLikes = originalComment.likesList;
-
-          console.log("orignialLikes1", orignialLikes);
-
-          // if current user ID is in likesList array then return
 
           //Taken care of in Front End
           if (orignialLikes) {
@@ -187,18 +175,13 @@ exports.like_comment = (req, res, next) => {
             }
           }
 
-          console.log("orignialLikes2", orignialLikes);
-
           let newLikes = orignialLikes;
 
           if (orignialLikes.length == 0 || orignialLikes == undefined) {
             newLikes = [authData._id];
           } else {
-            // newLikes = originalLikes.push(authData._id);
             newLikes.push(authData._id);
           }
-
-          console.log("orignialLikes3", orignialLikes);
 
           Comment.findOneAndUpdate(
             { _id: commentid },
@@ -242,32 +225,21 @@ exports.unlike_comment = (req, res, next) => {
             return res.json(err);
           }
 
-          console.log("originalComment.likesList", originalComment.likesList);
-
           let orignialLikes = originalComment.likesList;
-
-          console.log("orignialLikes1", orignialLikes);
 
           if (orignialLikes.length == 0 || orignialLikes == undefined) {
             return res.json("You haven't liked this comment");
           }
-
-          console.log("orignialLikes2", orignialLikes);
-          console.log("authData._id", authData._id);
 
           let newLikes = orignialLikes;
 
           // if current user ID is in likesList array then return
           //Taken care of in Front End
           if (newLikes.indexOf(authData._id) != -1) {
-            console.log("match");
             newLikes.splice(newLikes.indexOf(authData._id));
           } else {
             return res.json("You haven't liked this comment");
           }
-
-          console.log("newLikes3", newLikes);
-          console.log("orignialLikes3", orignialLikes);
 
           Comment.findOneAndUpdate(
             {
