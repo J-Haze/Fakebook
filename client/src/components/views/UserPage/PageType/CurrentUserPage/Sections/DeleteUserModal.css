@@ -7,8 +7,6 @@
   top: 0;
   width: 100%;
   height: 100vh;
-  /* background-color: rgb(0, 0, 0); */
-  /* background-color: rgba(0, 0, 0, 0.4); */
   background-color: rgba(235, 235, 235, 0.8);
 }
 
@@ -20,15 +18,9 @@
   flex-direction: column;
   margin-left: auto;
   margin-right: auto;
-
-  /* min-height: 428px; */
-  /* min-height: 450px; */
   width: 500px;
   padding: 0px 16px;
-
   color: black;
-
-  /* padding: 1rem; */
   border-radius: 6px;
   background: white;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.1);
@@ -37,13 +29,8 @@
 #delete-user-header {
   display: flex;
   flex-direction: column;
-  /* padding: 1rem; */
-  /* height: 132pxpx; */
   box-sizing: border-box;
-  /* border: 1px solid black; */
-  /* width: 200px; */
   padding: 10px 16px 0px 16px;
-  /* margin */
 }
 
 #delete-user-header-top {
@@ -52,7 +39,6 @@
   height: 100%;
   align-items: center;
   justify-content: center;
-  /* border: 1px solid black; */
 }
 
 #delete-user-header-title {
@@ -61,27 +47,20 @@
   font-size: 20px;
   font-weight: 700;
   line-height: 24px;
-  /* margin-bottom: 0; */
-  /* margin-left: 180px; */
   margin-top: 10px;
   margin-left: auto;
   margin-right: auto;
-  /* border: 1px solid red; */
 }
 
 #delete-user-header-subtitle {
-  /* color: #1c1e21; */
   color: var(--red);
   font-family: "Segoe UI", Helvetica, Arial, sans-serif;
   font-size: 20px;
   font-weight: 700;
   line-height: 24px;
-  /* margin-bottom: 0; */
-  /* margin-left: 180px; */
   margin-top: 10px;
   margin-left: auto;
   margin-right: auto;
-  /* border: 1px solid red; */
 }
 
 /* #delete-user-header-subtitle {
@@ -99,18 +78,12 @@
   align-items: center;
   background-color: var(--light-gray);
   border-radius: 50%;
-  /* margin-right: 10px; */
-
   color: #aaa;
   float: right;
-  /* margin-left: 100%; */
   margin-left: auto;
   margin-right: -20px;
-  /* margin-top: -17px; */
   font-size: 32px;
-  /* height: 10px; */
   font-weight: bold;
-  /* border: 1px solid red; */
   text-align: center;
   padding-bottom: 7px;
   box-sizing: border-box;
@@ -118,7 +91,6 @@
 
 .close-delete-user:hover,
 .close-delete-user:focus {
-  /* color: black; */
   background-color: var(--dark-gray);
   text-decoration: none;
   cursor: pointer;
@@ -128,20 +100,14 @@
   display: flex;
   flex-direction: column;
   height: 50px;
-  /* width: 100%; */
   padding: 1rem;
-  /* border: 1px solid rgb(204, 208, 213); */
-  /* border-top: 1px solid rgb(204, 208, 213); */
-  /* border: rgb(204, 208, 213) */
 }
 
 #delete-user-mid-row {
-  /* border: 1px solid red; */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   min-height: 5px;
-  /* height: 100%; */
 }
 
 .delete-user-username {
@@ -149,7 +115,6 @@
   font-size: 15px;
   font-weight: 600;
   line-height: 20px;
-  /* border: 1px solid black; */
   margin-top: 10px;
   margin-left: 6px;
 }
@@ -162,25 +127,19 @@
   display: inline-block;
   text-align: start;
   padding-top: -100px;
-  /* padding-bottom: 50px; */
   min-height: 153.5px;
   line-height: 28px;
   font-weight: 400;
   resize: none;
   border: white;
-
-  /* border: 1px solid black; */
 }
 
 .input-delete-user:focus {
-  /* border: white;
-    border: none; */
   outline: none !important;
 }
 
 #delete-user-img-row {
   height: 58.5px;
-  /* border: 1px solid black; */
   margin-top: 30px;
   margin-bottom: 10px;
 }
@@ -204,10 +163,6 @@
 }
 
 #delete-user-bottom-row {
-  /* height: auto; */
-  /* border: 1px solid red; */
-  /* margin-bottom: -5px; */
-  /* height: 100px; */
   height: 72px;
   width: 400px;
   margin-left: auto;
@@ -215,7 +170,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  /* margin-top: 30px; */
 }
 
 .submit-delete-user-btn {
@@ -240,20 +194,16 @@
 
 #submit-delete-user-cancel:hover {
   cursor: pointer;
-  /* background-color: rgb(81, 101, 255); */
   background-color: var(--dark-gray);
 }
 
 #submit-delete-user-confirm {
   background-color: var(--light-gray);
   color: #1c1e21;
-  /* border: 1px solid red; */
 }
 
 #submit-delete-user-confirm:hover {
   cursor: pointer;
-  /* background-color: rgb(81, 101, 255); */
-  /* color: white; */
   background-color: var(--red);
 }
 
@@ -277,7 +227,6 @@
 }
 
 .delete-cont {
-  /* border: 1px solid blue; */
 }
 
 .delete-bio-cont {
@@ -301,7 +250,5 @@
 }
 
 .delete-input:focus {
-  /* border: white;
-    border: none; */
   outline: none !important;
 }
