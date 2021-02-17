@@ -18,17 +18,11 @@ router.get("/:postid", auth, post_controller.get_post);
 //Update specific post
 router.put("/:postid", auth, post_controller.edit_post);
 
-
-
 //Like a specific post
 router.put("/:postid/like", auth, post_controller.like_post);
 
 //Unlike a specific post
 router.put("/:postid/unlike", auth, post_controller.unlike_post);
-
-//Don't have
-// //Publish post
-// router.put("/:postid/publish", auth, post_controller.publish_post);
 
 //Unpublish post
 router.put("/:postid/unpublish", auth, post_controller.unpublish_post);
