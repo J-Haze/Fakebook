@@ -1,8 +1,6 @@
 import React from "react";
 import Card from "../HomePage/Sections/Card.js";
-
 import { useState, useEffect } from "react";
-import Axios from "axios";
 
 import "./PostPage.css";
 
@@ -22,7 +20,6 @@ function PostPage(props) {
     //Checks if you're the post author
     if (props.currentUser._id === props.post.author._id) {
       setIsFriend(true);
-      console.log("two");
     }
   }, [props.currentUser, props.currentUser.friendList]);
 
