@@ -3,6 +3,7 @@ const jwt = require("jsonwebtoken");
 var fs = require("fs");
 var path = require("path");
 const multer = require("multer");
+// import multerUploads from "../middleware/multer"
 require("dotenv").config();
 
 var User = require("../models/User");
