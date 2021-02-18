@@ -111,7 +111,9 @@ exports.post_create_post = [
           if (req.files.length > 0) {
             console.log("file", req.files[0]);
 
-            req.files[0].filename = `${Date.now()}_${file.originalname}`;
+            req.files[0].filename = `${Date.now()}_${
+              req.files[0].originalname
+            }`;
 
             // var img = fs.readFileSync(req.files[0].path);
             // var encode_img = img.toString("base64");
