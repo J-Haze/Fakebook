@@ -82,7 +82,7 @@ var storage = multer.memoryStorage({
 
 var upload = multer({ storage: storage, limits: { fileSize: 5000000 } });
 
-let s3bucket = process.env.S3_BUCKET;
+// let s3bucket = process.env.S3_BUCKET;
 // console.log("bucket:", s3bucket);
 
 exports.post_create_post = [
@@ -115,23 +115,8 @@ exports.post_create_post = [
               req.files[0].originalname
             }`;
 
-            // var img = fs.readFileSync(req.files[0].path);
-            // var encode_img = img.toString("base64");
-            // var final_img = {
-            //   contentType: req.files[0].mimetype,
-            //   image: new Buffer.from(encode_img, "base64"),
-            // };
-
             const splitName = req.files[0].originalname.split(".");
             const format = splitName[splitName.length - 1];
-
-            // const s3Params = {
-            //   Bucket: process.env.S3_BUCKET,
-            //   Key: req.files[0].filename,
-            //   ContentType: format,
-            //   Body: req.files[0],
-            //   ACL: "public-read",,
-            // };
 
             const s3Params = {
               Bucket: process.env.S3_BUCKET,
@@ -140,15 +125,6 @@ exports.post_create_post = [
               Body: req.files[0].buffer,
               ACL: "public-read",
             };
-
-            // const s3Params = {
-            //   Bucket: process.env.S3_BUCKET,
-            //   Key: req.files[0].filename,
-            //   contentType: final_img.contentType,
-            //   Body: final_img.image,
-
-            //   ACL: "public-read",
-            // };
 
             console.log("s3Params;", s3Params);
 
@@ -167,7 +143,7 @@ exports.post_create_post = [
                     mimetype: req.files[0].mimetype,
                     // destination: req.files[0].destination,
                     destination: data.Location,
-                    url: `https://${process.env.S3_BUCKET}.s3.amazonaws.com/${req.files[0].filename}`,
+                    url: `https://${process.env.S3_BUCKET}.s3-us-west-2.amazonaws.com/${req.files[0].filename}`,
                     // destination:`https://${S3_BUCKET}.s3.amazonaws.com/${fileName}`,
                     filename: req.files[0].filename,
                     // path: fs.readFileSync(
@@ -210,44 +186,44 @@ exports.post_create_post = [
               });
             });
           } else {
-                   var post = new Post({
-                     text: finalText,
-                     image: {
-                       fieldname: "",
-                       originalname: "",
-                       encoding: "",
-                       mimetype: "",
-                       destination: "",
-                       url: "",
-                       filename: "",
-                       path: "",
-                       encoded: "",
-                       contentType: "",
-                     },
-                     likesList: [],
-                     author: authData._id,
-                     isPublished: true,
-                   });
+            var post = new Post({
+              text: finalText,
+              image: {
+                fieldname: "",
+                originalname: "",
+                encoding: "",
+                mimetype: "",
+                destination: "",
+                url: "",
+                filename: "",
+                path: "",
+                encoded: "",
+                contentType: "",
+              },
+              likesList: [],
+              author: authData._id,
+              isPublished: true,
+            });
 
-                   post.save(function (err) {
-                     if (err) {
-                       console.log("Failed to save");
-                       console.log(err);
-                       return res.status(400).json({
-                         success: false,
-                         err,
-                       });
-                     }
+            post.save(function (err) {
+              if (err) {
+                console.log("Failed to save");
+                console.log(err);
+                return res.status(400).json({
+                  success: false,
+                  err,
+                });
+              }
 
-                     post.author = postAuthor;
+              post.author = postAuthor;
 
-                     return res.json({
-                       message: "Post created",
-                       success: true,
-                       post: post,
-                     });
-                   });
-                 }
+              return res.json({
+                message: "Post created",
+                success: true,
+                post: post,
+              });
+            });
+          }
         });
       }
     });
