@@ -26,43 +26,16 @@ exports.get_posts = (req, res, next) => {
     .populate({ path: "likesList", match: { isPublished: true } });
 };
 
-// SET STORAGE
-var storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "uploads/");
-  },
-  filename: function (req, file, cb) {
-    cb(null, `${Date.now()}_${file.originalname}`);
-  },
-  fileFilter: (req, file, cb) => {
-    let ext = path.extname(file.originalname);
-    ext = ext.toLowerCase();
-    //must be jpg or png to upload
-    // if (ext !== ".jpg" || ext !== ".png") {
-    if (
-      ext !== ".png" &&
-      ext !== ".jpg" &&
-      ext !== ".gif" &&
-      ext !== ".jpeg" &&
-      ext !== ".svg" &&
-      ext !== ".jpg"
-    ) {
-      return cb(res.status(400).end("Only images are allowed."));
-    }
-    cb(null, true);
-  },
-});
-
 // // SET STORAGE
-// var storage = multer.memoryStorage({
-//   destination: (req, file, cb) => {
-//     cb(null, "");
+// var storage = multer.diskStorage({
+//   destination: function (req, file, cb) {
+//     cb(null, "uploads/");
 //   },
 //   filename: function (req, file, cb) {
 //     cb(null, `${Date.now()}_${file.originalname}`);
 //   },
 //   fileFilter: (req, file, cb) => {
-//     const ext = path.extname(file.originalname);
+//     let ext = path.extname(file.originalname);
 //     ext = ext.toLowerCase();
 //     //must be jpg or png to upload
 //     // if (ext !== ".jpg" || ext !== ".png") {
@@ -79,6 +52,33 @@ var storage = multer.diskStorage({
 //     cb(null, true);
 //   },
 // });
+
+// SET STORAGE
+var storage = multer.memoryStorage({
+  destination: (req, file, cb) => {
+    cb(null, "");
+  },
+  filename: function (req, file, cb) {
+    cb(null, `${Date.now()}_${file.originalname}`);
+  },
+  fileFilter: (req, file, cb) => {
+    const ext = path.extname(file.originalname);
+    ext = ext.toLowerCase();
+    //must be jpg or png to upload
+    // if (ext !== ".jpg" || ext !== ".png") {
+    if (
+      ext !== ".png" &&
+      ext !== ".jpg" &&
+      ext !== ".gif" &&
+      ext !== ".jpeg" &&
+      ext !== ".svg" &&
+      ext !== ".jpg"
+    ) {
+      return cb(res.status(400).end("Only images are allowed."));
+    }
+    cb(null, true);
+  },
+});
 
 var upload = multer({ storage: storage, limits: { fileSize: 5000000 } });
 
@@ -126,6 +126,7 @@ exports.post_create_post = [
               Key: req.files[0].filename,
               ContentType: format,
               Body: req.files[0],
+              ACL: "public-read",
             };
 
             S3.upload(s3Params, (err, data) => {
