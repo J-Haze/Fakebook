@@ -301,39 +301,30 @@ exports.edit_current_user = [
                 size: req.files[0].size,
                 contentType: `image/${format}`,
               };
-              console.log("photo0", photo);
+              console.log("bio2", bio);
+              console.log("location2", location);
+              console.log("occupation2", occupation);
+              User.findOneAndUpdate(
+                { _id: authData._id },
+                { bio, location, occupation, photo },
+                { useFindAndModify: false, new: true },
+                (err, updatedUser) => {
+                  if (err) {
+                    console.log(err);
+                    return res.json(err);
+                  }
+                  res.json({
+                    message: "User updated",
+                    post: updatedUser,
+                  });
+                }
+              );
             }
-            console.log("photo1", photo);
           });
-          console.log("photo2", photo);
-        }
-
-        console.log("photo3", photo);
-
-        console.log("bio2", bio);
-        console.log("location2", location);
-        console.log("occupation2", occupation);
-
-        if (photo == null) {
-          User.findOneAndUpdate(
-            { _id: authData._id },
-            { bio, location, occupation },
-            { useFindAndModify: false, new: true },
-            (err, updatedUser) => {
-              if (err) {
-                console.log(err);
-                return res.json(err);
-              }
-              res.json({
-                message: "User updated",
-                post: updatedUser,
-              });
-            }
-          );
         } else {
           User.findOneAndUpdate(
             { _id: authData._id },
-            { bio, location, occupation, photo },
+            { bio, location, occupation },
             { useFindAndModify: false, new: true },
             (err, updatedUser) => {
               if (err) {
