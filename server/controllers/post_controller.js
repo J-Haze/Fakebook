@@ -122,8 +122,8 @@ exports.post_create_post = [
             const s3Params = {
               Bucket: process.env.S3_BUCKET,
               Key: req.files[0].filename,
-              // ContentType: format,
-              // Body: req.file.buffer,
+              ContentType: format,
+              Body: req.file.buffer,
             };
 
             S3.upload(s3Params, (err, data) => {
