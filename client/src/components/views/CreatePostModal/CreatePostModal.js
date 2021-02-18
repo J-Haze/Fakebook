@@ -65,7 +65,7 @@ function CreatePostModal(props) {
         // &&
         // ext !== ".svg"
       ) {
-        setErrorMessage("File must be .png .jpg. or .gif");
+        setErrorMessage("File must be .png .jpg or .gif");
         alert("File must be .png .jpg. or .gif");
         return;
       }

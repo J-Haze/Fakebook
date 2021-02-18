@@ -99,15 +99,16 @@ function EditUserModal(props) {
       ext = ext.toLowerCase();
       if (
         ext !== ".png" &&
-        ext !== ".jpg" &&
-        ext !== ".gif"
+        ext !== ".jpg"
+        // &&
+        // ext !== ".gif"
         // &&
         // ext !== ".jpeg"
         // &&
         // ext !== ".svg"
       ) {
-        setErrorMessage("Only image uploads are allowed");
-        alert("Only image uploads are allowed");
+        setErrorMessage("File must be .png or .jpg");
+        alert("File must be .png or .jpg");
         return;
       }
     }
