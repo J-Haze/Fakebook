@@ -31,7 +31,7 @@ function CurrentUserFriendListPage(props) {
                   <img
                     className="prof-pic-friendList-request-page"
                     alt={`profile-pic-user-${request.sender.firstname}-${request.sender.lastname}`}
-                    src={`https://justins-fakebook-api.herokuapp.com/uploads/${request.sender.photo.filename}`}
+                    src={`${request.sender.photo.url}`}
                   />
                 </Link>
                 <div className="friend-request-card-info">
@@ -92,7 +92,7 @@ function CurrentUserFriendListPage(props) {
                   <img
                     className="prof-pic-friendList-request-page"
                     alt={`profile-pic-user-${request.receiver.firstname}-${request.receiver.lastname}`}
-                    src={`https://justins-fakebook-api.herokuapp.com/uploads/${request.receiver.photo.filename}`}
+                    src={`${request.receiver.photo.url}`}
                   />
                 </Link>
                 <div className="friend-request-card-info">

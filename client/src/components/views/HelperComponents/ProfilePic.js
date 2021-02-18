@@ -9,7 +9,7 @@ const ProfilePic = (props) => {
         <img
           className="prof-pic"
           alt={`profile-pic-user-${props.user.firstname}-${props.user.lastname}`}
-          src={`https://justins-fakebook-api.herokuapp.com/uploads/${props.user.photo.filename}`}
+          src={`${props.user.photo.url}`}
         />
       </Link>
     );

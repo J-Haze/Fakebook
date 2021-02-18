@@ -132,7 +132,7 @@ function NonFriendPage(props) {
           <img
             className="prof-pic-big"
             alt={`profile-pic-user-${props.userProfile.firstname}-${props.userProfile.lastname}`}
-            src={`https://justins-fakebook-api.herokuapp.com/uploads/${props.userProfile.photo.filename}`}
+            src={`${props.userProfile.photo.url}`}
           />
         ) : (
           <div className="prof-icon-big"></div>
@@ -245,7 +245,7 @@ function NonFriendPage(props) {
                       <img
                         className="prof-pic-friendList"
                         alt={`profile-pic-user-${friend.firstname}-${friend.lastname}`}
-                        src={`https://justins-fakebook-api.herokuapp.com/uploads/${friend.photo.filename}`}
+                        src={`${friend.photo.url}`}
                       />
                     </Link>
                     <div>

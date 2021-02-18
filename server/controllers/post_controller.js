@@ -3,7 +3,6 @@ const jwt = require("jsonwebtoken");
 var fs = require("fs");
 var path = require("path");
 const multer = require("multer");
-// import multerUploads from "../middleware/multer"
 require("dotenv").config();
 
 const AWS = require("aws-sdk");
@@ -80,7 +79,7 @@ var storage = multer.memoryStorage({
   },
 });
 
-var upload = multer({ storage: storage, limits: { fileSize: 5000000 } });
+var upload = multer({ storage: storage, limits: { fileSize: 4000000 } });
 
 exports.post_create_post = [
   upload.any("file"),
@@ -103,8 +102,6 @@ exports.post_create_post = [
           }
 
           if (req.files.length > 0) {
-            console.log("file", req.files[0]);
-
             req.files[0].filename = `${Date.now()}_${
               req.files[0].originalname
             }`;
@@ -181,8 +178,7 @@ exports.post_create_post = [
                 destination: "",
                 url: "",
                 filename: "",
-                path: "",
-                encoded: "",
+                size: "",
                 contentType: "",
               },
               likesList: [],

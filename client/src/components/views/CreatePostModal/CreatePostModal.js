@@ -56,7 +56,6 @@ function CreatePostModal(props) {
 
     if (imgUpload) {
       let ext = path.extname(imgUpload.name);
-      console.log("ext", ext);
       if (
         ext !== ".png" &&
         ext !== ".jpg" &&
@@ -85,7 +84,6 @@ function CreatePostModal(props) {
       },
     })
       .then((res, err) => {
-        console.log("imgUpload2", imgUpload);
         setErrorMessage("");
         props.fetchPosts();
         setText("");

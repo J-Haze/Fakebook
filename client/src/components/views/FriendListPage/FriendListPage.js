@@ -64,7 +64,7 @@ function FriendListPage(props) {
                     <img
                       className="prof-pic-friendList-page"
                       alt={`profile-pic-user-${friend.firstname}-${friend.lastname}`}
-                      src={`https://justins-fakebook-api.herokuapp.com/uploads/${friend.photo.filename}`}
+                      src={`${friend.photo.url}`}
                     />
                   </Link>
                   <div className="friend-card-info">

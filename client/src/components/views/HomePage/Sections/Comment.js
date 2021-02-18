@@ -145,7 +145,7 @@ function Comments(props) {
             <img
               className="prof-icon-small"
               alt={`profile-pic-user-${props.comment.author.firstname}-${props.comment.author.lastname}`}
-              src={`https://justins-fakebook-api.herokuapp.com/uploads/${props.comment.author.photo.filename}`}
+              src={`${props.comment.author.photo.url}`}
             />
           </Link>
         ) : (

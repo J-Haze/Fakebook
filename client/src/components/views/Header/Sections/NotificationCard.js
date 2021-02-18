@@ -15,7 +15,7 @@ function NotificationCard(props) {
       <img
         className="prof-pic-notification-card"
         alt={`profile-pic-user-${props.notification.sender.firstname}-${props.notification.sender.lastname}`}
-        src={`https://justins-fakebook-api.herokuapp.com/uploads/${props.notification.sender.photo.filename}`}
+        src={`${props.notification.sender.photo.url}`}
       />
       {props.notification.action === "like" ? (
         <div className="notification-action">

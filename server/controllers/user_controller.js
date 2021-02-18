@@ -9,6 +9,13 @@ var path = require("path");
 const multer = require("multer");
 require("dotenv").config();
 
+const AWS = require("aws-sdk");
+
+AWS.config.region = "us-west-2";
+
+// AWS
+const S3 = new AWS.S3();
+
 var User = require("../models/User");
 var Post = require("../models/Post");
 var Comment = require("../models/Comment");
@@ -149,16 +156,43 @@ exports.post_create_user = [
   },
 ];
 
+// // SET STORAGE
+// var storage = multer.diskStorage({
+//   destination: function (req, file, cb) {
+//     cb(null, "uploads/");
+//   },
+//   filename: function (req, file, cb) {
+//     cb(null, `${Date.now()}_${file.originalname}`);
+//   },
+//   fileFilter: (req, file, cb) => {
+//     let ext = path.extname(file.originalname);
+//     ext = ext.toLowerCase();
+//     //must be jpg or png to upload
+//     // if (ext !== ".jpg" || ext !== ".png") {
+//     if (
+//       ext !== ".png" &&
+//       ext !== ".jpg" &&
+//       ext !== ".gif" &&
+//       ext !== ".jpeg" &&
+//       ext !== ".svg" &&
+//       ext !== ".jpg"
+//     ) {
+//       return cb(res.status(400).end("Only images are allowed."));
+//     }
+//     cb(null, true);
+//   },
+// });
+
 // SET STORAGE
-var storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "uploads/");
+var storage = multer.memoryStorage({
+  destination: (req, file, cb) => {
+    cb(null, "");
   },
   filename: function (req, file, cb) {
     cb(null, `${Date.now()}_${file.originalname}`);
   },
   fileFilter: (req, file, cb) => {
-    const ext = path.extname(file.originalname);
+    let ext = path.extname(file.originalname);
     ext = ext.toLowerCase();
     //must be jpg or png to upload
     // if (ext !== ".jpg" || ext !== ".png") {
@@ -176,7 +210,7 @@ var storage = multer.diskStorage({
   },
 });
 
-var upload = multer({ storage: storage, limits: { fileSize: 5000000 } });
+var upload = multer({ storage: storage, limits: { fileSize: 4000000 } });
 
 exports.edit_current_user = [
   upload.any("file"),
@@ -206,29 +240,65 @@ exports.edit_current_user = [
         }
 
         if (req.files.length > 0) {
-          var img = fs.readFileSync(req.files[0].path);
-          var encode_img = img.toString("base64");
-          var final_img = {
-            contentType: req.files[0].mimetype,
-            image: new Buffer.from(encode_img, "base64"),
-          };
+          // var img = fs.readFileSync(req.files[0].path);
+          // var encode_img = img.toString("base64");
+          // var final_img = {
+          //   contentType: req.files[0].mimetype,
+          //   image: new Buffer.from(encode_img, "base64"),
+          // };
+
+          req.files[0].filename = `${Date.now()}_${req.files[0].originalname}`;
 
           const splitName = req.files[0].originalname.split(".");
           const format = splitName[splitName.length - 1];
 
-          photo = {
-            fieldname: req.files[0].fieldname,
-            originalname: req.files[0].originalname,
-            encoding: req.files[0].encoding,
-            mimetype: req.files[0].mimetype,
-            destination: req.files[0].destination,
-            filename: req.files[0].filename,
-            path: fs.readFileSync(
-              path.join(__dirname, "../..", "/uploads/" + req.files[0].filename)
-            ),
-            encoded: final_img,
-            contentType: `image/${format}`,
+          const s3Params = {
+            Bucket: process.env.S3_BUCKET,
+            Key: req.files[0].filename,
+            Body: req.files[0].buffer,
+            ACL: "public-read",
           };
+
+          // photo = {
+          //   fieldname: req.files[0].fieldname,
+          //   originalname: req.files[0].originalname,
+          //   encoding: req.files[0].encoding,
+          //   mimetype: req.files[0].mimetype,
+          //   destination: req.files[0].destination,
+          //   filename: req.files[0].filename,
+          //   path: fs.readFileSync(
+          //     path.join(__dirname, "../..", "/uploads/" + req.files[0].filename)
+          //   ),
+          //   encoded: final_img,
+          //   contentType: `image/${format}`,
+          // };
+
+          S3.upload(s3Params, (err, data) => {
+            if (err) {
+              console.log(err);
+              return res.json(err);
+            } else {
+              photo = {
+                fieldname: req.files[0].fieldname,
+                originalname: req.files[0].originalname,
+                encoding: req.files[0].encoding,
+                mimetype: req.files[0].mimetype,
+                destination: data.Location,
+                url: `https://${process.env.S3_BUCKET}.s3-us-west-2.amazonaws.com/${req.files[0].filename}`,
+                filename: req.files[0].filename,
+                // path: fs.readFileSync(
+                //   path.join(
+                //     __dirname,
+                //     "../..",
+                //     "/uploads/" + req.files[0].filename
+                //   )
+                // ),
+                // encoded: final_img,
+                size: req.files[0].size,
+                contentType: `image/${format}`,
+              };
+            }
+          });
         }
 
         if (photo == null) {

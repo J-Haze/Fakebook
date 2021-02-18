@@ -85,7 +85,7 @@ function Comments(props) {
               <img
                 className="prof-icon-small"
                 alt={`profile-pic-user-${props.currentUser.firstname}-${props.currentUser.lastname}`}
-                src={`https://justins-fakebook-api.herokuapp.com/uploads/${props.currentUser.photo.filename}`}
+                src={`${props.currentUser.photo.url}`}
               />
             </Link>
           ) : (
