@@ -111,12 +111,12 @@ exports.post_create_post = [
           if (req.files.length > 0) {
             console.log("file", req.files[0]);
 
-            var img = fs.readFileSync(req.files[0].path);
-            var encode_img = img.toString("base64");
-            var final_img = {
-              contentType: req.files[0].mimetype,
-              image: new Buffer.from(encode_img, "base64"),
-            };
+            // var img = fs.readFileSync(req.files[0].path);
+            // var encode_img = img.toString("base64");
+            // var final_img = {
+            //   contentType: req.files[0].mimetype,
+            //   image: new Buffer.from(encode_img, "base64"),
+            // };
 
             const splitName = req.files[0].originalname.split(".");
             const format = splitName[splitName.length - 1];
@@ -166,14 +166,16 @@ exports.post_create_post = [
                     url: `https://${process.env.S3_BUCKET}.s3.amazonaws.com/${fileName}`,
                     // destination:`https://${S3_BUCKET}.s3.amazonaws.com/${fileName}`,
                     filename: req.files[0].filename,
-                    path: fs.readFileSync(
-                      path.join(
-                        __dirname,
-                        "../..",
-                        "/uploads/" + req.files[0].filename
-                      )
-                    ),
-                    encoded: final_img,
+                    // path: fs.readFileSync(
+                    //   path.join(
+                    //     __dirname,
+                    //     "../..",
+                    //     "/uploads/" + req.files[0].filename
+                    //   )
+                    // ),
+                    // encoded: final_img,
+                    size: req.files[0].size,
+                    buffer: req.files[0].buffer,
                     contentType: `image/${format}`,
                   },
                   likesList: [],
