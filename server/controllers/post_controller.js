@@ -167,7 +167,7 @@ exports.post_create_post = [
                     mimetype: req.files[0].mimetype,
                     // destination: req.files[0].destination,
                     destination: data.Location,
-                    url: `https://${process.env.S3_BUCKET}.s3.amazonaws.com/${fileName}`,
+                    url: `https://${process.env.S3_BUCKET}.s3.amazonaws.com/${req.files[0].fieldname}`,
                     // destination:`https://${S3_BUCKET}.s3.amazonaws.com/${fileName}`,
                     filename: req.files[0].filename,
                     // path: fs.readFileSync(
