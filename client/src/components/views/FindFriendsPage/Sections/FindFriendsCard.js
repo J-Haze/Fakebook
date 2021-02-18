@@ -11,7 +11,7 @@ function Card(props) {
         <img
           className="prof-pic-friendList-page"
           alt={`profile-pic-user-${props.user.firstname}-${props.user.lastname}`}
-          src={`https://justins-fakebook-api.herokuapp.com/uploads/${props.user.photo.filename}`}
+          src={`${props.user.photo.url}`}
         />
       </Link>
       <div className="friend-card-info">

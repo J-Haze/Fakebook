@@ -100,10 +100,11 @@ function EditUserModal(props) {
       if (
         ext !== ".png" &&
         ext !== ".jpg" &&
-        ext !== ".gif" &&
-        ext !== ".jpeg" &&
-        ext !== ".svg" &&
-        ext !== ".jpg"
+        ext !== ".gif"
+        // &&
+        // ext !== ".jpeg"
+        // &&
+        // ext !== ".svg"
       ) {
         setErrorMessage("Only image uploads are allowed");
         alert("Only image uploads are allowed");

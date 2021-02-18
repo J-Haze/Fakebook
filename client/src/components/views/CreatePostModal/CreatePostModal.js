@@ -60,13 +60,14 @@ function CreatePostModal(props) {
       if (
         ext !== ".png" &&
         ext !== ".jpg" &&
-        ext !== ".gif" &&
-        ext !== ".jpeg" &&
-        ext !== ".svg" &&
-        ext !== ".jpg"
+        ext !== ".gif"
+        // &&
+        // ext !== ".jpeg"
+        // &&
+        // ext !== ".svg"
       ) {
-        setErrorMessage("Only image uploads are allowed");
-        alert("Only image uploads are allowed");
+        setErrorMessage("File must be .png .jpg. or .gif");
+        alert("File must be .png .jpg. or .gif");
         return;
       }
     }

@@ -82,9 +82,6 @@ var storage = multer.memoryStorage({
 
 var upload = multer({ storage: storage, limits: { fileSize: 5000000 } });
 
-// let s3bucket = process.env.S3_BUCKET;
-// console.log("bucket:", s3bucket);
-
 exports.post_create_post = [
   upload.any("file"),
   (req, res) => {
@@ -93,7 +90,6 @@ exports.post_create_post = [
         console.log(err);
         res.sendStatus(403);
       } else {
-        console.log("here1");
         User.findOne({ _id: authData._id }, function (err, user) {
           if (err) {
             console.log("Could not find author");
@@ -105,8 +101,6 @@ exports.post_create_post = [
           if (req.body.text) {
             finalText = req.body.text;
           }
-
-          console.log("here2");
 
           if (req.files.length > 0) {
             console.log("file", req.files[0]);
@@ -121,15 +115,11 @@ exports.post_create_post = [
             const s3Params = {
               Bucket: process.env.S3_BUCKET,
               Key: req.files[0].filename,
-              // Body: final_img,
               Body: req.files[0].buffer,
               ACL: "public-read",
             };
 
-            console.log("s3Params;", s3Params);
-
             S3.upload(s3Params, (err, data) => {
-              console.log("here", data);
               if (err) {
                 console.log(err);
                 return res.json(err);
@@ -141,10 +131,8 @@ exports.post_create_post = [
                     originalname: req.files[0].originalname,
                     encoding: req.files[0].encoding,
                     mimetype: req.files[0].mimetype,
-                    // destination: req.files[0].destination,
                     destination: data.Location,
                     url: `https://${process.env.S3_BUCKET}.s3-us-west-2.amazonaws.com/${req.files[0].filename}`,
-                    // destination:`https://${S3_BUCKET}.s3.amazonaws.com/${fileName}`,
                     filename: req.files[0].filename,
                     // path: fs.readFileSync(
                     //   path.join(
@@ -162,8 +150,6 @@ exports.post_create_post = [
                   isPublished: true,
                 });
               }
-
-              console.log("final post", post);
 
               post.save(function (err) {
                 if (err) {
