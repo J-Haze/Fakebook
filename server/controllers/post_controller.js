@@ -210,44 +210,44 @@ exports.post_create_post = [
               });
             });
           } else {
-            var post = new Post({
-              text: finalText,
-              image: {
-                fieldname: "",
-                originalname: "",
-                encoding: "",
-                mimetype: "",
-                destination: "",
-                url: "",
-                filename: "",
-                path: "",
-                encoded: "",
-                contentType: "",
-              },
-              likesList: [],
-              author: authData._id,
-              isPublished: true,
-            });
-          }
+                   var post = new Post({
+                     text: finalText,
+                     image: {
+                       fieldname: "",
+                       originalname: "",
+                       encoding: "",
+                       mimetype: "",
+                       destination: "",
+                       url: "",
+                       filename: "",
+                       path: "",
+                       encoded: "",
+                       contentType: "",
+                     },
+                     likesList: [],
+                     author: authData._id,
+                     isPublished: true,
+                   });
 
-          post.save(function (err) {
-            if (err) {
-              console.log("Failed to save");
-              console.log(err);
-              return res.status(400).json({
-                success: false,
-                err,
-              });
-            }
+                   post.save(function (err) {
+                     if (err) {
+                       console.log("Failed to save");
+                       console.log(err);
+                       return res.status(400).json({
+                         success: false,
+                         err,
+                       });
+                     }
 
-            post.author = postAuthor;
+                     post.author = postAuthor;
 
-            return res.json({
-              message: "Post created",
-              success: true,
-              post: post,
-            });
-          });
+                     return res.json({
+                       message: "Post created",
+                       success: true,
+                       post: post,
+                     });
+                   });
+                 }
         });
       }
     });
