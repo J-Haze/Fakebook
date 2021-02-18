@@ -155,7 +155,6 @@ exports.post_create_post = [
                     // ),
                     // encoded: final_img,
                     size: req.files[0].size,
-                    buffer: req.files[0].buffer,
                     contentType: `image/${format}`,
                   },
                   likesList: [],

@@ -7,15 +7,14 @@ const FileUploader = (props) => {
     // handle validations
     const file = e.target.files[0];
     if (file) {
-      if (file.size > 5000000) {
-        alert("File size cannot exceed more than 5MB");
+      if (file.size > 4000000) {
+        alert("File size cannot exceed more than 4MB");
         props.onFileSelectError({
-          error: "File size cannot exceed more than 5MB"
+          error: "File size cannot exceed more than 4MB",
         });
-      }
-      else props.onFileSelectSuccess(file);
+      } else props.onFileSelectSuccess(file);
     } else {
-      props.setImgUpload(null)
+      props.setImgUpload(null);
     }
   };
 
