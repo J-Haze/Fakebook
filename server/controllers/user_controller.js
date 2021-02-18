@@ -131,7 +131,7 @@ exports.post_create_user = [
               destination: `https://justins-fakebook-api.herokuapp.com/uploads/default-prof-pic.png`,
               url: `https://justins-fakebook-api.herokuapp.com/uploads/default-prof-pic.png`,
               filename: "default-prof-pic.png",
-              size: req.files[0].size,
+              size: 50000,
               contentType: "image/png",
             },
             realFacebookID: "",
