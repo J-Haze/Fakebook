@@ -198,6 +198,7 @@ var storage = multer.memoryStorage({
       ext !== ".jpg" &&
       ext !== ".gif" &&
       ext !== ".jpeg" &&
+      ext !== ".jfif" &&
       ext !== ".svg" &&
       ext !== ".jpg"
     ) {
@@ -236,6 +237,10 @@ exports.edit_current_user = [
           occupation = "";
         }
 
+        console.log("bio1", bio);
+        console.log("location1", location);
+        console.log("occupation1", occupation);
+
         if (req.files.length > 0) {
           // var img = fs.readFileSync(req.files[0].path);
           // var encode_img = img.toString("base64");
@@ -243,6 +248,8 @@ exports.edit_current_user = [
           //   contentType: req.files[0].mimetype,
           //   image: new Buffer.from(encode_img, "base64"),
           // };
+
+          console.log("file1", req.files[1]);
 
           req.files[0].filename = `${Date.now()}_${req.files[0].originalname}`;
 
@@ -294,9 +301,18 @@ exports.edit_current_user = [
                 size: req.files[0].size,
                 contentType: `image/${format}`,
               };
+              console.log("photo0", photo);
             }
+            console.log("photo1", photo);
           });
+          console.log("photo2", photo);
         }
+
+        console.log("photo3", photo);
+
+        console.log("bio2", bio);
+        console.log("location2", location);
+        console.log("occupation2", occupation);
 
         if (photo == null) {
           User.findOneAndUpdate(
@@ -309,7 +325,7 @@ exports.edit_current_user = [
                 return res.json(err);
               }
               res.json({
-                message: "User created",
+                message: "User updated",
                 post: updatedUser,
               });
             }
@@ -325,7 +341,7 @@ exports.edit_current_user = [
                 return res.json(err);
               }
               res.json({
-                message: "User created",
+                message: "User updated",
                 post: updatedUser,
               });
             }

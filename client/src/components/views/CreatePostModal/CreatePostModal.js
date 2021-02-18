@@ -59,14 +59,14 @@ function CreatePostModal(props) {
       if (
         ext !== ".png" &&
         ext !== ".jpg" &&
-        ext !== ".gif"
-        // &&
-        // ext !== ".jpeg"
+        ext !== ".gif" &&
+        ext !== ".jfif" &&
+        ext !== ".jpeg"
         // &&
         // ext !== ".svg"
       ) {
-        setErrorMessage("File must be .png .jpg or .gif");
-        alert("File must be .png .jpg. or .gif");
+        setErrorMessage("File must be .png .jpg, .jfif, or .gif");
+        alert("File must be .png .jpg, .jfif, or .gif");
         return;
       }
     }

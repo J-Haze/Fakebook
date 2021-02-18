@@ -49,6 +49,7 @@ function EditUserModal(props) {
   };
 
   const submitEditUser = () => {
+    console.log("file", imgUpload);
     if (filter.isProfane(bioText)) {
       alert("Bio contains a word that is not allowed.");
       return;
@@ -99,16 +100,17 @@ function EditUserModal(props) {
       ext = ext.toLowerCase();
       if (
         ext !== ".png" &&
-        ext !== ".jpg"
+        ext !== ".jpg" &&
+        ext !== ".jfif" &&
+        ext !== ".jpeg"
         // &&
         // ext !== ".gif"
-        // &&
-        // ext !== ".jpeg"
+
         // &&
         // ext !== ".svg"
       ) {
-        setErrorMessage("File must be .png or .jpg");
-        alert("File must be .png or .jpg");
+        setErrorMessage("File must be .png, .jpg, or .jfif");
+        alert("File must be .png, .jpg, or .jfif");
         return;
       }
     }
@@ -128,6 +130,7 @@ function EditUserModal(props) {
       },
     })
       .then((res, err) => {
+        console.log("file2", imgUpload);
         setErrorMessage("");
         setBioText("");
         setLocationText("");

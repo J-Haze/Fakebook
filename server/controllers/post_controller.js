@@ -70,6 +70,7 @@ var storage = multer.memoryStorage({
       ext !== ".jpg" &&
       ext !== ".gif" &&
       ext !== ".jpeg" &&
+      ext !== ".jfif" &&
       ext !== ".svg" &&
       ext !== ".jpg"
     ) {
