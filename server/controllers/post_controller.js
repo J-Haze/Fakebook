@@ -93,7 +93,7 @@ exports.post_create_post = [
         console.log(err);
         res.sendStatus(403);
       } else {
-        console.log("here1")
+        console.log("here1");
         User.findOne({ _id: authData._id }, function (err, user) {
           if (err) {
             console.log("Could not find author");
@@ -109,6 +109,8 @@ exports.post_create_post = [
           console.log("here2");
 
           if (req.files.length > 0) {
+            console.log("file", req.files[0]);
+
             var img = fs.readFileSync(req.files[0].path);
             var encode_img = img.toString("base64");
             var final_img = {
@@ -123,11 +125,11 @@ exports.post_create_post = [
               Bucket: process.env.S3_BUCKET,
               Key: req.files[0].filename,
               ContentType: format,
-              Body: req.file.buffer,
+              Body: req.files[0],
             };
 
             S3.upload(s3Params, (err, data) => {
-              console.log("here", data)
+              console.log("here", data);
               if (err) {
                 console.log(err);
                 return res.json(err);
@@ -246,7 +248,6 @@ exports.get_post = (req, res, next) => {
     .populate("author")
     .populate({ path: "likesList", match: { isPublished: true } });
 };
-
 
 //Not used
 exports.edit_post = [
