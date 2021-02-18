@@ -129,11 +129,11 @@ function NonFriendPage(props) {
       )}
       <div id="user-info-cont">
         {props.userProfile.photo ? (
-          <img
-            className="prof-pic-big"
-            alt={`profile-pic-user-${props.userProfile.firstname}-${props.userProfile.lastname}`}
-            src={`${props.userProfile.photo.url}`}
-          />
+            <img
+              className="prof-pic-big"
+              alt={`profile-pic-user-${props.userProfile.firstname}-${props.userProfile.lastname}`}
+              src={`${props.userProfile.photo.url}`}
+            />
         ) : (
           <div className="prof-icon-big"></div>
         )}

@@ -141,6 +141,8 @@
   width: 36px;
   box-shadow: rgba(0, 0, 0, 0.1);
   margin-left: 6px;
+
+  object-fit: cover;
 }
 
 .search-card-name {
@@ -323,6 +325,8 @@
   width: 36px;
   box-shadow: rgba(0, 0, 0, 0.1);
   margin-left: 6px;
+
+  object-fit: cover;
 }
 
 .notification-text {

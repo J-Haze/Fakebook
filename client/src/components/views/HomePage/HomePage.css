@@ -52,6 +52,8 @@
   height: 28px;
   width: 28px;
   box-shadow: rgba(0, 0, 0, 0.1);
+
+  object-fit: cover;
 }
 
 .prof-pic-home-user-page:hover {
@@ -177,6 +179,8 @@
   height: 60px;
   width: 60px;
   box-shadow: rgba(0, 0, 0, 0.1);
+
+  object-fit: cover;
 }
 
 .prof-pic-friendList-request-page:hover {

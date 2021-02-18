@@ -85,11 +85,10 @@
   margin-top: 12px;
   margin-left: auto;
   margin-right: auto;
+
+  object-fit: cover;
 }
 
-/* .prof-pic-big:hover {
-  cursor: pointer;
-} */
 
 .prof-icon-big {
   background-color: var(--dark-gray);
@@ -100,10 +99,6 @@
   margin-left: auto;
   margin-right: auto;
 }
-
-/* .prof-icon-big:hover {
-  cursor: pointer;
-} */
 
 .user-card-username {
   font-family: "Segoe UI Historic", "Segoe UI", Helvetica, Arial, sans-serif;
@@ -116,12 +111,6 @@
   margin-top: 20px;
   margin-bottom: 16px;
 }
-
-/* #user-info-box {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-} */
 
 .edit-user-prof {
   font-weight: 400px;
@@ -324,6 +313,8 @@
   border-radius: 8px;
   height: 102px;
   width: 102px;
+
+  object-fit: cover;
 }
 
 .prof-pic-friendList:hover {
