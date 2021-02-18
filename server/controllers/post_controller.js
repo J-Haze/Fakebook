@@ -6,6 +6,13 @@ const multer = require("multer");
 // import multerUploads from "../middleware/multer"
 require("dotenv").config();
 
+const AWS = require("aws-sdk");
+
+AWS.config.region = "us-west-2";
+
+// AWS
+const S3 = new AWS.S3();
+
 var User = require("../models/User");
 var Post = require("../models/Post");
 var Comment = require("../models/Comment");
@@ -28,7 +35,7 @@ var storage = multer.diskStorage({
     cb(null, `${Date.now()}_${file.originalname}`);
   },
   fileFilter: (req, file, cb) => {
-    const ext = path.extname(file.originalname);
+    let ext = path.extname(file.originalname);
     ext = ext.toLowerCase();
     //must be jpg or png to upload
     // if (ext !== ".jpg" || ext !== ".png") {
@@ -46,7 +53,37 @@ var storage = multer.diskStorage({
   },
 });
 
+// // SET STORAGE
+// var storage = multer.memoryStorage({
+//   destination: (req, file, cb) => {
+//     cb(null, "");
+//   },
+//   filename: function (req, file, cb) {
+//     cb(null, `${Date.now()}_${file.originalname}`);
+//   },
+//   fileFilter: (req, file, cb) => {
+//     const ext = path.extname(file.originalname);
+//     ext = ext.toLowerCase();
+//     //must be jpg or png to upload
+//     // if (ext !== ".jpg" || ext !== ".png") {
+//     if (
+//       ext !== ".png" &&
+//       ext !== ".jpg" &&
+//       ext !== ".gif" &&
+//       ext !== ".jpeg" &&
+//       ext !== ".svg" &&
+//       ext !== ".jpg"
+//     ) {
+//       return cb(res.status(400).end("Only images are allowed."));
+//     }
+//     cb(null, true);
+//   },
+// });
+
 var upload = multer({ storage: storage, limits: { fileSize: 5000000 } });
+
+let s3bucket = process.env.S3_BUCKET;
+// console.log("bucket:", s3bucket);
 
 exports.post_create_post = [
   upload.any("file"),
@@ -56,6 +93,7 @@ exports.post_create_post = [
         console.log(err);
         res.sendStatus(403);
       } else {
+        console.log("here1")
         User.findOne({ _id: authData._id }, function (err, user) {
           if (err) {
             console.log("Could not find author");
@@ -68,6 +106,8 @@ exports.post_create_post = [
             finalText = req.body.text;
           }
 
+          console.log("here2");
+
           if (req.files.length > 0) {
             var img = fs.readFileSync(req.files[0].path);
             var encode_img = img.toString("base64");
@@ -79,28 +119,65 @@ exports.post_create_post = [
             const splitName = req.files[0].originalname.split(".");
             const format = splitName[splitName.length - 1];
 
-            var post = new Post({
-              text: finalText,
-              image: {
-                fieldname: req.files[0].fieldname,
-                originalname: req.files[0].originalname,
-                encoding: req.files[0].encoding,
-                mimetype: req.files[0].mimetype,
-                destination: req.files[0].destination,
-                filename: req.files[0].filename,
-                path: fs.readFileSync(
-                  path.join(
-                    __dirname,
-                    "../..",
-                    "/uploads/" + req.files[0].filename
-                  )
-                ),
-                encoded: final_img,
-                contentType: `image/${format}`,
-              },
-              likesList: [],
-              author: authData._id,
-              isPublished: true,
+            const s3Params = {
+              Bucket: process.env.S3_BUCKET,
+              Key: req.files[0].filename,
+              // ContentType: format,
+              // Body: req.file.buffer,
+            };
+
+            S3.upload(s3Params, (err, data) => {
+              console.log("here", data)
+              if (err) {
+                console.log(err);
+                return res.json(err);
+              } else {
+                var post = new Post({
+                  text: finalText,
+                  image: {
+                    fieldname: req.files[0].fieldname,
+                    originalname: req.files[0].originalname,
+                    encoding: req.files[0].encoding,
+                    mimetype: req.files[0].mimetype,
+                    // destination: req.files[0].destination,
+                    destination: data.Location,
+                    url: `https://${process.env.S3_BUCKET}.s3.amazonaws.com/${fileName}`,
+                    // destination:`https://${S3_BUCKET}.s3.amazonaws.com/${fileName}`,
+                    filename: req.files[0].filename,
+                    path: fs.readFileSync(
+                      path.join(
+                        __dirname,
+                        "../..",
+                        "/uploads/" + req.files[0].filename
+                      )
+                    ),
+                    encoded: final_img,
+                    contentType: `image/${format}`,
+                  },
+                  likesList: [],
+                  author: authData._id,
+                  isPublished: true,
+                });
+              }
+
+              post.save(function (err) {
+                if (err) {
+                  console.log("Failed to save");
+                  console.log(err);
+                  return res.status(400).json({
+                    success: false,
+                    err,
+                  });
+                }
+
+                post.author = postAuthor;
+
+                return res.json({
+                  message: "Post created",
+                  success: true,
+                  post: post,
+                });
+              });
             });
           } else {
             var post = new Post({
@@ -111,6 +188,7 @@ exports.post_create_post = [
                 encoding: "",
                 mimetype: "",
                 destination: "",
+                url: "",
                 filename: "",
                 path: "",
                 encoded: "",
@@ -169,8 +247,8 @@ exports.get_post = (req, res, next) => {
     .populate({ path: "likesList", match: { isPublished: true } });
 };
 
-//Not used
 
+//Not used
 exports.edit_post = [
   body("title", "Title must not be empty.").trim().isLength({ min: 1 }),
   body("text", "Post body must not be empty.").trim().isLength({ min: 1 }),
