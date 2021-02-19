@@ -10,12 +10,14 @@ Full stack MERN Application, deployed on Heroku.
 * Create, read, update, and delete your user and user profile.
 * Create, read, and delete posts, comments, and images
 * Connect with other users 
- * Easily send outgoing Friend Requests and accepting incoming Friend Requests
- * Easily unfriend users
- * Comment on other's posts or images
- * Like other's posts, images, or comments
- * Easily find other users to become friends with using the Searchbar or Find Friends page
+  * Easily send outgoing Friend Requests and accepting incoming Friend Requests
+  * Easily unfriend users
+  * Comment on other's posts or images
+  * Like other's posts, images, or comments
+  * Easily find other users to become friends with using the Searchbar or Find Friends page
 * Customize your profile
+  * Upload a profile picture
+  * Customize your bio, location, and occupaiton
 * Real time notification menu notify's you when someone has interacted with you
 * RESTful API is versatile and accessible by any frontend.
 * User Authenticaiton:
