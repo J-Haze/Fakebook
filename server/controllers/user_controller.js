@@ -169,33 +169,6 @@ exports.post_create_user = [
   },
 ];
 
-// // SET STORAGE
-// var storage = multer.diskStorage({
-//   destination: function (req, file, cb) {
-//     cb(null, "uploads/");
-//   },
-//   filename: function (req, file, cb) {
-//     cb(null, `${Date.now()}_${file.originalname}`);
-//   },
-//   fileFilter: (req, file, cb) => {
-//     let ext = path.extname(file.originalname);
-//     ext = ext.toLowerCase();
-//     //must be jpg or png to upload
-//     // if (ext !== ".jpg" || ext !== ".png") {
-//     if (
-//       ext !== ".png" &&
-//       ext !== ".jpg" &&
-//       ext !== ".gif" &&
-//       ext !== ".jpeg" &&
-//       ext !== ".svg" &&
-//       ext !== ".jpg"
-//     ) {
-//       return cb(res.status(400).end("Only images are allowed."));
-//     }
-//     cb(null, true);
-//   },
-// });
-
 // SET STORAGE
 var storage = multer.memoryStorage({
   destination: (req, file, cb) => {
@@ -253,20 +226,7 @@ exports.edit_current_user = [
           occupation = "";
         }
 
-        console.log("bio1", bio);
-        console.log("location1", location);
-        console.log("occupation1", occupation);
-
         if (req.files.length > 0) {
-          // var img = fs.readFileSync(req.files[0].path);
-          // var encode_img = img.toString("base64");
-          // var final_img = {
-          //   contentType: req.files[0].mimetype,
-          //   image: new Buffer.from(encode_img, "base64"),
-          // };
-
-          console.log("file1", req.files[1]);
-
           req.files[0].filename = `${Date.now()}_${req.files[0].originalname}`;
 
           const splitName = req.files[0].originalname.split(".");
@@ -278,20 +238,6 @@ exports.edit_current_user = [
             Body: req.files[0].buffer,
             ACL: "public-read",
           };
-
-          // photo = {
-          //   fieldname: req.files[0].fieldname,
-          //   originalname: req.files[0].originalname,
-          //   encoding: req.files[0].encoding,
-          //   mimetype: req.files[0].mimetype,
-          //   destination: req.files[0].destination,
-          //   filename: req.files[0].filename,
-          //   path: fs.readFileSync(
-          //     path.join(__dirname, "../..", "/uploads/" + req.files[0].filename)
-          //   ),
-          //   encoded: final_img,
-          //   contentType: `image/${format}`,
-          // };
 
           S3.upload(s3Params, (err, data) => {
             if (err) {
@@ -306,20 +252,10 @@ exports.edit_current_user = [
                 destination: data.Location,
                 url: `https://${process.env.S3_BUCKET}.s3-us-west-2.amazonaws.com/${req.files[0].filename}`,
                 filename: req.files[0].filename,
-                // path: fs.readFileSync(
-                //   path.join(
-                //     __dirname,
-                //     "../..",
-                //     "/uploads/" + req.files[0].filename
-                //   )
-                // ),
-                // encoded: final_img,
                 size: req.files[0].size,
                 contentType: `image/${format}`,
               };
-              console.log("bio2", bio);
-              console.log("location2", location);
-              console.log("occupation2", occupation);
+
               User.findOneAndUpdate(
                 { _id: authData._id },
                 { bio, location, occupation, photo },
@@ -574,7 +510,6 @@ exports.unfriend_user = (req, res) => {
         {
           $pull: { friendList: userid },
         },
-        // { safe: true },
         { useFindAndModify: false, new: true },
         (err, newCurrentUser) => {
           if (err) {
@@ -588,19 +523,12 @@ exports.unfriend_user = (req, res) => {
             {
               $pull: { friendList: authData._id },
             },
-            // { safe: true },
             { useFindAndModify: false, new: true },
             (err, newUser) => {
               if (err) {
                 console.log(err);
                 return res.json(err);
               }
-
-              console.log(
-                "worked",
-                ("newCurrentUser", newCurrentUser),
-                ("newUser", newUser)
-              );
 
               res.json({
                 message: "Updated friend lists's",

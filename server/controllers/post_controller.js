@@ -25,33 +25,6 @@ exports.get_posts = (req, res, next) => {
     .populate({ path: "likesList", match: { isPublished: true } });
 };
 
-// // SET STORAGE
-// var storage = multer.diskStorage({
-//   destination: function (req, file, cb) {
-//     cb(null, "uploads/");
-//   },
-//   filename: function (req, file, cb) {
-//     cb(null, `${Date.now()}_${file.originalname}`);
-//   },
-//   fileFilter: (req, file, cb) => {
-//     let ext = path.extname(file.originalname);
-//     ext = ext.toLowerCase();
-//     //must be jpg or png to upload
-//     // if (ext !== ".jpg" || ext !== ".png") {
-//     if (
-//       ext !== ".png" &&
-//       ext !== ".jpg" &&
-//       ext !== ".gif" &&
-//       ext !== ".jpeg" &&
-//       ext !== ".svg" &&
-//       ext !== ".jpg"
-//     ) {
-//       return cb(res.status(400).end("Only images are allowed."));
-//     }
-//     cb(null, true);
-//   },
-// });
-
 // SET STORAGE
 var storage = multer.memoryStorage({
   destination: (req, file, cb) => {
@@ -132,14 +105,6 @@ exports.post_create_post = [
                     destination: data.Location,
                     url: `https://${process.env.S3_BUCKET}.s3-us-west-2.amazonaws.com/${req.files[0].filename}`,
                     filename: req.files[0].filename,
-                    // path: fs.readFileSync(
-                    //   path.join(
-                    //     __dirname,
-                    //     "../..",
-                    //     "/uploads/" + req.files[0].filename
-                    //   )
-                    // ),
-                    // encoded: final_img,
                     size: req.files[0].size,
                     contentType: `image/${format}`,
                   },

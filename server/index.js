@@ -33,16 +33,6 @@ const connect = mongoose
   .then(() => console.log("MongoDB Connected..."))
   .catch((err) => console.log(err));
 
-// if (process.env.NODE_ENV === "production") {
-//   app.use(express.static("client/build"));
-
-//   app.get("*", (req, res) => {
-//     res.sendFile(path.resolve(__dirname, "../client", "build", "index.html")); // relative path
-//   });
-// }
-
-//test
-
 app.use(flash());
 app.use(session({ secret: "cats", resave: false, saveUninitialized: true }));
 app.use(passport.initialize());
@@ -88,9 +78,13 @@ app.listen(port, () => {
   console.log(`Server Listening on ${port}`);
 });
 
+//Code used to keep Heroku dyno awake
+//No longer needed when I upgraded to a paid Heroku account
+//Kept in code in case I downgrade to a free account again
+
 //Wake up dyno:
 // const PORT = 8080;
-// const DYNO_URL = "https://justins-forum.herokuapp.com/"; // the url of your dyno
+// const DYNO_URL = "https://justins-fakebook.herokuapp.com/"; // the url of your dyno
 
 // app.listen(PORT, () => {
 //   wakeUpDyno(DYNO_URL); // will start once server starts

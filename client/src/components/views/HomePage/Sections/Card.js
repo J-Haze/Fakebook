@@ -273,7 +273,6 @@ function Card(props) {
                 <div>
                   <img
                     className="card-image"
-                    // src={`https://justins-fakebook-api.herokuapp.com/uploads/${props.post.image.filename}`}
                     src={`${props.post.image.url}`}
                   />
                 </div>

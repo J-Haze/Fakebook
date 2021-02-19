@@ -103,9 +103,6 @@ function CreatePostModal(props) {
   return (
     <div
       className="create-post-modal"
-      // onClick={() => {
-      //   props.setCreatePostModalOpen(false);
-      // }}
     >
       <div
         className="create-post-modal-content"
