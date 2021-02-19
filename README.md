@@ -65,6 +65,4 @@ Full stack MERN Application, deployed on Heroku.
 ![Image of App](./images/ReadMe-Login.png)
 
 
-
-
 This App was created to show off my skills as a web developer. Not intended to infringe Facebook's copyright or to compete with Facebook in any way.
