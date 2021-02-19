@@ -49,11 +49,17 @@ Full stack MERN Application, deployed on Heroku.
 ### Profile Page:
 ![Image of App](./images/ReadMe-ProfilePage.png)
 
+### Easily Manage Incoming and Sent Requests:
+![Image of App](./images/ReadMe-FindFriends.png)
+
 ### Interact with Posts and Comments:
 ![Image of App](./images/ReadMe-Post.png)
 
-### Interact with Posts and Comments:
-![Image of App](./images/ReadMe-SearchBar2.png)  ![Image of App](./images/ReadMe-Notifications2.png)
+### Use the Searchbar to find Friends and Users:
+![Image of App](./images/ReadMe-SearchBar2.png)  
+
+### Real time notifications:
+![Image of App](./images/ReadMe-Notifications2.png)
 
 ### Login Page:
 ![Image of App](./images/ReadMe-Login.png)
