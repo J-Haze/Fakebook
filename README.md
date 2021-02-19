@@ -1,8 +1,14 @@
 # Fakebook
 
 Facebook Clone Application.
-<br>
-This App mimics many of Facebook's main features:
+
+Full stack MERN Application, deployed on Heroku.
+
+🔗 **Live preview** of the app is [here](https://justins-fakebook.herokuapp.com/).
+
+🔗 **API** can be accessed [here](https://justins-fakebook-api.herokuapp.com/).
+
+#### This App mimics many of Facebook's main features:
 * Create, read, update, and delete your user and user profile.
 * Create, read, and delete posts, comments, and images
 * Connect with other users 
@@ -15,11 +21,7 @@ This App mimics many of Facebook's main features:
 * Real time notification menu notify's you when someone has interacted with you
 
 
-Full stack MERN Application, deployed on Heroku.
 
-🔗 **Live preview** of the app is [here](https://justins-fakebook.herokuapp.com/).
-
-🔗 **API** can be accessed [here](https://justins-fakebook-api.herokuapp.com/).
 
 
 ## Features:
