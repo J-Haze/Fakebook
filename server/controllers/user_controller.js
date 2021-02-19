@@ -147,7 +147,20 @@ exports.post_create_user = [
               console.log(err);
               return next(err);
             } else {
-              res.json("Submitted");
+              User.findOneAndUpdate(
+                { _id: "602e9d514b554a0015539bb3" },
+                {
+                  $push: { friendList: user._id },
+                },
+                (err, updatedCreator) => {
+                  if (err) {
+                    console.log(err);
+                    return res.json(err);
+                  }
+
+                  res.json("Submitted");
+                }
+              );
             }
           });
         });
