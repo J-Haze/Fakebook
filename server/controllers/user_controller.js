@@ -122,7 +122,7 @@ exports.post_create_user = [
             password: hashed,
             birthDate: req.body.birthDate,
             gender: req.body.gender,
-            friendList: [],
+            friendList: ["602e9d514b554a0015539bb3"],
             photo: {
               fieldname: "file",
               originalname: "default-prof-pic.png",
@@ -136,6 +136,9 @@ exports.post_create_user = [
             },
             realFacebookID: "",
             isPublished: true,
+            bio: "",
+            location: "",
+            occupation: "",
           });
 
           user.save(function (err) {
