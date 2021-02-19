@@ -44,20 +44,15 @@ Full stack MERN Application, deployed on Heroku.
 ## Pictures:
 
 #### Main Page:
+![Image of App](./images/ReadMe-Main.png)
 
+#### Profile Page:
+![Image of App](./images/ReadMe-ProfilePage.png)
+
+#### Login Page:
 ![Image of App](./images/ReadMe-Login.png)
 
-## API Documentation
 
-- Base URL: [https://justins-forum-api.herokuapp.com/](https://justins-forum-api.herokuapp.com/)
-
-| Method | Endpoint     | Usage             | Parameters                               | 🔒  |
-| ------ | :----------- | :---------------- | ---------------------------------------- | --- |
-| GET    | /            | Get all posts     |                                          |     |
-| GET    | /user        | Get current user  |                                          | ✅  |
-| POST   | /user/log-in | Log in in as user | username*, password*, confirm-password\* |
-
-_required (\*)_
 
 
 This App was created to show off my skills as a web developer. Not intended to infringe Facebook's copyright or to compete with Facebook in any way.
