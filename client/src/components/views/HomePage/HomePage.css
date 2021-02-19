@@ -635,6 +635,8 @@
   width: 32px;
   margin-right: 6px;
   margin-left: 0px;
+
+  object-fit: cover;
 }
 
 .comment-cont-inner {

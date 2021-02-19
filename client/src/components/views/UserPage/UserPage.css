@@ -89,7 +89,6 @@
   object-fit: cover;
 }
 
-
 .prof-icon-big {
   background-color: var(--dark-gray);
   border-radius: 50%;
@@ -98,6 +97,8 @@
   margin-top: 12px;
   margin-left: auto;
   margin-right: auto;
+
+  object-fit: cover;
 }
 
 .user-card-username {
@@ -326,6 +327,8 @@
   border-radius: 8px;
   height: 102px;
   width: 102px;
+
+  object-fit: cover;
 }
 
 .prof-icon-friendList:hover {
