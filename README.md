@@ -1,45 +1,58 @@
-# Justin's Forum App
+# Fakebook
 
-A RESTful online forum/blog application with CRUD operations.
-<br> Users can post articles and pictures, comment on other's posts, and edit or delete their own posts.
+Facebook Clone Application.
 
 Full stack MERN Application, deployed on Heroku.
 
-🔗 **Live preview** of the app is [here](https://justins-forum.herokuapp.com/).
+🔗 **Live preview** of the app is [here](https://justins-fakebook.herokuapp.com/).
 
-🔗 **API** can be accessed [here](https://justins-forum-api.herokuapp.com/).
-
-## API Documentation
-
-- Base URL: [https://justins-forum-api.herokuapp.com/](https://justins-forum-api.herokuapp.com/)
-
-| Method | Endpoint     | Usage             | Parameters                               | 🔒  |
-| ------ | :----------- | :---------------- | ---------------------------------------- | --- |
-| GET    | /            | Get all posts     |                                          |     |
-| GET    | /user        | Get current user  |                                          | ✅  |
-| POST   | /user/log-in | Log in in as user | username*, password*, confirm-password\* |
-
-_required (\*)_
-
-## Features:
-
-- RESTful API is versatile and accessible by any frontend.
-- CRUD Operations:
-  - Create, read, edit, and delete posts
+### This App mimics many of Facebook's main features:
+* Create, read, update, and delete your user and user profile.
+* Create, read, and delete posts, comments, and images
+* Connect with other users 
+  * Easily send outgoing Friend Requests and accepting incoming Friend Requests
+  * Easily unfriend users
+  * Comment on other's posts or images
+  * Like other's posts, images, or comments
+  * Easily find other users to become friends with using the Searchbar or Find Friends page
+* Customize your profile
+  * Upload a profile picture
+  * Customize your bio, location, and occupaiton
+* Real time notification menu notify's you when someone has interacted with you
+* RESTful API is versatile and accessible by any frontend.
+* User Authenticaiton:
+* User Authenticaiton:
+  * Sign up as a new user
+    * bcryptjs: Hashes passwords in order to safely secure user data
+  * Log in in order to create posts and comments
+    * jsonwebtoken - creates token for API to verify on each call
 
 # Built With:
 
-- ReactJS
 - JavaScript
+- ReactJS
 - NodeJS
 - ExpressJS
-- MongoDB + Mongoose
+- MongoDB 
+- Mongoose
+- Amazon Web Services
 - Axios
+- Multer image puploading
 - HTML/CSS
 - Heroku Hosting
 
 ## Pictures:
 
 #### Main Page:
+![Image of App](./images/ReadMe-Main.png)
 
-![Image of App](./images/Readme1.png)
+#### Profile Page:
+![Image of App](./images/ReadMe-ProfilePage.png)
+
+#### Login Page:
+![Image of App](./images/ReadMe-Login.png)
+
+
+
+
+This App was created to show off my skills as a web developer. Not intended to infringe Facebook's copyright or to compete with Facebook in any way.
