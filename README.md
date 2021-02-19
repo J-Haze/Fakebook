@@ -8,7 +8,7 @@ Full stack MERN Application, deployed on Heroku.
 
 🔗 **API** can be accessed [here](https://justins-fakebook-api.herokuapp.com/).
 
-#### This App mimics many of Facebook's main features:
+### This App mimics many of Facebook's main features:
 * Create, read, update, and delete your user and user profile.
 * Create, read, and delete posts, comments, and images
 * Connect with other users 
@@ -19,16 +19,13 @@ Full stack MERN Application, deployed on Heroku.
  * Easily find other users to become friends with using the Searchbar or Find Friends page
 * Customize your profile
 * Real time notification menu notify's you when someone has interacted with you
-
-
-
-
-
-## Features:
-
-- RESTful API is versatile and accessible by any frontend.
-- CRUD Operations:
-  - Create, read, edit, and delete posts
+* RESTful API is versatile and accessible by any frontend.
+* User Authenticaiton:
+* User Authenticaiton:
+  * Sign up as a new user
+    * bcryptjs: Hashes passwords in order to safely secure user data
+  * Log in in order to create posts and comments
+    * jsonwebtoken - creates token for API to verify on each call
 
 # Built With:
 
