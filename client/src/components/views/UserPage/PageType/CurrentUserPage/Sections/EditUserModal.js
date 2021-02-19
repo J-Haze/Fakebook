@@ -113,6 +113,11 @@ function EditUserModal(props) {
         alert("File must be .png, .jpg, or .jfif");
         return;
       }
+
+      if (imgUpload.size > 4000000) {
+        alert("Image file size cannot exceed more than 4MB");
+        return;
+      }
     }
 
     const formData = new FormData();
