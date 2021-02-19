@@ -29,12 +29,15 @@ Full stack MERN Application, deployed on Heroku.
 
 # Built With:
 
-- ReactJS
 - JavaScript
+- ReactJS
 - NodeJS
 - ExpressJS
-- MongoDB + Mongoose
+- MongoDB 
+- Mongoose
+- Amazon Web Services
 - Axios
+- Multer image puploading
 - HTML/CSS
 - Heroku Hosting
 
