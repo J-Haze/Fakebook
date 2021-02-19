@@ -43,13 +43,13 @@ Full stack MERN Application, deployed on Heroku.
 
 ## Pictures:
 
-#### Main Page:
+### Main Page:
 ![Image of App](./images/ReadMe-Main.png)
 
-#### Profile Page:
+### Profile Page:
 ![Image of App](./images/ReadMe-ProfilePage.png)
 
-#### Login Page:
+### Login Page:
 ![Image of App](./images/ReadMe-Login.png)
 
 
