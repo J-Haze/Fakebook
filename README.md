@@ -1,6 +1,6 @@
 # Fakebook
 
-Facebook Clone Application.
+Facebook Clone
 
 Full stack MERN Application, deployed on Heroku.
 
