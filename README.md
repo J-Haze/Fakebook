@@ -53,7 +53,7 @@ Full stack MERN Application, deployed on Heroku.
 ![Image of App](./images/ReadMe-Post.png)
 
 ### Interact with Posts and Comments:
-![Image of App](./images/ReadMe-Search.png)  ![Image of App](./images/ReadMe-Notifications.png)
+![Image of App](./images/ReadMe-SearchBar2.png)  ![Image of App](./images/ReadMe-Notifications2.png)
 
 ### Login Page:
 ![Image of App](./images/ReadMe-Login.png)
