@@ -69,7 +69,7 @@ function LoginPage(props) {
       <div className="login-text-cont">
         <div id="fb-signin-logo">fakebook</div>
         <div id="fb-signin-text">
-          Connect with friends and the world around you on Facebook.
+          Connect with friends and the world around you on Fakebook.
         </div>
       </div>
       <div

@@ -41,6 +41,8 @@ const connect = mongoose
 //   });
 // }
 
+//test
+
 app.use(flash());
 app.use(session({ secret: "cats", resave: false, saveUninitialized: true }));
 app.use(passport.initialize());

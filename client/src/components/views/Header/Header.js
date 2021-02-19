@@ -190,7 +190,7 @@ function Header(props) {
               <input
                 id="search-bar-input"
                 type="text"
-                placeholder="Search Facebook"
+                placeholder="Search Fakebook"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
