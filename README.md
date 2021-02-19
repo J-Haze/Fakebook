@@ -21,7 +21,6 @@ Full stack MERN Application, deployed on Heroku.
 * Real time notification menu notify's you when someone has interacted with you
 * RESTful API is versatile and accessible by any frontend.
 * User Authenticaiton:
-* User Authenticaiton:
   * Sign up as a new user
     * bcryptjs: Hashes passwords in order to safely secure user data
   * Log in in order to create posts and comments
