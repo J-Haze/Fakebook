@@ -36,7 +36,7 @@ Full stack MERN Application, deployed on Heroku.
 - Mongoose
 - Amazon Web Services
 - Axios
-- Multer image puploading
+- Multer image uploading
 - HTML/CSS
 - Heroku Hosting
 
