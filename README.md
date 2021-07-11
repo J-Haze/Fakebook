@@ -18,7 +18,7 @@ Full stack MERN Application, deployed on Heroku.
 * Customize your profile
   * Upload a profile picture
   * Customize your bio, location, and occupaiton
-* Real time notification menu notify's you when someone has interacted with you
+* Real time notification menu notifies you when someone has interacted with you
 * RESTful API is versatile and accessible by any frontend.
 * User Authenticaiton:
   * Sign up as a new user
@@ -29,12 +29,12 @@ Full stack MERN Application, deployed on Heroku.
 # Built With:
 
 - JavaScript
-- ReactJS
-- NodeJS
-- ExpressJS
+- React
+- Node.js
+- Express
 - MongoDB 
 - Mongoose
-- Amazon Web Services
+- Amazon Web Services (AWS)
 - Axios
 - Multer image uploading
 - HTML/CSS
